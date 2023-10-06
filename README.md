@@ -2,6 +2,6 @@
 Moje ročníková práce pro školní rok 2023/2024
 
 
-Update 001 06.10.2023
-        + První vlastní obrázky
-        + Přidání na Github
+<h2>Update 001 [06.10.2023]</h2>
+<p>+ První vlastní obrázky</p>
+<p>+ Přidání na Github</p>
