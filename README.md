@@ -1,2 +1,7 @@
 # age_of_war
- My school project for 2023/2024 school year
+Moje ročníková práce pro školní rok 2023/2024
+
+
+Update 001 06.10.2023
+        + První vlastní obrázky
+        + Přidání na Github
