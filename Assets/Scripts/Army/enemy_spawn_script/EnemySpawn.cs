@@ -21,7 +21,7 @@ public class EnemySpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canSpawn == true && nahoda == 1)
+        if (canSpawn == true && nahoda >= 1 && nahoda <= 3)
         {
             StartCoroutine(CooldownSoldier());
         }
@@ -29,7 +29,7 @@ public class EnemySpawn : MonoBehaviour
         {
             nahoda = Random.Range(1, 5);
         }
-        Debug.Log(nahoda);
+        //Debug.Log(nahoda);
     }
 
     IEnumerator CooldownSoldier()      //nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani
