@@ -1,6 +1,12 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 004 [10.10.2023]</h2>
+<p>+ Přidání grafického vzhledu životů základny hráče</p>
+<p>+ Upravení tvoření hráčových jednotek(teď se tvoří ve frontě a jeden Soldier trvá vyrobit 5s)</p>
+<p>+ Snaha dělat responzivitu na všechny typy monitorů</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/19c0982e-9025-4bba-82e8-66838816e0eb" width="300" height="150"></p>
+
 <h2>Update 003 [08.10.2023]</h2>
 <p>+ Upravení obrázků</p>
 <p>+ Změna spawnu (když se spawnul tak obešel toho prvního)</p>
