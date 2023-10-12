@@ -40,13 +40,13 @@ public class SoldierE : MonoBehaviour
             }
             else if(currhp > 0 && canGetdmg == true)
             {
-                StartCoroutine(dmgdealcooldown());
+                StartCoroutine(Dmgdealcooldown());
             }
         }
         hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);
     }
 
-    IEnumerator dmgdealcooldown()
+    IEnumerator Dmgdealcooldown()
     {
         canGetdmg = false;
         currhp = currhp - soldierPscript.dmg;

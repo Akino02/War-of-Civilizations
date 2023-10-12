@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +9,8 @@ public class ArmySpawn : MonoBehaviour
     SoldierE soldierEscript;                       //import scriptu protivnika
     [SerializeField] GameObject soldierE;          //import objektu
 
-    public GameObject Soldier;          //co spawne
-    public GameObject PlayerSpawner;    //kde to spawne
+    public GameObject soldier;          //co spawne
+    public GameObject playerSpawner;    //kde to spawne
 
     //nepratele
     public LayerMask opponentSoldier;       //layer hracovych jednotek typu soldier
@@ -18,10 +19,16 @@ public class ArmySpawn : MonoBehaviour
 
     public float zkusenosti = 0;        //zkusenosti
     public float penize = 0;            //penize
-    public bool canProduce = true;      //zda muze vyrabet
     public float order = 0;             //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
 
-    public GameObject makeBar;
+    //vyrovnik v procentech graficky                //zatim nefunguje nevim jak udelat ten casovac
+    public Image progBar;
+    private float waitSoldier = 5;
+    /*private float waitRanger = 8;
+    private float waitTank = 10;*/
+    public float progbarinprocents = 0f;            //
+    public float timer = 0;
+    public bool canProduce = true;      //zda muze vyrabet
 
     public float maxHPBase = 1000;
     public float currHPBase = 1000;
@@ -41,13 +48,13 @@ public class ArmySpawn : MonoBehaviour
     void Update()
     {
         hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;  //pomoc pri pocitani procent
-        if (order > 0 && canProduce == true && currHPBase != 0)  //zacne se produkce jakmile bude neco v rade
+        if (order > 0 && currHPBase != 0)  //zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
         {
-            StartCoroutine(orderfactory());
+            StartCoroutine(Orderfactory());
         }
         if (Physics2D.OverlapCircle(basePosition.transform.position, 0.8f, opponentSoldier) != null && canGetdmg == true)  //nejaky nepritel muze ubrat zivoty zakladny
         {
-            StartCoroutine(damageBaseSoldier());
+            StartCoroutine(DamageBaseSoldier());
         }
         hpBaseBarcurr.fillAmount = hpbaseinprocents;  //urcovani zivotu v procentech
     }
@@ -64,21 +71,34 @@ public class ArmySpawn : MonoBehaviour
             Debug.Log("Fronta je plna " + order);
         }
     }
-    /*IEnumerator ClickCooldown()      //nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani     //je to zatim nevyuzite
+    //funkce pro progressBar
+    IEnumerator Orderfactory()   //bude vyrabet jednoho 5s           //pak udelat na if (aby se menil ten vyrobni cas)              // pozdeji udelat smooth
     {
-        yield return order;
-        order -= 1;
-    }*/
-    IEnumerator orderfactory()      //bude vyrabet jednoho 5s
-    {
-        canProduce = false;
-        yield return new WaitForSecondsRealtime(5);
-        Instantiate(Soldier, PlayerSpawner.transform.position, PlayerSpawner.transform.rotation);
-        Debug.Log("Byl vyroben " + order);
-        order -= 1;
-        canProduce = true;
+        if (order > 0 && progbarinprocents != 1f && canProduce == true)
+        {
+            canProduce = false;
+            timer += 1;
+            yield return new WaitForSecondsRealtime(1);
+            progbarinprocents = ((100 * timer) / waitSoldier) / 100;        //zatím urèeno jen pro Soldiera
+            progBar.fillAmount = progbarinprocents;
+            canProduce = true;
+            if(progbarinprocents == 1f)
+            {
+                timer = 0;
+                progbarinprocents = 0f;
+                Instantiate(soldier, playerSpawner.transform.position, playerSpawner.transform.rotation);
+                Debug.Log("Byl vyroben " + order);
+                order -= 1;
+            }
+        }
+        if (order == 0)
+        {
+            timer = 0;
+            progbarinprocents = ((100 * timer) / waitSoldier) / 100;
+            progBar.fillAmount = progbarinprocents;
+        }
     }
-    IEnumerator damageBaseSoldier()      //base bude dostavat dmg od enemy
+    IEnumerator DamageBaseSoldier()      //base bude dostavat dmg od enemy
     {
         canGetdmg = false;
         currHPBase = currHPBase - soldierEscript.dmg;

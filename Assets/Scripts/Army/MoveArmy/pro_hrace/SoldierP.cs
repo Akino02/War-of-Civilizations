@@ -42,7 +42,7 @@ public class SoldierP : MonoBehaviour
             }
             else if (currhp > 0 && canGetdmg == true)
             {
-                StartCoroutine(dmgdealcooldown());
+                StartCoroutine(Dmgdealcooldown());
             }
         }
         else if (Physics2D.OverlapCircle(transform.position, 0.4f, opponentRanger) != null)
@@ -56,7 +56,7 @@ public class SoldierP : MonoBehaviour
         hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);
     }
 
-    IEnumerator dmgdealcooldown()
+    IEnumerator Dmgdealcooldown()
     {
         canGetdmg = false;
         currhp = currhp - soldierEscript.dmg;

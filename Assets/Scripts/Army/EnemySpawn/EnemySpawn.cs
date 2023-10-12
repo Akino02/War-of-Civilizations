@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    public GameObject Soldier;          //co spawne
-    public GameObject Ranger;          //co spawne
-    public GameObject Tank;          //co spawne
-    public GameObject EnemySpawner;    //kde to spawne
+    public GameObject soldier;          //co spawne
+    public GameObject ranger;          //co spawne
+    public GameObject tank;          //co spawne
+    public GameObject enemySpawner;    //kde to spawne
 
     public bool canSpawn = true;
     public int nahoda = 0;
@@ -35,7 +35,7 @@ public class EnemySpawn : MonoBehaviour
     IEnumerator CooldownSoldier()      //nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani
     {
         canSpawn = false;
-        Instantiate(Soldier, EnemySpawner.transform.position, EnemySpawner.transform.rotation);
+        Instantiate(soldier, enemySpawner.transform.position, enemySpawner.transform.rotation);
         nahoda = Random.Range(1, 5);
         yield return new WaitForSecondsRealtime(5);
         canSpawn = true;
