@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 006 [14.10.2023]</h2>
+<p>+ Nepřátelská základna má grafický vzhled životů</p>
+<p>+ Přidání NoFriction(aby se klouzali a nebyli na povrch přilepení)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/57653acc-f505-4c3c-9d95-d6fc61a0a2ee" width="300" height="150"></p>
+<br>
 <h2>Update 005 [12.10.2023]</h2>
 <p>+ Funguje ukazatel průběhu výroby vojáků při výrobě jednotek</p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/85c88e9b-9832-4223-8264-0b1cf0c1e57e" width="300" height="150"></p>
