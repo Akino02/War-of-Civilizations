@@ -2,24 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI;       //import teto funkce, abych mohl pracovat s UI vecmi v unity enginu
 
 public class ArmySpawn : MonoBehaviour
 {
+    //import enemy scriptu pro damage jaky davaji
     SoldierE soldierEscript;                       //import scriptu protivnika
     [SerializeField] GameObject soldierE;          //import objektu
+    //
 
+    //co a kde to bude spawnovat
     public GameObject soldier;          //co spawne
     public GameObject playerSpawner;    //kde to spawne
+    //
 
-    //nepratele
+    //nepratele (layers)
     public LayerMask opponentSoldier;       //layer hracovych jednotek typu soldier
     public LayerMask opponentRanger;       //layer hracovych jednotek typu ranger
     public LayerMask opponentTank;       //layer hracovych jednotek typu tank
+    //
 
+    //zatím 2/3 nevyuzite  funkce nasi basky
     public float zkusenosti = 0;        //zkusenosti
     public float penize = 0;            //penize
     public float order = 0;             //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
+    //
 
     //vyrovnik v procentech graficky                //zatim nefunguje nevim jak udelat ten casovac
     public Image progBar;
@@ -29,14 +36,18 @@ public class ArmySpawn : MonoBehaviour
     public float progbarinprocents = 0f;            //
     public float timer = 0;
     public bool canProduce = true;      //zda muze vyrabet
+    //
 
+    //hp a ubirani base
     public float maxHPBase = 1000;
     public float currHPBase = 1000;
     public float hpbaseinprocents = 1f;
-    public bool canGetdmg = true;
 
     public Image hpBaseBarcurr;
     public GameObject basePosition;
+
+    public bool canGetdmg = true;
+    //
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +63,7 @@ public class ArmySpawn : MonoBehaviour
         {
             StartCoroutine(Orderfactory());
         }
-        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.8f, opponentSoldier) != null && canGetdmg == true)  //nejaky nepritel muze ubrat zivoty zakladny
+        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.8f, opponentSoldier) != null && canGetdmg == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
         {
             StartCoroutine(DamageBaseSoldier());
         }
@@ -60,7 +71,7 @@ public class ArmySpawn : MonoBehaviour
     }
     public void SoldierSpawn()  // tato funkce na kliknuti spawne jednoho vojaka
     {
-        if (order < 5)      //muze je vyrabet v rade a kazdy se bude vyrabet 5s   //jeste tam pak doplnit ze za to bude platit
+        if (order < 5 && currHPBase > 0)      //muze je vyrabet v rade a kazdy se bude vyrabet 5s   //jeste tam pak doplnit ze za to bude platit
         {
             //StartCoroutine(ClickCooldown());   //je to zatim nevyuzite
             order += 1;
@@ -101,7 +112,7 @@ public class ArmySpawn : MonoBehaviour
     IEnumerator DamageBaseSoldier()      //base bude dostavat dmg od enemy
     {
         canGetdmg = false;
-        currHPBase = currHPBase - soldierEscript.dmg;
+        currHPBase -= soldierEscript.dmg;
         yield return new WaitForSecondsRealtime(2);
         canGetdmg = true;
     }

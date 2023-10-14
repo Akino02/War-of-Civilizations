@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoldierE : MonoBehaviour
 {
     SoldierP soldierPscript;                       //import scriptu protivnika
-    [SerializeField] GameObject soldierP;
+    [SerializeField] GameObject soldierP;          //import objektu
 
     public Rigidbody2D rb;              //funkce pro gravitaci
     public LayerMask opponent;       //layer hracovych jednotek
