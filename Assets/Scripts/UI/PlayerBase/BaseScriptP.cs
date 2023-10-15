@@ -4,7 +4,7 @@ using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.UI;       //import teto funkce, abych mohl pracovat s UI vecmi v unity enginu
 
-public class ArmySpawn : MonoBehaviour
+public class BaseScriptP : MonoBehaviour
 {
     //import enemy scriptu pro damage jaky davaji
     SoldierE soldierEscript;                       //import scriptu protivnika
