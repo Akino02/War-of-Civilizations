@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 007 [15.10.2023]</h2>
+<p>+ Byl přidán zvuk (hudba: <a href="https://www.youtube.com/watch?v=7T_YtklLyyo">Glorious Morning</a>, autor: <a href="https://www.youtube.com/@WaterflameMusic">Waterflame</a>, <a href="https://www.waterflame.com/contact-info">více ohledně povolení hudby</a>) </p>
+<p>+ Příprava na řazení výroby jednotek</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/3b2f8206-9b90-40a6-adc3-558387841741" width="300" height="150"></p>
+<br>
 <h2>Update 006 [14.10.2023]</h2>
 <p>+ Nepřátelská základna má grafický vzhled životů</p>
 <p>+ Přidání NoFriction(aby se klouzali a nebyli na povrch přilepení)</p>
