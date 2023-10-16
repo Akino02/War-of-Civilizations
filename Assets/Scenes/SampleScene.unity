@@ -1079,10 +1079,16 @@ MonoBehaviour:
   zkusenosti: 0
   penize: 0
   order: 0
+  orderv2: 0000000000000000000000000000000000000000
   progBar: {fileID: 2138784624}
   progbarinprocents: 0
   timer: 0
   canProduce: 1
+  order1: {fileID: 95546240}
+  order2: {fileID: 939321535}
+  order3: {fileID: 590898111}
+  order4: {fileID: 409454981}
+  order5: {fileID: 1554897496}
   maxHPBase: 1000
   currHPBase: 1000
   hpbaseinprocents: 1

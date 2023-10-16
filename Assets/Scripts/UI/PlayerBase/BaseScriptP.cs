@@ -26,6 +26,7 @@ public class BaseScriptP : MonoBehaviour
     public float zkusenosti = 0;        //zkusenosti
     public float penize = 0;            //penize
     public float order = 0;             //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
+    public int[] orderv2 = {0, 0, 0, 0, 0};             //poradi jednotek                               //zatim mimo provoz neni hodne jednotek *******************************
     //
 
     //vyrovnik v procentech graficky                //zatim nefunguje nevim jak udelat ten casovac
@@ -36,6 +37,12 @@ public class BaseScriptP : MonoBehaviour
     public float progbarinprocents = 0f;            //
     public float timer = 0;
     public bool canProduce = true;      //zda muze vyrabet
+
+    public Image order1;
+    public Image order2;
+    public Image order3;
+    public Image order4;
+    public Image order5;
     //
 
     //hp a ubirani base
@@ -58,6 +65,8 @@ public class BaseScriptP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        StartCoroutine(OrderView());        //graficke vydeni fronty
+        //StartCoroutine(OrderSorter());        //radi vojaky jak se maji vyrobit                 //zatim mimo provoz neni hodne jednotek *******************************
         hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;  //pomoc pri pocitani procent
         if (order > 0 && currHPBase != 0)  //zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
         {
@@ -75,6 +84,14 @@ public class BaseScriptP : MonoBehaviour
         {
             //StartCoroutine(ClickCooldown());   //je to zatim nevyuzite
             order += 1;
+            /*for(int i = 0;i < order; i++)                                 //zatim mimo provoz neni hodne jednotek *******************************
+            {
+                orderv2[i] = 1;
+            }
+            for (int j = 0; j < order; j++)
+            {
+                Debug.Log(orderv2[j]);
+            }*/
             Debug.Log("Prirazeno do fronty " + order);
         }
         else
@@ -109,6 +126,36 @@ public class BaseScriptP : MonoBehaviour
             progBar.fillAmount = progbarinprocents;
         }
     }
+    IEnumerator OrderView()             //toto zajistuje vizualni frontu vyroby jednotek
+    {
+        int giveOrder = 0;
+        for (int i = 1; i <= order; i++)
+        {
+            giveOrder = i;
+            order1.fillAmount = giveOrder;
+            giveOrder -= 1;
+            order2.fillAmount = giveOrder;
+            giveOrder -= 1;
+            order3.fillAmount = giveOrder;
+            giveOrder -= 1;
+            order4.fillAmount = giveOrder;
+            giveOrder -= 1;
+            order5.fillAmount = giveOrder;
+        }
+        yield return order;
+    }
+    /*IEnumerator OrderSorter()         //toto serazuje array podle toho co je na rade ve vyrobe            //zatim mimo provoz neni hodne jednotek *******************************
+    {
+        for (int i = 0;i > order; i--)
+        {
+            orderv2[i] = orderv2[i+1];
+            for (int j = 0; j < order; j++)
+            {
+                Debug.Log(orderv2[j]);
+            }
+        }
+        yield return order;
+    }*/
     IEnumerator DamageBaseSoldier()      //base bude dostavat dmg od enemy
     {
         canGetdmg = false;
