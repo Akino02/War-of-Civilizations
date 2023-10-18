@@ -12,7 +12,9 @@ public class BaseScriptP : MonoBehaviour
     //
 
     //co a kde to bude spawnovat
-    public GameObject soldier;          //co spawne
+    public GameObject soldierP;          //co spawne
+    public GameObject rangerP;          //co spawne
+    public GameObject tankP;          //co spawne
     public GameObject playerSpawner;    //kde to spawne
     //
 
@@ -25,7 +27,7 @@ public class BaseScriptP : MonoBehaviour
     //zatím 2/3 nevyuzite  funkce nasi basky
     public float zkusenosti = 0;        //zkusenosti
     public float penize = 0;            //penize
-    public float order = 0;             //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
+    public int order = 0;             //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
     public int[] orderv2 = {0, 0, 0, 0, 0};             //poradi jednotek                               //zatim mimo provoz neni hodne jednotek *******************************
     //
 
@@ -78,12 +80,13 @@ public class BaseScriptP : MonoBehaviour
         }
         hpBaseBarcurr.fillAmount = hpbaseinprocents;  //urcovani zivotu v procentech
     }
-    public void SoldierSpawn()  // tato funkce na kliknuti spawne jednoho vojaka
+    public void SoldierSpawn()  // tato funkce na kliknuti spawne jednoho vojaka            PRO SOLDIERA
     {
         if (order < 5 && currHPBase > 0)      //muze je vyrabet v rade a kazdy se bude vyrabet 5s   //jeste tam pak doplnit ze za to bude platit
         {
             //StartCoroutine(ClickCooldown());   //je to zatim nevyuzite
             order += 1;
+            orderv2[order-1] = 1;
             /*for(int i = 0;i < order; i++)                                 //zatim mimo provoz neni hodne jednotek *******************************
             {
                 orderv2[i] = 1;
@@ -92,6 +95,19 @@ public class BaseScriptP : MonoBehaviour
             {
                 Debug.Log(orderv2[j]);
             }*/
+            Debug.Log("Prirazeno do fronty " + order);
+        }
+        else
+        {
+            Debug.Log("Fronta je plna " + order);
+        }
+    }
+    public void RangerSpawn()  // tato funkce na kliknuti spawne jednoho vojaka            PRO RANGERA
+    {
+        if (order < 5 && currHPBase > 0)      //muze je vyrabet v rade a kazdy se bude vyrabet 5s   //jeste tam pak doplnit ze za to bude platit
+        {
+            order += 1;
+            orderv2[order - 1] = 2;
             Debug.Log("Prirazeno do fronty " + order);
         }
         else
@@ -114,9 +130,21 @@ public class BaseScriptP : MonoBehaviour
             {
                 timer = 0;
                 progbarinprocents = 0f;
-                Instantiate(soldier, playerSpawner.transform.position, playerSpawner.transform.rotation);
-                Debug.Log("Byl vyroben " + order);
+                if (orderv2[0] == 1)
+                {
+                    Instantiate(soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
+                    Debug.Log("Byl vyroben Soldier");
+                }
+                else if (orderv2[0] == 2)
+                {
+                    Instantiate(rangerP, playerSpawner.transform.position, playerSpawner.transform.rotation);
+                }
+                //Debug.Log("Byl vyroben " + order);
                 order -= 1;
+                if(order > 0) 
+                {
+                    StartCoroutine(OrderSorter());
+                }
             }
         }
         if (order == 0)
@@ -128,38 +156,37 @@ public class BaseScriptP : MonoBehaviour
     }
     IEnumerator OrderView()             //toto zajistuje vizualni frontu vyroby jednotek
     {
-        int giveOrder = 0;
-        for (int i = 1; i <= order; i++)
-        {
-            giveOrder = i;
-            order1.fillAmount = giveOrder;
-            giveOrder -= 1;
-            order2.fillAmount = giveOrder;
-            giveOrder -= 1;
-            order3.fillAmount = giveOrder;
-            giveOrder -= 1;
-            order4.fillAmount = giveOrder;
-            giveOrder -= 1;
-            order5.fillAmount = giveOrder;
-        }
+        int giveOrder = order;
+        order1.fillAmount = giveOrder;
+        giveOrder -= 1;
+        order2.fillAmount = giveOrder;
+        giveOrder -= 1;
+        order3.fillAmount = giveOrder;
+        giveOrder -= 1;
+        order4.fillAmount = giveOrder;
+        giveOrder -= 1;
+        order5.fillAmount = giveOrder;
         yield return order;
     }
-    /*IEnumerator OrderSorter()         //toto serazuje array podle toho co je na rade ve vyrobe            //zatim mimo provoz neni hodne jednotek *******************************
+    IEnumerator OrderSorter()         //toto serazuje array podle toho co je na rade ve vyrobe            //zatim mimo provoz neni hodne jednotek *******************************
     {
-        for (int i = 0;i > order; i--)
+        for (int i = 0;i < 5; i++)
         {
-            orderv2[i] = orderv2[i+1];
-            for (int j = 0; j < order; j++)
+            if(i != 4)
             {
-                Debug.Log(orderv2[j]);
+                orderv2[i] = orderv2[i + 1];
+            }
+            else
+            {
+                orderv2[i] = 0;
             }
         }
         yield return order;
-    }*/
+    }
     IEnumerator DamageBaseSoldier()      //base bude dostavat dmg od enemy
     {
         canGetdmg = false;
-        currHPBase -= soldierEscript.dmg;
+        currHPBase -= soldierEscript.dmgS;
         yield return new WaitForSecondsRealtime(2);
         canGetdmg = true;
     }

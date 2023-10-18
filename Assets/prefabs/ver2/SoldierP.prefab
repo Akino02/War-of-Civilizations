@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6052788770667779392}
   - component: {fileID: 564756049554643312}
   - component: {fileID: 1589192734463745437}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4613682966001363123}
   - component: {fileID: 7584174631398656725}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FullHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 6942951535098373586}
   - component: {fileID: 5718220904463192961}
   - component: {fileID: 3762024495565130062}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: CurrHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 2058439709915368367}
   - component: {fileID: 2287324404976431263}
   - component: {fileID: 7497954622039197467}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: FullHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2374151467814677283}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 1317459658053769334}
   - component: {fileID: 3743802442613015}
   - component: {fileID: 6707574062776155327}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CurrHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,8 +480,8 @@ GameObject:
   - component: {fileID: 3111088968232839279}
   - component: {fileID: 343247977715043915}
   - component: {fileID: 6679673829219362800}
-  m_Layer: 14
-  m_Name: Soldier
+  m_Layer: 10
+  m_Name: SoldierP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,19 +640,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32fd93076f8cb9f448044fab85e7e6fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierE: {fileID: 1102557992534293580, guid: d4f813f4e9465cc42af2bd25204308f9, type: 3}
+  soldierE: {fileID: 1415909045207986987, guid: 90c5faddcf4a96646b5c68c403279b5b, type: 3}
   rb: {fileID: 3111088968232839279}
   opponentSoldier:
     serializedVersion: 2
-    m_Bits: 32768
+    m_Bits: 8192
+  rangeS: 0.4
   opponentRanger:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16384
+  rangeR: 2
   opponentTank:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32768
+  rangeT: 0.5
   movespeed: 3
   hpBar: {fileID: 5816549770788582387}
+  maxhp: 100
   currhp: 100
-  dmg: 50
-  canGetdmg: 1
+  dmgS: 40
+  dmgR: 60
+  dmgT: 0
+  canGetdmgM: 1
+  canGetdmgR: 1

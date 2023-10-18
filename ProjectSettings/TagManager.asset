@@ -15,12 +15,12 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - Player
-  - Enemy
+  - SoldierP
+  - RangerP
+  - TankP
+  - SoldierE
+  - RangerE
+  - TankE
   - CameraBorder
   - 
   - 

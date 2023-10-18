@@ -74,7 +74,7 @@ public class EnemySpawn : MonoBehaviour
     IEnumerator DamageBaseSoldier()      //base bude dostavat dmg od enemy
     {
         canGetdmg = false;
-        currHPBase -= soldierPscript.dmg;
+        currHPBase -= soldierPscript.dmgS;
         yield return new WaitForSecondsRealtime(2);
         canGetdmg = true;
     }
