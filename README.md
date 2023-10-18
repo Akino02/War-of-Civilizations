@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 008 [16.10.2023]</h2>
+<p>+ Řazení výroby jednotek</p>
+<p>+ Příprava na více jednotek</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/70a07c16-6ace-4263-b518-8041212956be" width="300" height="150"></p>
+<br>
 <h2>Update 007 [15.10.2023]</h2>
 <p>+ Byl přidán zvuk (hudba: <a href="https://www.youtube.com/watch?v=7T_YtklLyyo">Glorious Morning</a>, autor: <a href="https://www.youtube.com/@WaterflameMusic">Waterflame</a>, <a href="https://www.waterflame.com/contact-info">více ohledně povolení hudby</a>) </p>
 <p>+ Příprava na řazení výroby jednotek</p>
