@@ -28,14 +28,12 @@ public class BaseScriptP : MonoBehaviour
     public float zkusenosti = 0;        //zkusenosti
     public float penize = 0;            //penize
     public int order = 0;             //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
-    public int[] orderv2 = {0, 0, 0, 0, 0};             //poradi jednotek                               //zatim mimo provoz neni hodne jednotek *******************************
+    public int[] orderv2 = {0, 0, 0, 0, 0};             //poradi jednotek                               //zatim chybí posledni jednotka a to je tank
     //
 
     //vyrovnik v procentech graficky                //zatim nefunguje nevim jak udelat ten casovac
     public Image progBar;
-    private float waitSoldier = 5;
-    /*private float waitRanger = 8;
-    private float waitTank = 10;*/
+    private int[] waitTime = {2, 5, 7};            //vyroba soldiera, rangera, tanka       //zatim upraveno   z  5,8,10     na 2,5,7****************************
     public float progbarinprocents = 0f;            //
     public float timer = 0;
     public bool canProduce = true;      //zda muze vyrabet
@@ -55,7 +53,8 @@ public class BaseScriptP : MonoBehaviour
     public Image hpBaseBarcurr;
     public GameObject basePosition;
 
-    public bool canGetdmg = true;
+    public bool canGetdmgM = true;
+    public bool canGetdmgR = true;
     //
 
     // Start is called before the first frame update
@@ -74,9 +73,13 @@ public class BaseScriptP : MonoBehaviour
         {
             StartCoroutine(Orderfactory());
         }
-        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.8f, opponentSoldier) != null && canGetdmg == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
+        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.8f, opponentSoldier) != null && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
         {
-            StartCoroutine(DamageBaseSoldier());
+            StartCoroutine(DmgdealcooldownMelee());
+        }
+        if (Physics2D.OverlapCircle(basePosition.transform.position, 1.4f, opponentRanger) != null && canGetdmgR == true && currHPBase > 0)
+        {
+            StartCoroutine(DmgdealcooldownRange());
         }
         hpBaseBarcurr.fillAmount = hpbaseinprocents;  //urcovani zivotu v procentech
     }
@@ -121,12 +124,12 @@ public class BaseScriptP : MonoBehaviour
         if (order > 0 && progbarinprocents != 1f && canProduce == true)
         {
             canProduce = false;
-            timer += 1;
-            yield return new WaitForSecondsRealtime(1);
-            progbarinprocents = ((100 * timer) / waitSoldier) / 100;        //zatím urèeno jen pro Soldiera
+            timer += 1;                                                                 //celkove cas spatne funguje *****************************************
+            yield return new WaitForSecondsRealtime(1);                                 //k casu se z nejakeho duvodu prictou 3s   takze   cas+3   je cekaci doba
+            progbarinprocents = ((100 * timer) / waitTime[orderv2[0]]) / 100;        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
             progBar.fillAmount = progbarinprocents;
             canProduce = true;
-            if(progbarinprocents == 1f)
+            if (progbarinprocents == 1f)
             {
                 timer = 0;
                 progbarinprocents = 0f;
@@ -150,7 +153,7 @@ public class BaseScriptP : MonoBehaviour
         if (order == 0)
         {
             timer = 0;
-            progbarinprocents = ((100 * timer) / waitSoldier) / 100;
+            progbarinprocents = ((100 * timer) / waitTime[orderv2[0]]) / 100;
             progBar.fillAmount = progbarinprocents;
         }
     }
@@ -183,11 +186,21 @@ public class BaseScriptP : MonoBehaviour
         }
         yield return order;
     }
-    IEnumerator DamageBaseSoldier()      //base bude dostavat dmg od enemy
+    //base bude dostavat dmg od enemy
+    IEnumerator DmgdealcooldownMelee()
     {
-        canGetdmg = false;
+        canGetdmgM = false;
         currHPBase -= soldierEscript.dmgS;
+        Debug.Log("Player " + currHPBase);
+        yield return new WaitForSeconds(3);
+        canGetdmgM = true;
+    }
+    IEnumerator DmgdealcooldownRange()
+    {
+        canGetdmgR = false;
+        currHPBase -= soldierEscript.dmgR;
+        Debug.Log("Player " + currHPBase);
         yield return new WaitForSecondsRealtime(2);
-        canGetdmg = true;
+        canGetdmgR = true;
     }
 }

@@ -29,11 +29,12 @@ public class EnemySpawn : MonoBehaviour
     public Image hpBaseBarcurr;
     public GameObject basePosition;
 
-    public bool canGetdmg = true;
+    public bool canGetdmgM = true;
+    public bool canGetdmgR = true;
     //
     //spawnovani jednotek
     public bool canSpawn = true;
-    public int nahoda = 0;
+    private int nahoda = 0;
     //
     // Start is called before the first frame update
     void Start()
@@ -47,35 +48,59 @@ public class EnemySpawn : MonoBehaviour
         hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;  //pomoc pri pocitani procent
         if (canSpawn == true && nahoda >= 1 && nahoda <= 3 && currHPBase > 0)
         {
-            StartCoroutine(CooldownSoldier());
+            StartCoroutine(CoolDownArmySpawn());
         }
         else if(nahoda == 0 || nahoda >= 4)
         {
             nahoda = Random.Range(1, 5);
         }
         //Debug.Log(nahoda);
-        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.8f, opponentSoldier) != null && canGetdmg == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
+        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.8f, opponentSoldier) != null && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
         {
-            StartCoroutine(DamageBaseSoldier());
+            StartCoroutine(DmgdealcooldownMelee());
+        }
+        if (Physics2D.OverlapCircle(basePosition.transform.position, 1.4f, opponentRanger) != null && canGetdmgR == true && currHPBase > 0)
+        {
+            StartCoroutine(DmgdealcooldownRange());
         }
         hpBaseBarcurr.fillAmount = hpbaseinprocents;  //urcovani zivotu v procentech
     }
 
-    IEnumerator CooldownSoldier()      //nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani
+    IEnumerator CoolDownArmySpawn()      //nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani
     {
         canSpawn = false;
-        Instantiate(soldier, enemySpawner.transform.position, enemySpawner.transform.rotation);
+        if(nahoda == 1)
+        {
+            Instantiate(soldier, enemySpawner.transform.position, enemySpawner.transform.rotation);
+            yield return new WaitForSecondsRealtime(5);
+        }
+        else if(nahoda == 2)
+        {
+            Instantiate(ranger, enemySpawner.transform.position, enemySpawner.transform.rotation);
+            yield return new WaitForSecondsRealtime(8);
+        }
+        else if(nahoda == 3)
+        {
+            Debug.Log("Tady bude Tank (zatim neni)");
+        }
         nahoda = Random.Range(1, 5);
-        yield return new WaitForSecondsRealtime(5);
         canSpawn = true;
     }
-    //pak tady bude i ranger i tank
-    //
-    IEnumerator DamageBaseSoldier()      //base bude dostavat dmg od enemy
+    //base bude dostavat dmg od enemy
+    IEnumerator DmgdealcooldownMelee()
     {
-        canGetdmg = false;
+        canGetdmgM = false;
         currHPBase -= soldierPscript.dmgS;
+        Debug.Log("Player " + currHPBase);
+        yield return new WaitForSeconds(3);
+        canGetdmgM = true;
+    }
+    IEnumerator DmgdealcooldownRange()
+    {
+        canGetdmgR = false;
+        currHPBase -= soldierPscript.dmgR;
+        Debug.Log("Player " + currHPBase);
         yield return new WaitForSecondsRealtime(2);
-        canGetdmg = true;
+        canGetdmgR = true;
     }
 }

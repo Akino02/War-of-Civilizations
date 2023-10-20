@@ -11,7 +11,7 @@ public class SoldierP : MonoBehaviour
     public LayerMask opponentSoldier;       //layer hracovych jednotek typu soldier
     public float rangeS = 0.5f;
     public LayerMask opponentRanger;       //layer hracovych jednotek typu ranger
-    public float rangeR = 2f;
+    public float rangeR = 1.4f;
     public LayerMask opponentTank;       //layer hracovych jednotek typu tank
     public float rangeT = 0.5f;
     public float movespeed;             //rychlost pohybu objektu
@@ -25,7 +25,7 @@ public class SoldierP : MonoBehaviour
 
     //Ohledne utoku
     public float dmgS = 40; //sila teto postavy
-    public float dmgR = 25; //sila teto postavy
+    public float dmgR = 60; //sila teto postavy
     public float dmgT; //sila teto postavy
     public bool canGetdmgM = true;      //na blizko
     public bool canGetdmgR = true;      //na dalku
@@ -40,7 +40,7 @@ public class SoldierP : MonoBehaviour
     {
         hpinprocents = ((100 * currhp) / maxhp) / 100;
         rb.velocity = new Vector2((movespeed * 1), rb.velocity.y);   //bude se hybyt do leva zatim je to testovaci
-        if (Physics2D.OverlapCircle(transform.position, rangeS, opponentSoldier) != null)
+        if (Physics2D.OverlapCircle(transform.position, rangeS, opponentSoldier) != null)       //je tam if, aby to poznaval hned
         {
             if (currhp <= 0)
             {
@@ -51,7 +51,7 @@ public class SoldierP : MonoBehaviour
                 StartCoroutine(DmgdealcooldownMelee());
             }
         }
-        else if (Physics2D.OverlapCircle(transform.position, rangeR, opponentRanger) != null)
+        if (Physics2D.OverlapCircle(transform.position, rangeR, opponentRanger) != null)        //je tam if, aby to poznaval hned
         {
             if (currhp <= 0)
             {
@@ -81,7 +81,7 @@ public class SoldierP : MonoBehaviour
     {
         canGetdmgR = false;
         currhp -= soldierEscript.dmgR;
-        //Debug.Log("Player " + currhp);
+        Debug.Log("Player " + currhp);
         yield return new WaitForSecondsRealtime(2);
         canGetdmgR = true;
     }

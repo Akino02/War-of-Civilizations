@@ -314,11 +314,11 @@ MonoBehaviour:
   opponentSoldier:
     serializedVersion: 2
     m_Bits: 8192
-  rangeS: 0.4
+  rangeS: 0.5
   opponentRanger:
     serializedVersion: 2
     m_Bits: 16384
-  rangeR: 2
+  rangeR: 1.4
   opponentTank:
     serializedVersion: 2
     m_Bits: 32768
