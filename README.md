@@ -1,6 +1,13 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 010 [20.10.2023]</h2>
+<p>+ Nová jednotka (Ranger už konečně pro hráče)</p>
+<p>+ Nový systém výroby (úprava času výroby, ale není hotová)</p>
+<p>+ Nový systém boje (už by všechny jednotky měli spolu bojovat a bojovat proti základnám)</p>
+<p>+ Obnovení zapisování do wordu(ohledně updatů něco jako tady, ale je to ve větách)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/f881f664-d8e2-4a0f-b74f-a20404f01077" width="300" height="150"></p>
+<br>
 <h2>Update 009 [18.10.2023]</h2>
 <p>+ Nová jednotka (Ranger jen zatím pro hráče)</p>
 <p>+ Nový systém výroby (Nyní se může vyrábět více jednotek, takže když se klikne v daném pořadí tak se to v tom pořadí vyrobí)</p>
