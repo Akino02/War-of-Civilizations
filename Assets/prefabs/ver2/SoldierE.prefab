@@ -192,7 +192,7 @@ MonoBehaviour:
   currhp: 100
   dmgS: 30
   dmgR: 15
-  dmgT: 0
+  dmgT: 30
   canGetdmgM: 1
   canGetdmgR: 1
 --- !u!1 &1540713791341460543

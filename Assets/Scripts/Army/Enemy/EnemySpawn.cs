@@ -46,6 +46,7 @@ public class EnemySpawn : MonoBehaviour
     void Update()
     {
         hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;  //pomoc pri pocitani procent
+        //toto slouzi pro spawn vojaku
         if (canSpawn == true && nahoda >= 1 && nahoda <= 3 && currHPBase > 0)
         {
             StartCoroutine(CoolDownArmySpawn());
@@ -54,8 +55,9 @@ public class EnemySpawn : MonoBehaviour
         {
             nahoda = Random.Range(1, 5);
         }
-        //Debug.Log(nahoda);
-        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.8f, opponentSoldier) != null && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
+
+        //damage pro base
+        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.5f, opponentSoldier) != null || Physics2D.OverlapCircle(basePosition.transform.position, 0.5f, opponentTank) != null && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
         {
             StartCoroutine(DmgdealcooldownMelee());
         }
@@ -71,17 +73,18 @@ public class EnemySpawn : MonoBehaviour
         canSpawn = false;
         if(nahoda == 1)
         {
-            Instantiate(soldier, enemySpawner.transform.position, enemySpawner.transform.rotation);
             yield return new WaitForSecondsRealtime(5);
+            Instantiate(soldier, enemySpawner.transform.position, enemySpawner.transform.rotation);
         }
         else if(nahoda == 2)
         {
-            Instantiate(ranger, enemySpawner.transform.position, enemySpawner.transform.rotation);
             yield return new WaitForSecondsRealtime(8);
+            Instantiate(ranger, enemySpawner.transform.position, enemySpawner.transform.rotation);
         }
         else if(nahoda == 3)
         {
-            Debug.Log("Tady bude Tank (zatim neni)");
+            yield return new WaitForSecondsRealtime(10);
+            Instantiate(tank, enemySpawner.transform.position, enemySpawner.transform.rotation);
         }
         nahoda = Random.Range(1, 5);
         canSpawn = true;
@@ -90,7 +93,14 @@ public class EnemySpawn : MonoBehaviour
     IEnumerator DmgdealcooldownMelee()
     {
         canGetdmgM = false;
-        currHPBase -= soldierPscript.dmgS;
+        if (Physics2D.OverlapCircle(transform.position, 0.5f, opponentSoldier) != null)
+        {
+            currHPBase -= soldierPscript.dmgS;
+        }
+        else if (Physics2D.OverlapCircle(transform.position, 0.5f, opponentTank) != null)
+        {
+            currHPBase -= soldierPscript.dmgT;
+        }
         Debug.Log("Player " + currHPBase);
         yield return new WaitForSeconds(3);
         canGetdmgM = true;

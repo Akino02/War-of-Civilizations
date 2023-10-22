@@ -26,7 +26,7 @@ public class SoldierE : MonoBehaviour
 	//Ohledne utoku
 	public float dmgS = 30;
 	public float dmgR = 15;
-	public float dmgT;
+	public float dmgT = 30;
 	public bool canGetdmgM = true;
 	public bool canGetdmgR = true;
 
@@ -40,7 +40,7 @@ public class SoldierE : MonoBehaviour
 	{
 		hpinprocents = ((100 * currhp) / maxhp) / 100;
 		rb.velocity = new Vector2((movespeed * -1), rb.velocity.y);   //bude se hybyt do leva zatim je to testovaci
-		if (Physics2D.OverlapCircle(transform.position, rangeS, opponentSoldier) != null)		//je tam if, aby to poznaval hned
+		if (Physics2D.OverlapCircle(transform.position, rangeS, opponentSoldier) != null || Physics2D.OverlapCircle(transform.position, rangeT, opponentTank) != null)	//je tam if, aby to poznaval hned
 		{
 			if(currhp <= 0)
 			{
@@ -68,8 +68,15 @@ public class SoldierE : MonoBehaviour
 	IEnumerator DmgdealcooldownMelee()
 	{
 		canGetdmgM = false;
-		currhp -= soldierPscript.dmgS;
-		Debug.Log("Enemy " + currhp);
+        if (Physics2D.OverlapCircle(transform.position, rangeS, opponentSoldier) != null)
+        {
+            currhp -= soldierPscript.dmgS;
+        }
+        else if (Physics2D.OverlapCircle(transform.position, rangeT, opponentTank) != null)
+        {
+            currhp -= soldierPscript.dmgT;
+        }
+        Debug.Log("Enemy " + currhp);
 		yield return new WaitForSecondsRealtime(3);
 		canGetdmgM = true;
 	}

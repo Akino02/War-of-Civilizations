@@ -33,7 +33,7 @@ public class BaseScriptP : MonoBehaviour
 
     //vyrovnik v procentech graficky                //zatim nefunguje nevim jak udelat ten casovac
     public Image progBar;
-    private int[] waitTime = {2, 5, 7};            //vyroba soldiera, rangera, tanka       //zatim upraveno   z  5,8,10     na 2,5,7****************************
+    private int[] waitTime = {5, 8, 10};            //vyroba soldiera, rangera, tanka       //zatim upraveno   z  5,8,10     na 2,5,7****************************
     public float progbarinprocents = 0f;            //
     public float timer = 0;
     public bool canProduce = true;      //zda muze vyrabet
@@ -73,7 +73,7 @@ public class BaseScriptP : MonoBehaviour
         {
             StartCoroutine(Orderfactory());
         }
-        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.8f, opponentSoldier) != null && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
+        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.5f, opponentSoldier) != null || Physics2D.OverlapCircle(basePosition.transform.position, 0.5f, opponentTank) != null && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
         {
             StartCoroutine(DmgdealcooldownMelee());
         }
@@ -118,6 +118,19 @@ public class BaseScriptP : MonoBehaviour
             Debug.Log("Fronta je plna " + order);
         }
     }
+    public void TankSpawn()  // tato funkce na kliknuti spawne jednoho vojaka            PRO TANK
+    {
+        if (order < 5 && currHPBase > 0)      //muze je vyrabet v rade a kazdy se bude vyrabet 5s   //jeste tam pak doplnit ze za to bude platit
+        {
+            order += 1;
+            orderv2[order - 1] = 3;
+            Debug.Log("Prirazeno do fronty " + order);
+        }
+        else
+        {
+            Debug.Log("Fronta je plna " + order);
+        }
+    }
     //funkce pro progressBar
     IEnumerator Orderfactory()   //bude vyrabet jednoho 5s           //pak udelat na if (aby se menil ten vyrobni cas)              // pozdeji udelat smooth
     {
@@ -126,7 +139,7 @@ public class BaseScriptP : MonoBehaviour
             canProduce = false;
             timer += 1;                                                                 //celkove cas spatne funguje *****************************************
             yield return new WaitForSecondsRealtime(1);                                 //k casu se z nejakeho duvodu prictou 3s   takze   cas+3   je cekaci doba
-            progbarinprocents = ((100 * timer) / waitTime[orderv2[0]]) / 100;        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
+            progbarinprocents = ((100 * timer) / waitTime[orderv2[0]-1]) / 100;        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
             progBar.fillAmount = progbarinprocents;
             canProduce = true;
             if (progbarinprocents == 1f)
@@ -142,9 +155,13 @@ public class BaseScriptP : MonoBehaviour
                 {
                     Instantiate(rangerP, playerSpawner.transform.position, playerSpawner.transform.rotation);
                 }
+                else if (orderv2[0] == 3)
+                {
+                    Instantiate(tankP, playerSpawner.transform.position, playerSpawner.transform.rotation);
+                }
                 //Debug.Log("Byl vyroben " + order);
                 order -= 1;
-                if(order > 0) 
+                if(order >= 0) 
                 {
                     StartCoroutine(OrderSorter());
                 }
@@ -190,7 +207,14 @@ public class BaseScriptP : MonoBehaviour
     IEnumerator DmgdealcooldownMelee()
     {
         canGetdmgM = false;
-        currHPBase -= soldierEscript.dmgS;
+        if (Physics2D.OverlapCircle(transform.position, 0.5f, opponentSoldier) != null)
+        {
+            currHPBase -= soldierEscript.dmgS;
+        }
+        else if (Physics2D.OverlapCircle(transform.position, 0.5f, opponentTank) != null)
+        {
+            currHPBase -= soldierEscript.dmgT;
+        }
         Debug.Log("Player " + currHPBase);
         yield return new WaitForSeconds(3);
         canGetdmgM = true;
