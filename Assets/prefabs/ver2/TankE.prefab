@@ -205,7 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3212953724793311268}
   - component: {fileID: 6100128109067900275}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: CurrHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 569302830112476156}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2949081247530572910}
   - component: {fileID: 7324395886131677747}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: FullHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1828724066313397240}
   - component: {fileID: 6085656526865695922}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: FullHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4369087621827039237}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 5933916940040553860}
   - component: {fileID: 5524163771420392524}
   - component: {fileID: 7113377917865540644}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: CurrHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 2716867878956950267}
   - component: {fileID: 2643218555370300812}
   - component: {fileID: 2435568985386618502}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 8427206754609766768}
   - component: {fileID: 7219857349384575334}
   - component: {fileID: 5012480542076261150}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: FullHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 1250237453611051174}
   - component: {fileID: 3041270082951022046}
   - component: {fileID: 2943388516875819109}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: CurrHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}

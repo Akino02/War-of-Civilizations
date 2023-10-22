@@ -92,6 +92,6 @@ public class SoldierP : MonoBehaviour
 	/*private void OnDrawGizmosSelected()   //vykreslí kruh okolo jednotky
 	{
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, rangeR);
+		Gizmos.DrawWireSphere(transform.position, rangeS);
 	}*/
 }

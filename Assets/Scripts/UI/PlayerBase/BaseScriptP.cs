@@ -73,7 +73,7 @@ public class BaseScriptP : MonoBehaviour
         {
             StartCoroutine(Orderfactory());
         }
-        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.5f, opponentSoldier) != null || Physics2D.OverlapCircle(basePosition.transform.position, 0.5f, opponentTank) != null && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
+        if ((Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null || Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null) && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
         {
             StartCoroutine(DmgdealcooldownMelee());
         }
@@ -83,21 +83,13 @@ public class BaseScriptP : MonoBehaviour
         }
         hpBaseBarcurr.fillAmount = hpbaseinprocents;  //urcovani zivotu v procentech
     }
+    //to jsou funkce pro cudliky
     public void SoldierSpawn()  // tato funkce na kliknuti spawne jednoho vojaka            PRO SOLDIERA
     {
         if (order < 5 && currHPBase > 0)      //muze je vyrabet v rade a kazdy se bude vyrabet 5s   //jeste tam pak doplnit ze za to bude platit
         {
-            //StartCoroutine(ClickCooldown());   //je to zatim nevyuzite
             order += 1;
             orderv2[order-1] = 1;
-            /*for(int i = 0;i < order; i++)                                 //zatim mimo provoz neni hodne jednotek *******************************
-            {
-                orderv2[i] = 1;
-            }
-            for (int j = 0; j < order; j++)
-            {
-                Debug.Log(orderv2[j]);
-            }*/
             Debug.Log("Prirazeno do fronty " + order);
         }
         else
@@ -207,11 +199,11 @@ public class BaseScriptP : MonoBehaviour
     IEnumerator DmgdealcooldownMelee()
     {
         canGetdmgM = false;
-        if (Physics2D.OverlapCircle(transform.position, 0.5f, opponentSoldier) != null)
+        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null)
         {
             currHPBase -= soldierEscript.dmgS;
         }
-        else if (Physics2D.OverlapCircle(transform.position, 0.5f, opponentTank) != null)
+        else if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null)
         {
             currHPBase -= soldierEscript.dmgT;
         }

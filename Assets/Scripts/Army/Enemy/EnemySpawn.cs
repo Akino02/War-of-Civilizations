@@ -57,7 +57,7 @@ public class EnemySpawn : MonoBehaviour
         }
 
         //damage pro base
-        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.5f, opponentSoldier) != null || Physics2D.OverlapCircle(basePosition.transform.position, 0.5f, opponentTank) != null && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
+        if ((Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null || Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null) && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
         {
             StartCoroutine(DmgdealcooldownMelee());
         }
@@ -93,11 +93,11 @@ public class EnemySpawn : MonoBehaviour
     IEnumerator DmgdealcooldownMelee()
     {
         canGetdmgM = false;
-        if (Physics2D.OverlapCircle(transform.position, 0.5f, opponentSoldier) != null)
+        if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null)
         {
             currHPBase -= soldierPscript.dmgS;
         }
-        else if (Physics2D.OverlapCircle(transform.position, 0.5f, opponentTank) != null)
+        else if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null)
         {
             currHPBase -= soldierPscript.dmgT;
         }
