@@ -28,6 +28,7 @@ public class BaseScriptP : MonoBehaviour
     public float zkusenosti = 0;        //zkusenosti
     public float penize = 0;            //penize
     public int order = 0;             //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
+    public int made = 0;
     public int[] orderv2 = {0, 0, 0, 0, 0};             //poradi jednotek                               //zatim chybí posledni jednotka a to je tank
     //
 
@@ -136,6 +137,7 @@ public class BaseScriptP : MonoBehaviour
             canProduce = true;
             if (progbarinprocents == 1f)
             {
+                made += 1;
                 timer = 0;
                 progbarinprocents = 0f;
                 if (orderv2[0] == 1)
@@ -201,11 +203,11 @@ public class BaseScriptP : MonoBehaviour
         canGetdmgM = false;
         if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null)
         {
-            currHPBase -= soldierEscript.dmgS;
+            currHPBase -= soldierEscript.dmg[0];
         }
         else if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null)
         {
-            currHPBase -= soldierEscript.dmgT;
+            currHPBase -= soldierEscript.dmg[2];
         }
         Debug.Log("Player " + currHPBase);
         yield return new WaitForSeconds(3);
@@ -214,7 +216,7 @@ public class BaseScriptP : MonoBehaviour
     IEnumerator DmgdealcooldownRange()
     {
         canGetdmgR = false;
-        currHPBase -= soldierEscript.dmgR;
+        currHPBase -= soldierEscript.dmg[1];
         Debug.Log("Player " + currHPBase);
         yield return new WaitForSecondsRealtime(2);
         canGetdmgR = true;

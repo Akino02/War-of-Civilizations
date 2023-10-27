@@ -640,26 +640,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32fd93076f8cb9f448044fab85e7e6fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierE: {fileID: 1415909045207986987, guid: 90c5faddcf4a96646b5c68c403279b5b, type: 3}
+  soldierE: {fileID: 5621665606601854760, guid: 9b015885881bfd04f91cc409fa3394b8, type: 3}
   rb: {fileID: 7221418529146263125}
-  opponentSoldier:
-    serializedVersion: 2
-    m_Bits: 8192
-  rangeS: 0.5
-  opponentRanger:
-    serializedVersion: 2
+  armyTypes:
+  - serializedVersion: 2
+    m_Bits: 1024
+  - serializedVersion: 2
     m_Bits: 16384
-  rangeR: 1.4
-  opponentTank:
-    serializedVersion: 2
+  - serializedVersion: 2
+    m_Bits: 4096
+  armyTypesE:
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 16384
+  - serializedVersion: 2
     m_Bits: 32768
-  rangeT: 0.5
+  ranges:
+  - 0.5
+  - 1.4
+  - 0.5
+  rangesE:
+  - 0.5
+  - 1.4
+  - 0.5
   movespeed: 3
+  armyType:
+    serializedVersion: 2
+    m_Bits: 4096
+  armyTypeNum: 0
   hpBar: {fileID: 3687539827233981007}
-  maxhp: 300
-  currhp: 300
-  dmgS: 40
-  dmgR: 60
-  dmgT: 40
+  maxhp:
+  - 100
+  - 60
+  - 300
+  currhp: 0
+  dmg: 280000003c00000028000000
   canGetdmgM: 1
   canGetdmgR: 1

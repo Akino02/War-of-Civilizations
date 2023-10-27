@@ -95,11 +95,11 @@ public class EnemySpawn : MonoBehaviour
         canGetdmgM = false;
         if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null)
         {
-            currHPBase -= soldierPscript.dmgS;
+            currHPBase -= soldierPscript.dmg[0];
         }
         else if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null)
         {
-            currHPBase -= soldierPscript.dmgT;
+            currHPBase -= soldierPscript.dmg[2];
         }
         Debug.Log("Player " + currHPBase);
         yield return new WaitForSeconds(3);
@@ -108,7 +108,7 @@ public class EnemySpawn : MonoBehaviour
     IEnumerator DmgdealcooldownRange()
     {
         canGetdmgR = false;
-        currHPBase -= soldierPscript.dmgR;
+        currHPBase -= soldierPscript.dmg[1];
         Debug.Log("Player " + currHPBase);
         yield return new WaitForSecondsRealtime(2);
         canGetdmgR = true;
