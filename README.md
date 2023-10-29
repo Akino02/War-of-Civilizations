@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 013 [29.10.2023]</h2>
+<p>+ Nový obrázek pro Základny na 1. levelu evoluce</p>
+<p>+ Nový ukazatel toho co se právě vyrábí za jednotku</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/dafc98d1-0501-4a89-b255-871107934a8b" width="500" height="250"></p>
+<br>
 <h2>Update 012 [27.10.2023]</h2>
 <p>+ Snaha udělat nový systém boje(nepovedlo se)[byly na tom ztraceny 4 dny práce]</p>
 <p>+ Vylepšení starého systému boje a zkrácení, spojení (navzájem na sebe navazují, takže to dělá ten dojem z toho systému boje, který se nepovedl)</p>
