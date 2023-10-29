@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 012 [27.10.2023]</h2>
+<p>+ Snaha udělat nový systém boje(nepovedlo se)[byly na tom ztraceny 4 dny práce]</p>
+<p>+ Vylepšení starého systému boje a zkrácení, spojení (navzájem na sebe navazují, takže to dělá ten dojem z toho systému boje, který se nepovedl)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/3b42ce41-de72-4a82-917b-64244ed2c053" width="500" height="250"></p>
+<br>
 <h2>Update 011 [22.10.2023]</h2>
 <p>+ Nová jednotka (Tank)</p>
 <p>+ Oprava grafického vidění systému výroby</p>
