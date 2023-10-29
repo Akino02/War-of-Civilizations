@@ -44,7 +44,7 @@ public class SoldierP : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//																										chyba neche brát vìci od nepøítele************************
+		//																										chyba neche brát vìci od nepøítele****** uz to funguje ale to je warning tady jen kdyby
 		hpinprocents = ((100 * currhp) / maxhp[armyTypeNum]) / 100;															//premena zivotu na procenta
 		rb.velocity = new Vector2((movespeed * 1), rb.velocity.y);															//bude se hybyt do leva zatim je to testovaci
 		if (Physics2D.OverlapCircle(transform.position, soldierEscript.ranges[0], soldierEscript.armyTypes[0]) != null || Physics2D.OverlapCircle(transform.position, soldierEscript.ranges[2], soldierEscript.armyTypes[2]) != null)  //je tam if, aby to poznaval hned
