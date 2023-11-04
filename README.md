@@ -1,6 +1,10 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 014 [30.10.2023]</h2>
+<p>+ Nový obrázek pro Základny na 1. úrovni evoluce (v2)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/54846d34-92af-4c0c-8451-75809c929826" width="500" height="250"></p>
+<br>
 <h2>Update 013 [29.10.2023]</h2>
 <p>+ Nový obrázek pro Základny na 1. levelu evoluce</p>
 <p>+ Nový ukazatel toho co se právě vyrábí za jednotku</p>
