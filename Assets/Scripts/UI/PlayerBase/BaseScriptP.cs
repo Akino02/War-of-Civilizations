@@ -25,14 +25,16 @@ public class BaseScriptP : MonoBehaviour
 	//
 
 	//zatím 2/3 nevyuzite  funkce nasi basky
-	public float zkusenosti = 0;								//zkusenosti		//zatim nefunguje
-	public float penize = 0;									//penize			//zatim nefunguje
+	public float experience = 0;								//zkusenosti		//zatim nefunguje
+	public int money = 0;										//penize			//zatim nefunguje
 	public int order = 0;										//kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
 	public int made = 0;
-	public int[] orderv2 = {0, 0, 0, 0, 0};						//poradi jednotek
+	public int[] orderv2 = {0, 0, 0, 0, 0};                     //poradi jednotek
+
+	public Text moneyText;
 	//
 
-	//vyrovnik v procentech graficky
+	//vyrobnik v procentech graficky
 	public Image progBar;
 	private int[] waitTime = {5, 8, 10};						//vyroba soldiera, rangera, tanka			//zatim upraveno   z  5,8,10     na 2,5,7****************************
 	public float progbarinprocents = 0f;						//
@@ -72,6 +74,7 @@ public class BaseScriptP : MonoBehaviour
 	{
 		StartCoroutine(OrderView());							//graficke vydeni fronty
 		hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;  //pomoc pri pocitani procent
+		moneyText.text = money.ToString();
 		if (order > 0 && currHPBase != 0)						//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
 		{
 			StartCoroutine(Orderfactory());

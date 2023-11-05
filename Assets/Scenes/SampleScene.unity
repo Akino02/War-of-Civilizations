@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 332149393}
   - component: {fileID: 332149392}
   m_Layer: 5
-  m_Name: MoneyNum
+  m_Name: MoneyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1033,7 +1033,7 @@ GameObject:
   - component: {fileID: 757668574}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: baseP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1154,11 +1154,12 @@ MonoBehaviour:
   opponentTank:
     serializedVersion: 2
     m_Bits: 32768
-  zkusenosti: 0
-  penize: 0
+  experience: 0
+  money: 0
   order: 0
   made: 0
   orderv2: 0000000000000000000000000000000000000000
+  moneyText: {fileID: 332149392}
   progBar: {fileID: 2138784624}
   progbarinprocents: 0
   timer: 0
@@ -2941,7 +2942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.275, y: 0.92100006}
   m_AnchorMax: {x: 0.42600003, y: 0.9646296}
-  m_AnchoredPosition: {x: -55.94, y: 0}
+  m_AnchoredPosition: {x: -55.940002, y: 0}
   m_SizeDelta: {x: -111.88, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443310497
@@ -3908,8 +3909,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1443310496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.06423343, y: 0.136}
-  m_AnchorMax: {x: 0.27585018, y: 0.84277755}
+  m_AnchorMin: {x: 0.053000003, y: 0.093456835}
+  m_AnchorMax: {x: 0.27585018, y: 0.8851574}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3933,7 +3934,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e56404d14aefdc549b463a9a44f7d8ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

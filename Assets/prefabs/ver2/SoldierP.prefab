@@ -649,18 +649,7 @@ MonoBehaviour:
     m_Bits: 2048
   - serializedVersion: 2
     m_Bits: 4096
-  armyTypesE:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 16384
-  - serializedVersion: 2
-    m_Bits: 32768
   ranges:
-  - 0.5
-  - 1.4
-  - 0.5
-  rangesE:
   - 0.5
   - 1.4
   - 0.5
@@ -678,3 +667,4 @@ MonoBehaviour:
   dmg: 280000003c00000028000000
   canGetdmgM: 1
   canGetdmgR: 1
+  moneykill: 1e00000032000000c8000000

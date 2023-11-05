@@ -26,7 +26,10 @@ public class SoldierP : MonoBehaviour
 	//Ohledne utoku
 	public int[] dmg = { 40, 60, 40 };
 	public bool canGetdmgM = true;								//na blizko
-	public bool canGetdmgR = true;								//na dalku
+	public bool canGetdmgR = true;                              //na dalku
+	public bool[] enemies = { false, false, false };			//
+
+	public int[] moneykill = { 30, 50, 200 };                  //peniza za zabiti nepritele (soldier, ranger, tank)
 
 	// Start is called before the first frame update
 	void Start()
@@ -44,42 +47,49 @@ public class SoldierP : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//																										chyba neche brát vìci od nepøítele****** uz to funguje ale to je warning tady jen kdyby
+		checkEnemy();
+		//														chyba nechce brat veci od nepritele****** uz to funguje ale to je warning tady jen kdyby
 		hpinprocents = ((100 * currhp) / maxhp[armyTypeNum]) / 100;															//premena zivotu na procenta
-		rb.velocity = new Vector2((movespeed * 1), rb.velocity.y);															//bude se hybyt do leva zatim je to testovaci
-		if (Physics2D.OverlapCircle(transform.position, soldierEscript.ranges[0], soldierEscript.armyTypes[0]) != null || Physics2D.OverlapCircle(transform.position, soldierEscript.ranges[2], soldierEscript.armyTypes[2]) != null)  //je tam if, aby to poznaval hned
+		rb.velocity = new Vector2((movespeed * 1), rb.velocity.y);                                                          //bude se hybyt do leva zatim je to testovaci
+		for (int i = 0; i < 3; i++)
 		{
-			if (currhp <= 0)									//pokud objekt nema zivoty tak zemre
+			if (enemies[i] == true)
 			{
-				Destroy(gameObject);
-			}
-			else if (currhp > 0 && canGetdmgM == true)			//pokud objekt ma zivoty a muze dostat dmg tak se spusti IEnumerator
-			{
-				StartCoroutine(DmgdealcooldownMelee());
-			}
-		}
-		if (Physics2D.OverlapCircle(transform.position, soldierEscript.ranges[1], soldierEscript.armyTypes[1]) != null)		//je tam if, aby to poznaval hned
-		{
-			if (currhp <= 0)									//pokud objekt nema zivoty tak zemre
-			{
-				Destroy(gameObject);
-			}
-			else if (currhp > 0 && canGetdmgR == true)          ////pokud objekt ma zivoty a muze dostat dmg tak se spusti IEnumerator
-			{
-				StartCoroutine(DmgdealcooldownRange());
+				if (currhp <= 0)
+				{
+					Destroy(gameObject);
+				}
+				else if (currhp > 0)
+				{
+					if ((i == 0 || i == 2) && canGetdmgM == true)
+					{
+						StartCoroutine(DmgdealcooldownMelee());
+					}
+					else if (i == 1 && canGetdmgR == true)
+					{
+						StartCoroutine(DmgdealcooldownRange());
+					}
+				}
 			}
 		}
 		hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);								//zapisovani do hpbaru
+	}
+	public void checkEnemy()
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			enemies[i] = Physics2D.OverlapCircle(transform.position, soldierEscript.ranges[i], soldierEscript.armyTypes[i]) != null;
+		}
 	}
 
 	IEnumerator DmgdealcooldownMelee()							//zde dostava dmg od jednotek, ktere jsou na blizko
 	{
 		canGetdmgM = false;
-		if (Physics2D.OverlapCircle(transform.position, soldierEscript.ranges[0], soldierEscript.armyTypes[0]) != null)		//pokud je to soldier
+		if (enemies[0])		//pokud je to soldier
 		{
 			currhp -= soldierEscript.dmg[0];
 		}
-		else if (Physics2D.OverlapCircle(transform.position, soldierEscript.ranges[2], soldierEscript.armyTypes[2]) != null)//pokud je to tank
+		else if (enemies[2])//pokud je to tank
 		{
 			currhp -= soldierEscript.dmg[2];
 		}

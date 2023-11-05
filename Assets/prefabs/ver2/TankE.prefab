@@ -374,6 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soldierP: {fileID: 7800895947703929326, guid: ed661f2a13cabad4d8f5738f721b7b32, type: 3}
+  baseP: {fileID: 7800895947703929326, guid: ed661f2a13cabad4d8f5738f721b7b32, type: 3}
   rb: {fileID: 8490637887702020366}
   armyTypes:
   - serializedVersion: 2
@@ -400,3 +401,4 @@ MonoBehaviour:
   dmg: 1e0000000f0000001e000000
   canGetdmgM: 1
   canGetdmgR: 1
+  enemies: 000000
