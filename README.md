@@ -1,6 +1,12 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 016 [05.11.2023]</h2>
+<p>+ Nový obrázek pro zkušenosti</p>
+<p>+ Zkrácení systému pro jednotky</p>
+<p>+ Nový systém pro přidávání peněz při zabití nepřítele</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/9aef2cce-ab33-49fa-8393-13f47eb08680" width="500" height="250"></p>
+<br>
 <h2>Update 015 [04.11.2023]</h2>
 <p>+ Nový obrázek pro peníze</p>
 <p>+ Příprava na vizuální přehled peněz a zkušeností</p>
