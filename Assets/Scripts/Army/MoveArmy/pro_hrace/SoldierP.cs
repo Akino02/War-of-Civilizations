@@ -19,20 +19,21 @@ public class SoldierP : MonoBehaviour
 	//Ohledne HPbaru
 	public GameObject hpBar;
 
-	public float[] maxhp = {100, 60 , 300};
-	public float currhp;
+	public float[] maxhp = {100, 60 , 300};                                                                                         //upravit pro budoucí evoluci
+    public float currhp;
 	private float hpinprocents = 1f;
 
 	//Ohledne utoku
-	public int[] dmg = { 40, 60, 40 };
-	public bool canGetdmgM = true;								//na blizko
+	public int[] dmg = { 40, 60, 40 };                                                                                              //upravit pro budoucí evoluci
+    public bool canGetdmgM = true;								//na blizko
 	public bool canGetdmgR = true;                              //na dalku
 	public bool[] enemies = { false, false, false };			//
 
-	public int[] moneykill = { 30, 50, 200 };                  //peniza za zabiti nepritele (soldier, ranger, tank)
+	public int[] moneykill = { 30, 50, 150 };					//peniza za zabiti nepritele (soldier, ranger, tank)				//upravit pro budoucí evoluci
+	public int[] expperkill = { 100, 125, 300 };                //peniza za zabiti nepritele (soldier, ranger, tank)				//upravit pro budoucí evoluci
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
 	{
 		soldierEscript = soldierE.GetComponent<SoldierE>();		//import protivnika a jeho promennych
 		for (int i = 0; i < 3; i++)								//prirazuje hodnoty podle toho co je to za typ jednotky

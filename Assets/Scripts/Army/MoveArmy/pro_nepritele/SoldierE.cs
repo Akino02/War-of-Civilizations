@@ -8,7 +8,7 @@ public class SoldierE : MonoBehaviour
 	SoldierP soldierPscript;									//import scriptu protivnika
 	[SerializeField] GameObject soldierP;						//import objektu
 	BaseScriptP basePscript;									//import objektu
-	GameObject item;						//import objektu
+	GameObject item;											//import objektu
 
 	public Rigidbody2D rb;										//funkce pro gravitaci
 	public LayerMask[] armyTypes = new LayerMask[3];
@@ -21,14 +21,13 @@ public class SoldierE : MonoBehaviour
 	//Ohledne HPbaru
 	public GameObject hpBar;
 
-	public float[] maxhp = { 100, 60, 300 };
-	public float currhp;
-	//public float[] hptype = { 100, 60, 300 };
+	public float[] maxhp = { 100, 60, 300 };																//upravit pro budoucí evoluci
+    public float currhp;
 	private float hpinprocents = 1f;
 
 	//Ohledne utoku
-	public int[] dmg = { 40, 60, 40 };
-	public bool canGetdmgM = true;      //na blizko
+	public int[] dmg = { 40, 60, 40 };																		//upravit pro budoucí evoluci
+    public bool canGetdmgM = true;      //na blizko
 	public bool canGetdmgR = true;      //na dalku
 	public bool[] enemies = { false, false, false };
 	private bool givemoney = true;								//cooldown na penize
@@ -57,7 +56,7 @@ public class SoldierE : MonoBehaviour
 	{
 		hpinprocents = ((100 * currhp) / maxhp[armyTypeNum]) / 100;
 		rb.velocity = new Vector2((movespeed * -1), rb.velocity.y);   //bude se hybyt do leva zatim je to testovaci
-        checkEnemy();
+		checkEnemy();
 		for (int i = 0; i < 3; i++)
 		{
 			if(enemies[i] == true)

@@ -24,19 +24,22 @@ public class BaseScriptP : MonoBehaviour
 	public LayerMask opponentTank;								//layer hracovych jednotek typu tank
 	//
 
-	//zatím 2/3 nevyuzite  funkce nasi basky
-	public float experience = 0;								//zkusenosti		//zatim nefunguje
-	public int money = 0;										//penize			//zatim nefunguje
+	//zatím 1/3 nevyuzite  funkce nasi basky
+	public float experience = 0;                                //zkusenosti												//zatim nefunguje************************************
+	public int level = 1;										//toto ukazuje level evoluce v zakladu je to 1				//zatim mimo provoz**********************************
+	public int money = 175;										//penize			
 	public int order = 0;										//kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
 	public int made = 0;
 	public int[] orderv2 = {0, 0, 0, 0, 0};                     //poradi jednotek
 
-	public Text moneyText;
+	public Text experienceText;									//Prehled ohledne dalsi evoluce v %
+	public Text moneyText;										//Prehled kolik ma hrac financi
 	//
 
 	//vyrobnik v procentech graficky
 	public Image progBar;
-	private int[] waitTime = {5, 8, 10};						//vyroba soldiera, rangera, tanka			//zatim upraveno   z  5,8,10     na 2,5,7****************************
+	public int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };					//vícerozmìrné pole pro cenu jednotek
+	private int[] waitTime = {5, 8, 10};						//vyroba soldiera, rangera, tanka
 	public float progbarinprocents = 0f;						//
 	public float timer = 0;
 	public bool canProduce = true;								//zda muze vyrabet
@@ -51,7 +54,7 @@ public class BaseScriptP : MonoBehaviour
 	//
 
 	//hp a ubirani base
-	public float maxHPBase = 1000;
+	public float maxHPBase = 1000;									//potøeba zmìnit poèet životù pøi updatu !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public float currHPBase = 1000;
 	public float hpbaseinprocents = 1f;
 
@@ -65,6 +68,7 @@ public class BaseScriptP : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		moneyText.text = money.ToString();
 		soldierEscript = soldierE.GetComponent<SoldierE>();		//import protivnika a jeho promìnných
 		StartCoroutine(TrainingText());							//zapise se co se vyrabi
 	}
@@ -73,7 +77,7 @@ public class BaseScriptP : MonoBehaviour
 	void Update()
 	{
 		StartCoroutine(OrderView());							//graficke vydeni fronty
-		hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;  //pomoc pri pocitani procent
+		hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;															//pomoc pri pocitani procent
 		moneyText.text = money.ToString();
 		if (order > 0 && currHPBase != 0)						//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
 		{
@@ -92,41 +96,44 @@ public class BaseScriptP : MonoBehaviour
 	//to jsou funkce pro cudliky
 	public void SoldierSpawn()									//tato funkce na kliknuti spawne jednoho vojaka				PRO SOLDIERA
 	{
-		if (order < 5 && currHPBase > 0)						//jeste tam pak doplnit ze za to bude platit
+		if (order < 5 && currHPBase > 0 && money >= 15)						//jeste tam pak doplnit ze za to bude platit
 		{
 			order += 1;
 			orderv2[order-1] = 1;
+			money -= 15;
 			Debug.Log("Prirazeno do fronty " + order);
 		}
 		else
 		{
-			Debug.Log("Fronta je plna " + order);
+			Debug.Log("Fronta je plna " + order + "nebo nemas penize");
 		}
 	}
 	public void RangerSpawn()									// tato funkce na kliknuti spawne jednoho vojaka			PRO RANGERA
 	{
-		if (order < 5 && currHPBase > 0)						//jeste tam pak doplnit ze za to bude platit
+		if (order < 5 && currHPBase > 0 && money >= 25)			//jeste tam pak doplnit ze za to bude platit
 		{
 			order += 1;
 			orderv2[order - 1] = 2;
+			money -= 25;
 			Debug.Log("Prirazeno do fronty " + order);
 		}
 		else
 		{
-			Debug.Log("Fronta je plna " + order);
+			Debug.Log("Fronta je plna " + order + "nebo nemas penize");
 		}
 	}
 	public void TankSpawn()										// tato funkce na kliknuti spawne jednoho vojaka			PRO TANK
 	{
-		if (order < 5 && currHPBase > 0)						//jeste tam pak doplnit ze za to bude platit
+		if (order < 5 && currHPBase > 0 && money >= 100)		//jeste tam pak doplnit ze za to bude platit
 		{
 			order += 1;
 			orderv2[order - 1] = 3;
+			money -= 100;
 			Debug.Log("Prirazeno do fronty " + order);
 		}
 		else
 		{
-			Debug.Log("Fronta je plna " + order);
+			Debug.Log("Fronta je plna " + order + "nebo nemas penize");
 		}
 	}
 	//funkce pro progressBar
