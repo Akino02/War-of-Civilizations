@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 018 [14.11.2023]</h2>
+<p>+ Nový systém na počítání zkušeností</p>
+<p>+ Přídáný budoucí evoluce (hp,dmg,moneyperkill,expperkill) (v budoucnu se to ještě asi změní z důvodu snadného dohrání hry teď)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/6b0709c6-dfae-43b9-95f4-4222100651e6" width="500" height="250"></p>
+<br>
 <h2>Update 017 [11.11.2023]</h2>
 <p>+ Nový obrázek pro základnu 2. úrovni</p>
 <p>+ Dokončení systému peněz</p>
