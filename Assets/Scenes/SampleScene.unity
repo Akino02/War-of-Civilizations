@@ -1239,7 +1239,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32768
   experience: 0
-  level: 1
+  level: 0
   money: 175
   order: 0
   made: 0

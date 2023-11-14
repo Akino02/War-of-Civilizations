@@ -2,47 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
-using UnityEngine.UI;											//import teto funkce, abych mohl pracovat s UI vecmi v unity enginu
+using UnityEngine.UI;                                           //import teto funkce, abych mohl pracovat s UI vecmi v unity enginu
 
 public class BaseScriptP : MonoBehaviour
 {
 	//import enemy scriptu pro damage jaky davaji
-	SoldierE soldierEscript;									//import scriptu protivnika
-	[SerializeField] GameObject soldierE;						//import objektu
-	//
+	SoldierE soldierEscript;                                    //import scriptu protivnika
+	[SerializeField] GameObject soldierE;                       //import objektu
+																//
 
 	//co a kde to bude spawnovat
-	public GameObject soldierP;									//To je objekt soldier
-	public GameObject rangerP;									//To je objekt ranger
-	public GameObject tankP;									//To je objekt tank
-	public GameObject playerSpawner;							//misto kde se tyto objekty spawnou
-	//
+	public GameObject soldierP;                                 //To je objekt soldier
+	public GameObject rangerP;                                  //To je objekt ranger
+	public GameObject tankP;                                    //To je objekt tank
+	public GameObject playerSpawner;                            //misto kde se tyto objekty spawnou
+																//
 
 	//nepratele (layers)
-	public LayerMask opponentSoldier;							//layer hracovych jednotek typu soldier					//tohle bych mel upravit na jeden odkaz
-	public LayerMask opponentRanger;							//layer hracovych jednotek typu ranger
-	public LayerMask opponentTank;								//layer hracovych jednotek typu tank
-	//
+	public LayerMask opponentSoldier;                           //layer hracovych jednotek typu soldier						//tohle bych mel upravit na jeden odkaz
+	public LayerMask opponentRanger;                            //layer hracovych jednotek typu ranger
+	public LayerMask opponentTank;                              //layer hracovych jednotek typu tank
+																//
 
 	//zatím 1/3 nevyuzite  funkce nasi basky
-	public float experience = 0;                                //zkusenosti												//zatim nefunguje************************************
-	public int level = 1;										//toto ukazuje level evoluce v zakladu je to 1				//zatim mimo provoz**********************************
-	public int money = 175;										//penize			
-	public int order = 0;										//kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
+	public int experience = 0;									//zkusenosti												//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+	public int experienceinprocents = 0;						//zkusenosti												//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+	public int nextlevelup = 8000;                                                                                          //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+	public int level = 0;                                       //toto ukazuje level evoluce v zakladu je to 0				//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+	public int money = 175;                                     //penize			
+	public int order = 0;                                       //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
 	public int made = 0;
-	public int[] orderv2 = {0, 0, 0, 0, 0};                     //poradi jednotek
+	public int[] orderv2 = { 0, 0, 0, 0, 0 };                     //poradi jednotek
 
-	public Text experienceText;									//Prehled ohledne dalsi evoluce v %
-	public Text moneyText;										//Prehled kolik ma hrac financi
-	//
+	public Text experienceText;                                 //Prehled ohledne dalsi evoluce v %
+	public Text moneyText;                                      //Prehled kolik ma hrac financi
+																//
 
 	//vyrobnik v procentech graficky
 	public Image progBar;
-	public int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };					//vícerozmìrné pole pro cenu jednotek
-	private int[] waitTime = {5, 8, 10};						//vyroba soldiera, rangera, tanka
-	public float progbarinprocents = 0f;						//
+	public int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };		//vícerozmìrné pole pro cenu jednotek //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+    private int[] waitTime = { 5, 8, 10 };                      //vyroba soldiera, rangera, tanka
+	public float progbarinprocents = 0f;                        //
 	public float timer = 0;
-	public bool canProduce = true;								//zda muze vyrabet
+	public bool canProduce = true;                              //zda muze vyrabet
 
 	public Image order1;
 	public Image order2;
@@ -50,11 +52,11 @@ public class BaseScriptP : MonoBehaviour
 	public Image order4;
 	public Image order5;
 
-	public Text trainText;										//tento text se bude prepisovat podle toho co se vyrabi
-	//
+	public Text trainText;                                      //tento text se bude prepisovat podle toho co se vyrabi
+																//
 
 	//hp a ubirani base
-	public float maxHPBase = 1000;									//potøeba zmìnit poèet životù pøi updatu !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	public float maxHPBase = 1000;                                  //potøeba zmìnit poèet životù pøi updatu !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public float currHPBase = 1000;
 	public float hpbaseinprocents = 1f;
 
@@ -69,17 +71,20 @@ public class BaseScriptP : MonoBehaviour
 	void Start()
 	{
 		moneyText.text = money.ToString();
-		soldierEscript = soldierE.GetComponent<SoldierE>();		//import protivnika a jeho promìnných
-		StartCoroutine(TrainingText());							//zapise se co se vyrabi
+		experienceText.text = experienceinprocents.ToString() + "%";                                                        //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+        soldierEscript = soldierE.GetComponent<SoldierE>();     //import protivnika a jeho promìnných
+		StartCoroutine(TrainingText());                         //zapise se co se vyrabi
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		StartCoroutine(OrderView());							//graficke vydeni fronty
-		hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;															//pomoc pri pocitani procent
-		moneyText.text = money.ToString();
-		if (order > 0 && currHPBase != 0)						//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
+		StartCoroutine(OrderView());                            //graficke vydeni fronty
+		hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;                                                          //pomoc pri pocitani procent
+		experienceinprocents = ((100 * experience) / nextlevelup);                                                          //pocitani procent	//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+        moneyText.text = money.ToString();
+		experienceText.text = experienceinprocents.ToString() + "%";                                                                            //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+        if (order > 0 && currHPBase != 0)						//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
 		{
 			StartCoroutine(Orderfactory());
 		}
@@ -223,17 +228,17 @@ public class BaseScriptP : MonoBehaviour
 		}
 		yield return new WaitForSeconds(0);
 	}
-	IEnumerator DmgdealcooldownMelee()							//base bude dostavat dmg od enemy melee
-	{
+	IEnumerator DmgdealcooldownMelee()                          //base bude dostavat dmg od enemy melee
+    {
 		canGetdmgM = false;
 		if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null)
 		{
-			currHPBase -= soldierEscript.dmg[0];
-		}
+			currHPBase -= soldierEscript.dmg[soldierEscript.level,0];                                                       //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+        }
 		else if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null)
 		{
-			currHPBase -= soldierEscript.dmg[2];
-		}
+			currHPBase -= soldierEscript.dmg[soldierEscript.level,2];                                                       //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+        }
 		Debug.Log("Player " + currHPBase);
 		yield return new WaitForSeconds(3);
 		canGetdmgM = true;
@@ -241,8 +246,8 @@ public class BaseScriptP : MonoBehaviour
 	IEnumerator DmgdealcooldownRange()							//base bude dostavat dmg od enemy ranged
 	{
 		canGetdmgR = false;
-		currHPBase -= soldierEscript.dmg[1];
-		Debug.Log("Player " + currHPBase);
+		currHPBase -= soldierEscript.dmg[soldierEscript.level, 1];                                                          //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+        Debug.Log("Player " + currHPBase);
 		yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;
 	}
