@@ -1239,6 +1239,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32768
   experience: 0
+  experienceinprocents: 0
+  nextlevelup: 8000
   level: 0
   money: 175
   order: 0
