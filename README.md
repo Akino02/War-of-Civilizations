@@ -1,6 +1,12 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 017 [11.11.2023]</h2>
+<p>+ Nový obrázek pro základnu 2. úrovni</p>
+<p>+ Dokončení systému peněz</p>
+<p>+ Příprava na dokončení systému zkušeností</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/5188388f-683b-4783-aa0d-ffa0f7d0954a" width="500" height="250">, <img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/0ed05bbb-49d9-4647-b64a-7a2bf624dd7f" width="250" height="250"></p>
+<br>
 <h2>Update 016 [05.11.2023]</h2>
 <p>+ Nový obrázek pro zkušenosti</p>
 <p>+ Zkrácení systému pro jednotky</p>
