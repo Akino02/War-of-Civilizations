@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.UI;                                           //import teto funkce, abych mohl pracovat s UI vecmi v unity enginu
@@ -16,7 +17,7 @@ public class BaseScriptP : MonoBehaviour
 	public GameObject rangerP;                                  //To je objekt ranger
 	public GameObject tankP;                                    //To je objekt tank
 	public GameObject playerSpawner;                            //misto kde se tyto objekty spawnou
-																//
+
 
 	//nepratele (layers)
 	public LayerMask opponentSoldier;                           //layer hracovych jednotek typu soldier						//tohle bych mel upravit na jeden odkaz
@@ -24,27 +25,29 @@ public class BaseScriptP : MonoBehaviour
 	public LayerMask opponentTank;                              //layer hracovych jednotek typu tank
 																//
 
-	//zatím 1/3 nevyuzite  funkce nasi basky
-	public int experience = 0;									//zkusenosti												//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-	public int experienceinprocents = 0;						//zkusenosti												//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-	public int nextlevelup = 8000;                                                                                          //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-	public int level = 0;                                       //toto ukazuje level evoluce v zakladu je to 0				//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+	//funkce zakladny ukazuje zkusenosti(%), pocet penez, co se vyrabi, co je ve fronte
+	public int experience = 0;									//zkusenosti
+	public int experienceinprocents = 0;						//zkusenosti
+	public int nextlevelup = 4000;                              //pokud dosahne tolika zkusenosti tak se evolvuje			//potrebuje i prenastavit v unity!!
+	public int level = 0;                                       //toto ukazuje level evoluce v zakladu je to 0
 	public int money = 175;                                     //penize			
 	public int order = 0;                                       //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
 	public int made = 0;
-	public int[] orderv2 = { 0, 0, 0, 0, 0 };                     //poradi jednotek
+	public int[] orderv2 = { 0, 0, 0, 0, 0 };                   //poradi jednotek
+	public GameObject[] baseAppearance = new GameObject[2];		//vzhled budov v array ohledne nove evoluce
 
 	public Text experienceText;                                 //Prehled ohledne dalsi evoluce v %
 	public Text moneyText;                                      //Prehled kolik ma hrac financi
-																//
+
 
 	//vyrobnik v procentech graficky
 	public Image progBar;
 	public int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };		//vícerozmìrné pole pro cenu jednotek //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-    private int[] waitTime = { 5, 8, 10 };                      //vyroba soldiera, rangera, tanka
-	public float progbarinprocents = 0f;                        //
+	private int[] waitTime = { 5, 8, 10 };                      //vyroba soldiera, rangera, tanka
+	public float progbarinprocents = 0f;                        
 	public float timer = 0;
 	public bool canProduce = true;                              //zda muze vyrabet
+	public Text[] actionButtonText = new Text[3];				//upraveni textu u buttonu soldier, ranger, tank		//pozdeji budou jeste dalsi dva na dobrovolny update evoluce a pro pohromy
 
 	public Image order1;
 	public Image order2;
@@ -71,8 +74,8 @@ public class BaseScriptP : MonoBehaviour
 	void Start()
 	{
 		moneyText.text = money.ToString();
-		experienceText.text = experienceinprocents.ToString() + "%";                                                        //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        soldierEscript = soldierE.GetComponent<SoldierE>();     //import protivnika a jeho promìnných
+		experienceText.text = experienceinprocents.ToString() + "%";
+		soldierEscript = soldierE.GetComponent<SoldierE>();     //import protivnika a jeho promìnných
 		StartCoroutine(TrainingText());                         //zapise se co se vyrabi
 	}
 
@@ -81,10 +84,10 @@ public class BaseScriptP : MonoBehaviour
 	{
 		StartCoroutine(OrderView());                            //graficke vydeni fronty
 		hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;                                                          //pomoc pri pocitani procent
-		experienceinprocents = ((100 * experience) / nextlevelup);                                                          //pocitani procent	//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        moneyText.text = money.ToString();
-		experienceText.text = experienceinprocents.ToString() + "%";                                                                            //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        if (order > 0 && currHPBase != 0)						//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
+		experienceinprocents = ((100 * experience) / nextlevelup);
+		moneyText.text = money.ToString();
+		StartCoroutine(Evolution());
+		if (order > 0 && currHPBase != 0)						//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
 		{
 			StartCoroutine(Orderfactory());
 		}
@@ -229,16 +232,16 @@ public class BaseScriptP : MonoBehaviour
 		yield return new WaitForSeconds(0);
 	}
 	IEnumerator DmgdealcooldownMelee()                          //base bude dostavat dmg od enemy melee
-    {
+	{
 		canGetdmgM = false;
 		if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null)
 		{
 			currHPBase -= soldierEscript.dmg[soldierEscript.level,0];                                                       //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        }
+		}
 		else if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null)
 		{
 			currHPBase -= soldierEscript.dmg[soldierEscript.level,2];                                                       //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        }
+		}
 		Debug.Log("Player " + currHPBase);
 		yield return new WaitForSeconds(3);
 		canGetdmgM = true;
@@ -247,8 +250,39 @@ public class BaseScriptP : MonoBehaviour
 	{
 		canGetdmgR = false;
 		currHPBase -= soldierEscript.dmg[soldierEscript.level, 1];                                                          //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        Debug.Log("Player " + currHPBase);
+		Debug.Log("Player " + currHPBase);
 		yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;
+	}
+	IEnumerator Evolution()
+    {
+		if(experience >= nextlevelup && level != 4)
+		{
+			experience -= nextlevelup;
+			level += 1;
+			for(int i = 0;i < 3; i++)							//pise do vsech textu, ktere jsou uchovany v poli
+			{
+				actionButtonText[i].text = "lvl." + (level + 1);
+			}
+			/*soldierText.text = "lvl." + (level + 1);
+			rangerText.text = "lvl." + (level + 1);
+			tankText.text = "lvl." + (level + 1);*/
+			for (int i = 0;i < 2; i++)
+			{
+				if(level == i)									//zatim jsou jen 2, aby to mohlo fungovat pozdeji jich bude 5 mozna vice
+				{
+					baseAppearance[i].SetActive(true);
+				}
+				else
+				{
+					baseAppearance[i].SetActive(false);
+				}
+			}
+		}
+		else
+		{
+			experienceText.text = experienceinprocents.ToString() + "%";
+		}
+		yield return experience;
 	}
 }

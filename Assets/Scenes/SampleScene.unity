@@ -1240,18 +1240,25 @@ MonoBehaviour:
     m_Bits: 32768
   experience: 0
   experienceinprocents: 0
-  nextlevelup: 8000
+  nextlevelup: 4000
   level: 0
   money: 175
   order: 0
   made: 0
   orderv2: 0000000000000000000000000000000000000000
+  baseAppearance:
+  - {fileID: 1529459348}
+  - {fileID: 585693400}
   experienceText: {fileID: 995822368}
   moneyText: {fileID: 332149392}
   progBar: {fileID: 2138784624}
   progbarinprocents: 0
   timer: 0
   canProduce: 1
+  actionButtonText:
+  - {fileID: 2028482987}
+  - {fileID: 2125907789}
+  - {fileID: 1066755950}
   order1: {fileID: 95546240}
   order2: {fileID: 939321535}
   order3: {fileID: 590898111}
@@ -2296,7 +2303,7 @@ GameObject:
   - component: {fileID: 1066755951}
   - component: {fileID: 1066755950}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: TankText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4203,7 +4210,7 @@ GameObject:
   - component: {fileID: 2028482988}
   - component: {fileID: 2028482987}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: SoldierText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4282,7 +4289,7 @@ GameObject:
   - component: {fileID: 2125907790}
   - component: {fileID: 2125907789}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: RangerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

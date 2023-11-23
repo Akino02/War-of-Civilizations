@@ -646,21 +646,10 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 1024
   - serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 2048
   - serializedVersion: 2
     m_Bits: 4096
-  armyTypesE:
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 16384
-  - serializedVersion: 2
-    m_Bits: 32768
   ranges:
-  - 0.5
-  - 1.4
-  - 0.5
-  rangesE:
   - 0.5
   - 1.4
   - 0.5
@@ -670,11 +659,9 @@ MonoBehaviour:
     m_Bits: 4096
   armyTypeNum: 0
   hpBar: {fileID: 3687539827233981007}
-  maxhp:
-  - 100
-  - 60
-  - 300
   currhp: 0
-  dmg: 280000003c00000028000000
+  level: 0
   canGetdmgM: 1
   canGetdmgR: 1
+  enemies: 000000
+  expperkill: 640000007d0000002c010000

@@ -22,13 +22,13 @@ public class SoldierE : MonoBehaviour
 	public GameObject hpBar;
 
 	public float[,] maxhp = { { 100, 60, 300 }, { 150, 90, 450 }, { 225, 135, 675 }, { 350, 200, 1000 }, { 400, 300, 1500 } };              //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-    public float currhp;
+	public float currhp;
 	private float hpinprocents = 1f;
 	public int level = 0;                                                                                                   //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
 
-    //Ohledne utoku
-    public int[,] dmg = { { 40, 60, 30 }, { 60, 90, 50 }, { 90, 135, 70 }, { 135, 90, 115 }, { 150, 200, 120 } };           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-    public bool canGetdmgM = true;      //na blizko
+	//Ohledne utoku
+	public int[,] dmg = { { 40, 60, 30 }, { 60, 90, 50 }, { 90, 135, 70 }, { 135, 90, 115 }, { 150, 200, 120 } };           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+	public bool canGetdmgM = true;      //na blizko
 	public bool canGetdmgR = true;      //na dalku
 	public bool[] enemies = { false, false, false };
 	private bool givemoney = true;								//cooldown na penize
@@ -42,13 +42,13 @@ public class SoldierE : MonoBehaviour
 		basePscript = item.GetComponent<BaseScriptP>();
 		//
 		level = basePscript.level;                              //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			if (armyType == armyTypes[i])
 			{
 				//maxhp = hptype[i];
 				currhp = maxhp[level,i];                        //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-                armyTypeNum = i;
+				armyTypeNum = i;
 			}
 			//Debug.Log(i);
 		}
@@ -57,19 +57,15 @@ public class SoldierE : MonoBehaviour
 	void Update()
 	{
 		hpinprocents = ((100 * currhp) / maxhp[level,armyTypeNum]) / 100;                                                   //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        rb.velocity = new Vector2((movespeed * -1), rb.velocity.y);   //bude se hybyt do leva zatim je to testovaci
-		checkEnemy();
+		rb.velocity = new Vector2((movespeed * -1), rb.velocity.y);   //bude se hybyt do leva zatim je to testovaci
+		CheckEnemy();
 		for (int i = 0; i < 3; i++)
 		{
 			if(enemies[i] == true)
 			{
-				if (currhp <= 0 && givemoney == true)
+                if (currhp <= 0 && givemoney == true)
 				{
-					givemoney = false;
-					basePscript.money += soldierPscript.moneykill[level,armyTypeNum];										//zatim to dava penez tolik kdo ho zabil coz je spatne     potreba to dostat do UI z prefabu
-					basePscript.experience += soldierPscript.expperkill[armyTypeNum];										//zatim to dava penez tolik kdo ho zabil coz je spatne     potreba to dostat do UI z prefabu
-					Debug.Log(basePscript.money);                                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-                    Destroy(gameObject);
+					Death();									//funkce kdyz zemre
 				}
 				else if (currhp > 0)
 				{
@@ -83,16 +79,30 @@ public class SoldierE : MonoBehaviour
 					}
 				}
 			}
+			else if (currhp <= 0 && givemoney == true)
+			{
+				Death();										//pojistna funkce jestli je mrtvy
+			}
 		}
+		//pojistka proto kdyz zabije hracovu jednotku drive a nema okolo sebe nikoho jineho a ma 0 hp a nebo mene
 		hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);
 	}
 
-	public void checkEnemy()
+	public void CheckEnemy()
 	{
 		for (int i = 0; i < 3; i++)
 		{
 			enemies[i] = Physics2D.OverlapCircle(transform.position, soldierPscript.ranges[i], soldierPscript.armyTypes[i]) != null;
 		}
+	}
+	public void Death()											//funkce pro zjisteni zda je objekt mrtvy a da penize a zkusenosti za jeho smrt
+	{
+		givemoney = false;
+		basePscript.money += soldierPscript.moneykill[level, armyTypeNum];                                      //zatim to dava penez tolik kdo ho zabil coz je spatne     potreba to dostat do UI z prefabu
+		basePscript.experience += soldierPscript.expperkill[armyTypeNum];                                       //zatim to dava penez tolik kdo ho zabil coz je spatne     potreba to dostat do UI z prefabu
+		Debug.Log(soldierPscript.moneykill[level, armyTypeNum]);                                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+		Debug.Log(soldierPscript.expperkill[armyTypeNum]);                                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+		Destroy(gameObject);
 	}
 
 	IEnumerator DmgdealcooldownMelee()
@@ -101,12 +111,12 @@ public class SoldierE : MonoBehaviour
 		if (enemies[0] == true)
 		{
 			currhp -= soldierPscript.dmg[soldierPscript.level,0];                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        }
+		}
 		else if (enemies[2])
 		{
 			currhp -= soldierPscript.dmg[soldierPscript.level,2];                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        }
-		Debug.Log("Enemy " + currhp);
+		}
+		//Debug.Log("Enemy " + currhp);
 		yield return new WaitForSecondsRealtime(3);
 		canGetdmgM = true;
 	}
@@ -114,7 +124,7 @@ public class SoldierE : MonoBehaviour
 	{
 		canGetdmgR = false;
 		currhp -= soldierPscript.dmg[soldierPscript.level, 1];                                                              //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        Debug.Log("Enemy " + currhp);
+		//Debug.Log("Enemy " + currhp);
 		yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;
 	}
