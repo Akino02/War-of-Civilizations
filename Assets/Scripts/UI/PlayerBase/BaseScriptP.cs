@@ -144,6 +144,33 @@ public class BaseScriptP : MonoBehaviour
 			Debug.Log("Fronta je plna " + order + "nebo nemas penize");
 		}
 	}
+	/*public void EvolutionUpgrade()												//funkce pro button, ktery bude evolvovat hracovy jednotky a zakladnu	(BUTTON NENI HOTOVY)
+	{
+        if (experience >= nextlevelup && level != 4)
+        {
+            experience -= nextlevelup;
+            level += 1;
+            for (int i = 0; i < 3; i++)                         //pise do vsech textu, ktere jsou uchovany v poli
+            {
+                actionButtonText[i].text = "lvl." + (level + 1);
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                if (level == i)                                 //zatim jsou jen 2, aby to mohlo fungovat pozdeji jich bude 5 mozna vice
+                {
+                    baseAppearance[i].SetActive(true);
+                }
+                else
+                {
+                    baseAppearance[i].SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            experienceText.text = experienceinprocents.ToString() + "%";
+        }
+    }*/
 	//funkce pro progressBar
 	IEnumerator Orderfactory()									//bude vyrabet jednoho 5s           //pak udelat na if (aby se menil ten vyrobni cas)              // pozdeji udelat smooth
 	{
@@ -254,7 +281,7 @@ public class BaseScriptP : MonoBehaviour
 		yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;
 	}
-	IEnumerator Evolution()
+	IEnumerator Evolution()										//docasne dokud neni button tak se to evolvuje automaticky
     {
 		if(experience >= nextlevelup && level != 4)
 		{
