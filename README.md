@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 021 [27.11.2023]</h2>
+<p>+ Byl vytvořen nový obrázek 3. úrovně základny</p>
+<p>+ Všechny už vytvořené obrázky, kromě 3. úrovně základny, budou upraveny (jsou myšleny pouze vzhledy základen)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/f44251a0-2b31-494a-ba19-a0cf660330ee" width="250" height="150"></p>
+<br>
 <h2>Update 020 [24.11.2023]</h2>
 <p>+ Upravení vzhledu 2. úrovně základny</p>
 <p>+ Příprava na úpravu systému evoluce (čudlík)</p>
