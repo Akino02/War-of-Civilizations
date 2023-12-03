@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 025 [03.12.2023]</h2>
+<p>+ Dokončené dělení scriptů z původního BaseScript vzniky: ButtonScript, ProgresScript, HpScript</p>
+<p>+ Byl upraven HP bar, tak aby už byl plynulý a měnil barvu podle toho kolik má hráč životů(jen pro hráče, zatím)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/75ad3c36-8f65-4b52-82f2-3472abe5bb2e" width="500" height="250"></p>
+<br>
 <h2>Update 024 [03.12.2023]</h2>
 <p>+ Script BaseScript byl přejmenován a rozdělen do menších scriptů</p>
 <p>+ Byl upraven Progres bar, tak aby už byl plynulý</p>
@@ -33,7 +38,7 @@ Moje ročníková práce pro školní rok 2023/2024
 <br>
 <h2>Update 018 [14.11.2023]</h2>
 <p>+ Nový systém na počítání zkušeností</p>
-<p>+ Přídáný budoucí evoluce (hp,dmg,moneyperkill,expperkill) (v budoucnu se to ještě asi změní z důvodu snadného dohrání hry teď)</p>
+<p>+ Přídání budoucí evoluce (hp,dmg,moneyperkill,expperkill) (v budoucnu se to ještě asi změní z důvodu snadného dohrání hry teď)</p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/6b0709c6-dfae-43b9-95f4-4222100651e6" width="500" height="250"></p>
 <br>
 <h2>Update 017 [11.11.2023]</h2>
