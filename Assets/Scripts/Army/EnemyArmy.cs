@@ -7,7 +7,7 @@ public class EnemyArmy : MonoBehaviour
     //																						TENTO SCRIPT BYL UZAVREN Z DUVODU NEFUNGOVANI(MOZNA BUDE OPRAVEN)[CHYBA V TOM ZE NEMUZE NAJIT NOVE OBJEKTY KTERYM DA SCRIPT]
 
     PlayerArmy SoldierPscript;           //import scriptu protivnika
-    SpawnScript baseScriptP;             //importuje script protivnikovy zakladny
+    ButtonScript baseScriptP;             //importuje script protivnikovy zakladny
     [SerializeField] GameObject enemyBase;
     [SerializeField] GameObject baseScriptPHolder;
 
@@ -43,7 +43,7 @@ public class EnemyArmy : MonoBehaviour
                                          // Start is called before the first frame update
     void Start()
     {
-        baseScriptP = baseScriptPHolder.GetComponent<SpawnScript>();  //import protivnika a jeho promìnných
+        baseScriptP = baseScriptPHolder.GetComponent<ButtonScript>();  //import protivnika a jeho promìnných
         if (armyType == Soldier)
         {
             armyTypeNum = 1;
