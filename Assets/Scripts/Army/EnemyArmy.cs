@@ -7,7 +7,7 @@ public class EnemyArmy : MonoBehaviour
     //																						TENTO SCRIPT BYL UZAVREN Z DUVODU NEFUNGOVANI(MOZNA BUDE OPRAVEN)[CHYBA V TOM ZE NEMUZE NAJIT NOVE OBJEKTY KTERYM DA SCRIPT]
 
     PlayerArmy SoldierPscript;           //import scriptu protivnika
-    BaseScriptP baseScriptP;             //importuje script protivnikovy zakladny
+    SpawnScript baseScriptP;             //importuje script protivnikovy zakladny
     [SerializeField] GameObject enemyBase;
     [SerializeField] GameObject baseScriptPHolder;
 
@@ -43,7 +43,7 @@ public class EnemyArmy : MonoBehaviour
                                          // Start is called before the first frame update
     void Start()
     {
-        baseScriptP = baseScriptPHolder.GetComponent<BaseScriptP>();  //import protivnika a jeho promìnných
+        baseScriptP = baseScriptPHolder.GetComponent<SpawnScript>();  //import protivnika a jeho promìnných
         if (armyType == Soldier)
         {
             armyTypeNum = 1;
@@ -75,7 +75,7 @@ public class EnemyArmy : MonoBehaviour
         {
             if (armyTypeNum == 1 || armyTypeNum == 3)
             {
-                GameObject[] allEnemies = FindObjectsOfType<GameObject>();
+                /*GameObject[] allEnemies = FindObjectsOfType<GameObject>();            //mimo provoz prozatim
 
                 GameObject[] sortobj = new GameObject[baseScriptP.made];
                 foreach (GameObject obj in allEnemies)
@@ -89,7 +89,7 @@ public class EnemyArmy : MonoBehaviour
                         Debug.Log(sortobj[0] + "Vyvoláno");
                     }
 
-                }
+                }*/
                 Debug.Log("Konec");
                 StartCoroutine(DmgdealcooldownMelee());
                 Debug.Log("Can give dmg Enemy");
