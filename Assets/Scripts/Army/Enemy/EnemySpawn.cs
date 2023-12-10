@@ -45,7 +45,6 @@ public class EnemySpawn : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		hpbaseinprocents = ((100 * currHPBase) / maxHPBase) / 100;  //pomoc pri pocitani procent
 		//toto slouzi pro spawn vojaku
 		if (canSpawn == true && nahoda >= 1 && nahoda <= 3 && currHPBase > 0)
 		{
@@ -65,8 +64,10 @@ public class EnemySpawn : MonoBehaviour
 		{
 			StartCoroutine(DmgdealcooldownRange());
 		}
-		hpBaseBarcurr.fillAmount = hpbaseinprocents;  //urcovani zivotu v procentech
-	}
+        hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / maxHPBase, 3f * Time.deltaTime);       //kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
+        Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / maxHPBase));                                   //nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
+        hpBaseBarcurr.color = healthColor;                      //zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
+    }
 
 	IEnumerator CoolDownArmySpawn()      //nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani
 	{
