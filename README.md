@@ -1,6 +1,10 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 027 [20.12.2023]</h2>
+<p>+ Opravení gifu s ohněm</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/b2c462fe-57ae-4d41-a132-e73058b32426" width="50" height="50"></p>
+<br>
 <h2>Update 026 [10.12.2023]</h2>
 <p>+ Dokončená úprava cesty</p>
 <p>+ Nepřítel už má také plynulý HP bar</p>
