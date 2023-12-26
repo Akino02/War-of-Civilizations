@@ -1,6 +1,18 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 027 [20.12.2023]</h2>
+<p>+ Opravení gifu s ohněm</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/b2c462fe-57ae-4d41-a132-e73058b32426" width="50" height="50"></p>
+<br>
+<h2>Update 026 [10.12.2023]</h2>
+<p>+ Dokončená úprava cesty</p>
+<p>+ Nepřítel už má také plynulý HP bar</p>
+<p>+ Byla přidána první animace(Oheň)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/b568f87f-19dc-4fbd-8b3c-efb312ce58ea" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/03babee7-ea6f-491f-9fd4-69b4d172f103" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/642bec96-5b93-4bad-b267-131bdae2a1a2" width="50" height="50"></p>
+<br>
 <h2>Update 025 [03.12.2023]</h2>
 <p>+ Dokončené dělení scriptů z původního BaseScript vzniky: ButtonScript, ProgresScript, HpScript</p>
 <p>+ Byl upraven HP bar, tak aby už byl plynulý a měnil barvu podle toho kolik má hráč životů(jen pro hráče, zatím)</p>
