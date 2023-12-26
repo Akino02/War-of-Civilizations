@@ -7,7 +7,9 @@ public class EnemySpawn : MonoBehaviour
 {
 	//import enemy scriptu pro damage jaky davaji
 	SoldierP soldierPscript;                       //import scriptu protivnika
+	SoldierE soldierEscript;
 	[SerializeField] GameObject soldierP;          //import objektu
+	[SerializeField] GameObject soldierE;          //import objektu
 	//
 	//import layeru nepratel(hracovych)
 	public LayerMask opponentSoldier;       //layer hracovych jednotek typu soldier
@@ -19,7 +21,7 @@ public class EnemySpawn : MonoBehaviour
 	public GameObject soldier;          //co spawne
 	public GameObject ranger;          //co spawne
 	public GameObject tank;          //co spawne
-	public GameObject enemySpawner;    //kde to spawne
+	public GameObject baseSpawner;    //kde to spawne
 	//
 	//veci ohledne baseHP ci damage pro base
 	public float maxHPBase = 1000;
@@ -40,6 +42,7 @@ public class EnemySpawn : MonoBehaviour
 	void Start()
 	{
 		soldierPscript = soldierP.GetComponent<SoldierP>();  //import protivnika a jeho promìnných
+		soldierEscript = soldierE.GetComponent<SoldierE>();  //import protivnika a jeho promìnných
 	}
 
 	// Update is called once per frame
@@ -75,17 +78,17 @@ public class EnemySpawn : MonoBehaviour
 		if(nahoda == 1)
 		{
 			yield return new WaitForSecondsRealtime(5);
-			Instantiate(soldier, enemySpawner.transform.position, enemySpawner.transform.rotation);
+			Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		else if(nahoda == 2)
 		{
 			yield return new WaitForSecondsRealtime(8);
-			Instantiate(ranger, enemySpawner.transform.position, enemySpawner.transform.rotation);
+			Instantiate(ranger, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		else if(nahoda == 3)
 		{
 			yield return new WaitForSecondsRealtime(10);
-			Instantiate(tank, enemySpawner.transform.position, enemySpawner.transform.rotation);
+			Instantiate(tank, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		nahoda = Random.Range(1, 5);
 		canSpawn = true;

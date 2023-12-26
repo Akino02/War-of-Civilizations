@@ -15,8 +15,8 @@ public class HpScript : MonoBehaviour
 	public LayerMask[] opponents = new LayerMask[3];            //layer nepratelskych jednotek soldier,ranger,tank
 																//
 	//hp a ubirani base
-	public float maxHPBase = 1000;								//potøeba zmìnit poèet životù pøi updatu !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	public float currHPBase = 1000;
+	public float[] maxHPBase = {1000,2000,3000,4000,5000};								//potøeba zmìnit poèet životù pøi updatu !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	public float currHPBase;
 	public float hpbaseinprocents = 1f;
 																//
 	public Image hpBaseBarcurr;                                 //vizualni ukazatel zivotu
@@ -24,6 +24,7 @@ public class HpScript : MonoBehaviour
 																//
 	public bool canGetdmgM = true;
 	public bool canGetdmgR = true;
+	public bool upgradingHp = false;
 	//
 	// Start is called before the first frame update
 	void Start()
@@ -31,14 +32,14 @@ public class HpScript : MonoBehaviour
 		progresS = GetComponent<ProgresScript>();     //propojeni zakladnich scriptu pro funkci UI
 		buttonS = GetComponent<ButtonScript>();     //propojeni zakladnich scriptu pro funkci UI
 		soldierEscript = soldierE.GetComponent<SoldierE>();     //import protivnika a jeho promìnných
-	}
+        currHPBase = maxHPBase[progresS.level];
+    }
 
 	// Update is called once per frame
 	void Update()
 	{
-		hpbaseinprocents = ((currHPBase) / maxHPBase);			//pomoc pri pocitani procent
-		//toto slouzi pro ubirani zivotu zakladny
-		for (int i = 0; i < 3; i++)
+        //toto slouzi pro ubirani zivotu zakladny
+        for (int i = 0; i < 3; i++)
 		{
 			if (currHPBase > 0)
 			{
@@ -52,11 +53,11 @@ public class HpScript : MonoBehaviour
 				}
 			}
 		}
-		hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / maxHPBase, 3f* Time.deltaTime);		//kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
-		Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / maxHPBase));									//nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
+		hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / maxHPBase[progresS.level], 3f* Time.deltaTime);		//kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
+		Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / maxHPBase[progresS.level]));									//nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
 		hpBaseBarcurr.color = healthColor;						//zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
 	}
-	IEnumerator DmgdealcooldownMelee()                          //base bude dostavat dmg od enemy melee				//potreba pak upravit system ubirani zivotu
+    IEnumerator DmgdealcooldownMelee()                          //base bude dostavat dmg od enemy melee				//potreba pak upravit system ubirani zivotu
 	{
 		canGetdmgM = false;
 		if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponents[0]) != null)
@@ -79,4 +80,15 @@ public class HpScript : MonoBehaviour
 		yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;
 	}
+    public IEnumerator UpgradeHp()								//zachova procentuelne hp pri upgradu
+    {
+		if(progresS.level > 0)
+		{
+			Debug.Log(currHPBase);
+			Debug.Log(maxHPBase[progresS.level - 1]);
+            hpbaseinprocents = currHPBase / maxHPBase[progresS.level - 1];      //pomoc pri pocitani procent
+            currHPBase = hpbaseinprocents * maxHPBase[progresS.level];          //vypocita aktualni pocet hp v novych zivotech
+        }
+		yield return currHPBase;
+    }
 }

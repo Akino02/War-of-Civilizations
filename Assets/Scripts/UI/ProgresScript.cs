@@ -17,12 +17,14 @@ public class ProgresScript : MonoBehaviour
 	public int order = 0;                                       //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
 	public int made = 0;
 	public int[] orderv2 = { 0, 0, 0, 0, 0 };                   //poradi jednotek
-	public GameObject[] baseAppearance = new GameObject[3];     //vzhled budov v array ohledne nove evoluce
+	public GameObject[] baseAppearance = new GameObject[4];     //vzhled budov v array ohledne nove evoluce
 
 	public Text experienceText;                                 //Prehled ohledne dalsi evoluce v %
 	public Text moneyText;                                      //Prehled kolik ma hrac financi
 
     public GameObject playerSpawner;                            //misto kde se tyto objekty spawnou
+
+	public GameObject canvas;
 
 
     //vyrobnik v procentech graficky
@@ -44,8 +46,8 @@ public class ProgresScript : MonoBehaviour
 	{
 		buttonS = GetComponent<ButtonScript>();     //propojeni zakladnich scriptu pro funkci UI
 		hpS = GetComponent<HpScript>();     //propojeni zakladnich scriptu pro funkci UI
-		//nastaveni aktualnich penez
-		moneyText.text = money.ToString();
+                                                                //nastaveni aktualnich penez
+        moneyText.text = money.ToString();
 		experienceText.text = experienceinprocents.ToString() + "%";
 		StartCoroutine(TrainingText());                         //zapise se co se vyrabi
 	}
@@ -203,15 +205,15 @@ public class ProgresScript : MonoBehaviour
 	{
 		if (experience >= nextlevelup && level != 4)
 		{
-			experience -= nextlevelup;
+            experience -= nextlevelup;
 			level += 1;
 			for (int i = 0; i < 3; i++)                         //pise do vsech textu, ktere jsou uchovany v poli
 			{
 				actionButtonText[i].text = "lvl." + (level + 1);
 			}
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 4; i++)
 			{
-				if (level == i)                                 //zatim jsou jen 3, aby to mohlo fungovat pozdeji jich bude 5 mozna vice
+				if (level == i)                                 //zatim jsou jen 4, aby to mohlo fungovat pozdeji jich bude 5 mozna vice
 				{
 					baseAppearance[i].SetActive(true);
 				}
@@ -220,11 +222,12 @@ public class ProgresScript : MonoBehaviour
 					baseAppearance[i].SetActive(false);
 				}
 			}
-		}
+            StartCoroutine(hpS.UpgradeHp());					//pro vylepseni zivotu s tim, ze se zachova %
+        }
 		else
 		{
 			experienceText.text = experienceinprocents.ToString() + "%";
 		}
-		yield return experience;
+        yield return experience;
 	}
 }

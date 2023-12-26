@@ -7,28 +7,34 @@ public class SoldierP : MonoBehaviour
 {
 	SoldierE soldierEscript;									//import scriptu protivnika
 	[SerializeField] GameObject soldierE;
-	ProgresScript progresS;                                    //import script
-	GameObject item;                                            //import objektu
+	ProgresScript progresS;										//import script, pro urcovani okolnich veci
 
 	public Rigidbody2D rb;										//funkce pro gravitaci
-	public LayerMask[] armyTypes = new LayerMask[3];			//to jsou vrstvy spolubojovniku
-	//public LayerMask[] armyTypesE = new LayerMask[3];			//to jsou vrstvy nepratel //meli by byt jen v enemyscriptu ale nejde to idk proc
-	public float[] ranges = { 0.5f, 1.4f, 0.5f };
-	//public float[] rangesE = { 0.5f, 1.4f, 0.5f };
-	public float movespeed;										//rychlost pohybu objektu
-	public LayerMask armyType;
+
+	public LayerMask[] armyTypes = new LayerMask[3];			//to jsou vrstvy spolubojovniku		//mohu si pak upravit
+	//public LayerMask[] armyTypes = {10,11,12};				//to jsou vrstvy spolubojovniku		//zde jsou nadefinované jednotky, coz spatne funguje (ma se tam napsat cislo layeru)
+
+	//public LayerMask[] armyTypesE = new LayerMask[3];			//to jsou vrstvy nepratel			//je to v komentarich, protoze to bere ze scriptu SoldierE
+
+	public float[] ranges = { 0.5f, 1.4f, 0.5f };				//tady jsou nadefinovane vzdalenosti kde mohou ubrat zivoty		(Soldier, Ranger, Tank)
+
+	//public float[] rangesE = { 0.5f, 1.4f, 0.5f };			//tady jsou nadefinovano vzdalenosti kde mohou ubrat zivoty, ale je to urceno pro enemy
+
+	public float movespeed;										//rychlost pohybu objektu(vojacka)
+
+	public LayerMask armyType;									//zde se ulozi jaky typ vojacka je tento dany
 	public int armyTypeNum;
 
 	//Ohledne HPbaru
 	public GameObject hpBar;
 
-	public float[,] maxhp = { { 100, 60, 300 },{150,90,450 },{225,135,675},{ 350,200,1000},{400,300,1500 } };               //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+	public float[,] maxhp = { { 100, 60, 300 },{150,90,450 },{225,135,675},{ 350,200,1000},{400,300,1500 } };
 	public float currhp;
 	private float hpinprocents = 1f;
-	public int level = 0;                                                                                                   //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+	public int level = 0;
 
 	//Ohledne utoku
-	public int[,] dmg = { {40, 60, 30 },{ 60, 90, 50}, { 90, 135, 70 }, { 135, 90, 115 }, { 150, 200, 120 } };              //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+	public int[,] dmg = { {40, 60, 30 },{ 60, 90, 50}, { 90, 135, 70 }, { 135, 90, 115 }, { 150, 200, 120 } };
 	public bool canGetdmgM = true;								//na blizko
 	public bool canGetdmgR = true;                              //na dalku
 	public bool[] enemies = { false, false, false };            //
@@ -36,8 +42,8 @@ public class SoldierP : MonoBehaviour
 	public bool[] alliesStop = { false, false, false };					//odstup od spojencu
 	public bool[] enemiesStop = { false, false, false };			//odstup od nepratel
 
-	public int[,] moneykill = { { 30, 50, 150 }, {60,100,300}, {120,200,600}, {240,400,1200}, {480,800,2400} };             //peniza za zabiti nepritele (soldier, ranger, tank)//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-	public int[] expperkill = { 100, 125, 300 };                //peniza za zabiti nepritele (soldier, ranger, tank)		//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+	public int[,] moneykill = { { 30, 50, 150 }, {60,100,300}, {120,200,600}, {240,400,1200}, {480,800,2400} };             //peniza za zabiti nepritele (soldier, ranger, tank)
+	public int[] expperkill = { 100, 125, 300 };                //peniza za zabiti nepritele (soldier, ranger, tank)
 
 	// Start is called before the first frame update
 	void Start()
@@ -116,7 +122,7 @@ public class SoldierP : MonoBehaviour
         }
 	}
 
-	IEnumerator DmgdealcooldownMelee()							//zde dostava dmg od jednotek, ktere jsou na blizko
+	IEnumerator DmgdealcooldownMelee()							//zde dostava dmg od jednotek, ktere jsou na blizko (melee)
 	{
 		canGetdmgM = false;
 		if (enemies[0])		//pokud je to soldier
