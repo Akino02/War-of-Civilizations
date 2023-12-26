@@ -1,6 +1,12 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 028 [26.12.2023]</h2>
+<p>+ Byl vytvořen nový obrázek pro 4. evoluci</p>
+<p>+ Byl upraven systém vylepšení životů (procentuální číslo zůstane s vylepšením)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/19bb79b1-6fad-488a-b9f2-71e25420e5db" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/bd7e1a5d-7a7b-4c64-884d-9bbedf481230" width="250" height="150"></p>
+<br>
 <h2>Update 027 [20.12.2023]</h2>
 <p>+ Opravení gifu s ohněm</p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/b2c462fe-57ae-4d41-a132-e73058b32426" width="50" height="50"></p>
