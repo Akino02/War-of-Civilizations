@@ -11,6 +11,8 @@ public class HpScript : MonoBehaviour
 	SoldierE soldierEscript;                                    //import scriptu protivnika
 	[SerializeField] GameObject soldierE;                       //import objektu
 
+	EnemySpawn enemyS;
+
 	//nepratele (layers)
 	public LayerMask[] opponents = new LayerMask[3];            //layer nepratelskych jednotek soldier,ranger,tank
 																//
@@ -33,6 +35,11 @@ public class HpScript : MonoBehaviour
 		buttonS = GetComponent<ButtonScript>();     //propojeni zakladnich scriptu pro funkci UI
 		soldierEscript = soldierE.GetComponent<SoldierE>();     //import protivnika a jeho promìnných
         currHPBase = maxHPBase[progresS.level];
+
+        //
+        GameObject script2 = GameObject.FindWithTag("baseE");      //toto najde zakladnu nepritele pomoci tagu ktery ma
+        enemyS = script2.GetComponent<EnemySpawn>();
+		//
     }
 
 	// Update is called once per frame
@@ -62,11 +69,11 @@ public class HpScript : MonoBehaviour
 		canGetdmgM = false;
 		if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponents[0]) != null)
 		{
-			currHPBase -= soldierEscript.dmg[soldierEscript.level, 0];                                                       //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+			currHPBase -= soldierEscript.dmg[enemyS.level, 0];                                                       //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
 		}
 		else if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponents[2]) != null)
 		{
-			currHPBase -= soldierEscript.dmg[soldierEscript.level, 2];                                                       //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+			currHPBase -= soldierEscript.dmg[enemyS.level, 2];                                                       //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
 		}
 		Debug.Log("Player " + currHPBase);
 		yield return new WaitForSeconds(3);
@@ -75,7 +82,7 @@ public class HpScript : MonoBehaviour
 	IEnumerator DmgdealcooldownRange()                          //base bude dostavat dmg od enemy ranged
 	{
 		canGetdmgR = false;
-		currHPBase -= soldierEscript.dmg[soldierEscript.level, 1];                                                          //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+		currHPBase -= soldierEscript.dmg[enemyS.level, 1];                                                          //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
 		Debug.Log("Player " + currHPBase);
 		yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;

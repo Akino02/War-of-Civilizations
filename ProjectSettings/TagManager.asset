@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - baseP
+  - baseE
   layers:
   - Default
   - TransparentFX

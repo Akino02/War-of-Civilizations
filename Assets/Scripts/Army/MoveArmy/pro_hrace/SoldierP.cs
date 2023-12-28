@@ -7,7 +7,8 @@ public class SoldierP : MonoBehaviour
 {
 	SoldierE soldierEscript;									//import scriptu protivnika
 	[SerializeField] GameObject soldierE;
-	ProgresScript progresS;										//import script, pro urcovani okolnich veci
+	ProgresScript progresS;                                     //import script, pro urcovani okolnich veci
+	EnemySpawn enemyS;
 
 	public Rigidbody2D rb;										//funkce pro gravitaci
 
@@ -22,8 +23,8 @@ public class SoldierP : MonoBehaviour
 
 	public float movespeed;										//rychlost pohybu objektu(vojacka)
 
-	public LayerMask armyType;									//zde se ulozi jaky typ vojacka je tento dany
-	public int armyTypeNum;
+	public LayerMask armyType;                                  //zde se nastavi objektu layer jaky typ vojaka to je
+    public int armyTypeNum;
 
 	//Ohledne HPbaru
 	public GameObject hpBar;
@@ -39,8 +40,8 @@ public class SoldierP : MonoBehaviour
 	public bool canGetdmgR = true;                              //na dalku
 	public bool[] enemies = { false, false, false };            //
 	public Vector3 distanceFromAllie;							//nastaveni pro odstup od jednotek
-	public bool[] alliesStop = { false, false, false };					//odstup od spojencu
-	public bool[] enemiesStop = { false, false, false };			//odstup od nepratel
+	public bool[] alliesStop = { false, false, false };			//odstup od spojencu
+	public bool[] enemiesStop = { false, false, false };		//odstup od nepratel
 
 	public int[,] moneykill = { { 30, 50, 150 }, {60,100,300}, {120,200,600}, {240,400,1200}, {480,800,2400} };             //peniza za zabiti nepritele (soldier, ranger, tank)
 	public int[] expperkill = { 100, 125, 300 };                //peniza za zabiti nepritele (soldier, ranger, tank)
@@ -50,11 +51,14 @@ public class SoldierP : MonoBehaviour
 	{
 
 		soldierEscript = soldierE.GetComponent<SoldierE>();     //import protivnika a jeho promennych
-		//
-		GameObject item = GameObject.FindWithTag("baseP");              //toto najde zakladnu hrace pomoci tagu ktery ma
-        progresS = item.GetComponent<ProgresScript>();
-		//
-		level = progresS.level;								//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+        //
+        GameObject script1 = GameObject.FindWithTag("baseP");       //toto najde zakladnu hrace pomoci tagu ktery ma
+        progresS = script1.GetComponent<ProgresScript>();
+        //
+        GameObject script2 = GameObject.FindWithTag("baseE");      //toto najde zakladnu nepritele pomoci tagu ktery ma
+        enemyS = script2.GetComponent<EnemySpawn>();
+        //
+        level = progresS.level;									//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
 		for (int i = 0; i < 3; i++)								//prirazuje hodnoty podle toho co je to za typ jednotky
 		{
 			if (armyType == armyTypes[i])
@@ -127,11 +131,11 @@ public class SoldierP : MonoBehaviour
 		canGetdmgM = false;
 		if (enemies[0])		//pokud je to soldier
 		{
-			currhp -= soldierEscript.dmg[soldierEscript.level,0];                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+			currhp -= soldierEscript.dmg[enemyS.level,0];                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
         }
 		else if (enemies[2])//pokud je to tank
 		{
-			currhp -= soldierEscript.dmg[soldierEscript.level, 2];                                                          //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+			currhp -= soldierEscript.dmg[enemyS.level, 2];                                                          //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
         }
 		//Debug.Log("Player " + currhp + " Melee");
 		yield return new WaitForSeconds(3);
@@ -140,7 +144,7 @@ public class SoldierP : MonoBehaviour
 	IEnumerator DmgdealcooldownRange()							//zde dostava dmg od jednotek, ktere jsou na dalku (ranger)
 	{
 		canGetdmgR = false;
-		currhp -= soldierEscript.dmg[soldierEscript.level, 1];                                                              //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+		currhp -= soldierEscript.dmg[enemyS.level, 1];                                                              //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
 		//Debug.Log("Player " + currhp + "Range");
 		yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;

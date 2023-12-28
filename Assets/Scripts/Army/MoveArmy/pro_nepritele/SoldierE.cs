@@ -8,14 +8,14 @@ public class SoldierE : MonoBehaviour
 	SoldierP soldierPscript;									//import scriptu protivnika
 	[SerializeField] GameObject soldierP;						//import objektu
     ProgresScript progresS;										//import script
-	GameObject item;											//import objektu
+    EnemySpawn enemyS;										//import script
 
 	public Rigidbody2D rb;										//funkce pro gravitaci
 	public LayerMask[] armyTypes = new LayerMask[3];
 	//public LayerMask[] armyTypesE = new LayerMask[3];
 	public float[] ranges = { 0.5f, 1.4f, 0.5f };
 	public float movespeed;										//rychlost pohybu objektu
-	public LayerMask armyType;
+	public LayerMask armyType;									//zde se nastavi objektu layer jaky typ vojaka to je
 	public int armyTypeNum;
 
 	//Ohledne HPbaru
@@ -28,12 +28,12 @@ public class SoldierE : MonoBehaviour
 
 	//Ohledne utoku
 	public int[,] dmg = { { 40, 60, 30 }, { 60, 90, 50 }, { 90, 135, 70 }, { 135, 90, 115 }, { 150, 200, 120 } };           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-	public bool canGetdmgM = true;      //na blizko
-	public bool canGetdmgR = true;      //na dalku
+	public bool canGetdmgM = true;								//na blizko
+	public bool canGetdmgR = true;								//na dalku
 	public bool[] enemies = { false, false, false };
     public Vector3 distanceFromAllie;                           //nastaveni pro odstup od jednotek
-    public bool[] alliesStop = { false, false, false };                 //odstup od spojencu
-    public bool[] enemiesStop = { false, false, false };            //odstup od nepratel
+    public bool[] alliesStop = { false, false, false };         //odstup od spojencu
+    public bool[] enemiesStop = { false, false, false };        //odstup od nepratel
 
 
     private bool givemoney = true;								//cooldown na penize
@@ -41,13 +41,16 @@ public class SoldierE : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		soldierPscript = soldierP.GetComponent<SoldierP>();  //import protivnika a jeho promìnných
+		soldierPscript = soldierP.GetComponent<SoldierP>();		//import protivnika a jeho promìnných
 		//
-		GameObject item = GameObject.FindWithTag("baseP");				//toto najde zakladnu hrace pomoci tagu ktery ma
-		progresS = item.GetComponent<ProgresScript>();
+		GameObject script1 = GameObject.FindWithTag("baseP");		//toto najde zakladnu hrace pomoci tagu ktery ma
+		progresS = script1.GetComponent<ProgresScript>();
+        //
+        GameObject script2 = GameObject.FindWithTag("baseE");      //toto najde zakladnu nepritele pomoci tagu ktery ma
+        enemyS = script2.GetComponent<EnemySpawn>();
 		//
-		level = progresS.level;                              //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-		for (int i = 0; i < 3; i++)
+		level = enemyS.level;
+        for (int i = 0; i < 3; i++)
 		{
 			if (armyType == armyTypes[i])
 			{
@@ -62,8 +65,8 @@ public class SoldierE : MonoBehaviour
 	void Update()
 	{
         CheckCollision();
-        hpinprocents = ((100 * currhp) / maxhp[level,armyTypeNum]) / 100;                                                   //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-		rb.velocity = new Vector2((movespeed * -1), rb.velocity.y);   //bude se hybyt do leva zatim je to testovaci
+        hpinprocents = ((100 * currhp) / maxhp[level,armyTypeNum]) / 100;													//potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+		rb.velocity = new Vector2((movespeed * -1), rb.velocity.y);															//bude se hybyt do leva zatim je to testovaci
 		for (int i = 0; i < 3; i++)
 		{
 			if(enemies[i] == true)
@@ -105,7 +108,7 @@ public class SoldierE : MonoBehaviour
         //pojistka proto kdyz zabije hracovu jednotku drive a nema okolo sebe nikoho jineho a ma 0 hp a nebo mene
         hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);
 	}
-    public void CheckCollision()        //kontroluje kolize mezi vojaky
+    public void CheckCollision()								//kontroluje kolize mezi vojaky
     {
         distanceFromAllie = new Vector3(transform.position.x - 1, transform.position.y, transform.position.y);
         for (int i = 0; i < 3; i++)
@@ -120,8 +123,8 @@ public class SoldierE : MonoBehaviour
 		givemoney = false;
         progresS.money += soldierPscript.moneykill[level, armyTypeNum];                                      //zatim to dava penez tolik kdo ho zabil coz je spatne     potreba to dostat do UI z prefabu
         progresS.experience += soldierPscript.expperkill[armyTypeNum];                                       //zatim to dava penez tolik kdo ho zabil coz je spatne     potreba to dostat do UI z prefabu
-		Debug.Log(soldierPscript.moneykill[level, armyTypeNum]);                                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-		Debug.Log(soldierPscript.expperkill[armyTypeNum]);                                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+		Debug.Log(soldierPscript.moneykill[level, armyTypeNum]);                                                            //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+		Debug.Log(soldierPscript.expperkill[armyTypeNum]);                                                                  //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
 		Destroy(gameObject);
 	}
 
@@ -130,12 +133,12 @@ public class SoldierE : MonoBehaviour
 		canGetdmgM = false;
 		if (enemies[0] == true)
 		{
-			currhp -= soldierPscript.dmg[soldierPscript.level,0];                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
+			currhp -= soldierPscript.dmg[progresS.level,0];                                                           //tady je problem, ale je zatim opraven ale potrebuje se opravit mby(level od vojacka, je tam od base)
         }
 		else if (enemies[2])
 		{
-			currhp -= soldierPscript.dmg[soldierPscript.level,2];                                                           //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-		}
+			currhp -= soldierPscript.dmg[progresS.level,2];                                                           //tady je problem, ale je zatim opraven ale potrebuje se opravit mby(level od vojacka, je tam od base)
+        }
 		//Debug.Log("Enemy " + currhp);
 		yield return new WaitForSecondsRealtime(3);
 		canGetdmgM = true;
@@ -143,9 +146,9 @@ public class SoldierE : MonoBehaviour
 	IEnumerator DmgdealcooldownRange()
 	{
 		canGetdmgR = false;
-		currhp -= soldierPscript.dmg[soldierPscript.level, 1];                                                              //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-																															//Debug.Log("Enemy " + currhp);
-		yield return new WaitForSecondsRealtime(2);
+		currhp -= soldierPscript.dmg[progresS.level, 1];                                                              //tady je problem, ale je zatim opraven ale potrebuje se opravit mby(level od vojacka, je tam od base)
+                                                                                                                      //Debug.Log("Enemy " + currhp);
+        yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;
 	}
 }

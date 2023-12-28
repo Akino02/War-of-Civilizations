@@ -10,7 +10,7 @@ public class UniArmy : MonoBehaviour
     UniArmy SoldierEscript;			//import scriptu protivnika
     UniArmy SoldierPscript;			//import scriptu protivnika
 	//BaseScriptP BaseScript;				//importuje script protivnikovy zakladny
-	[SerializeField] GameObject enemyBase;
+	//[SerializeField] GameObject enemyBase;						//nevyuzite
 
 	public Rigidbody2D rb;              //funkce pro gravitaci
 	public LayerMask opponent;          //layer nepratelskych jednotek typu soldier
@@ -92,20 +92,13 @@ public class UniArmy : MonoBehaviour
                         SoldierPscript = obj.GetComponent<UniArmy>();                   //Toto najde dalsiho nepritele, ktery splnuje pozadavky
 						Debug.Log("Enemy found");
                     }
-					if(obj.layer == 13 && dir == 0)
+					/*else if(obj.layer == 13 && dir == 0)
 					{
                         SoldierEscript = obj.GetComponent<UniArmy>();                   //Toto najde dalsiho nepritele, ktery splnuje pozadavky
                         Debug.Log("Player found");
-                    }
+                    }*/
                 }
-				if(SoldierPscript != null ||  SoldierEscript != null)
-				{
-                    StartCoroutine(DmgdealcooldownMelee());
-                }
-				else
-				{
-					Debug.Log("Again");
-				}
+                StartCoroutine(DmgdealcooldownMelee());
                 //Debug.Log("Can give dmg Enemy");
             }
 			/*else if (armyTypeNum == 2)

@@ -201,7 +201,7 @@ public class ProgresScript : MonoBehaviour
 		}
 		yield return new WaitForSeconds(0);
 	}
-	IEnumerator Evolution()										//docasne dokud neni button tak se to evolvuje automaticky
+	IEnumerator Evolution()										//docasne dokud neni button tak se to evolvuje automaticky			//radsi sledovat !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	{
 		if (experience >= nextlevelup && level != 4)
 		{
@@ -211,18 +211,22 @@ public class ProgresScript : MonoBehaviour
 			{
 				actionButtonText[i].text = "lvl." + (level + 1);
 			}
-			for (int i = 0; i < 4; i++)
-			{
-				if (level == i)                                 //zatim jsou jen 4, aby to mohlo fungovat pozdeji jich bude 5 mozna vice
-				{
-					baseAppearance[i].SetActive(true);
-				}
-				else
-				{
-					baseAppearance[i].SetActive(false);
-				}
-			}
+                for (int i = 0; i < 5; i++)
+                {
+                    if (level == i)                                 //zatim jsou jen 4, aby to mohlo fungovat pozdeji jich bude 5 mozna vice
+                    {
+                        baseAppearance[i].SetActive(true);
+                    }
+                    else
+                    {
+                        baseAppearance[i].SetActive(false);
+                    }
+                }
             StartCoroutine(hpS.UpgradeHp());					//pro vylepseni zivotu s tim, ze se zachova %
+        }
+		else if(level == 4)
+		{
+			experienceText.text = "Max";
         }
 		else
 		{
