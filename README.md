@@ -1,8 +1,14 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 029 [28.12.2023]</h2>
+<p>+ Byl vytvořen nový obrázek pro 5. evoluci základny</p>
+<p>+ Nepřítel se může vylepšovat (60s, 15s)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/4385ada5-d61b-45e7-8877-7beefea37e80" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/035f4f14-5761-4bd0-997d-d816c2293654" width="200" height="150"></p>
+<br>
 <h2>Update 028 [26.12.2023]</h2>
-<p>+ Byl vytvořen nový obrázek pro 4. evoluci</p>
+<p>+ Byl vytvořen nový obrázek pro 4. evoluci základny</p>
 <p>+ Byl upraven systém vylepšení životů (procentuální číslo zůstane s vylepšením)</p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/19bb79b1-6fad-488a-b9f2-71e25420e5db" width="500" height="250"></p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/bd7e1a5d-7a7b-4c64-884d-9bbedf481230" width="250" height="150"></p>
