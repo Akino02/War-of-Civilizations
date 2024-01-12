@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,11 +10,15 @@ public class UniArmy : MonoBehaviour
     //																						TENTO SCRIPT BYL UZAVREN Z DUVODU NEFUNGOVANI(MOZNA BUDE OPRAVEN)[CHYBA V TOM ZE NEMUZE NAJIT NOVE OBJEKTY KTERYM DA SCRIPT]
 
     UniArmy SoldierEscript;			//import scriptu protivnika
-    UniArmy SoldierPscript;			//import scriptu protivnika
-	//BaseScriptP BaseScript;				//importuje script protivnikovy zakladny
-	//[SerializeField] GameObject enemyBase;						//nevyuzite
+    UniArmy SoldierPscript;         //import scriptu protivnika
 
-	public Rigidbody2D rb;              //funkce pro gravitaci
+    //opraveni scriptu
+    private UniArmy SoldierArmyScript;
+
+    //BaseScriptP BaseScript;				//importuje script protivnikovy zakladny
+    //[SerializeField] GameObject enemyBase;						//nevyuzite
+
+    public Rigidbody2D rb;              //funkce pro gravitaci
 	public LayerMask opponent;          //layer nepratelskych jednotek typu soldier
 	public LayerMask opponentBase;          //layer nepratelske zakladny
 	public float range;                 //velikost kde muze bojovat
@@ -46,8 +52,9 @@ public class UniArmy : MonoBehaviour
 	public float dmgT = 40;             //Melee Tank sila postavy*/
 	public bool canGiveDmgM = false;     //Muze bojovat melee
 	public bool canGiveDmgR = false;     //Muze bojovat na dalku
-	// Start is called before the first frame update
-	void Start()
+
+    // Start is called before the first frame update
+    void Start()
 	{
         if (armyType == Soldier)
         {
@@ -78,34 +85,12 @@ public class UniArmy : MonoBehaviour
 		rb.velocity = new Vector2((movespeed * moveDir[dir]), rb.velocity.y);      //bude se hybyt do leva zatim je to testovaci
 		if (Physics2D.OverlapCircle(transform.position, range, opponent) != null && canGiveDmgM == true || canGiveDmgR == true)     //je tam if, aby to poznaval hned
 		{
-			if (armyTypeNum == 1 || armyTypeNum == 3)
-			{
-				GameObject[] allEnemies = FindObjectsOfType<GameObject>();      //najde vsechny objekty
-
-                SoldierPscript = null;
-                SoldierEscript = null;
-
-                foreach (GameObject obj in allEnemies)							//vypise vsechny objekty
-				{
-					if (obj.layer == 10 && dir == 1)			//poradi vrstvy 
-					{
-                        SoldierPscript = obj.GetComponent<UniArmy>();                   //Toto najde dalsiho nepritele, ktery splnuje pozadavky
-						Debug.Log("Enemy found");
-                    }
-					/*else if(obj.layer == 13 && dir == 0)
-					{
-                        SoldierEscript = obj.GetComponent<UniArmy>();                   //Toto najde dalsiho nepritele, ktery splnuje pozadavky
-                        Debug.Log("Player found");
-                    }*/
-                }
-                StartCoroutine(DmgdealcooldownMelee());
-                //Debug.Log("Can give dmg Enemy");
-            }
-			/*else if (armyTypeNum == 2)
+            FindMyEnemy();
+            /*else if (armyTypeNum == 2)
 			{
 				StartCoroutine(DmgdealcooldownRange());
 			}*/
-		}
+        }
 
 		/*if (Physics2D.OverlapCircle(transform.position, rangeR, opponentRanger) != null)		//je tam if, aby to poznaval hned
 		{
@@ -120,10 +105,39 @@ public class UniArmy : MonoBehaviour
 		}*/
 		if (currhp <= 0)
 		{
+
 			Destroy(gameObject);
 		}
 		hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);
 	}
+	void FindMyEnemy()
+	{
+        if (armyTypeNum == 1 || armyTypeNum == 3)
+        {
+            SoldierPscript = null;
+            SoldierEscript = null;
+
+            GameObject[] allEnemies = (dir == 1) ? GameObject.FindGameObjectsWithTag("Player") : GameObject.FindGameObjectsWithTag("Enemy");
+
+            foreach (GameObject obj in allEnemies.Reverse())				//tady se otoci porazi aby bral toho prvniho enemy vzdy
+            {
+                SoldierArmyScript = obj.GetComponent<UniArmy>();
+                if (obj.layer == 10 && dir == 1)
+                {
+                    SoldierPscript = SoldierArmyScript;						//dosazeni scriptu za objekt
+                    Debug.Log("Enemy has found");
+                }
+                else if (obj.layer == 13 && dir == 0)
+                {
+                    SoldierEscript = SoldierArmyScript;						//dosazeni scriptu za objekt
+                    Debug.Log("Player has found");
+                }
+            }
+
+            StartCoroutine(DmgdealcooldownMelee());
+            // Debug.Log("Can give ");
+        }
+    }
 
 	IEnumerator DmgdealcooldownMelee()
 	{
@@ -147,7 +161,7 @@ public class UniArmy : MonoBehaviour
 				BaseScriptE.currHPBase -= dmg[armyTypeNum - 1];
 			}*/
         }
-		else if (armyTypeNum == 2)
+		else if (armyTypeNum == 3)
 		{
             if (dir == 0)
             {
