@@ -1,6 +1,9 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 030 [12.01.2023]</h2>
+<p>+ Byl změněn systém boje</p>
+<br>
 <h2>Update 029 [28.12.2023]</h2>
 <p>+ Byl vytvořen nový obrázek pro 5. evoluci základny</p>
 <p>+ Nepřítel se může vylepšovat (60s, 15s)</p>
