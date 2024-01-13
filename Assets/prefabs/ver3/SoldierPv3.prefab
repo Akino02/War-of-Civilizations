@@ -329,25 +329,32 @@ MonoBehaviour:
   opponentBase:
     serializedVersion: 2
     m_Bits: 262144
-  range: 0.5
+  ranges:
+  - 0.5
+  - 1.4
   movespeed: 3
   armyType:
     serializedVersion: 2
     m_Bits: 1024
-  Soldier:
+  soldier:
     serializedVersion: 2
     m_Bits: 1024
-  Ranger:
+  ranger:
     serializedVersion: 2
     m_Bits: 2048
-  Tank:
+  tank:
     serializedVersion: 2
     m_Bits: 4096
+  allies:
+    serializedVersion: 2
+    m_Bits: 7168
   armyTypeNum: 0
   hpBar: {fileID: 6988335744767284693}
   currhp: 100
+  lvl: 0
   made: 0
   dir: 0
+  checkCollision: 0000000000
   canGiveDmgM: 0
   canGiveDmgR: 0
 --- !u!1 &6695170113660086957
