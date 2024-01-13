@@ -1,6 +1,10 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 031 [13.01.2023]</h2>
+<p>+ Vojáčci můžou přes sebe střílet(pokud je před Rangerem Soldier tak ten Ranger může útočit na Nepřítele, pokud má na to range)</p>
+<p>+ Opravování systému (peněz, zkušeností)</p>
+<br>
 <h2>Update 030 [12.01.2023]</h2>
 <p>+ Byl změněn systém boje</p>
 <br>
