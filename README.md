@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 032 [19.01.2023]</h2>
+<p>+ Nové úpravy v boji</p>
+<p>+ Opravování systému (boj, spawn)</p>
+<!--<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/8d10df0c-6595-42ea-959f-c5e894fa2fd2" width="500" height="250"></p>-->
+<br>
 <h2>Update 031 [13.01.2023]</h2>
 <p>+ Vojáčci můžou přes sebe střílet(pokud je před Rangerem Soldier tak ten Ranger může útočit na Nepřítele, pokud má na to range)</p>
 <p>+ Opravování systému (peněz, zkušeností)</p>
