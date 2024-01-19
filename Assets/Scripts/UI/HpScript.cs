@@ -8,8 +8,11 @@ public class HpScript : MonoBehaviour
 	ProgresScript progresS;										//propojeni zakladnich scriptu pro funkci UI
 	ButtonScript buttonS;											//propojeni zakladnich scriptu pro funkci UI
 
-	SoldierE soldierEscript;                                    //import scriptu protivnika
+	SoldierE soldierEscript;                                    //import scriptu protivnika									//potreba upravit ubirani hp pro zakladnu
 	[SerializeField] GameObject soldierE;                       //import objektu
+
+	UniArmy army;
+	public GameObject objectArmyE;
 
 	EnemySpawn enemyS;
 
@@ -46,7 +49,7 @@ public class HpScript : MonoBehaviour
 	void Update()
 	{
         //toto slouzi pro ubirani zivotu zakladny
-        for (int i = 0; i < 3; i++)
+        /*for (int i = 0; i < 3; i++)
 		{
 			if (currHPBase > 0)
 			{
@@ -59,7 +62,7 @@ public class HpScript : MonoBehaviour
 					StartCoroutine(DmgdealcooldownMelee());
 				}
 			}
-		}
+		}*/
 		hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / maxHPBase[progresS.level], 3f* Time.deltaTime);		//kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
 		Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / maxHPBase[progresS.level]));									//nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
 		hpBaseBarcurr.color = healthColor;						//zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu

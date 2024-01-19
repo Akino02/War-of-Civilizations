@@ -292,7 +292,6 @@ GameObject:
   - component: {fileID: 5878389473079664463}
   - component: {fileID: 1246977025580456707}
   - component: {fileID: 6642511998734939259}
-  - component: {fileID: 9058268163789786753}
   - component: {fileID: 6586093440630193042}
   m_Layer: 13
   m_Name: SoldierEv3
@@ -442,46 +441,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &9058268163789786753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6846435292887009449}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94562e6ead877d1438b9ac298ae27b28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyBase: {fileID: 0}
-  baseScriptPHolder: {fileID: 0}
-  rb: {fileID: 1246977025580456707}
-  opponent:
-    serializedVersion: 2
-    m_Bits: 7168
-  opponentBase:
-    serializedVersion: 2
-    m_Bits: 131072
-  range: 0.5
-  movespeed: 3
-  armyType:
-    serializedVersion: 2
-    m_Bits: 8192
-  Soldier:
-    serializedVersion: 2
-    m_Bits: 8192
-  Ranger:
-    serializedVersion: 2
-    m_Bits: 16384
-  Tank:
-    serializedVersion: 2
-    m_Bits: 32768
-  armyTypeNum: 0
-  hpBar: {fileID: 5829334886852838632}
-  currhp: 100
-  canGiveDmgM: 0
-  canGiveDmgR: 0
 --- !u!114 &6586093440630193042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,7 +453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9dbc4c2708e344cb65d2253445fe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 1246977025580456707}
   opponent:
     serializedVersion: 2
     m_Bits: 7168
@@ -504,10 +462,11 @@ MonoBehaviour:
   ranges:
   - 0.5
   - 1.4
-  movespeed: 3
   armyType:
     serializedVersion: 2
     m_Bits: 8192
+  rb: {fileID: 1246977025580456707}
+  movespeed: 3
   soldier:
     serializedVersion: 2
     m_Bits: 8192
@@ -524,11 +483,12 @@ MonoBehaviour:
   hpBar: {fileID: 5829334886852838632}
   currhp: 100
   lvl: 0
-  made: 0
   dir: 1
   checkCollision: 0000000000
+  distanceFromAllie: {x: 0, y: 0, z: 0}
   canGiveDmgM: 0
   canGiveDmgR: 0
+  expperkill: 640000007d0000002c010000
 --- !u!1 &8703199701421686388
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,91 +8,98 @@ using UnityEngine;
 
 public class UniArmy : MonoBehaviour
 {
-	ProgresScript progresS;            //importuje script zakladny v levo(hrace)
-	EnemySpawn enemyS;				//importuje script zakladny v pravo(enemy)
+	//importovane scripty
+	ProgresScript progresS;										//importuje script zakladny v levo(hrace)
+	HpScript hpS;												//importuje script zakladny v levo(hrace)
+	EnemySpawn enemyS;											//importuje script zakladny v pravo(enemy)
 
-	UniArmy SoldierEscript;         //import scriptu protivnika
-	UniArmy SoldierPscript;         //import scriptu protivnika
+	UniArmy armyScriptE;										//import scriptu protivnika
+	UniArmy armyScriptP;										//import scriptu spojence
 
-	//opraveni scriptu
-	private UniArmy SoldierArmyScript;
+	private UniArmy SoldierArmyScript;							//importovani scriptu, ktery bude slouzit pro vojacka, aby si nasel nepritele
 
-	//BaseScriptP BaseScript;				//importuje script protivnikovy zakladny
-	//[SerializeField] GameObject enemyBase;						//nevyuzite
+	//
+    public LayerMask opponent;									//layer nepratelskych jednotek typu soldier
+	public LayerMask opponentBase;								//layer nepratelske zakladny
+	public float[] ranges = { 0.5f, 1.4f};						//velikost kde muze bojovat
+	public LayerMask armyType;                                  //typ jednotky
 
-	public Rigidbody2D rb;              //funkce pro gravitaci
-	public LayerMask opponent;          //layer nepratelskych jednotek typu soldier
-	public LayerMask opponentBase;          //layer nepratelske zakladny
-	public float[] ranges = { 0.5f, 1.4f};                 //velikost kde muze bojovat
-	public float movespeed;             //rychlost pohybu objektu
-	public LayerMask armyType;          //typ jednotky
+	//zaklad pro pohyb a gravitaci
+    public Rigidbody2D rb;                                      //funkce pro gravitaci
+    public float movespeed;                                     //rychlost pohybu objektu
 
-	//vsechny typy jednotek
-	public LayerMask soldier;
-	public LayerMask ranger;
-	public LayerMask tank;
-	public LayerMask allies;
-	public int armyTypeNum = 0;         //toto definuje jaky je to typ vojaka
+    //vsechny typy jednotek
+    public LayerMask soldier;									//Layer pro vojacka typu SOLDIER
+	public LayerMask ranger;									//Layer pro vojacka typu RANGER
+	public LayerMask tank;										//Layer pro vojacka typu TANK
+	public LayerMask allies;									//Layer pratelskych vojacku
+	public int armyTypeNum = 0;									//toto definuje jaky je to typ vojaka
 
 	//Ohledne HPbaru
 	public GameObject hpBar;
 
-	private float maxhp = 100;
+	private float[,] maxhp = { { 100, 60, 300 }, { 150, 90, 450 }, { 225, 135, 675 }, { 350, 200, 1000 }, { 400, 300, 1500 } };
 	public float currhp = 100;
-	private int[,] hptypes = { { 100, 60, 300 }, { 150, 90, 450 }, { 225, 135, 675 }, { 350, 200, 1000 }, { 400, 300, 1500 } };       //Typy zivotu pro jednotky (soldier, ranger, tank)
 	private float hpinprocents = 1f;
-	public int lvl = 0;
+	public int lvl = 0;											//uchovani urovne vojacka
 
-	public int made = 0;
 
 	private int[] moveDir = { 1, -1, 0};
 	public int dir;
 
-	public bool[] checkCollision = { false, false , false, false, false};
+	public bool[] checkCollision = { false, false , false, false, false};	//zda soldier vidi, zda ranger vidi, zda spojenci se vidi, zda vidi zakladnu(melee), zda vidi zakladnu(ranger)
 	public Vector3 distanceFromAllie;
 
 
-    //Ohledne utoku
-    private int[] dmg = { 40, 60, 40 };             //sila pro postavy (soldier, ranger, tank)
+	//Ohledne utoku
+	private int[,] dmg = { { 40, 60, 30 }, { 60, 90, 50 }, { 90, 135, 70 }, { 135, 90, 115 }, { 150, 200, 120 } };             //sila pro vojacky (soldier, ranger, tank)
 
-	/*public float dmgR = 60;             //Range Ranger sila postavy
-	public float dmgT = 40;             //Melee Tank sila postavy*/
-	public bool canGiveDmgM = false;     //Muze bojovat melee
-	public bool canGiveDmgR = false;     //Muze bojovat na dalku
+	public bool canGiveDmgM = false;							//Muze bojovat melee
+	public bool canGiveDmgR = false;							//Muze bojovat na dalku
 
 	//Odmeny za to ze zemre
-    public int[,] moneykill = { { 30, 50, 150 }, { 60, 100, 300 }, { 120, 200, 600 }, { 240, 400, 1200 }, { 480, 800, 2400 } };             //peniza za zabiti nepritele (soldier, ranger, tank)
-    public int[] expperkill = { 100, 125, 300 };																							//zkusenosti za zabiti nepritele (soldier, ranger, tank)
+	public int[,] moneykill = { { 30, 50, 150 }, { 60, 100, 300 }, { 120, 200, 600 }, { 240, 400, 1200 }, { 480, 800, 2400 } };             //peniza za zabiti nepritele (soldier, ranger, tank)
+	public int[] expperkill = { 100, 125, 300 };				//zkusenosti za zabiti nepritele (soldier, ranger, tank)
 	//
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
 	{
-        GameObject script1 = GameObject.FindWithTag("baseP");       //toto najde zakladnu hrace pomoci tagu ktery ma
-        progresS = script1.GetComponent<ProgresScript>();
-        //
-        GameObject script2 = GameObject.FindWithTag("baseE");      //toto najde zakladnu nepritele pomoci tagu ktery ma
-        enemyS = script2.GetComponent<EnemySpawn>();
+		GameObject script1 = GameObject.FindWithTag("baseP");	//toto najde zakladnu hrace pomoci tagu ktery ma
+		progresS = script1.GetComponent<ProgresScript>();
+		hpS = script1.GetComponent<HpScript>();
+		//
+		GameObject script2 = GameObject.FindWithTag("baseE");	//toto najde zakladnu nepritele pomoci tagu ktery ma
+		enemyS = script2.GetComponent<EnemySpawn>();
 
-        if (armyType == soldier)
+		if(dir == 0)
+		{
+            lvl = progresS.level;                                   //zde se urci jaky level bude mit pro hrace
+        }
+		else
+		{
+			lvl = enemyS.level;										//zde se urci jaky level bude mit pro nepritele
+		}
+
+		if (armyType == soldier)								//nastaveni co je to za druh vojacka
 		{
 			armyTypeNum = 1;
-			maxhp = hptypes[lvl,armyTypeNum - 1];
-			currhp = maxhp;
+			//maxhp = hptypes[lvl,armyTypeNum - 1];
+			currhp = maxhp[lvl, armyTypeNum - 1];
 			canGiveDmgM = true;
 		}
 		else if (armyType == ranger)
 		{
 			armyTypeNum = 2;
-			maxhp = hptypes[lvl,armyTypeNum - 1];
-			currhp = maxhp;
+			//maxhp = hptypes[lvl,armyTypeNum - 1];
+			currhp = maxhp[lvl, armyTypeNum - 1];
 			canGiveDmgR = true;
 		}
 		else if (armyType == tank)
 		{
 			armyTypeNum = 3;
-			maxhp = hptypes[lvl,armyTypeNum - 1];
-			currhp = maxhp;
+			//maxhp = hptypes[lvl,armyTypeNum - 1];
+			currhp = maxhp[lvl, armyTypeNum - 1];
 			canGiveDmgM = true;
 		}
 	}
@@ -100,9 +107,10 @@ public class UniArmy : MonoBehaviour
 	void Update()
 	{
 		CheckForEnemy();	//tato funkce zajistuje kontrolovani kolizi v okoli
-		hpinprocents = ((100 * currhp) / maxhp) / 100;
+		hpinprocents = ((100 * currhp) / maxhp[lvl, armyTypeNum - 1]) / 100;
 		Move();      //tato funkce zajistuje pohyb
-		if (checkCollision[0] && canGiveDmgM == true && armyTypeNum != 2)     //je tam if, aby to poznaval hned
+		//DamageBase();											//ubirani zivotu primo zakladne
+        if (checkCollision[0] && canGiveDmgM == true && armyTypeNum != 2)     //je tam if, aby to poznaval hned
 		{
 			FindMyEnemy();
 		}
@@ -110,20 +118,28 @@ public class UniArmy : MonoBehaviour
 		{
 			FindMyEnemy();
 		}
-		if (currhp <= 0)
+		else if (checkCollision[3] && canGiveDmgM == true && armyTypeNum != 2)
+		{
+			StartCoroutine(DmgDealCoolDownMeleeBase());
+        }
+        else if (checkCollision[4] && canGiveDmgR == true && armyTypeNum == 2)
+		{
+            StartCoroutine(DmgDealCoolDownRangerBase());
+        }
+        if (currhp <= 0)
 		{
 			if(dir != 0)		//tato podminka bude davat penize a zkusenosti pri tom kdyz zemre enemy
 			{
 				Reward();
-            }
+			}
 			Destroy(gameObject);
 		}
 		hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);
 	}
 	void FindMyEnemy()						//tato funkce hleda nepritele a k nemu priradi script a jeste se zavola dalsi funkce na utok
 	{
-		SoldierPscript = null;
-		SoldierEscript = null;
+		armyScriptP = null;
+		armyScriptE = null;
 
 		GameObject[] allEnemies = (dir == 1) ? GameObject.FindGameObjectsWithTag("Player") : GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -132,12 +148,12 @@ public class UniArmy : MonoBehaviour
 			SoldierArmyScript = obj.GetComponent<UniArmy>();
 			if (obj.layer == 10 && dir == 1)
 			{
-				SoldierPscript = SoldierArmyScript;                     //dosazeni scriptu za objekt
+                armyScriptP = SoldierArmyScript;                     //dosazeni scriptu za objekt
 				//Debug.Log("Allie attacked");
 			}
 			else if (obj.layer == 13 && dir == 0)
 			{
-				SoldierEscript = SoldierArmyScript;                     //dosazeni scriptu za objekt
+                armyScriptE = SoldierArmyScript;                     //dosazeni scriptu za objekt
 				//Debug.Log("Enemy attacked");
 			}
 		}
@@ -148,17 +164,19 @@ public class UniArmy : MonoBehaviour
 		else if (armyTypeNum == 2)
 		{
 			StartCoroutine(DmgdealcooldownRange());
-		}
+        }
 		// Debug.Log("Can give ");
 	}
 	void CheckForEnemy()
 	{
-		float notFullsize = 0.50f;
-        distanceFromAllie = new Vector3(transform.position.x + notFullsize, transform.position.y, transform.position.y);
-        checkCollision[0] = Physics2D.OverlapCircle(transform.position, ranges[0], opponent);           //zda vidi enemy tak stoji (urceno pro melee class)
+		float notFullsize = 0.50f;								//slouzi pro mensi odstup od objektu, aby kontroloval odstup mezi spojenci
+		distanceFromAllie = new Vector3(transform.position.x + notFullsize * moveDir[dir], transform.position.y, transform.position.y);
+		checkCollision[0] = Physics2D.OverlapCircle(transform.position, ranges[0], opponent);           //zda vidi enemy tak stoji (urceno pro melee class)
+		checkCollision[3] = Physics2D.OverlapCircle(transform.position, ranges[0], opponentBase);           //zda vidi nepratelskou zakladnu (urceno pro melee class(range))
 		if(armyTypeNum == 2)			//pokud je to Ranger tak ten se zastavi dale, protoze muze zabijet z dalky
 		{
-            checkCollision[1] = Physics2D.OverlapCircle(transform.position, ranges[1], opponent);           //zda vidi enemy tak stoji (urceno pro ranger class)
+			checkCollision[1] = Physics2D.OverlapCircle(transform.position, ranges[1], opponent);           //zda vidi enemy tak stoji (urceno pro ranger class)
+			checkCollision[4] = Physics2D.OverlapCircle(transform.position, ranges[1], opponentBase);           //zda vidi nepratelskou zakladnu (urceno pro ranger class(range))
         }
 		checkCollision[2] = Physics2D.OverlapCircle(distanceFromAllie, 0.1f, allies);           //zda vidi spojence tak se zastavi (je urceno pro vsechny)
 	}
@@ -180,6 +198,17 @@ public class UniArmy : MonoBehaviour
 		Debug.Log(moneykill[lvl, armyTypeNum - 1]);
 		Debug.Log(expperkill[armyTypeNum - 1]);
 	}
+	/*void DamageBase()
+	{
+        if (checkCollision[3] && canGiveDmgM == true && armyTypeNum != 2)     //je tam if, aby to poznaval hned
+        {
+            StartCoroutine(DmgDealCoolDownMeleeBase());
+        }
+        else if (checkCollision[4] && canGiveDmgR == true && armyTypeNum == 2)      //je tam if, aby to poznaval hned
+        {
+			StartCoroutine(DmgDealCoolDownRangerBase());
+        }
+    }*/
 
 	IEnumerator DmgdealcooldownMelee()				//tato funkce slouzi pro utok pro soldier a tank
 	{
@@ -190,11 +219,11 @@ public class UniArmy : MonoBehaviour
 			{*/
 			if(dir == 0)
 			{
-				SoldierEscript.currhp -= dmg[armyTypeNum - 1];
+                armyScriptE.currhp -= dmg[lvl, armyTypeNum - 1];
 			}
 			else
 			{
-				SoldierPscript.currhp -= dmg[armyTypeNum - 1];
+                armyScriptP.currhp -= dmg[lvl, armyTypeNum - 1];
 			}
 			//SoldierPscript.currhp -= dmg[armyTypeNum - 1];
 			//}
@@ -207,11 +236,11 @@ public class UniArmy : MonoBehaviour
 		{
 			if (dir == 0)
 			{
-				SoldierEscript.currhp -= dmg[armyTypeNum - 1];
+                armyScriptE.currhp -= dmg[lvl, armyTypeNum - 1];
 			}
 			else
 			{
-				SoldierPscript.currhp -= dmg[armyTypeNum - 1];
+                armyScriptP.currhp -= dmg[lvl, armyTypeNum - 1];
 			}
 			//SoldierPscript.currhp -= dmg[armyTypeNum - 1];
 			//BaseScriptE.currHPBase -= dmg[armyTypeNum - 1];
@@ -226,16 +255,58 @@ public class UniArmy : MonoBehaviour
 		canGiveDmgR = false;
 		if (dir == 0)
 		{
-			SoldierEscript.currhp -= dmg[armyTypeNum - 1];
+            armyScriptE.currhp -= dmg[lvl, armyTypeNum - 1];
 		}
 		else
 		{
-			SoldierPscript.currhp -= dmg[armyTypeNum - 1];
+            armyScriptP.currhp -= dmg[lvl, armyTypeNum - 1];
 		}
 		yield return new WaitForSecondsRealtime(2);
 		canGiveDmgR = true;
 	}
+	IEnumerator DmgDealCoolDownMeleeBase()						//potencionalni problem************************
+	{
+        canGiveDmgM = false;
+        if (armyTypeNum == 1)
+        {
+            if (dir == 0)
+            {
+                enemyS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+            }
+            else
+            {
+                hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+            }
+        }
+        else if (armyTypeNum == 3)
+        {
+            if (dir == 0)
+            {
+                enemyS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+            }
+            else
+            {
+                hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+            }
+        }
+        yield return new WaitForSeconds(3);
+        canGiveDmgM = true;
+    }
 
+    IEnumerator DmgDealCoolDownRangerBase()                     //potencionalni problem************************
+    {
+        canGiveDmgR = false;
+        if (dir == 0)
+        {
+            enemyS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+        }
+        else
+        {
+            hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+        }
+        yield return new WaitForSecondsRealtime(2);
+        canGiveDmgR = true;
+    }
 	private void OnDrawGizmosSelected()		//vykreslí kruh okolo jednotky
 	{
 		Gizmos.color = Color.red;

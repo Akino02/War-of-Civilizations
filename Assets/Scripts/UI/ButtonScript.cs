@@ -12,8 +12,8 @@ public class ButtonScript : MonoBehaviour
 																//
 	//co a kde to bude spawnovat
 	public GameObject soldierP;                                 //To je objekt soldier
-	public GameObject rangerP;                                  //To je objekt ranger
-	public GameObject tankP;                                    //To je objekt tank
+	/*public GameObject rangerP;                                  //To je objekt ranger			//je to zbytecne, protoze je to univerzalni
+	public GameObject tankP;                                    //To je objekt tank*/
 	//
 
 	// Start is called before the first frame update

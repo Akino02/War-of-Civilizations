@@ -8,6 +8,9 @@ public class ProgresScript : MonoBehaviour
 	ButtonScript buttonS;
 	HpScript hpS;
 
+	UniArmy army;                                               //importovani pro pracovani s vojacky
+	public GameObject objectArmyP;								//objekt pro propojeni scriptu
+
 	//funkce zakladny ukazuje zkusenosti(%), pocet penez, co se vyrabi, co je ve fronte
 	public int experience = 0;									//zkusenosti
 	public int experienceinprocents = 0;						//zkusenosti
@@ -23,8 +26,6 @@ public class ProgresScript : MonoBehaviour
 	public Text moneyText;                                      //Prehled kolik ma hrac financi
 
     public GameObject playerSpawner;                            //misto kde se tyto objekty spawnou
-
-	public GameObject canvas;
 
 
     //vyrobnik v procentech graficky
@@ -45,7 +46,9 @@ public class ProgresScript : MonoBehaviour
 	void Start()
 	{
 		buttonS = GetComponent<ButtonScript>();     //propojeni zakladnich scriptu pro funkci UI
-		hpS = GetComponent<HpScript>();     //propojeni zakladnich scriptu pro funkci UI
+		hpS = GetComponent<HpScript>();				//propojeni zakladnich scriptu pro funkci UI
+
+		army = objectArmyP.GetComponent<UniArmy>();				//propojeni scriptu UniArmy s ProgresScript
                                                                 //nastaveni aktualnich penez
         moneyText.text = money.ToString();
 		experienceText.text = experienceinprocents.ToString() + "%";
@@ -132,16 +135,19 @@ public class ProgresScript : MonoBehaviour
                 progBar.fillAmount = 0f;
                 if (orderv2[0] == 1)
                 {
+					army.armyType = army.soldier;
                     Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
                     Debug.Log("Byl vyroben Soldier");
                 }
                 else if (orderv2[0] == 2)
                 {
-                    Instantiate(buttonS.rangerP, playerSpawner.transform.position, playerSpawner.transform.rotation);
+                    army.armyType = army.ranger;
+                    Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
                 }
                 else if (orderv2[0] == 3)
                 {
-                    Instantiate(buttonS.tankP, playerSpawner.transform.position, playerSpawner.transform.rotation);
+                    army.armyType = army.tank;
+                    Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
                 }
                 //Debug.Log("Byl vyroben " + order);
                 order -= 1;

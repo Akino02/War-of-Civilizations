@@ -120,7 +120,6 @@ GameObject:
   - component: {fileID: 9001723536436959398}
   - component: {fileID: 3317921190204593618}
   - component: {fileID: 3907331728987660665}
-  - component: {fileID: 6377468704235428245}
   - component: {fileID: 2435776891177974356}
   m_Layer: 10
   m_Name: SoldierPv3
@@ -270,46 +269,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6377468704235428245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6212554131169085765}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a084646927ed65942a8368b3ee3f76a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyBase: {fileID: 0}
-  rb: {fileID: 3317921190204593618}
-  opponent:
-    serializedVersion: 2
-    m_Bits: 57344
-  opponentBase:
-    serializedVersion: 2
-    m_Bits: 262144
-  range: 0.5
-  movespeed: 3
-  armyType:
-    serializedVersion: 2
-    m_Bits: 1024
-  Soldier:
-    serializedVersion: 2
-    m_Bits: 1024
-  Ranger:
-    serializedVersion: 2
-    m_Bits: 2048
-  Tank:
-    serializedVersion: 2
-    m_Bits: 4096
-  armyTypeNum: 0
-  hpBar: {fileID: 6988335744767284693}
-  currhp: 100
-  made: 100
-  canGiveDmgM: 0
-  canGiveDmgR: 0
 --- !u!114 &2435776891177974356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,7 +281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9dbc4c2708e344cb65d2253445fe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 3317921190204593618}
   opponent:
     serializedVersion: 2
     m_Bits: 57344
@@ -332,10 +290,11 @@ MonoBehaviour:
   ranges:
   - 0.5
   - 1.4
-  movespeed: 3
   armyType:
     serializedVersion: 2
     m_Bits: 1024
+  rb: {fileID: 3317921190204593618}
+  movespeed: 3
   soldier:
     serializedVersion: 2
     m_Bits: 1024
@@ -352,11 +311,12 @@ MonoBehaviour:
   hpBar: {fileID: 6988335744767284693}
   currhp: 100
   lvl: 0
-  made: 0
   dir: 0
   checkCollision: 0000000000
+  distanceFromAllie: {x: 0, y: 0, z: 0}
   canGiveDmgM: 0
   canGiveDmgR: 0
+  expperkill: 640000007d0000002c010000
 --- !u!1 &6695170113660086957
 GameObject:
   m_ObjectHideFlags: 0
