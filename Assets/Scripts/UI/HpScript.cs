@@ -6,42 +6,42 @@ using UnityEngine.UI;
 public class HpScript : MonoBehaviour
 {
 	ProgresScript progresS;										//propojeni zakladnich scriptu pro funkci UI
-	ButtonScript buttonS;											//propojeni zakladnich scriptu pro funkci UI
+	ButtonScript buttonS;										//propojeni zakladnich scriptu pro funkci UI
 
-	SoldierE soldierEscript;                                    //import scriptu protivnika									//potreba upravit ubirani hp pro zakladnu
-	[SerializeField] GameObject soldierE;                       //import objektu
+	/*SoldierE soldierEscript;                                  //import scriptu protivnika									//potreba upravit ubirani hp pro zakladnu
+	[SerializeField] GameObject soldierE;                       //import objektu*/
 
-	UniArmy army;
-	public GameObject objectArmyE;
+	/*UniArmy army;
+	public GameObject objectArmyE;*/
 
-	EnemySpawn enemyS;
+	//EnemySpawn enemyS;
 
 	//nepratele (layers)
 	public LayerMask[] opponents = new LayerMask[3];            //layer nepratelskych jednotek soldier,ranger,tank
 																//
 	//hp a ubirani base
-	public float[] maxHPBase = {1000,2000,3000,4000,5000};								//potøeba zmìnit poèet životù pøi updatu !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	public float[] maxHPBase = {1000,2000,3000,4000,5000};		//potøeba zmìnit poèet životù pøi updatu !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public float currHPBase;
 	public float hpbaseinprocents = 1f;
 																//
 	public Image hpBaseBarcurr;                                 //vizualni ukazatel zivotu
 	public GameObject basePosition;                             //misto kde se nachazi zakladna
 																//
-	public bool canGetdmgM = true;
-	public bool canGetdmgR = true;
+	/*public bool canGetdmgM = true;
+	public bool canGetdmgR = true;*/
 	public bool upgradingHp = false;
 	//
 	// Start is called before the first frame update
 	void Start()
 	{
-		progresS = GetComponent<ProgresScript>();     //propojeni zakladnich scriptu pro funkci UI
-		buttonS = GetComponent<ButtonScript>();     //propojeni zakladnich scriptu pro funkci UI
-		soldierEscript = soldierE.GetComponent<SoldierE>();     //import protivnika a jeho promìnných
+		progresS = GetComponent<ProgresScript>();				//propojeni zakladnich scriptu pro funkci UI
+		buttonS = GetComponent<ButtonScript>();					//propojeni zakladnich scriptu pro funkci UI
+		/*soldierEscript = soldierE.GetComponent<SoldierE>();   //import protivnika a jeho promìnných*/
         currHPBase = maxHPBase[progresS.level];
 
         //
-        GameObject script2 = GameObject.FindWithTag("baseE");      //toto najde zakladnu nepritele pomoci tagu ktery ma
-        enemyS = script2.GetComponent<EnemySpawn>();
+        /*GameObject script2 = GameObject.FindWithTag("baseE");																//toto najde zakladnu nepritele pomoci tagu ktery ma
+        enemyS = script2.GetComponent<EnemySpawn>();*/
 		//
     }
 
@@ -67,7 +67,7 @@ public class HpScript : MonoBehaviour
 		Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / maxHPBase[progresS.level]));									//nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
 		hpBaseBarcurr.color = healthColor;						//zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
 	}
-    IEnumerator DmgdealcooldownMelee()                          //base bude dostavat dmg od enemy melee				//potreba pak upravit system ubirani zivotu
+    /*IEnumerator DmgdealcooldownMelee()                          //base bude dostavat dmg od enemy melee				//potreba pak upravit system ubirani zivotu
 	{
 		canGetdmgM = false;
 		if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponents[0]) != null)
@@ -89,15 +89,15 @@ public class HpScript : MonoBehaviour
 		Debug.Log("Player " + currHPBase);
 		yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;
-	}
+	}*/
     public IEnumerator UpgradeHp()								//zachova procentuelne hp pri upgradu
     {
 		if(progresS.level > 0)
 		{
 			Debug.Log(currHPBase);
 			Debug.Log(maxHPBase[progresS.level - 1]);
-            hpbaseinprocents = currHPBase / maxHPBase[progresS.level - 1];      //pomoc pri pocitani procent
-            currHPBase = hpbaseinprocents * maxHPBase[progresS.level];          //vypocita aktualni pocet hp v novych zivotech
+            hpbaseinprocents = currHPBase / maxHPBase[progresS.level - 1];			//pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
+            currHPBase = hpbaseinprocents * maxHPBase[progresS.level];				//vypocita aktualniho poctu hp v novych zivotech
         }
 		yield return currHPBase;
     }

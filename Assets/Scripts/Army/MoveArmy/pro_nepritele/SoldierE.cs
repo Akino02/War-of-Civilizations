@@ -8,7 +8,7 @@ public class SoldierE : MonoBehaviour
 	SoldierP soldierPscript;									//import scriptu protivnika
 	[SerializeField] GameObject soldierP;						//import objektu
     ProgresScript progresS;										//import script
-    EnemySpawn enemyS;										//import script
+    EnemySpawn enemyS;											//import script
 
 	public Rigidbody2D rb;										//funkce pro gravitaci
 	public LayerMask[] armyTypes = new LayerMask[3];

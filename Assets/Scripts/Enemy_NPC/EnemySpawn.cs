@@ -14,14 +14,14 @@ public class EnemySpawn : MonoBehaviour
     UniArmy army;                                               //importovani pro pracovani s vojacky
     public GameObject objectArmyE;                              //objekt pro propojeni scriptu
 
-    /*[SerializeField] GameObject soldierP;          //import objektu
-	[SerializeField] GameObject soldierE;          //import objektu*/
+    /*[SerializeField] GameObject soldierP;						//import objektu
+	[SerializeField] GameObject soldierE;						//import objektu*/
 
     //
     //import layeru nepratel(hracovych)
-    public LayerMask opponentSoldier;       //layer hracovych jednotek typu soldier
-	public LayerMask opponentRanger;       //layer hracovych jednotek typu ranger
-	public LayerMask opponentTank;       //layer hracovych jednotek typu tank
+    /*public LayerMask opponentSoldier;							//layer hracovych jednotek typu soldier
+	public LayerMask opponentRanger;							//layer hracovych jednotek typu ranger
+	public LayerMask opponentTank;								//layer hracovych jednotek typu tank*/
 	//
 	//
 	//co bude spawnovat a kde
@@ -36,7 +36,7 @@ public class EnemySpawn : MonoBehaviour
 	public float hpbaseinprocents = 1f;
 
 	public int level = 0;
-	public int[] lvltype = {60, 15};
+	public int[] lvltype = {60, 15};							//za jak dlouho dojde k evoluci ****************************ten cas je moc kratky
 	public bool evolving = false;
 
     public GameObject[] baseAppearance = new GameObject[5];     //vzhled budov v array ohledne nove evoluce
@@ -44,8 +44,8 @@ public class EnemySpawn : MonoBehaviour
     public Image hpBaseBarcurr;
 	public GameObject basePosition;
 
-	public bool canGetdmgM = true;
-	public bool canGetdmgR = true;
+	/*public bool canGetdmgM = true;
+	public bool canGetdmgR = true;*/
 	//
 	//spawnovani jednotek
 	public bool canSpawn = true;
@@ -57,8 +57,8 @@ public class EnemySpawn : MonoBehaviour
         GameObject item = GameObject.FindWithTag("baseP");		//toto najde zakladnu hrace pomoci tagu ktery ma
         progresS = item.GetComponent<ProgresScript>();			//zde se dosadi script za objekt
 
-        /*soldierPscript = soldierP.GetComponent<SoldierP>();  //import protivnika a jeho promìnných
-		soldierEscript = soldierE.GetComponent<SoldierE>();  //import protivnika a jeho promìnných*/
+        /*soldierPscript = soldierP.GetComponent<SoldierP>();	//import protivnika a jeho promìnných
+		soldierEscript = soldierE.GetComponent<SoldierE>();		//import protivnika a jeho promìnných*/
 
         army = objectArmyE.GetComponent<UniArmy>();				//propojeni scriptu UniArmy s ProgresScript
     }
@@ -66,7 +66,7 @@ public class EnemySpawn : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-        if(currHPBase > 0 && level != 4)																				//mimo provoz !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!****Zkoumani problemu
+        if(currHPBase > 0 && level != 4)
 		{
 			StartCoroutine(Evolution());
         }
@@ -79,7 +79,7 @@ public class EnemySpawn : MonoBehaviour
 		{
 			nahoda = Random.Range(1, 5);
 		}
-		//damage pro base
+		//damage pro base						//vse ohledne dmg je vyrazeno, protoze uz existuje lepsi zpusob
 		/*if ((Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null || Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null) && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
 		{
 			StartCoroutine(DmgdealcooldownMelee());
@@ -93,7 +93,7 @@ public class EnemySpawn : MonoBehaviour
         hpBaseBarcurr.color = healthColor;                      //zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
     }
 
-	IEnumerator CoolDownArmySpawn()      //nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani
+	IEnumerator CoolDownArmySpawn()								//nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani
 	{
 		canSpawn = false;
 		if(nahoda == 1)
@@ -146,7 +146,6 @@ public class EnemySpawn : MonoBehaviour
         if (evolving == false && level != 4)
         {
             evolving = true;
-            StartCoroutine(UpgradeHp());					//pro vylepseni zivotu s tim, ze se zachova %
 			if(progresS.level > level)
 			{
 				yield return new WaitForSeconds(lvltype[1]);    //pokud je nepritel pozadu tak jeho evolution time bude kazdych 15s
@@ -171,16 +170,17 @@ public class EnemySpawn : MonoBehaviour
 					baseAppearance[i].SetActive(false);
                  }
             }
+            StartCoroutine(UpgradeHp());						//pro vylepseni zivotu s tim, ze se zachova %
         }
     }
-    IEnumerator UpgradeHp()								//zachova procentuelne hp pri upgradu			//sledovat fungovani
+    IEnumerator UpgradeHp()										//zachova procentuelne hp pri upgradu			//sledovat fungovani
     {
         if (level > 0)
         {
             Debug.Log(currHPBase);
             Debug.Log(maxHPBase[level - 1]);
-            hpbaseinprocents = currHPBase / maxHPBase[level - 1];      //pomoc pri pocitani procent
-            currHPBase = hpbaseinprocents * maxHPBase[level];          //vypocita aktualni pocet hp v novych zivotech
+            hpbaseinprocents = currHPBase / maxHPBase[level-1];						//pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
+            currHPBase = hpbaseinprocents * maxHPBase[level];						//vypocita aktualniho poctu hp v novych zivotech
         }
         yield return currHPBase;
     }

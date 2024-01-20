@@ -17,6 +17,6 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(target.position.x,target.position.y + 6, -10);                                     //bude pronasledovat dany objekt aby se hybal a jeho pozije je rovna targetu
+        transform.position = new Vector3(target.position.x,target.position.y + 6, -10);                                     //bude pronasledovat dany objekt aby se hybal a jeho pozice je rovna targetu
     }
 }

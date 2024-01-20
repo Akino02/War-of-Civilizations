@@ -1372,8 +1372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f25315d27fb62b408a324884d13f1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierE: {fileID: 5621665606601854760, guid: 9b015885881bfd04f91cc409fa3394b8, type: 3}
-  objectArmyE: {fileID: 0}
   opponents:
   - serializedVersion: 2
     m_Bits: 8192
@@ -1391,8 +1389,6 @@ MonoBehaviour:
   hpbaseinprocents: 1
   hpBaseBarcurr: {fileID: 1862144057}
   basePosition: {fileID: 771168800}
-  canGetdmgM: 1
-  canGetdmgR: 1
   upgradingHp: 0
 --- !u!114 &757668577
 MonoBehaviour:
@@ -2599,15 +2595,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectArmyE: {fileID: 6846435292887009449, guid: 9c94b23fa22d48242be6d1d5518fc477, type: 3}
-  opponentSoldier:
-    serializedVersion: 2
-    m_Bits: 1024
-  opponentRanger:
-    serializedVersion: 2
-    m_Bits: 2048
-  opponentTank:
-    serializedVersion: 2
-    m_Bits: 4096
   soldier: {fileID: 6846435292887009449, guid: 9c94b23fa22d48242be6d1d5518fc477, type: 3}
   baseSpawner: {fileID: 1055716162}
   maxHPBase:
@@ -2629,8 +2616,6 @@ MonoBehaviour:
   - {fileID: 1775158132}
   hpBaseBarcurr: {fileID: 1111857607}
   basePosition: {fileID: 745390496}
-  canGetdmgM: 1
-  canGetdmgR: 1
   canSpawn: 1
 --- !u!1 &1066755948
 GameObject:

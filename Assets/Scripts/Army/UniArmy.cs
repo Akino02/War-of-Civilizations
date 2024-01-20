@@ -74,11 +74,11 @@ public class UniArmy : MonoBehaviour
 
 		if(dir == 0)
 		{
-            lvl = progresS.level;                                   //zde se urci jaky level bude mit pro hrace
+            lvl = progresS.level;                               //zde se urci jaky level bude mit pro hrace
         }
 		else
 		{
-			lvl = enemyS.level;										//zde se urci jaky level bude mit pro nepritele
+			lvl = enemyS.level;									//zde se urci jaky level bude mit pro nepritele
 		}
 
 		if (armyType == soldier)								//nastaveni co je to za druh vojacka
@@ -128,7 +128,7 @@ public class UniArmy : MonoBehaviour
         }
         if (currhp <= 0)
 		{
-			if(dir != 0)		//tato podminka bude davat penize a zkusenosti pri tom kdyz zemre enemy
+			if(dir != 0)										//tato podminka bude davat penize a zkusenosti pri tom kdyz zemre enemy
 			{
 				Reward();
 			}
@@ -136,24 +136,24 @@ public class UniArmy : MonoBehaviour
 		}
 		hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);
 	}
-	void FindMyEnemy()						//tato funkce hleda nepritele a k nemu priradi script a jeste se zavola dalsi funkce na utok
+	void FindMyEnemy()											//tato funkce hleda nepritele a k nemu priradi script a jeste se zavola dalsi funkce na utok
 	{
 		armyScriptP = null;
 		armyScriptE = null;
 
 		GameObject[] allEnemies = (dir == 1) ? GameObject.FindGameObjectsWithTag("Player") : GameObject.FindGameObjectsWithTag("Enemy");
 
-		foreach (GameObject obj in allEnemies.Reverse())                //tady se otoci porazi aby bral toho prvniho enemy vzdy
+		foreach (GameObject obj in allEnemies.Reverse())        //tady se otoci porazi aby bral toho prvniho enemy vzdy
 		{
 			SoldierArmyScript = obj.GetComponent<UniArmy>();
 			if (obj.layer == 10 && dir == 1)
 			{
-                armyScriptP = SoldierArmyScript;                     //dosazeni scriptu za objekt
+                armyScriptP = SoldierArmyScript;                //dosazeni scriptu za objekt
 				//Debug.Log("Allie attacked");
 			}
 			else if (obj.layer == 13 && dir == 0)
 			{
-                armyScriptE = SoldierArmyScript;                     //dosazeni scriptu za objekt
+                armyScriptE = SoldierArmyScript;                //dosazeni scriptu za objekt
 				//Debug.Log("Enemy attacked");
 			}
 		}
@@ -210,7 +210,7 @@ public class UniArmy : MonoBehaviour
         }
     }*/
 
-	IEnumerator DmgdealcooldownMelee()				//tato funkce slouzi pro utok pro soldier a tank
+	IEnumerator DmgdealcooldownMelee()							//tato funkce slouzi pro utok pro soldier a tank
 	{
 		canGiveDmgM = false;
 		if (armyTypeNum == 1)
@@ -250,7 +250,7 @@ public class UniArmy : MonoBehaviour
 		yield return new WaitForSeconds(3);
 		canGiveDmgM = true;
 	}
-	IEnumerator DmgdealcooldownRange()				//tato funkce slouzi pro utok pro ranger
+	IEnumerator DmgdealcooldownRange()							//tato funkce slouzi pro utok pro ranger
 	{
 		canGiveDmgR = false;
 		if (dir == 0)

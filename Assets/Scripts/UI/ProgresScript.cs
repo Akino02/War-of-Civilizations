@@ -25,11 +25,11 @@ public class ProgresScript : MonoBehaviour
 	public Text experienceText;                                 //Prehled ohledne dalsi evoluce v %
 	public Text moneyText;                                      //Prehled kolik ma hrac financi
 
-    public GameObject playerSpawner;                            //misto kde se tyto objekty spawnou
+	public GameObject playerSpawner;                            //misto kde se tyto objekty spawnou
 
 
-    //vyrobnik v procentech graficky
-    public Image progBar;
+	//vyrobnik v procentech graficky
+	public Image progBar;
 	public int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };		//vícerozmìrné pole pro cenu jednotek	//potrebuje upravu
 	private int[] waitTime = { 5, 8, 10 };                      //vyroba soldiera, rangera, tanka
 	public float progbarfill = 0f;								//kolik bude vyplnovat v progbaru
@@ -40,17 +40,17 @@ public class ProgresScript : MonoBehaviour
 	public Image[] orderVizual = new Image[5];
 
 	public Text trainText;                                      //tento text se bude prepisovat podle toho co se vyrabi
-																//
+	//
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		buttonS = GetComponent<ButtonScript>();     //propojeni zakladnich scriptu pro funkci UI
-		hpS = GetComponent<HpScript>();				//propojeni zakladnich scriptu pro funkci UI
+		buttonS = GetComponent<ButtonScript>();					//propojeni zakladnich scriptu pro funkci UI
+		hpS = GetComponent<HpScript>();							//propojeni zakladnich scriptu pro funkci UI
 
 		army = objectArmyP.GetComponent<UniArmy>();				//propojeni scriptu UniArmy s ProgresScript
-                                                                //nastaveni aktualnich penez
-        moneyText.text = money.ToString();
+																//nastaveni aktualnich penez
+		moneyText.text = money.ToString();
 		experienceText.text = experienceinprocents.ToString() + "%";
 		StartCoroutine(TrainingText());                         //zapise se co se vyrabi
 	}
@@ -58,15 +58,15 @@ public class ProgresScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		OrderView();                            //graficke videni fronty
+		OrderView();											//graficke videni fronty
 		experienceinprocents = ((100 * experience) / nextlevelup);				//vytvori proceznta ze zkusenosti
-		moneyText.text = money.ToString();                                      //opakovatelne se budou vpisovat penize do textu
-		StartCoroutine(Evolution());                                            //funkce pro vylepsovani urovne doby
-		if (order > 0 && hpS.currHPBase != 0)                       //zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
+		moneyText.text = money.ToString();						//opakovatelne se budou vpisovat penize do textu
+		StartCoroutine(Evolution());							//funkce pro vylepsovani urovne doby
+		if (order > 0 && hpS.currHPBase != 0)					//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
 		{
 			//StartCoroutine(Orderfactory());
 			OrderFactory();
-        }
+		}
 	}
 	/*IEnumerator Orderfactory()                                  //bude vyrabet jednoho 5s           //pak udelat na if (aby se menil ten vyrobni cas)              // pozdeji udelat smooth
 	{
@@ -76,9 +76,9 @@ public class ProgresScript : MonoBehaviour
 			timer += 1;                                         //je to trosicku opozdene, ale nevadi
 			StartCoroutine(TrainingText());                     //zacne se psat co se vyrabi
 			progbarinprocents = (timer / waitTime[orderv2[0] - 1]);        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
-            //progBar.fillAmount = progbarinprocents;
-            yield return new WaitForSecondsRealtime(1);
-            progBar.fillAmount = Mathf.Lerp(progBar.fillAmount, progbarinprocents, progbarinprocents);
+			//progBar.fillAmount = progbarinprocents;
+			yield return new WaitForSecondsRealtime(1);
+			progBar.fillAmount = Mathf.Lerp(progBar.fillAmount, progbarinprocents, progbarinprocents);
 			//yield return new WaitForSecondsRealtime(1);
 			canProduce = true;
 			if (progbarinprocents == 1f)
@@ -117,55 +117,55 @@ public class ProgresScript : MonoBehaviour
 	}*/
 	private void OrderFactory()									//potrebuje celkove sledovani **********
 	{
-        if (order > 0 && progBar.fillAmount != 1f && canProduce == true)
-        {
-            canProduce = false;
-            //timer += 1;                                         //je to trosicku opozdene, ale nevadi
-            StartCoroutine(TrainingText());                     //zacne se psat co se vyrabi
-            progbarfill = (Time.deltaTime / waitTime[orderv2[0] - 1]);        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
-            //progBar.fillAmount = progbarinprocents;
-            //yield return new WaitForSecondsRealtime(1);
-            progBar.fillAmount = Mathf.Lerp(progBar.fillAmount, progBar.fillAmount + 1f, progbarfill);      //min, max, speed
-                                                                                                            //yield return new WaitForSecondsRealtime(1);
-            canProduce = true;
-            if (progBar.fillAmount >= 1f)
-            {
-                made += 1;
-                //timer = 0;
-                progBar.fillAmount = 0f;
-                if (orderv2[0] == 1)
-                {
+		if (order > 0 && progBar.fillAmount != 1f && canProduce == true)
+		{
+			canProduce = false;
+			//timer += 1;										//je to trosicku opozdene, ale nevadi
+			StartCoroutine(TrainingText());                     //zacne se psat co se vyrabi
+			progbarfill = (Time.deltaTime / waitTime[orderv2[0] - 1]);        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
+			//progBar.fillAmount = progbarinprocents;
+			//yield return new WaitForSecondsRealtime(1);
+			progBar.fillAmount = Mathf.Lerp(progBar.fillAmount, progBar.fillAmount + 1f, progbarfill);      //min, max, speed
+																											//yield return new WaitForSecondsRealtime(1);
+			canProduce = true;
+			if (progBar.fillAmount >= 1f)
+			{
+				made += 1;
+				//timer = 0;
+				progBar.fillAmount = 0f;
+				if (orderv2[0] == 1)
+				{
 					army.armyType = army.soldier;
-                    Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
-                    Debug.Log("Byl vyroben Soldier");
-                }
-                else if (orderv2[0] == 2)
-                {
-                    army.armyType = army.ranger;
-                    Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
-                }
-                else if (orderv2[0] == 3)
-                {
-                    army.armyType = army.tank;
-                    Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
-                }
-                //Debug.Log("Byl vyroben " + order);
-                order -= 1;
-                if (order >= 0)
-                {
-                    StartCoroutine(OrderSorter());
-                }
-            }
-        }
-        if (order == 0)
-        {
-            //timer = 0;
-            //progbarinprocents = ((100 * timer) / waitTime[orderv2[0]]) / 100;
-            progbarfill = 0;
-            progBar.fillAmount = progbarfill;
-            StartCoroutine(TrainingText());                     //zapise se viditelne ze se nic nevyrabi
-        }
-    }
+					Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
+					Debug.Log("Byl vyroben Soldier");
+				}
+				else if (orderv2[0] == 2)
+				{
+					army.armyType = army.ranger;
+					Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
+				}
+				else if (orderv2[0] == 3)
+				{
+					army.armyType = army.tank;
+					Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
+				}
+				//Debug.Log("Byl vyroben " + order);
+				order -= 1;
+				if (order >= 0)
+				{
+					StartCoroutine(OrderSorter());
+				}
+			}
+		}
+		if (order == 0)
+		{
+			//timer = 0;
+			//progbarinprocents = ((100 * timer) / waitTime[orderv2[0]]) / 100;
+			progbarfill = 0;
+			progBar.fillAmount = progbarfill;
+			StartCoroutine(TrainingText());                     //zapise se viditelne ze se nic nevyrabi
+		}
+	}
 	private void OrderView()                                    //toto zajistuje vizualni frontu vyroby jednotek
 	{
 		for (int i = 0; i < 5; i++)
@@ -198,7 +198,7 @@ public class ProgresScript : MonoBehaviour
 	IEnumerator TrainingText()                                  //slouzi proto, aby clovek videl co se prave vyrabi
 	{
 		string[] trainingTextWrite = { "Nothing...", "Training Soldier...", "Training Ranger...", "Training Tank..." };
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 4; i++)								//vepisuje se text do boxu co se prave vyrabi
 		{
 			if (orderv2[0] == i)
 			{
@@ -209,35 +209,35 @@ public class ProgresScript : MonoBehaviour
 	}
 	IEnumerator Evolution()										//docasne dokud neni button tak se to evolvuje automaticky			//radsi sledovat !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	{
-		if (experience >= nextlevelup && level != 4)
+		if (experience >= nextlevelup && level != 4)			//pokud jeho level neni roven 4 coz je nejvysi uroven tak se muze vylepsit
 		{
-            experience -= nextlevelup;
+			experience -= nextlevelup;
 			level += 1;
 			for (int i = 0; i < 3; i++)                         //pise do vsech textu, ktere jsou uchovany v poli
 			{
 				actionButtonText[i].text = "lvl." + (level + 1);
 			}
-                for (int i = 0; i < 5; i++)
-                {
-                    if (level == i)                                 //zatim jsou jen 4, aby to mohlo fungovat pozdeji jich bude 5 mozna vice
-                    {
-                        baseAppearance[i].SetActive(true);
-                    }
-                    else
-                    {
-                        baseAppearance[i].SetActive(false);
-                    }
-                }
-            StartCoroutine(hpS.UpgradeHp());					//pro vylepseni zivotu s tim, ze se zachova %
-        }
+				for (int i = 0; i < 5; i++)						//zde se zmeni vzhled zakladny
+				{
+					if (level == i)
+					{
+						baseAppearance[i].SetActive(true);
+					}
+					else
+					{
+						baseAppearance[i].SetActive(false);
+					}
+				}
+			StartCoroutine(hpS.UpgradeHp());					//pro vylepseni zivotu s tim, ze se zachova %
+		}
 		else if(level == 4)
 		{
 			experienceText.text = "Max";
-        }
+		}
 		else
 		{
 			experienceText.text = experienceinprocents.ToString() + "%";
 		}
-        yield return experience;
+		yield return experience;
 	}
 }
