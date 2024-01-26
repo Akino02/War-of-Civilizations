@@ -1,6 +1,10 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 034 [26.01.2023]</h2>
+<p>+ Byla přidána Minimapa</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/fcbd1a63-1c14-46d1-bae8-c9807c36c6af" width="500" height="250"></p>
+<br>
 <h2>Update 033 [20.01.2023]</h2>
 <p>+ Opravování evoluce u nepřítele (poslední evoluce se špatně vykonala)</p>
 <p>+ Upravení vzhledu kódu</p>
