@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    //public CameraFollow follow;
+	//tento script funguje na pohyblivost obrazu, takze ho vlastni kamera a taky slunce
+	public Rigidbody2D rb;                                      //funkce pro gravitaci
+	private float activeX;                                      //promenna pro ulozeni zda se hybe ci ne
+	public float movespeed = 5;                                 //rychlost pohybu objektu
 
-    public Rigidbody2D rb;                                      //funkce pro gravitaci
-    private float activeX;                                      //promenna pro ulozeni zda se hybe ci ne
-    public float movespeed = 5;                                 //rychlost pohybu objektu
+	// Start is called before the first frame update
+	void Start()
+	{
 
-    // Start is called before the first frame update
-    void Start()
-    {
+	}
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        activeX = Input.GetAxis("Horizontal");                  //definice pohybu(ten pohyb je urcen pro A, D a taky pro levou sipku a pravou sipku)
-        rb.velocity = new Vector2((movespeed * activeX), rb.velocity.y);                                                       //pohyb kamery
-    }
+	// Update is called once per frame
+	void Update()
+	{
+		activeX = Input.GetAxis("Horizontal");                  //definice pohybu(ten pohyb je urcen pro A, D a taky pro levou sipku a pravou sipku)
+		rb.velocity = new Vector2((movespeed * activeX), rb.velocity.y);                                                       //pohyb kamery
+	}
 }
