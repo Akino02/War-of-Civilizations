@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 035 [27.01.2023]</h2>
+<p>+ Bylo přídáno pozadí, které je 3D (trošku)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/0f5812c8-4c5f-4a29-ad05-c48a074d4eef" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/6e74eddb-cc60-4a6c-8c07-3a444f4b96e7" width="500" height="250"></p>
+<br>
 <h2>Update 034 [26.01.2023]</h2>
 <p>+ Byla přidána Minimapa</p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/fcbd1a63-1c14-46d1-bae8-c9807c36c6af" width="500" height="250"></p>
