@@ -18,6 +18,9 @@ public class UniArmy : MonoBehaviour
 
 	private UniArmy SoldierArmyScript;							//importovani scriptu, ktery bude slouzit pro vojacka, aby si nasel nepritele
 
+	//animace
+	//public Animator animator;									//pro import animatoru
+
 	//
     public LayerMask opponent;									//layer nepratelskych jednotek typu soldier
 	public LayerMask opponentBase;								//layer nepratelske zakladny
@@ -190,6 +193,7 @@ public class UniArmy : MonoBehaviour
 		{
 			rb.velocity = new Vector2((movespeed * moveDir[dir]), rb.velocity.y);
 		}
+		//animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));						//toto dosazuje za promenou speed v animatoru
 	}
 	void Reward()
 	{
