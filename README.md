@@ -1,7 +1,7 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
-<h2>Update 036 [27.01.2023]</h2>
+<h2>Update 036 [02.02.2023]</h2>
 <p>+ Vytváření postavičky pro první evoluci</p>
 <p>+ Obrázek evoluce: 1, třída: soldier, animace: idle</p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/dbb7d73b-d167-4c22-a047-8a007d2f54b0" width="500" height="250"></p>
