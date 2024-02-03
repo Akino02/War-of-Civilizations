@@ -1,6 +1,12 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 037 [03.02.2024]</h2>
+<p>+ Tvoření animací do hry</p>
+<p>+ Pro: Soldier, Ranger, (Tank později)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/23c6c802-2b21-47dd-8d08-f2c718bb72ba" width="192" height="192"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/82b9de0c-6571-4bcb-969d-f23d9b28d135" width="192" height="192"></p>
+<br>
 <h2>Update 036 [02.02.2024]</h2>
 <p>+ Vytváření postavičky pro první evoluci</p>
 <p>+ Obrázek evoluce: 1, třída: soldier, animace: idle</p>
