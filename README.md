@@ -1,31 +1,48 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
-<h2>Update 035 [27.01.2023]</h2>
+<h2>Update 038 [04.02.2024]</h2>
+<p>+ Tvoření animací do hry</p>
+<p>+ Pro: Tanka (Evoluce: 1)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/59a71db7-fa89-4dcf-85c4-b0a9fba668a0" width="432" height="288"></p>
+<br>
+<h2>Update 037 [03.02.2024]</h2>
+<p>+ Tvoření animací do hry</p>
+<p>+ Pro: Soldier, Ranger, (Tank později)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/23c6c802-2b21-47dd-8d08-f2c718bb72ba" width="192" height="192"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/82b9de0c-6571-4bcb-969d-f23d9b28d135" width="192" height="192"></p>
+<br>
+<h2>Update 036 [02.02.2024]</h2>
+<p>+ Vytváření postavičky pro první evoluci</p>
+<p>+ Obrázek evoluce: 1, třída: soldier, animace: idle</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/dbb7d73b-d167-4c22-a047-8a007d2f54b0" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/5b3d3e48-13bc-4ecc-b3b7-cac45869ef5a" width="384" height="384"></p>
+<br>
+<h2>Update 035 [27.01.2024]</h2>
 <p>+ Bylo přídáno pozadí, které je 3D (trošku)</p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/0f5812c8-4c5f-4a29-ad05-c48a074d4eef" width="500" height="250"></p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/6e74eddb-cc60-4a6c-8c07-3a444f4b96e7" width="500" height="250"></p>
 <br>
-<h2>Update 034 [26.01.2023]</h2>
+<h2>Update 034 [26.01.2024]</h2>
 <p>+ Byla přidána Minimapa</p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/fcbd1a63-1c14-46d1-bae8-c9807c36c6af" width="500" height="250"></p>
 <br>
-<h2>Update 033 [20.01.2023]</h2>
+<h2>Update 033 [20.01.2024]</h2>
 <p>+ Opravování evoluce u nepřítele (poslední evoluce se špatně vykonala)</p>
 <p>+ Upravení vzhledu kódu</p>
 <!--<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/8d10df0c-6595-42ea-959f-c5e894fa2fd2" width="500" height="250"></p>-->
 <br>
-<h2>Update 032 [19.01.2023]</h2>
+<h2>Update 032 [19.01.2024]</h2>
 <p>+ Nové úpravy v boji</p>
 <p>+ Opravování systému (boj, spawn)</p>
 <!--<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/8d10df0c-6595-42ea-959f-c5e894fa2fd2" width="500" height="250"></p>-->
 <br>
-<h2>Update 031 [13.01.2023]</h2>
+<h2>Update 031 [13.01.2024]</h2>
 <p>+ Vojáčci můžou přes sebe střílet(pokud je před Rangerem Soldier tak ten Ranger může útočit na Nepřítele, pokud má na to range)</p>
 <p>+ Opravování systému (peněz, zkušeností)</p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/8d10df0c-6595-42ea-959f-c5e894fa2fd2" width="500" height="250"></p>
 <br>
-<h2>Update 030 [12.01.2023]</h2>
+<h2>Update 030 [12.01.2024]</h2>
 <p>+ Byl změněn systém boje</p>
 <br>
 <h2>Update 029 [28.12.2023]</h2>
