@@ -464,9 +464,9 @@ MonoBehaviour:
   - 1.4
   armyType:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 16384
   rb: {fileID: 1246977025580456707}
-  movespeed: 3
+  movespeed: 1
   soldier:
     serializedVersion: 2
     m_Bits: 8192

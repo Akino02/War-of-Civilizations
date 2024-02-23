@@ -294,7 +294,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   rb: {fileID: 3317921190204593618}
-  movespeed: 3
+  movespeed: 1
   soldier:
     serializedVersion: 2
     m_Bits: 1024
