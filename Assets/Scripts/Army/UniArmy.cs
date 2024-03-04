@@ -19,12 +19,12 @@ public class UniArmy : MonoBehaviour
 	private UniArmy SoldierArmyScript;							//importovani scriptu, ktery bude slouzit pro vojacka, aby si nasel nepritele
 
 	//animace
-	//public Animator animator;									//pro import animatoru
+	public Animator animator;									//pro import animatoru
 
 	//
     public LayerMask opponent;									//layer nepratelskych jednotek typu soldier
 	public LayerMask opponentBase;								//layer nepratelske zakladny
-	public float[] ranges = { 0.5f, 1.4f};						//velikost kde muze bojovat
+	public float[] ranges = { 0.5f, 1.7f, 0.1f};						//velikost kde muze bojovat
 	public LayerMask armyType;                                  //typ jednotky
 
 	//zaklad pro pohyb a gravitaci
@@ -105,6 +105,8 @@ public class UniArmy : MonoBehaviour
 			currhp = maxhp[lvl, armyTypeNum - 1];
 			canGiveDmgM = true;
 		}
+		animator.SetInteger("Class", armyTypeNum);
+		animator.SetInteger("Level", lvl);
 	}
 	// Update is called once per frame
 	void Update()
@@ -172,8 +174,9 @@ public class UniArmy : MonoBehaviour
 	}
 	void CheckForEnemy()
 	{
-		float notFullsize = 0.50f;								//slouzi pro mensi odstup od objektu, aby kontroloval odstup mezi spojenci
-		distanceFromAllie = new Vector3(transform.position.x + notFullsize * moveDir[dir], transform.position.y, transform.position.y);
+		//float notFullsize = 0.30f;                              //slouzi pro mensi odstup od objektu, aby kontroloval odstup mezi spojenci
+		float borderObject = GetComponent<SpriteRenderer>().bounds.size.x / 2;
+		distanceFromAllie = new Vector3(transform.position.x + (ranges[2] * 1.25f) * moveDir[dir] +borderObject * moveDir[dir], transform.position.y, transform.position.y);
 		checkCollision[0] = Physics2D.OverlapCircle(transform.position, ranges[0], opponent);           //zda vidi enemy tak stoji (urceno pro melee class)
 		checkCollision[3] = Physics2D.OverlapCircle(transform.position, ranges[0], opponentBase);           //zda vidi nepratelskou zakladnu (urceno pro melee class(range))
 		if(armyTypeNum == 2)			//pokud je to Ranger tak ten se zastavi dale, protoze muze zabijet z dalky
@@ -181,18 +184,28 @@ public class UniArmy : MonoBehaviour
 			checkCollision[1] = Physics2D.OverlapCircle(transform.position, ranges[1], opponent);           //zda vidi enemy tak stoji (urceno pro ranger class)
 			checkCollision[4] = Physics2D.OverlapCircle(transform.position, ranges[1], opponentBase);           //zda vidi nepratelskou zakladnu (urceno pro ranger class(range))
         }
-		checkCollision[2] = Physics2D.OverlapCircle(distanceFromAllie, 0.1f, allies);           //zda vidi spojence tak se zastavi (je urceno pro vsechny)
+		checkCollision[2] = Physics2D.OverlapCircle(distanceFromAllie, 0.09f, allies);           //zda vidi spojence tak se zastavi (je urceno pro vsechny)
 	}
 	void Move()
 	{
-		if (checkCollision[0] || checkCollision[1] || checkCollision[2])            //pokud vojacek narazi na jakoukoliv kolizi tak se zastavi
+		if (checkCollision[0] || checkCollision[1] || checkCollision[2] || checkCollision[3] || checkCollision[4])            //pokud vojacek narazi na jakoukoliv kolizi tak se zastavi
 		{
 			rb.velocity = new Vector2((movespeed * moveDir[2]), rb.velocity.y);      //bude se hybat podle toho zda je to enemy ci player
+			animator.SetFloat("Speed", 0);
+			if (!checkCollision[2])
+			{
+				animator.SetBool("EnemyNear", true);
+			}
+			else
+			{
+				animator.SetBool("EnemyNear", false);
+			}
 		}
 		else																		//pokud nebude zadna kolize tak bude chodit
 		{
 			rb.velocity = new Vector2((movespeed * moveDir[dir]), rb.velocity.y);
-		}
+            animator.SetFloat("Speed", rb.velocity.x * moveDir[dir]);
+        }
 		//animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));						//toto dosazuje za promenou speed v animatoru
 	}
 	void Reward()
@@ -217,7 +230,8 @@ public class UniArmy : MonoBehaviour
 	IEnumerator DmgdealcooldownMelee()							//tato funkce slouzi pro utok pro soldier a tank
 	{
 		canGiveDmgM = false;
-		if (armyTypeNum == 1)
+        yield return new WaitForSeconds(3);
+        if (armyTypeNum == 1)
 		{
 			/*if(opponent != null)
 			{*/
@@ -251,13 +265,13 @@ public class UniArmy : MonoBehaviour
 		}
 		/*Debug.Log("Player " + SoldierEscript.currhp);
 		Debug.Log("Player " + BaseScriptE.currHPBase);*/
-		yield return new WaitForSeconds(3);
 		canGiveDmgM = true;
 	}
 	IEnumerator DmgdealcooldownRange()							//tato funkce slouzi pro utok pro ranger
 	{
 		canGiveDmgR = false;
-		if (dir == 0)
+        yield return new WaitForSecondsRealtime(2);
+        if (dir == 0)
 		{
             armyScriptE.currhp -= dmg[lvl, armyTypeNum - 1];
 		}
@@ -265,12 +279,12 @@ public class UniArmy : MonoBehaviour
 		{
             armyScriptP.currhp -= dmg[lvl, armyTypeNum - 1];
 		}
-		yield return new WaitForSecondsRealtime(2);
 		canGiveDmgR = true;
 	}
 	IEnumerator DmgDealCoolDownMeleeBase()						//potencionalni problem************************
 	{
         canGiveDmgM = false;
+        yield return new WaitForSeconds(3);
         if (armyTypeNum == 1)
         {
             if (dir == 0)
@@ -293,13 +307,13 @@ public class UniArmy : MonoBehaviour
                 hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
             }
         }
-        yield return new WaitForSeconds(3);
         canGiveDmgM = true;
     }
 
     IEnumerator DmgDealCoolDownRangerBase()                     //potencionalni problem************************
     {
         canGiveDmgR = false;
+        yield return new WaitForSecondsRealtime(2);
         if (dir == 0)
         {
             enemyS.currHPBase -= dmg[lvl, armyTypeNum - 1];
@@ -308,12 +322,13 @@ public class UniArmy : MonoBehaviour
         {
             hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
         }
-        yield return new WaitForSecondsRealtime(2);
         canGiveDmgR = true;
     }
 	private void OnDrawGizmosSelected()		//vykreslí kruh okolo jednotky
 	{
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(distanceFromAllie, 0.1f);
+		//Gizmos.DrawWireSphere(distanceFromAllie, 0.1f);
+		//Gizmos.DrawWireSphere(transform.position, ranges[1]);
+		//Gizmos.DrawWireSphere(transform.position, ranges[0]);
 	}
 }

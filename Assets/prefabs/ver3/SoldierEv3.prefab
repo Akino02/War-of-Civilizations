@@ -461,10 +461,11 @@ MonoBehaviour:
     m_Bits: 131072
   ranges:
   - 0.5
-  - 1.4
+  - 1.45
+  - 0.1
   armyType:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 32768
   rb: {fileID: 1246977025580456707}
   movespeed: 1
   soldier:
