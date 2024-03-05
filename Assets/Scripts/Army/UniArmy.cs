@@ -22,17 +22,17 @@ public class UniArmy : MonoBehaviour
 	public Animator animator;									//pro import animatoru
 
 	//
-    public LayerMask opponent;									//layer nepratelskych jednotek typu soldier
+	public LayerMask opponent;									//layer nepratelskych jednotek typu soldier
 	public LayerMask opponentBase;								//layer nepratelske zakladny
-	public float[] ranges = { 0.5f, 1.7f, 0.1f};						//velikost kde muze bojovat
+	public float[] ranges = { 0.5f, 1.45f, 0.1f};				//velikost kde muze bojovat
 	public LayerMask armyType;                                  //typ jednotky
 
 	//zaklad pro pohyb a gravitaci
-    public Rigidbody2D rb;                                      //funkce pro gravitaci
-    public float movespeed;                                     //rychlost pohybu objektu
+	public Rigidbody2D rb;                                      //funkce pro gravitaci
+	public float movespeed;                                     //rychlost pohybu objektu
 
-    //vsechny typy jednotek
-    public LayerMask soldier;									//Layer pro vojacka typu SOLDIER
+	//vsechny typy jednotek
+	public LayerMask soldier;									//Layer pro vojacka typu SOLDIER
 	public LayerMask ranger;									//Layer pro vojacka typu RANGER
 	public LayerMask tank;										//Layer pro vojacka typu TANK
 	public LayerMask allies;									//Layer pratelskych vojacku
@@ -77,11 +77,12 @@ public class UniArmy : MonoBehaviour
 
 		if(dir == 0)
 		{
-            lvl = progresS.level;                               //zde se urci jaky level bude mit pro hrace
-        }
+			lvl = progresS.level;                               //zde se urci jaky level bude mit pro hrace
+		}
 		else
 		{
-			lvl = enemyS.level;									//zde se urci jaky level bude mit pro nepritele
+			lvl = enemyS.level;                                 //zde se urci jaky level bude mit pro nepritele
+			transform.Rotate(0f, 180f, 0f);
 		}
 
 		if (armyType == soldier)								//nastaveni co je to za druh vojacka
@@ -115,7 +116,7 @@ public class UniArmy : MonoBehaviour
 		hpinprocents = ((100 * currhp) / maxhp[lvl, armyTypeNum - 1]) / 100;
 		Move();      //tato funkce zajistuje pohyb
 		//DamageBase();											//ubirani zivotu primo zakladne
-        if (checkCollision[0] && canGiveDmgM == true && armyTypeNum != 2)     //je tam if, aby to poznaval hned
+		if (checkCollision[0] && canGiveDmgM == true && armyTypeNum != 2)     //je tam if, aby to poznaval hned
 		{
 			FindMyEnemy();
 		}
@@ -126,12 +127,12 @@ public class UniArmy : MonoBehaviour
 		else if (checkCollision[3] && canGiveDmgM == true && armyTypeNum != 2)
 		{
 			StartCoroutine(DmgDealCoolDownMeleeBase());
-        }
-        else if (checkCollision[4] && canGiveDmgR == true && armyTypeNum == 2)
+		}
+		else if (checkCollision[4] && canGiveDmgR == true && armyTypeNum == 2)
 		{
-            StartCoroutine(DmgDealCoolDownRangerBase());
-        }
-        if (currhp <= 0)
+			StartCoroutine(DmgDealCoolDownRangerBase());
+		}
+		if (currhp <= 0)
 		{
 			if(dir != 0)										//tato podminka bude davat penize a zkusenosti pri tom kdyz zemre enemy
 			{
@@ -153,12 +154,12 @@ public class UniArmy : MonoBehaviour
 			SoldierArmyScript = obj.GetComponent<UniArmy>();
 			if (obj.layer == 10 && dir == 1)
 			{
-                armyScriptP = SoldierArmyScript;                //dosazeni scriptu za objekt
+				armyScriptP = SoldierArmyScript;                //dosazeni scriptu za objekt
 				//Debug.Log("Allie attacked");
 			}
 			else if (obj.layer == 13 && dir == 0)
 			{
-                armyScriptE = SoldierArmyScript;                //dosazeni scriptu za objekt
+				armyScriptE = SoldierArmyScript;                //dosazeni scriptu za objekt
 				//Debug.Log("Enemy attacked");
 			}
 		}
@@ -169,7 +170,7 @@ public class UniArmy : MonoBehaviour
 		else if (armyTypeNum == 2)
 		{
 			StartCoroutine(DmgdealcooldownRange());
-        }
+		}
 		// Debug.Log("Can give ");
 	}
 	void CheckForEnemy()
@@ -183,30 +184,33 @@ public class UniArmy : MonoBehaviour
 		{
 			checkCollision[1] = Physics2D.OverlapCircle(transform.position, ranges[1], opponent);           //zda vidi enemy tak stoji (urceno pro ranger class)
 			checkCollision[4] = Physics2D.OverlapCircle(transform.position, ranges[1], opponentBase);           //zda vidi nepratelskou zakladnu (urceno pro ranger class(range))
-        }
+		}
 		checkCollision[2] = Physics2D.OverlapCircle(distanceFromAllie, 0.09f, allies);           //zda vidi spojence tak se zastavi (je urceno pro vsechny)
 	}
 	void Move()
 	{
-		if (checkCollision[0] || checkCollision[1] || checkCollision[2] || checkCollision[3] || checkCollision[4])            //pokud vojacek narazi na jakoukoliv kolizi tak se zastavi
+		if (checkCollision[0] || checkCollision[1] || checkCollision[2] || checkCollision[3] || checkCollision[4])            //pokud vojacek narazi na jakoukoliv kolizi tak se zastavi (base, armyP, armyE)
 		{
-			rb.velocity = new Vector2((movespeed * moveDir[2]), rb.velocity.y);      //bude se hybat podle toho zda je to enemy ci player
-			animator.SetFloat("Speed", 0);
-			if (!checkCollision[2])
-			{
-				animator.SetBool("EnemyNear", true);
-			}
-			else
-			{
-				animator.SetBool("EnemyNear", false);
-			}
-		}
+			rb.velocity = new Vector2((movespeed * moveDir[2]), rb.velocity.y);		//nebude se hybat pokud je poblic kolize
+			animator.SetFloat("Speed", 0);                                          //dosazeni za promennou speed, ktera urcuje animace
+        }
 		else																		//pokud nebude zadna kolize tak bude chodit
 		{
 			rb.velocity = new Vector2((movespeed * moveDir[dir]), rb.velocity.y);
-            animator.SetFloat("Speed", rb.velocity.x * moveDir[dir]);
-        }
-		//animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));						//toto dosazuje za promenou speed v animatoru
+			animator.SetFloat("Speed", rb.velocity.x * moveDir[dir]);				//dosazeni za promennou speed, ktera urcuje animace
+		}
+		Animation();
+	}
+	void Animation()
+	{
+		if (checkCollision[0] || checkCollision[3] || checkCollision[1] || checkCollision[4])
+		{
+			animator.SetBool("EnemyNear", true);
+		}
+		else
+		{
+			animator.SetBool("EnemyNear", false);
+		}
 	}
 	void Reward()
 	{
@@ -215,115 +219,115 @@ public class UniArmy : MonoBehaviour
 		Debug.Log(moneykill[lvl, armyTypeNum - 1]);
 		Debug.Log(expperkill[armyTypeNum - 1]);
 	}
-	/*void DamageBase()
-	{
-        if (checkCollision[3] && canGiveDmgM == true && armyTypeNum != 2)     //je tam if, aby to poznaval hned
-        {
-            StartCoroutine(DmgDealCoolDownMeleeBase());
-        }
-        else if (checkCollision[4] && canGiveDmgR == true && armyTypeNum == 2)      //je tam if, aby to poznaval hned
-        {
-			StartCoroutine(DmgDealCoolDownRangerBase());
-        }
-    }*/
-
 	IEnumerator DmgdealcooldownMelee()							//tato funkce slouzi pro utok pro soldier a tank
 	{
 		canGiveDmgM = false;
-        yield return new WaitForSeconds(3);
-        if (armyTypeNum == 1)
+		yield return new WaitForSeconds(3);
+		if (checkCollision[0])
 		{
-			/*if(opponent != null)
-			{*/
-			if(dir == 0)
+			if (armyTypeNum == 1)
 			{
-                armyScriptE.currhp -= dmg[lvl, armyTypeNum - 1];
+				/*if(opponent != null)
+				{*/
+				if (dir == 0)
+				{
+					armyScriptE.currhp -= dmg[lvl, armyTypeNum - 1];
+				}
+				else
+				{
+					armyScriptP.currhp -= dmg[lvl, armyTypeNum - 1];
+				}
+				//SoldierPscript.currhp -= dmg[armyTypeNum - 1];
+				//}
+				/*else if (opponentBase != null)
+				{
+					BaseScriptE.currHPBase -= dmg[armyTypeNum - 1];
+				}*/
 			}
-			else
+			else if (armyTypeNum == 3)
 			{
-                armyScriptP.currhp -= dmg[lvl, armyTypeNum - 1];
+				if (dir == 0)
+				{
+					armyScriptE.currhp -= dmg[lvl, armyTypeNum - 1];
+				}
+				else
+				{
+					armyScriptP.currhp -= dmg[lvl, armyTypeNum - 1];
+				}
+				//SoldierPscript.currhp -= dmg[armyTypeNum - 1];
+				//BaseScriptE.currHPBase -= dmg[armyTypeNum - 1];
 			}
-			//SoldierPscript.currhp -= dmg[armyTypeNum - 1];
-			//}
-			/*else if (opponentBase != null)
-			{
-				BaseScriptE.currHPBase -= dmg[armyTypeNum - 1];
-			}*/
+			/*Debug.Log("Player " + SoldierEscript.currhp);
+			Debug.Log("Player " + BaseScriptE.currHPBase);*/
+			canGiveDmgM = true;
 		}
-		else if (armyTypeNum == 3)
-		{
-			if (dir == 0)
-			{
-                armyScriptE.currhp -= dmg[lvl, armyTypeNum - 1];
-			}
-			else
-			{
-                armyScriptP.currhp -= dmg[lvl, armyTypeNum - 1];
-			}
-			//SoldierPscript.currhp -= dmg[armyTypeNum - 1];
-			//BaseScriptE.currHPBase -= dmg[armyTypeNum - 1];
-		}
-		/*Debug.Log("Player " + SoldierEscript.currhp);
-		Debug.Log("Player " + BaseScriptE.currHPBase);*/
-		canGiveDmgM = true;
 	}
 	IEnumerator DmgdealcooldownRange()							//tato funkce slouzi pro utok pro ranger
 	{
 		canGiveDmgR = false;
-        yield return new WaitForSecondsRealtime(2);
-        if (dir == 0)
+		yield return new WaitForSecondsRealtime(2);
+		if (checkCollision[1])
 		{
-            armyScriptE.currhp -= dmg[lvl, armyTypeNum - 1];
-		}
-		else
-		{
-            armyScriptP.currhp -= dmg[lvl, armyTypeNum - 1];
+			if (dir == 0)
+			{
+				armyScriptE.currhp -= dmg[lvl, armyTypeNum - 1];
+			}
+			else
+			{
+				armyScriptP.currhp -= dmg[lvl, armyTypeNum - 1];
+			}
 		}
 		canGiveDmgR = true;
 	}
 	IEnumerator DmgDealCoolDownMeleeBase()						//potencionalni problem************************
 	{
-        canGiveDmgM = false;
-        yield return new WaitForSeconds(3);
-        if (armyTypeNum == 1)
-        {
-            if (dir == 0)
-            {
-                enemyS.currHPBase -= dmg[lvl, armyTypeNum - 1];
-            }
-            else
-            {
-                hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
-            }
-        }
-        else if (armyTypeNum == 3)
-        {
-            if (dir == 0)
-            {
-                enemyS.currHPBase -= dmg[lvl, armyTypeNum - 1];
-            }
-            else
-            {
-                hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
-            }
-        }
-        canGiveDmgM = true;
-    }
+		canGiveDmgM = false;
+		yield return new WaitForSeconds(3);
+		if (checkCollision[3])
+		{
+			if (armyTypeNum == 1)
+			{
+				if (dir == 0)
+				{
+					enemyS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+				}
+				else
+				{
+					hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+				}
+			}
+			else if (armyTypeNum == 3)
+			{
+				if (dir == 0)
+				{
+					enemyS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+				}
+				else
+				{
+					hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+				}
+			}
+		}
+		canGiveDmgM = true;
+	}
 
-    IEnumerator DmgDealCoolDownRangerBase()                     //potencionalni problem************************
-    {
-        canGiveDmgR = false;
-        yield return new WaitForSecondsRealtime(2);
-        if (dir == 0)
-        {
-            enemyS.currHPBase -= dmg[lvl, armyTypeNum - 1];
-        }
-        else
-        {
-            hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
-        }
-        canGiveDmgR = true;
-    }
+	IEnumerator DmgDealCoolDownRangerBase()                     //potencionalni problem************************
+	{
+		canGiveDmgR = false;
+		yield return new WaitForSecondsRealtime(2);
+		if (checkCollision[4])
+		{
+			if (dir == 0)
+			{
+				enemyS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+			}
+			else
+			{
+				hpS.currHPBase -= dmg[lvl, armyTypeNum - 1];
+			}
+		}
+		canGiveDmgR = true;
+	}
 	private void OnDrawGizmosSelected()		//vykreslí kruh okolo jednotky
 	{
 		Gizmos.color = Color.red;

@@ -143,7 +143,7 @@ public class EnemySpawn : MonoBehaviour
 	}*/
     IEnumerator Evolution()                                     //toto bude primo pro enemy system pro evoluce			//jeste to neni upravene pro Enemy	//mimo provoz !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
-        if (evolving == false && level != 4)
+        if (evolving == false && level != 4 && canSpawn == true)
         {
             evolving = true;
 			if(progresS.level > level)
