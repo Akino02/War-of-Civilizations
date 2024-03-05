@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 045 [05.03.2024]</h2>
+<p>+ Přidání animace postavičkám</p>
+<p>+ Synchronizace útoku s animacemi</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/89a5d326-66ec-4dbf-b900-dde77159626a" width="500" height="250"></p>
+<br>
 <h2>Update 044 [04.03.2024]</h2>
 <p>+ Přidání souborů pro animace postaviček</p>
 <br>
