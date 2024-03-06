@@ -100,19 +100,28 @@ public class EnemySpawn : MonoBehaviour
 		{
 			yield return new WaitForSecondsRealtime(5);
             army.armyType = army.soldier;
-            Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+			if (!PauseMenu.paused)
+			{
+                Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+            }
 		}
 		else if(nahoda == 2)
 		{
 			yield return new WaitForSecondsRealtime(8);
             army.armyType = army.ranger;
-            Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+            if (!PauseMenu.paused)
+			{
+                Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+            }
 		}
 		else if(nahoda == 3)
 		{
 			yield return new WaitForSecondsRealtime(10);
             army.armyType = army.tank;
-            Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+            if (!PauseMenu.paused)
+			{
+                Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+            }
 		}
 		nahoda = Random.Range(1, 5);
 		canSpawn = true;
@@ -161,7 +170,9 @@ public class EnemySpawn : MonoBehaviour
             }
             for (int i = 0; i < 5; i++)
             {
-                 if (level == i)                                 //zatim jsou jen 4, aby to mohlo fungovat pozdeji jich bude 5 mozna vice
+				if (!PauseMenu.paused)
+				{
+					if (level == i)
                  {
 					baseAppearance[i].SetActive(true);
                  }
@@ -169,6 +180,7 @@ public class EnemySpawn : MonoBehaviour
                  {
 					baseAppearance[i].SetActive(false);
                  }
+				}
             }
             StartCoroutine(UpgradeHp());						//pro vylepseni zivotu s tim, ze se zachova %
         }

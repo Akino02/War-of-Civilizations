@@ -33,7 +33,7 @@ public class ButtonScript : MonoBehaviour
 	//to jsou funkce pro cudliky
 	public void SoldierSpawn()									//tato funkce na kliknuti spawne jednoho vojaka				PRO SOLDIERA
 	{
-		if (progresS.order < 5 && hpS.currHPBase > 0 && progresS.money >= 15)												//jeste tam pak doplnit ze za to bude platit
+		if (progresS.order < 5 && hpS.currHPBase > 0 && progresS.money >= 15 && !PauseMenu.paused)												//jeste tam pak doplnit ze za to bude platit
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order -1] = 1;
@@ -47,7 +47,7 @@ public class ButtonScript : MonoBehaviour
 	}
 	public void RangerSpawn()									//tato funkce na kliknuti spawne jednoho vojaka				PRO RANGERA
 	{
-		if (progresS.order < 5 && hpS.currHPBase > 0 && progresS.money >= 25)												//jeste tam pak doplnit ze za to bude platit
+		if (progresS.order < 5 && hpS.currHPBase > 0 && progresS.money >= 25 && !PauseMenu.paused)												//jeste tam pak doplnit ze za to bude platit
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order - 1] = 2;
@@ -61,7 +61,7 @@ public class ButtonScript : MonoBehaviour
 	}
 	public void TankSpawn()										// tato funkce na kliknuti spawne jednoho vojaka			PRO TANK
 	{
-		if (progresS.order < 5 && hpS.currHPBase > 0 && progresS.money >= 100)												//jeste tam pak doplnit ze za to bude platit
+		if (progresS.order < 5 && hpS.currHPBase > 0 && progresS.money >= 100 && !PauseMenu.paused)												//jeste tam pak doplnit ze za to bude platit
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order - 1] = 3;

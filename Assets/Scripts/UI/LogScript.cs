@@ -6,29 +6,28 @@ using UnityEngine.UIElements;
 
 public class LogScript : MonoBehaviour
 {
-    public GameObject canvas;
-    public Text monolog;
-    private string[] texts = { "Welcome", "You don't have enough money", "You have a full queue" };
+    public GameObject warning;
+    public GameObject reportScore;
+    public Text placeText;
+    private string[] possibleText = {"You don't have enough money", "You have a full queue", "You Won", "You Lost"};
 
     // Start is called before the first frame update
     void Start()
     {
-        //monolog.text = texts[0];
-
-        /*static Text CreateText(Transform parent)                  //vytvorit text, ktery se presune do canvasu a do neho se vypise "texts[0]"
-        {
-            var go = new GameObject();
-            go.transform.parent = parent;
-            var text = go.AddComponent<Text>();
-            return text;
-        }
-        var mytext = CreateText(canvas.transform);
-        mytext.text = texts[0];*/
+        warning.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void ShowText()
+    {
+        placeText.text = possibleText[0];
+        warning.SetActive(true);
+    }
+    public void ShowReport()
+    {
     }
 }
