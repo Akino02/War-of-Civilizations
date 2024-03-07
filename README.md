@@ -1,6 +1,19 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 047 [07.03.2024]</h2>
+<p>+ Přidání hlášek ohledně výroby jednotek</p>
+<p>+ Opravování systému boje (opožděné)</p>
+<p>+ Opravení ubírání peněz za výrobu jednotek</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/f1f44334-9d9d-4cf7-90e9-fb85827377de" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/b34186ef-2363-429d-8e5c-884049515c64" width="500" height="250"></p>
+<br>
+<h2>Update 046 [06.03.2024]</h2>
+<p>+ Přidání menu do hry</p>
+<p>+ Opravování systému boje</p>
+<p>+ Upravení ubírání životů jednotek (random: DmgMin, DmgMax)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/4b3305ec-b41e-43fd-a2a7-64ee0c0245c0" width="500" height="250"></p>
+<br>
 <h2>Update 045 [05.03.2024]</h2>
 <p>+ Přidání animace postavičkám</p>
 <p>+ Synchronizace útoku s animacemi</p>
