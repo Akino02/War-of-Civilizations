@@ -17,6 +17,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Class
     m_EventTreshold: 1
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2027304068368580972}
   m_Solo: 0
@@ -41,6 +44,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7959480731979966969}
@@ -93,6 +99,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8914588987649210963}
@@ -449,6 +458,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Class
     m_EventTreshold: 2
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2106628434962658763}
   m_Solo: 0
@@ -511,6 +523,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Class
     m_EventTreshold: 1
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2891650881645450297}
   m_Solo: 0
@@ -620,6 +635,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Class
     m_EventTreshold: 2
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7959480731979966969}
   m_Solo: 0
@@ -727,6 +745,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2366273388179669153}
@@ -901,6 +922,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2462087164609845306}
   m_Solo: 0
@@ -1010,6 +1034,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Class
     m_EventTreshold: 2
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3393735238431393065}
   m_Solo: 0
@@ -1117,6 +1144,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3724425765126005278}
   m_Solo: 0
@@ -1222,6 +1252,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2189838741264231773}
   m_Solo: 0
@@ -1274,6 +1307,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2027304068368580972}
   m_Solo: 0
@@ -1302,6 +1338,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Class
     m_EventTreshold: 2
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6236089568850308969}
   m_Solo: 0
@@ -1431,6 +1470,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2106628434962658763}
@@ -1616,6 +1658,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Class
     m_EventTreshold: 2
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3724425765126005278}
   m_Solo: 0
@@ -1780,6 +1825,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6776845433450914057}
   m_Solo: 0
@@ -1869,6 +1917,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Class
     m_EventTreshold: 1
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6582253525409522015}
   m_Solo: 0
@@ -2078,6 +2129,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: Level
     m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: ScriptFound
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -2373,6 +2430,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2891650881645450297}
   m_Solo: 0
@@ -2426,6 +2486,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Class
     m_EventTreshold: 1
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2366273388179669153}
   m_Solo: 0
@@ -2478,6 +2541,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5816920883545548159}
@@ -2537,6 +2603,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Class
     m_EventTreshold: 1
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1426326372428564932}
   m_Solo: 0
@@ -2592,6 +2661,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5816920883545548159}
@@ -2667,6 +2739,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6776845433450914057}
@@ -2913,6 +2988,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3393735238431393065}
   m_Solo: 0
@@ -3155,6 +3233,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8914588987649210963}
@@ -3473,6 +3554,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1426326372428564932}
   m_Solo: 0
@@ -3497,6 +3581,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2189838741264231773}
@@ -3599,6 +3686,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6582253525409522015}
@@ -3764,6 +3854,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2462087164609845306}
   m_Solo: 0
@@ -3788,6 +3881,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: EnemyNear
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ScriptFound
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6236089568850308969}

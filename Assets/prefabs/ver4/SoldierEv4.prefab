@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7914372282691125399
 Transform:
   m_ObjectHideFlags: 0
@@ -374,7 +374,7 @@ Transform:
   m_GameObject: {fileID: 5633176964602936672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.39, y: -2.44, z: 0}
+  m_LocalPosition: {x: -1.1045184, y: -6.6964436, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -552,7 +552,7 @@ MonoBehaviour:
   - 0.1
   armyType:
     serializedVersion: 2
-    m_Bits: 32768
+    m_Bits: 16384
   rb: {fileID: 5970578804002715682}
   movespeed: 1
   soldier:
