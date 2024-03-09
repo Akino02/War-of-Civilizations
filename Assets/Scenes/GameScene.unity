@@ -6220,7 +6220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5633176964602936672, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7838952929780681232, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: armyType.m_Bits
