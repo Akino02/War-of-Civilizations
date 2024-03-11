@@ -1,6 +1,10 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 048 [09.03.2024]</h2>
+<p>+ Upravení vzhledu menu (video)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/aa4cfc8b-3e3d-42ee-a108-f72f0d89fa49" width="500" height="250"></p>
+<br>
 <h2>Update 047 [07.03.2024]</h2>
 <p>+ Přidání hlášek ohledně výroby jednotek</p>
 <p>+ Opravování systému boje (opožděné)</p>
