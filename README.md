@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 050 [14.03.2024]</h2>
+<p>+ Přidání čudlíku pro odchod do hlavní nabídky</p>
+<p>+ Přidání čudlíku pro katastrofu(funguje, ale nenabije se zpět)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/540e5b7c-63fd-4660-b080-68f2265f732a" width="500" height="250"></p>
+<br>
 <h2>Update 049 [11.03.2024]</h2>
 <p>+ Upravení nastavení v menu(Hudba, Autor hudby link)</p>
 <p>+ Možná opravení zpoždění animace při útoku</p>
