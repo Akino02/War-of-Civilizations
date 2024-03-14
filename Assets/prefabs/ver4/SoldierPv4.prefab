@@ -181,7 +181,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.96000004, y: 1.9212509}
+  m_Size: {x: 0.6, y: 1.9212509}
   m_EdgeRadius: 0
 --- !u!114 &4859471762535174877
 MonoBehaviour:
@@ -208,7 +208,7 @@ MonoBehaviour:
   - 0.1
   armyType:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 4096
   rb: {fileID: 7549627688701097679}
   movespeed: 1
   soldier:
@@ -229,6 +229,7 @@ MonoBehaviour:
   lvl: 0
   dir: 0
   checkCollision: 000000000000
+  isBase: 0
   distanceFromAllie: {x: 0, y: 0, z: 0}
   canGiveDmgM: 0
   canGiveDmgR: 0

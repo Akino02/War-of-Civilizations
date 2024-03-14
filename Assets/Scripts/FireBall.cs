@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FireBall : MonoBehaviour
+{
+    UniArmy armyScriptE;
+
+    public GameObject hitBox;
+
+    float dmgBall = 100;
+    bool hit = false;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (transform.position.y < -20 || hit == true)          //pokud propadne nebo se dotkne nepritele
+        {
+            Destroy(gameObject);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D hitBox)
+    {
+        if (hitBox.gameObject.CompareTag("Enemy"))
+        {
+            var SoldierArmyScript = hitBox.GetComponent<UniArmy>();
+            armyScriptE = SoldierArmyScript;                    //dosazeni scriptu za objekt
+            dmgBall = armyScriptE.maxhp[armyScriptE.lvl, 2] / 3;
+            if (hit == false)
+            {
+                armyScriptE.currhp -= dmgBall;                      //nastaveni poskozeni fireballu podle toho kolik dana postavicka ma hp
+            }
+            hit = true;
+        }
+    }
+}

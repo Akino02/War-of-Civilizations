@@ -43,7 +43,7 @@ public class UniArmy : MonoBehaviour
 	//Ohledne HPbaru
 	public GameObject hpBar;
 
-	private float[,] maxhp = { { 100, 60, 300 }, { 150, 90, 450 }, { 225, 135, 675 }, { 350, 200, 1000 }, { 400, 300, 1500 } };
+	public float[,] maxhp = { { 100, 60, 300 }, { 150, 90, 450 }, { 225, 135, 675 }, { 350, 200, 1000 }, { 400, 300, 1500 } };
 	public float currhp = 100;
 	private float hpinprocents = 1f;
 	public int lvl = 0;                                         //uchovani urovne vojacka
@@ -170,7 +170,7 @@ public class UniArmy : MonoBehaviour
 		armyScriptP = null;
 		armyScriptE = null;
 
-		GameObject[] allEnemies = (dir == 1) ? GameObject.FindGameObjectsWithTag("Player") : GameObject.FindGameObjectsWithTag("Enemy");
+		GameObject[] allEnemies = (dir == 1) ? GameObject.FindGameObjectsWithTag("Player") : GameObject.FindGameObjectsWithTag("Enemy");		//pokud true tak hleda tag s player, pokud false tak hleda tag s enemy
 
 		foreach (GameObject obj in allEnemies.Reverse())        //tady se otoci porazi aby bral toho prvniho enemy vzdy
 		{

@@ -100,28 +100,19 @@ public class EnemySpawn : MonoBehaviour
 		{
 			yield return new WaitForSecondsRealtime(5);
             army.armyType = army.soldier;
-			if (!PauseMenu.paused)
-			{
-                Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
-            }
+            Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		else if(nahoda == 2)
 		{
 			yield return new WaitForSecondsRealtime(8);
             army.armyType = army.ranger;
-            if (!PauseMenu.paused)
-			{
-                Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
-            }
+            Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		else if(nahoda == 3)
 		{
 			yield return new WaitForSecondsRealtime(10);
             army.armyType = army.tank;
-            if (!PauseMenu.paused)
-			{
-                Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
-            }
+            Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		nahoda = Random.Range(1, 5);
 		canSpawn = true;
@@ -170,8 +161,6 @@ public class EnemySpawn : MonoBehaviour
             }
             for (int i = 0; i < 5; i++)
             {
-				if (!PauseMenu.paused)
-				{
 					if (level == i)
                  {
 					baseAppearance[i].SetActive(true);
@@ -180,7 +169,6 @@ public class EnemySpawn : MonoBehaviour
                  {
 					baseAppearance[i].SetActive(false);
                  }
-				}
             }
             StartCoroutine(UpgradeHp());						//pro vylepseni zivotu s tim, ze se zachova %
         }

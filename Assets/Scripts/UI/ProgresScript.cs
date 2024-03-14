@@ -40,10 +40,17 @@ public class ProgresScript : MonoBehaviour
 	public Image[] orderVizual = new Image[5];
 
 	public Text trainText;                                      //tento text se bude prepisovat podle toho co se vyrabi
-	//
+																//
 
-	// Start is called before the first frame update
-	void Start()
+	//Katastrofa
+	public GameObject fireBall;
+	public GameObject borderL;
+    public GameObject borderR;
+    public GameObject disasterZone;
+    public bool canDoDisaster = true;
+
+    // Start is called before the first frame update
+    void Start()
 	{
 		buttonS = GetComponent<ButtonScript>();					//propojeni zakladnich scriptu pro funkci UI
 		hpS = GetComponent<HpScript>();							//propojeni zakladnich scriptu pro funkci UI
@@ -52,7 +59,7 @@ public class ProgresScript : MonoBehaviour
 																//nastaveni aktualnich penez
 		moneyText.text = money.ToString();
 		experienceText.text = experienceinprocents.ToString() + "%";
-		StartCoroutine(TrainingText());                         //zapise se co se vyrabi
+		TrainingText();                         //zapise se co se vyrabi
 	}
 
 	// Update is called once per frame
@@ -61,7 +68,7 @@ public class ProgresScript : MonoBehaviour
 		OrderView();											//graficke videni fronty
 		experienceinprocents = ((100 * experience) / nextlevelup);				//vytvori proceznta ze zkusenosti
 		moneyText.text = money.ToString();						//opakovatelne se budou vpisovat penize do textu
-		StartCoroutine(Evolution());							//funkce pro vylepsovani urovne doby
+		Evolution();							//funkce pro vylepsovani urovne doby
 		if (order > 0 && hpS.currHPBase != 0)					//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
 		{
 			//StartCoroutine(Orderfactory());
@@ -121,7 +128,7 @@ public class ProgresScript : MonoBehaviour
 		{
 			canProduce = false;
 			//timer += 1;										//je to trosicku opozdene, ale nevadi
-			StartCoroutine(TrainingText());                     //zacne se psat co se vyrabi
+			TrainingText();                     //zacne se psat co se vyrabi
 			progbarfill = (Time.deltaTime / waitTime[orderv2[0] - 1]);        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
 			//progBar.fillAmount = progbarinprocents;
 			//yield return new WaitForSecondsRealtime(1);
@@ -153,7 +160,7 @@ public class ProgresScript : MonoBehaviour
 				order -= 1;
 				if (order >= 0)
 				{
-					StartCoroutine(OrderSorter());
+					OrderSorter();
 				}
 			}
 		}
@@ -163,7 +170,7 @@ public class ProgresScript : MonoBehaviour
 			//progbarinprocents = ((100 * timer) / waitTime[orderv2[0]]) / 100;
 			progbarfill = 0;
 			progBar.fillAmount = progbarfill;
-			StartCoroutine(TrainingText());                     //zapise se viditelne ze se nic nevyrabi
+			TrainingText();                     //zapise se viditelne ze se nic nevyrabi
 		}
 	}
 	private void OrderView()                                    //toto zajistuje vizualni frontu vyroby jednotek
@@ -180,7 +187,7 @@ public class ProgresScript : MonoBehaviour
 			}
 		}
 	}
-	IEnumerator OrderSorter()                                   //toto serazuje array podle toho co je na rade ve vyrobe
+	void OrderSorter()                                   //toto serazuje array podle toho co je na rade ve vyrobe
 	{
 		for (int i = 0; i < 5; i++)
 		{
@@ -193,9 +200,9 @@ public class ProgresScript : MonoBehaviour
 				orderv2[i] = 0;
 			}
 		}
-		yield return order;
+		//yield return order;
 	}
-	IEnumerator TrainingText()                                  //slouzi proto, aby clovek videl co se prave vyrabi
+	void TrainingText()                                  //slouzi proto, aby clovek videl co se prave vyrabi
 	{
 		string[] trainingTextWrite = { "Nothing...", "Training Soldier...", "Training Ranger...", "Training Tank..." };
 		for (int i = 0; i < 4; i++)								//vepisuje se text do boxu co se prave vyrabi
@@ -205,9 +212,9 @@ public class ProgresScript : MonoBehaviour
 				trainText.text = trainingTextWrite[i];
 			}
 		}
-		yield return new WaitForSeconds(0);
+		//yield return new WaitForSeconds(0);
 	}
-	IEnumerator Evolution()										//docasne dokud neni button tak se to evolvuje automaticky			//radsi sledovat !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	void Evolution()										//docasne dokud neni button tak se to evolvuje automaticky			//radsi sledovat !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	{
 		if (experience >= nextlevelup && level != 4)			//pokud jeho level neni roven 4 coz je nejvysi uroven tak se muze vylepsit
 		{
@@ -238,6 +245,19 @@ public class ProgresScript : MonoBehaviour
 		{
 			experienceText.text = experienceinprocents.ToString() + "%";
 		}
-		yield return experience;
+		//yield return experience;
 	}
+    public IEnumerator SpawnFireBall()
+    {
+        int i = 0;
+        while (i <= 10)
+        {
+            float randomPosX = Random.Range(borderL.transform.position.x, borderR.transform.position.x);
+            Vector3 disasterZonePos = new Vector3(randomPosX, disasterZone.transform.position.y, disasterZone.transform.position.z);
+            Instantiate(fireBall, disasterZonePos, disasterZone.transform.rotation);
+            yield return new WaitForSeconds(0.4f);
+            i += 1;
+        }
+    }
+
 }

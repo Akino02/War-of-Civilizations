@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39516672, y: 0.17300001}
   m_AnchorMax: {x: 0.6025002, y: 0.273}
-  m_AnchoredPosition: {x: 329281.9, y: 860410.56}
+  m_AnchoredPosition: {x: 329281.94, y: 860410.56}
   m_SizeDelta: {x: 209.04, y: 58.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &51163237
@@ -1314,7 +1314,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39516672, y: 0.17300001}
   m_AnchorMax: {x: 0.6025002, y: 0.273}
-  m_AnchoredPosition: {x: 328789.8, y: 860092.3}
+  m_AnchoredPosition: {x: 328789.84, y: 860092.3}
   m_SizeDelta: {x: 377.3469, y: 98.09997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &501958361
@@ -1483,7 +1483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.296, y: 0.7478889}
   m_AnchorMax: {x: 0.69600004, y: 0.8954075}
-  m_AnchoredPosition: {x: 328789, y: 860434.1}
+  m_AnchoredPosition: {x: 328789, y: 860434.2}
   m_SizeDelta: {x: 357.69, y: 81.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &695297125
@@ -1559,7 +1559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.296, y: 0.7478889}
   m_AnchorMax: {x: 0.69600004, y: 0.8954075}
-  m_AnchoredPosition: {x: 328783.1, y: 860682.1}
+  m_AnchoredPosition: {x: 328783.1, y: 860682.2}
   m_SizeDelta: {x: 728.0001, y: 144.5682}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &771728293
@@ -1803,7 +1803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39516672, y: 0.17300001}
   m_AnchorMax: {x: 0.6025002, y: 0.273}
-  m_AnchoredPosition: {x: 328083.16, y: 859963.56}
+  m_AnchoredPosition: {x: 328083.2, y: 859963.56}
   m_SizeDelta: {x: 209.04001, y: 58.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1246589967
@@ -2685,7 +2685,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Used Music
 
-    Glorious Morning'
+    Glorious Morning
+
+    Author: WaterFlame'
 --- !u!222 &1821086429
 CanvasRenderer:
   m_ObjectHideFlags: 0
