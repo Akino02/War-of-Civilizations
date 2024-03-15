@@ -517,11 +517,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8691068444577517121, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.138564
+      value: 7.33
       objectReference: {fileID: 0}
     - target: {fileID: 8691068444577517121, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.423873
+      value: -2.37
       objectReference: {fileID: 0}
     - target: {fileID: 8691068444577517121, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5127,8 +5127,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: d1fbae11246e7f24ebbfa2cdade48786, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5708,11 +5708,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8691068444577517121, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.58
+      value: 4.7714357
       objectReference: {fileID: 0}
     - target: {fileID: 8691068444577517121, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.17
+      value: -2.116127
       objectReference: {fileID: 0}
     - target: {fileID: 8691068444577517121, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6537,11 +6537,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8691068444577517121, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.63
+      value: 6.26
       objectReference: {fileID: 0}
     - target: {fileID: 8691068444577517121, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.84
+      value: -1.98
       objectReference: {fileID: 0}
     - target: {fileID: 8691068444577517121, guid: b6306679ea864694da6d796f11b967ea, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7445,7 +7445,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Disaster
+  m_Text: 
 --- !u!222 &1893611151
 CanvasRenderer:
   m_ObjectHideFlags: 0
