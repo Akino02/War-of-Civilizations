@@ -1,6 +1,12 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 051 [15.03.2024]</h2>
+<p>+ Přidání obrázku na čudlík s katastrofami</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/857e8d6c-8f49-4684-91de-cc312bd5afbd" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/d7be9a95-106d-44c7-9d8e-701755578e87" width="250" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/d5a9d6cc-f176-497d-8bd4-9aa272b6358f" width="250" height="250"></p>
+<br>
 <h2>Update 050 [14.03.2024]</h2>
 <p>+ Přidání čudlíku pro odchod do hlavní nabídky</p>
 <p>+ Přidání čudlíku pro katastrofu(funguje, ale nenabije se zpět)</p>
