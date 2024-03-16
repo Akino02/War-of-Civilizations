@@ -1,6 +1,11 @@
 # age_of_war
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 052 [16.03.2024]</h2>
+<p>+ Přidání SFX do hry</p>
+<p>+ Upravení scriptů</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/0381d433-958c-4031-9e22-f901c627cc3a" width="500" height="250"></p>
+<br>
 <h2>Update 051 [15.03.2024]</h2>
 <p>+ Přidání obrázku na čudlík s katastrofami</p>
 <p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/857e8d6c-8f49-4684-91de-cc312bd5afbd" width="500" height="250"></p>
