@@ -235,7 +235,7 @@ public class ProgresScript : MonoBehaviour
 						baseAppearance[i].SetActive(false);
 					}
 				}
-			StartCoroutine(hpS.UpgradeHp());					//pro vylepseni zivotu s tim, ze se zachova %
+			hpS.UpgradeHp();					//pro vylepseni zivotu s tim, ze se zachova %
 		}
 		else if(level == 4)
 		{

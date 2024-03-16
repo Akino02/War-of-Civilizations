@@ -23,8 +23,12 @@ public class UniArmy : MonoBehaviour
 	//animace
 	public Animator animator;                                   //pro import animatoru
 
-	//
-	public LayerMask opponent;                                  //layer nepratelskych jednotek typu soldier
+    //sound
+    public AudioSource attackSound;
+	public static float sfxSound = 0.35f;
+
+    //
+    public LayerMask opponent;                                  //layer nepratelskych jednotek typu soldier
 	public LayerMask opponentBase;                              //layer nepratelske zakladny
 	public float[] ranges = { 0.6f, 0.6f, 0.1f };                //velikost kde muze bojovat				//puvodne to bylo { 0.6f, 1.7f, 0.1f}
 	public LayerMask armyType;                                  //typ jednotky
@@ -75,7 +79,12 @@ public class UniArmy : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		GameObject script1 = GameObject.FindWithTag("baseP");   //toto najde zakladnu hrace pomoci tagu ktery ma
+        //Sound
+        attackSound.volume = ButtonsMenu.volumeSFX;
+        sfxSound = attackSound.volume;
+
+
+        GameObject script1 = GameObject.FindWithTag("baseP");   //toto najde zakladnu hrace pomoci tagu ktery ma
 		progresS = script1.GetComponent<ProgresScript>();
 		hpS = script1.GetComponent<HpScript>();
 		//
@@ -267,7 +276,8 @@ public class UniArmy : MonoBehaviour
 				{
 					armyScriptP.currhp -= randomDmg;
 				}
-			}
+                attackSound.Play();
+            }
 			else if (armyTypeNum == 3)
 			{
 				if (dir == 0)
@@ -278,7 +288,8 @@ public class UniArmy : MonoBehaviour
 				{
 					armyScriptP.currhp -= randomDmg;
 				}
-			}
+                attackSound.Play();
+            }
 		}
 		else if (checkCollision[3])
 		{
@@ -292,7 +303,8 @@ public class UniArmy : MonoBehaviour
 				{
 					hpS.currHPBase -= randomDmg;
 				}
-			}
+                attackSound.Play();
+            }
 			else if (armyTypeNum == 3)
 			{
 				if (dir == 0)
@@ -303,7 +315,8 @@ public class UniArmy : MonoBehaviour
 				{
 					hpS.currHPBase -= randomDmg;
 				}
-			}
+                attackSound.Play();
+            }
 		}
 		checkCollision[5] = false;                              //mozna chyba*************************
 		animator.SetBool("ScriptFound", false);
@@ -325,7 +338,8 @@ public class UniArmy : MonoBehaviour
 			{
 				armyScriptP.currhp -= randomDmg;
 			}
-			Debug.Log("Strel");
+            attackSound.Play();
+            Debug.Log("Strel");
 		}
 		else if (checkCollision[4])            //problem RESIT  && checkCollision[5]
 		{
@@ -339,7 +353,8 @@ public class UniArmy : MonoBehaviour
 			{
 				hpS.currHPBase -= randomDmg;
 			}
-			Debug.Log("Strel");
+            attackSound.Play();
+            Debug.Log("Strel");
 		}
 		checkCollision[5] = false;								//mozna chyba*************************
 		animator.SetBool("ScriptFound", false);

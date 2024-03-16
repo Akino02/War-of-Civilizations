@@ -17,7 +17,7 @@ public class HpScript : MonoBehaviour
 	//EnemySpawn enemyS;
 
 	//nepratele (layers)
-	public LayerMask[] opponents = new LayerMask[3];            //layer nepratelskych jednotek soldier,ranger,tank
+	//public LayerMask[] opponents = new LayerMask[3];            //layer nepratelskych jednotek soldier,ranger,tank
 																//
 	//hp a ubirani base
 	public float[] maxHPBase = {1000,2000,3000,4000,5000};		//potøeba zmìnit poèet životù pøi updatu !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -90,7 +90,7 @@ public class HpScript : MonoBehaviour
 		yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;
 	}*/
-    public IEnumerator UpgradeHp()								//zachova procentuelne hp pri upgradu
+    public void UpgradeHp()								//zachova procentuelne hp pri upgradu
     {
 		if(progresS.level > 0)
 		{
@@ -99,6 +99,6 @@ public class HpScript : MonoBehaviour
             hpbaseinprocents = currHPBase / maxHPBase[progresS.level - 1];			//pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
             currHPBase = hpbaseinprocents * maxHPBase[progresS.level];				//vypocita aktualniho poctu hp v novych zivotech
         }
-		yield return currHPBase;
+		//yield return currHPBase;
     }
 }

@@ -29,9 +29,11 @@ public class EnemySpawn : MonoBehaviour
 	/*public GameObject ranger;          //co spawne
 	public GameObject tank;          //co spawne*/
 	public GameObject baseSpawner;    //kde to spawne
+	private int[] waitTime = { 5, 8, 10 , 8};					//soldier, ranger, tank, cant Build
+	private int[] difficulty = { 10, 5, 3 };					//obtiznost hry
 	//
 	//veci ohledne baseHP ci damage pro base
-	public float[] maxHPBase = {1000,2000,3000,4000,5000};
+	public float[] maxHPBase = {1000,2000,3000,4000,5000};		//zivoty zakladny
 	public float currHPBase;
 	public float hpbaseinprocents = 1f;
 
@@ -71,13 +73,17 @@ public class EnemySpawn : MonoBehaviour
 			StartCoroutine(Evolution());
         }
         //toto slouzi pro spawn vojaku
-        if (canSpawn == true && nahoda >= 1 && nahoda <= 3 && currHPBase > 0)
+        /*if (canSpawn == true && nahoda >= 1 && nahoda <= 3 && currHPBase > 0)
 		{
 			StartCoroutine(CoolDownArmySpawn());
 		}
 		else if(nahoda == 0 || nahoda >= 4)
 		{
-			nahoda = Random.Range(1, 5);
+			nahoda = Random.Range(1, 10);
+		}*/
+        if (canSpawn == true && currHPBase > 0)
+		{
+			StartCoroutine(CoolDownArmySpawn());
 		}
 		//damage pro base						//vse ohledne dmg je vyrazeno, protoze uz existuje lepsi zpusob
 		/*if ((Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null || Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null) && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
@@ -98,27 +104,32 @@ public class EnemySpawn : MonoBehaviour
 		canSpawn = false;
 		if(nahoda == 1)
 		{
-			yield return new WaitForSecondsRealtime(5);
+			yield return new WaitForSeconds(waitTime[0]);
             army.armyType = army.soldier;
             Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		else if(nahoda == 2)
 		{
-			yield return new WaitForSecondsRealtime(8);
+			yield return new WaitForSeconds(waitTime[1]);
             army.armyType = army.ranger;
             Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		else if(nahoda == 3)
 		{
-			yield return new WaitForSecondsRealtime(10);
+			yield return new WaitForSeconds(waitTime[2]);
             army.armyType = army.tank;
             Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
-		nahoda = Random.Range(1, 5);
+		else
+		{
+			yield return new WaitForSeconds(waitTime[3]);
+			Debug.Log("Cant build");
+		}
+		nahoda = Random.Range(1, difficulty[1]);			//easy 0, normal 1, hard 2
 		canSpawn = true;
 	}
-	//base bude dostavat dmg od enemy
-	/*IEnumerator DmgdealcooldownMelee()
+    //base bude dostavat dmg od enemy
+    /*IEnumerator DmgdealcooldownMelee()
 	{
 		canGetdmgM = false;
 		if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null)
@@ -141,7 +152,18 @@ public class EnemySpawn : MonoBehaviour
 		yield return new WaitForSecondsRealtime(2);
 		canGetdmgR = true;
 	}*/
-    IEnumerator Evolution()                                     //toto bude primo pro enemy system pro evoluce			//jeste to neni upravene pro Enemy	//mimo provoz !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    void UpgradeHp()										//zachova procentuelne hp pri upgradu			//sledovat fungovani
+    {
+        if (level > 0)
+        {
+            Debug.Log(currHPBase);
+            Debug.Log(maxHPBase[level - 1]);
+            hpbaseinprocents = currHPBase / maxHPBase[level - 1];						//pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
+            currHPBase = hpbaseinprocents * maxHPBase[level];						//vypocita aktualniho poctu hp v novych zivotech
+        }
+        //yield return currHPBase;
+    }
+    IEnumerator Evolution()                                     //toto bude primo pro enemy system pro evoluce
     {
         if (evolving == false && level != 4 && canSpawn == true)
         {
@@ -161,27 +183,17 @@ public class EnemySpawn : MonoBehaviour
             }
             for (int i = 0; i < 5; i++)
             {
-					if (level == i)
-                 {
+				if (level == i)
+                {
 					baseAppearance[i].SetActive(true);
-                 }
-                 else
-                 {
+                }
+                else
+                {
 					baseAppearance[i].SetActive(false);
-                 }
+                }
             }
-            StartCoroutine(UpgradeHp());						//pro vylepseni zivotu s tim, ze se zachova %
+			//StartCoroutine(UpgradeHp());						//pro vylepseni zivotu s tim, ze se zachova %
+			UpgradeHp();
         }
-    }
-    IEnumerator UpgradeHp()										//zachova procentuelne hp pri upgradu			//sledovat fungovani
-    {
-        if (level > 0)
-        {
-            Debug.Log(currHPBase);
-            Debug.Log(maxHPBase[level - 1]);
-            hpbaseinprocents = currHPBase / maxHPBase[level-1];						//pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
-            currHPBase = hpbaseinprocents * maxHPBase[level];						//vypocita aktualniho poctu hp v novych zivotech
-        }
-        yield return currHPBase;
     }
 }

@@ -12,21 +12,30 @@ public class ButtonsMenu : MonoBehaviour
     public GameObject settingMenu;
 
 
-    public static float volume;
-    public Slider volumeBar;
-    public Text showVolumeValue;
+    public static float volumeSong;
+    public static float volumeSFX;
+    public Slider volumeBarSong;
+    public Slider volumeBarSFX;
+    public Text showVolumeValueSong;
+    public Text showVolumeValueSFX;
 
-    public AudioSource testSound;
-    bool isPlaying = false;
-    public Text showPlayButtonText;
+    public AudioSource testSongSound;
+    public AudioSource testSFXSound;
+
+    bool isPlayingSong = false;
+    bool isPlayingSFX = false;
+    public Text showPlayButtonTextSong;
+    public Text showPlayButtonTextSFX;
 
     // Start is called before the first frame update
     void Start()
     {
         mainMenu.SetActive(true);                       //nastaveni ze toto menu bude videt pri startu
         settingMenu.SetActive(false);                   //toto menu bude pri startu vypnute
-        volumeBar.value = CameraFollow.songInGame;      //nastaveni zvuku do hry
-        showPlayButtonText.text = "Play";               //nastaveni nazvu buttonu
+        volumeBarSong.value = CameraFollow.songInGame;      //nastaveni zvuku do hry
+        volumeBarSFX.value = UniArmy.sfxSound;      //nastaveni zvuku do hry
+        showPlayButtonTextSong.text = "Play";
+        showPlayButtonTextSFX.text = "Play";
 
         //testSound = GetComponent<AudioSource>();
     }
@@ -34,8 +43,10 @@ public class ButtonsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        volume = volumeBar.value;                       //ziskani hodnoty z posouvadla
-        showVolumeValue.text = "Volume: " + math.round(volume*100) + "%";     //dosazeni textu pri meneni hodnoty zvuku
+        volumeSong = volumeBarSong.value;                       //ziskani hodnoty z posouvadla
+        volumeSFX = volumeBarSFX.value;                       //ziskani hodnoty z posouvadla
+        showVolumeValueSong.text = "Volume: " + math.round(volumeSong * 100) + "%";     //dosazeni textu pri meneni hodnoty zvuku
+        showVolumeValueSFX.text = "Volume: " + math.round(volumeSFX * 100) + "%";     //dosazeni textu pri meneni hodnoty zvuku
     }
 
     //MainMenu buttons
@@ -49,8 +60,10 @@ public class ButtonsMenu : MonoBehaviour
         settingMenu.SetActive(true);
 
         //nastavise hodnota textu na play a jeste bool
-        showPlayButtonText.text = "Play";
-        isPlaying = false;
+        showPlayButtonTextSong.text = "Play";
+        showPlayButtonTextSFX.text = "Play";
+        isPlayingSong = false;
+        isPlayingSFX = false;
     }
     public void QuitGame()          //Funkce pro vypnuti hry
     {
@@ -67,7 +80,8 @@ public class ButtonsMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         settingMenu.SetActive(false);
-        testSound.Stop();           //vypne se hudba, jakmile jde mimo nastaveni
+        testSongSound.Stop();           //vypne se hudba, jakmile jde mimo nastaveni
+        testSFXSound.Stop();
     }
     /*public IEnumerator PlaySoundTimer()          //pokud se zmeni hodnota tak se pusti testovaci zvuk                   !!udelat lepsi mby
     {
@@ -76,24 +90,41 @@ public class ButtonsMenu : MonoBehaviour
         yield return new WaitForSeconds(timeForTest);
         testSound.Stop();
     }*/
-    public void PlaySound()                     //metoda pro button na test zvuku (Hudba)                                   !!udelat to lepsi fr
+    public void PlaySoundSong()                     //metoda pro button na test zvuku (Hudba)                                   !!udelat to lepsi fr
     {
-        if (!isPlaying)
+        if (!isPlayingSong)
         {
-            testSound.volume = volume;
-            isPlaying = true;
-            testSound.Play();
-            showPlayButtonText.text = "Stop";
+            testSongSound.volume = volumeSong;
+            isPlayingSong = true;
+            testSongSound.Play();
+            showPlayButtonTextSong.text = "Stop";
         }
         else
         {
-            isPlaying = false;
-            testSound.Stop();
-            showPlayButtonText.text = "Play";
+            isPlayingSong = false;
+            testSongSound.Stop();
+            showPlayButtonTextSong.text = "Play";
+        }
+    }
+    public void PlaySoundSFX()                     //metoda pro button na test zvuku (Hudba)                                   !!udelat to lepsi fr
+    {
+        if (!isPlayingSFX)
+        {
+            testSFXSound.volume = volumeSFX;
+            isPlayingSFX = true;
+            testSFXSound.Play();
+            showPlayButtonTextSFX.text = "Stop";
+        }
+        else
+        {
+            isPlayingSFX = false;
+            testSFXSound.Stop();
+            showPlayButtonTextSFX.text = "Play";
         }
     }
     public void OnChangeVolume()                //pri zmene se nastavi hlasitost hudby
     {
-        testSound.volume = volume;
+        testSongSound.volume = volumeSong;
+        testSFXSound.volume = volumeSFX;
     }
 }
