@@ -10,6 +10,7 @@ public class EnemySpawn : MonoBehaviour
 	/*SoldierP soldierPscript;									//import scriptu protivnika
 	SoldierE soldierEscript;*/
 	ProgresScript progresS;                                     //importuje script zakladnu hrace
+	HpScript hpS;
 
     UniArmy army;                                               //importovani pro pracovani s vojacky
     public GameObject objectArmyE;                              //objekt pro propojeni scriptu
@@ -58,17 +59,18 @@ public class EnemySpawn : MonoBehaviour
 	{
         GameObject item = GameObject.FindWithTag("baseP");		//toto najde zakladnu hrace pomoci tagu ktery ma
         progresS = item.GetComponent<ProgresScript>();			//zde se dosadi script za objekt
+		hpS = item.GetComponent<HpScript>();					
 
         /*soldierPscript = soldierP.GetComponent<SoldierP>();	//import protivnika a jeho promìnných
 		soldierEscript = soldierE.GetComponent<SoldierE>();		//import protivnika a jeho promìnných*/
 
-        army = objectArmyE.GetComponent<UniArmy>();				//propojeni scriptu UniArmy s ProgresScript
+        army = objectArmyE.GetComponent<UniArmy>();             //propojeni scriptu UniArmy s ProgresScript
     }
 
 	// Update is called once per frame
 	void Update()
 	{
-        if(currHPBase > 0 && level != 4)
+        if(level != 4 && currHPBase > 0 && hpS.currHPBase > 0)
 		{
 			StartCoroutine(Evolution());
         }
@@ -81,7 +83,7 @@ public class EnemySpawn : MonoBehaviour
 		{
 			nahoda = Random.Range(1, 10);
 		}*/
-        if (canSpawn == true && currHPBase > 0)
+        if (canSpawn == true && currHPBase > 0 && hpS.currHPBase > 0)
 		{
 			StartCoroutine(CoolDownArmySpawn());
 		}

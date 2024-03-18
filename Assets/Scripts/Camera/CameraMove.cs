@@ -35,7 +35,10 @@ public class CameraMove : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-        activeX = Input.GetAxis("Horizontal");                  //definice pohybu(ten pohyb je urcen pro A, D a taky pro levou sipku a pravou sipku)
+        if (!LogScript.isGameOver)
+        {
+            activeX = Input.GetAxis("Horizontal");                  //definice pohybu(ten pohyb je urcen pro A, D a taky pro levou sipku a pravou sipku)
+        }
         rb.velocity = new Vector2((movespeed * activeX), rb.velocity.y);                                                       //pohyb kamery
         sun.transform.position = new Vector3(widthFromSun.transform.position.x + transform.position.x, sun.transform.position.y, sun.transform.position.z);     //nastaveni pozice pro slunce
     }

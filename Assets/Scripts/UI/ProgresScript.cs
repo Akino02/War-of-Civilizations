@@ -69,7 +69,7 @@ public class ProgresScript : MonoBehaviour
 		experienceinprocents = ((100 * experience) / nextlevelup);				//vytvori proceznta ze zkusenosti
 		moneyText.text = money.ToString();						//opakovatelne se budou vpisovat penize do textu
 		Evolution();							//funkce pro vylepsovani urovne doby
-		if (order > 0 && hpS.currHPBase != 0)					//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
+		if (order > 0 && !LogScript.isGameOver)					//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
 		{
 			//StartCoroutine(Orderfactory());
 			OrderFactory();

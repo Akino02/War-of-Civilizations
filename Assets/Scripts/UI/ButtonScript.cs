@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;                                           //import teto funkce, abych mohl pracovat s UI vecmi v unity enginu
@@ -24,11 +23,10 @@ public class ButtonScript : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		//soldierEscript = soldierE.GetComponent<SoldierE>();   //import protivnika a jeho promìnných
 
-        progresS = GetComponent<ProgresScript>();				//propojeni zakladnich scriptu pro funkci UI
-        hpS = GetComponent<HpScript>();							//propojeni zakladnich scriptu pro funkci UI
-        logS = GetComponent<LogScript>();							//propojeni zakladnich scriptu pro funkci UI
+        progresS = GetComponent<ProgresScript>();				        //propojeni zakladnich scriptu pro funkci UI
+        hpS = GetComponent<HpScript>();							        //propojeni zakladnich scriptu pro funkci UI
+        logS = GetComponent<LogScript>();							    //propojeni zakladnich scriptu pro funkci UI
 	}
 
 	// Update is called once per frame
@@ -40,7 +38,7 @@ public class ButtonScript : MonoBehaviour
 	public void SoldierSpawn()									//tato funkce na kliknuti spawne jednoho vojaka				PRO SOLDIERA
 	{
 		buttonN = 1;
-		if (progresS.order < 5 && hpS.currHPBase > 0 && progresS.money >= progresS.moneyperunit[progresS.level, 0])												//jeste tam pak doplnit ze za to bude platit
+		if (progresS.order < 5 && !LogScript.isGameOver && progresS.money >= progresS.moneyperunit[progresS.level, 0])												//jeste tam pak doplnit ze za to bude platit
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order -1] = 1;
@@ -60,7 +58,7 @@ public class ButtonScript : MonoBehaviour
 	public void RangerSpawn()									//tato funkce na kliknuti spawne jednoho vojaka				PRO RANGERA
 	{
         buttonN = 2;
-        if (progresS.order < 5 && hpS.currHPBase > 0 && progresS.money >= progresS.moneyperunit[progresS.level, 1])												//jeste tam pak doplnit ze za to bude platit
+        if (progresS.order < 5 && !LogScript.isGameOver && progresS.money >= progresS.moneyperunit[progresS.level, 1])												//jeste tam pak doplnit ze za to bude platit
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order - 1] = 2;
@@ -80,7 +78,7 @@ public class ButtonScript : MonoBehaviour
 	public void TankSpawn()										// tato funkce na kliknuti spawne jednoho vojaka			PRO TANK
 	{
         buttonN = 3;
-        if (progresS.order < 5 && hpS.currHPBase > 0 && progresS.money >= progresS.moneyperunit[progresS.level, 2])												//jeste tam pak doplnit ze za to bude platit
+        if (progresS.order < 5 && !LogScript.isGameOver && progresS.money >= progresS.moneyperunit[progresS.level, 2])												//jeste tam pak doplnit ze za to bude platit
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order - 1] = 3;
@@ -99,7 +97,7 @@ public class ButtonScript : MonoBehaviour
 	}
 	public void Warning()
 	{
-		if (progresS.money < progresS.moneyperunit[progresS.level, buttonN-1] && logS.canShow)
+		if (progresS.money < progresS.moneyperunit[progresS.level, buttonN-1] && logS.canShow && !LogScript.isGameOver)
 		{
             Debug.Log("Nemas Dostatek penez");
             logS.placeText.text = logS.possibleText[0];
@@ -142,7 +140,7 @@ public class ButtonScript : MonoBehaviour
 	//funkce pro progressBar
     public void Disaster()                  //katastrofa
     {
-        if (progresS.canDoDisaster)
+        if (progresS.canDoDisaster && !LogScript.isGameOver)
         {
             progresS.canDoDisaster = false;
             StartCoroutine(progresS.SpawnFireBall());

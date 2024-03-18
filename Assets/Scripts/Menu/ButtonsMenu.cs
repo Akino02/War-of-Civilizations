@@ -45,8 +45,8 @@ public class ButtonsMenu : MonoBehaviour
     {
         volumeSong = volumeBarSong.value;                       //ziskani hodnoty z posouvadla
         volumeSFX = volumeBarSFX.value;                       //ziskani hodnoty z posouvadla
-        showVolumeValueSong.text = "Volume: " + math.round(volumeSong * 100) + "%";     //dosazeni textu pri meneni hodnoty zvuku
-        showVolumeValueSFX.text = "Volume: " + math.round(volumeSFX * 100) + "%";     //dosazeni textu pri meneni hodnoty zvuku
+        showVolumeValueSong.text = "Volume: " + math.round(volumeSong * 100) + "% Song";     //dosazeni textu pri meneni hodnoty zvuku
+        showVolumeValueSFX.text = "Volume: " + math.round(volumeSFX * 100) + "% SFX";     //dosazeni textu pri meneni hodnoty zvuku
     }
 
     //MainMenu buttons
