@@ -1,6 +1,10 @@
-# age_of_war
+# Wish of War
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 053 [18.03.2024]</h2>
+<p>+ Přidán konec hry</p>
+<p>+ IMG ERROR CAN'T FIND PATH</p>
+<br>
 <h2>Update 052 [16.03.2024]</h2>
 <p>+ Přidání SFX do hry</p>
 <p>+ Upravení scriptů</p>
