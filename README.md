@@ -1,9 +1,15 @@
 # Wish of War
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 054 [22.03.2024]</h2>
+<p>+ Upravení katastrof</p>
+<p>+ Přidány ceny jednotek (viditelné)</p>
+<p>+ Upravení systému evoluce nepřítele</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/6c7f17f1-9380-4d0b-abba-4245f770f8db" width="500" height="250"></p>
+<br>
 <h2>Update 053 [18.03.2024]</h2>
 <p>+ Přidán konec hry</p>
-<p>+ IMG ERROR CAN'T FIND PATH</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/8541315b-ff56-4f43-8679-90c6abbd771f" width="500" height="250"></p>
 <br>
 <h2>Update 052 [16.03.2024]</h2>
 <p>+ Přidání SFX do hry</p>
