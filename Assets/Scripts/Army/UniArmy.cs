@@ -170,6 +170,10 @@ public class UniArmy : MonoBehaviour
 			}
 			Destroy(gameObject);
 		}
+		else if (transform.position.y < -20)					//pokud tam bude hodne nepratel od nepritele ci hrace tak by mohli padat dolu a pokud ano tak zemrou
+		{
+            Destroy(gameObject);
+        }
 		hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);
 	}
 	void FindMyEnemy()											//tato funkce hleda nepritele a k nemu priradi script a jeste se zavola dalsi funkce na utok

@@ -53,6 +53,7 @@ public class ButtonsMenu : MonoBehaviour
     public void Play()          //Funkce pro vstoupeni do hry
     {
         SceneManager.LoadScene("GameScene");
+        LogScript.isGameOver = false;                           //Zajistuje ze kdyz jde do hry tak hra bude nova
     }
     public void Setting()              //Funkce pro zmenu nastaveni
     {

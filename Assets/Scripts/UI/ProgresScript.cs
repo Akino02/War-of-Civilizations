@@ -35,7 +35,7 @@ public class ProgresScript : MonoBehaviour
 	public float progbarfill = 0f;								//kolik bude vyplnovat v progbaru
 	//public float timer = 0;
 	public bool canProduce = true;                              //zda muze vyrabet
-	public Text[] actionButtonText = new Text[3];               //upraveni textu u buttonu soldier, ranger, tank		//pozdeji budou jeste dalsi dva na dobrovolny update evoluce a pro pohromy
+	public Text[] actionButtonText = new Text[6];               //upraveni textu u buttonu soldier, ranger, tank		//pozdeji budou jeste dalsi dva na dobrovolny update evoluce a pro pohromy
 
 	public Image[] orderVizual = new Image[5];
 
@@ -47,12 +47,15 @@ public class ProgresScript : MonoBehaviour
 	public GameObject borderL;
     public GameObject borderR;
     public GameObject disasterZone;
+	private float waitDisasterFill = 0f;
+	private int waitingTimeForDisaster = 30;
+	public Image waitDisasterFillBox;
     public bool canDoDisaster = true;
 
     // Start is called before the first frame update
     void Start()
 	{
-		buttonS = GetComponent<ButtonScript>();					//propojeni zakladnich scriptu pro funkci UI
+        buttonS = GetComponent<ButtonScript>();					//propojeni zakladnich scriptu pro funkci UI
 		hpS = GetComponent<HpScript>();							//propojeni zakladnich scriptu pro funkci UI
 
 		army = objectArmyP.GetComponent<UniArmy>();				//propojeni scriptu UniArmy s ProgresScript
@@ -60,7 +63,13 @@ public class ProgresScript : MonoBehaviour
 		moneyText.text = money.ToString();
 		experienceText.text = experienceinprocents.ToString() + "%";
 		TrainingText();                         //zapise se co se vyrabi
-	}
+
+        for (int i = 0; i < 3; i++)								//na zacatku se definuje co tam bude na tom buttonu
+        {
+            actionButtonText[i].text = "lvl." + (level + 1);
+            actionButtonText[i + (actionButtonText.Length) / 2].text = "Cost " + moneyperunit[level, i] + " $";
+        }
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -74,6 +83,10 @@ public class ProgresScript : MonoBehaviour
 			//StartCoroutine(Orderfactory());
 			OrderFactory();
 		}
+		if (!canDoDisaster && !LogScript.isGameOver)
+		{
+			WaitDisaster();
+        }
 	}
 	/*IEnumerator Orderfactory()                                  //bude vyrabet jednoho 5s           //pak udelat na if (aby se menil ten vyrobni cas)              // pozdeji udelat smooth
 	{
@@ -130,11 +143,12 @@ public class ProgresScript : MonoBehaviour
 			//timer += 1;										//je to trosicku opozdene, ale nevadi
 			TrainingText();                     //zacne se psat co se vyrabi
 			progbarfill = (Time.deltaTime / waitTime[orderv2[0] - 1]);        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
+			//Debug.Log(progbarfill);
 			//progBar.fillAmount = progbarinprocents;
 			//yield return new WaitForSecondsRealtime(1);
 			progBar.fillAmount = Mathf.Lerp(progBar.fillAmount, progBar.fillAmount + 1f, progbarfill);      //min, max, speed
 																											//yield return new WaitForSecondsRealtime(1);
-			canProduce = true;
+            canProduce = true;
 			if (progBar.fillAmount >= 1f)
 			{
 				made += 1;
@@ -223,6 +237,7 @@ public class ProgresScript : MonoBehaviour
 			for (int i = 0; i < 3; i++)                         //pise do vsech textu, ktere jsou uchovany v poli
 			{
 				actionButtonText[i].text = "lvl." + (level + 1);
+				actionButtonText[i+(actionButtonText.Length)/2].text = "Cost " + moneyperunit[level, i] + " $";
 			}
 				for (int i = 0; i < 5; i++)						//zde se zmeni vzhled zakladny
 				{
@@ -249,15 +264,32 @@ public class ProgresScript : MonoBehaviour
 	}
     public IEnumerator SpawnFireBall()
     {
+		waitDisasterFill = 1f;
+        waitDisasterFillBox.fillAmount = waitDisasterFill;
+        WaitDisaster();
         int i = 0;
-        while (i <= 10)
+        while (i <= 20)
         {
             float randomPosX = Random.Range(borderL.transform.position.x, borderR.transform.position.x);
-            Vector3 disasterZonePos = new Vector3(randomPosX, disasterZone.transform.position.y, disasterZone.transform.position.z);
+            Vector3 disasterZonePos = new Vector3(randomPosX, disasterZone.transform.position.y, fireBall.transform.position.z);
             Instantiate(fireBall, disasterZonePos, disasterZone.transform.rotation);
             yield return new WaitForSeconds(0.4f);
             i += 1;
         }
     }
 
+	public void WaitDisaster()
+	{
+        if (waitDisasterFillBox.fillAmount > 0)					//
+		{
+            waitDisasterFill = (Time.deltaTime / waitingTimeForDisaster);				//definice rychlosti klesani (cas snimku/celkova doba cekani)
+            waitDisasterFillBox.fillAmount = Mathf.Lerp(waitDisasterFillBox.fillAmount, waitDisasterFillBox.fillAmount -1f, waitDisasterFill);		//min, max, speed
+        }
+		else													//pokud je to rovno nule ci mensi 
+		{
+			waitDisasterFill = 0;
+			waitDisasterFillBox.fillAmount = waitDisasterFill;
+			canDoDisaster = true;
+        }
+    }
 }

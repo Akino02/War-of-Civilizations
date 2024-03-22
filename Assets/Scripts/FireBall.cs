@@ -30,7 +30,7 @@ public class FireBall : MonoBehaviour
         {
             var SoldierArmyScript = hitBox.GetComponent<UniArmy>();
             armyScriptE = SoldierArmyScript;                    //dosazeni scriptu za objekt
-            dmgBall = armyScriptE.maxhp[armyScriptE.lvl, 2] / 3;
+            dmgBall = (armyScriptE.maxhp[armyScriptE.lvl, 2] / 3) / 2;
             if (hit == false)
             {
                 armyScriptE.currhp -= dmgBall;                      //nastaveni poskozeni fireballu podle toho kolik dana postavicka ma hp

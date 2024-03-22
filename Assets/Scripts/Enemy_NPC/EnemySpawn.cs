@@ -30,8 +30,8 @@ public class EnemySpawn : MonoBehaviour
 	/*public GameObject ranger;          //co spawne
 	public GameObject tank;          //co spawne*/
 	public GameObject baseSpawner;    //kde to spawne
-	private int[] waitTime = { 5, 8, 10 , 8};					//soldier, ranger, tank, cant Build
-	private int[] difficulty = { 10, 5, 3 };					//obtiznost hry
+	private int[] waitTime = { 5, 8, 10 , 5};					//soldier, ranger, tank, cant Build
+	private int[] difficulty = { 10, 5, 4 };					//obtiznost hry
 	//
 	//veci ohledne baseHP ci damage pro base
 	public float[] maxHPBase = {1000,2000,3000,4000,5000};		//zivoty zakladny
@@ -39,8 +39,9 @@ public class EnemySpawn : MonoBehaviour
 	public float hpbaseinprocents = 1f;
 
 	public int level = 0;
-	public int[] lvltype = {60, 15};							//za jak dlouho dojde k evoluci ****************************ten cas je moc kratky
+	public int lvlTypeWait = 15;							//cas byl upraven a jeste podminka pro evoluce
 	public bool evolving = false;
+	private int EvolveExperiencePro = 90;						//procenta zkusenosti od, kterych se zacne vylepsovat enemy
 
     public GameObject[] baseAppearance = new GameObject[5];     //vzhled budov v array ohledne nove evoluce
 
@@ -169,33 +170,42 @@ public class EnemySpawn : MonoBehaviour
     {
         if (evolving == false && level != 4 && canSpawn == true)
         {
-            evolving = true;
-			if(progresS.level > level)
+			if (progresS.experience >= (progresS.nextlevelup * EvolveExperiencePro) / 100 || progresS.level > level)		//urcit jinak podminku
 			{
-				yield return new WaitForSeconds(lvltype[1]);    //pokud je nepritel pozadu tak jeho evolution time bude kazdych 15s
-                level += 1;
-                evolving = false;
-            }
-			else
-			{
-				yield return new WaitForSeconds(lvltype[0]);    //pokud je nepritel stejne rychly nebo rychlejsi tak jeho evolution time bude kazdych 60s
-                level += 1;
-                evolving = false;
-
-            }
-            for (int i = 0; i < 5; i++)
-            {
-				if (level == i)
+                evolving = true;
+                /*if(progresS.level > level)
                 {
-					baseAppearance[i].SetActive(true);
+                    //yield return new WaitForSeconds(lvltype[1]);    //pokud je nepritel pozadu tak jeho evolution time bude kazdych 15s
+                    yield return new WaitForSeconds(2f);
+                    level += 1;
+                    evolving = false;
                 }
                 else
                 {
-					baseAppearance[i].SetActive(false);
+                    //yield return new WaitForSeconds(lvltype[0]);    //pokud je nepritel stejne rychly nebo rychlejsi tak jeho evolution time bude kazdych 60s
+                    yield return new WaitForSeconds(2f);
+                    level += 1;
+                    evolving = false;
+
+                }*/
+                yield return new WaitForSeconds(lvlTypeWait);
+                level += 1;
+                evolving = false;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    if (level == i)
+                    {
+                        baseAppearance[i].SetActive(true);
+                    }
+                    else
+                    {
+                        baseAppearance[i].SetActive(false);
+                    }
                 }
+                //StartCoroutine(UpgradeHp());						//pro vylepseni zivotu s tim, ze se zachova %
+                UpgradeHp();
             }
-			//StartCoroutine(UpgradeHp());						//pro vylepseni zivotu s tim, ze se zachova %
-			UpgradeHp();
         }
     }
 }

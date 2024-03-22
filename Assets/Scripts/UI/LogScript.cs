@@ -44,18 +44,13 @@ public class LogScript : MonoBehaviour
             isGameOver = true;
             endGameMenu.SetActive(true);
             escapeButtonBack.SetActive(false);
-            switch (hpS.currHPBase)
+            if(hpS.currHPBase <= 0)
             {
-                case 0:
-                    {
-                        winnerText.text = "You Lost!";
-                        break;
-                    }
-                default:
-                    {
-                        winnerText.text = "You Won!";
-                        break;
-                    }
+                winnerText.text = "You Lost!";
+            }
+            else
+            {
+                winnerText.text = "You Won!";
             }
         }
     }
