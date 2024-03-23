@@ -84,13 +84,6 @@ public class ButtonsMenu : MonoBehaviour
         testSongSound.Stop();           //vypne se hudba, jakmile jde mimo nastaveni
         testSFXSound.Stop();
     }
-    /*public IEnumerator PlaySoundTimer()          //pokud se zmeni hodnota tak se pusti testovaci zvuk                   !!udelat lepsi mby
-    {
-        testSound.Play();
-        testSound.volume = volume;
-        yield return new WaitForSeconds(timeForTest);
-        testSound.Stop();
-    }*/
     public void PlaySoundSong()                     //metoda pro button na test zvuku (Hudba)                                   !!udelat to lepsi fr
     {
         if (!isPlayingSong)

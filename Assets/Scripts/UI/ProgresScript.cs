@@ -48,7 +48,7 @@ public class ProgresScript : MonoBehaviour
     public GameObject borderR;
     public GameObject disasterZone;
 	private float waitDisasterFill = 0f;
-	private int waitingTimeForDisaster = 30;
+	private int waitingTimeForDisaster = 40;
 	public Image waitDisasterFillBox;
     public bool canDoDisaster = true;
 
@@ -268,7 +268,7 @@ public class ProgresScript : MonoBehaviour
         waitDisasterFillBox.fillAmount = waitDisasterFill;
         WaitDisaster();
         int i = 0;
-        while (i <= 20)
+        while (i <= 30)
         {
             float randomPosX = Random.Range(borderL.transform.position.x, borderR.transform.position.x);
             Vector3 disasterZonePos = new Vector3(randomPosX, disasterZone.transform.position.y, fireBall.transform.position.z);

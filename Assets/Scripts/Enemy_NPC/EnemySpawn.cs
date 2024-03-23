@@ -30,8 +30,8 @@ public class EnemySpawn : MonoBehaviour
 	/*public GameObject ranger;          //co spawne
 	public GameObject tank;          //co spawne*/
 	public GameObject baseSpawner;    //kde to spawne
-	private int[] waitTime = { 5, 8, 10 , 5};					//soldier, ranger, tank, cant Build
-	private int[] difficulty = { 10, 5, 4 };					//obtiznost hry
+	private int[] waitTime = { 7, 10, 15 , 8};					//soldier, ranger, tank, cant Build
+	private int[] difficulty = { 8, 5, 4};					//obtiznost hry
 	//
 	//veci ohledne baseHP ci damage pro base
 	public float[] maxHPBase = {1000,2000,3000,4000,5000};		//zivoty zakladny
@@ -128,7 +128,7 @@ public class EnemySpawn : MonoBehaviour
 			yield return new WaitForSeconds(waitTime[3]);
 			Debug.Log("Cant build");
 		}
-		nahoda = Random.Range(1, difficulty[1]);			//easy 0, normal 1, hard 2
+		nahoda = Random.Range(1, difficulty[2]);			//easy 0, normal 1, hard 2
 		canSpawn = true;
 	}
     //base bude dostavat dmg od enemy
@@ -170,24 +170,9 @@ public class EnemySpawn : MonoBehaviour
     {
         if (evolving == false && level != 4 && canSpawn == true)
         {
-			if (progresS.experience >= (progresS.nextlevelup * EvolveExperiencePro) / 100 || progresS.level > level)		//urcit jinak podminku
+			if (progresS.experience >= (progresS.nextlevelup * EvolveExperiencePro) / 100 && progresS.level == level)		//urcit jinak podminku
 			{
                 evolving = true;
-                /*if(progresS.level > level)
-                {
-                    //yield return new WaitForSeconds(lvltype[1]);    //pokud je nepritel pozadu tak jeho evolution time bude kazdych 15s
-                    yield return new WaitForSeconds(2f);
-                    level += 1;
-                    evolving = false;
-                }
-                else
-                {
-                    //yield return new WaitForSeconds(lvltype[0]);    //pokud je nepritel stejne rychly nebo rychlejsi tak jeho evolution time bude kazdych 60s
-                    yield return new WaitForSeconds(2f);
-                    level += 1;
-                    evolving = false;
-
-                }*/
                 yield return new WaitForSeconds(lvlTypeWait);
                 level += 1;
                 evolving = false;
@@ -203,7 +188,26 @@ public class EnemySpawn : MonoBehaviour
                         baseAppearance[i].SetActive(false);
                     }
                 }
-                //StartCoroutine(UpgradeHp());						//pro vylepseni zivotu s tim, ze se zachova %
+                UpgradeHp();
+            }
+			else if(progresS.level > level)
+			{
+                evolving = true;
+                yield return new WaitForSeconds(lvlTypeWait);
+                level += 1;
+                evolving = false;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    if (level == i)
+                    {
+                        baseAppearance[i].SetActive(true);
+                    }
+                    else
+                    {
+                        baseAppearance[i].SetActive(false);
+                    }
+                }
                 UpgradeHp();
             }
         }

@@ -64,6 +64,7 @@ public class UniArmy : MonoBehaviour
 	//Ohledne utoku
 	private int[,] dmgMin = { { 20, 30, 15 }, { 25, 35, 15 }, { 30, 40, 20 }, { 35, 45, 20 }, { 40, 50, 25 } };             //sila pro vojacky (soldier, ranger, tank)
 	private int[,] dmgMax = { { 40, 60, 30 }, { 50, 70, 35 }, { 60, 80, 40 }, { 70, 90, 45 }, { 80, 100, 50 } };             //sila pro vojacky (soldier, ranger, tank)
+	//private int[] betterDmg = { 150, 300, 120 };
 
 	public bool canGiveDmgM = false;                            //Muze bojovat melee
 	public bool canGiveDmgR = false;                            //Muze bojovat na dalku
@@ -124,6 +125,14 @@ public class UniArmy : MonoBehaviour
 		}
 		animator.SetInteger("Class", armyTypeNum);
 		animator.SetInteger("Level", lvl);
+		/*if (dir == 0)											//zvyseni dmg pro hrace kdyz dosahne posledni urovne
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				dmgMin[4, i] = betterDmg[i];
+                dmgMax[4, i] = betterDmg[i];
+            }
+        }*/
 	}
 	// Update is called once per frame
 	void Update()
@@ -343,7 +352,7 @@ public class UniArmy : MonoBehaviour
 				armyScriptP.currhp -= randomDmg;
 			}
             attackSound.Play();
-            Debug.Log("Strel");
+            //Debug.Log("Strel");
 		}
 		else if (checkCollision[4])            //problem RESIT  && checkCollision[5]
 		{
@@ -358,7 +367,7 @@ public class UniArmy : MonoBehaviour
 				hpS.currHPBase -= randomDmg;
 			}
             attackSound.Play();
-            Debug.Log("Strel");
+            //Debug.Log("Strel");
 		}
 		checkCollision[5] = false;								//mozna chyba*************************
 		animator.SetBool("ScriptFound", false);
