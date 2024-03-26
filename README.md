@@ -1,6 +1,11 @@
 # Wish of War
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 055 [23.03.2024]</h2>
+<p>+ Upravení obtížnosti hry (dohratelné)</p>
+<p>+ Přidány životy základen (text)</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/20e716dc-fe99-4719-9595-48bf051e1c52" width="500" height="250"></p>
+<br>
 <h2>Update 054 [22.03.2024]</h2>
 <p>+ Upravení katastrof</p>
 <p>+ Přidány ceny jednotek (viditelné)</p>
