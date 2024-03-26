@@ -43,8 +43,8 @@ public class HpScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		hpTextShow.text = currHPBase.ToString();
-        hpEnemyTextShow.text = enemyS.currHPBase.ToString();
+		hpTextShow.text = Mathf.Round(currHPBase).ToString();
+        hpEnemyTextShow.text = Mathf.Round(enemyS.currHPBase).ToString();
 
 
 		hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / maxHPBase[progresS.level], 3f* Time.deltaTime);		//kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas

@@ -47,7 +47,7 @@ public class UniArmy : MonoBehaviour
 	//Ohledne HPbaru
 	public GameObject hpBar;
 
-	public float[,] maxhp = { { 100, 60, 300 }, { 150, 90, 450 }, { 225, 135, 675 }, { 350, 200, 1000 }, { 400, 300, 1500 } };
+	public float[,] maxhp = { { 100, 60, 300 }, { 200, 160, 400 }, { 300, 260, 500 }, { 400, 360, 600 }, { 500, 460, 700 } };
 	public float currhp = 100;
 	private float hpinprocents = 1f;
 	public int lvl = 0;                                         //uchovani urovne vojacka
@@ -62,8 +62,8 @@ public class UniArmy : MonoBehaviour
 
 
 	//Ohledne utoku
-	private int[,] dmgMin = { { 20, 30, 15 }, { 25, 35, 15 }, { 30, 40, 20 }, { 35, 45, 20 }, { 40, 50, 25 } };             //sila pro vojacky (soldier, ranger, tank)
-	private int[,] dmgMax = { { 40, 60, 30 }, { 50, 70, 35 }, { 60, 80, 40 }, { 70, 90, 45 }, { 80, 100, 50 } };             //sila pro vojacky (soldier, ranger, tank)
+	private int[,] dmgMin = { { 20, 30, 15 }, { 120, 130, 115 }, { 220, 230, 215 }, { 320, 330, 315 }, { 420, 430, 415 } };             //sila pro vojacky (soldier, ranger, tank)
+	private int[,] dmgMax = { { 40, 60, 30 }, { 140, 160, 130 }, { 240, 260, 230 }, { 340, 360, 330 }, { 340, 360, 330 } };             //sila pro vojacky (soldier, ranger, tank)
 	//private int[] betterDmg = { 150, 300, 120 };
 
 	public bool canGiveDmgM = false;                            //Muze bojovat melee
@@ -277,7 +277,7 @@ public class UniArmy : MonoBehaviour
 		canGiveDmgM = false;
         yield return new WaitForSecondsRealtime(2);
         int randomDmg = Random.Range(dmgMin[lvl, armyTypeNum - 1], dmgMax[lvl, armyTypeNum - 1]);                           //nahodna hodnota pro utok na jednotky
-		if (checkCollision[0] && checkCollision[5] && !isBase)
+		if (checkCollision[0] && checkCollision[5] && !isBase && !LogScript.isGameOver)
 		{
 			if (armyTypeNum == 1)
 			{
@@ -304,7 +304,7 @@ public class UniArmy : MonoBehaviour
                 attackSound.Play();
             }
 		}
-		else if (checkCollision[3])
+		else if (checkCollision[3] && !LogScript.isGameOver)
 		{
             if (armyTypeNum == 1)
 			{
@@ -341,7 +341,7 @@ public class UniArmy : MonoBehaviour
 		canGiveDmgR = false;
 		yield return new WaitForSecondsRealtime(2);
 		int randomDmg = Random.Range(dmgMin[lvl, armyTypeNum - 1], dmgMax[lvl, armyTypeNum - 1]);                           //nahodna hodnota pro utok na jednotky
-		if (checkCollision[1] && checkCollision[5] && !isBase)                 //problem RESIT  && checkCollision[5]
+		if (checkCollision[1] && checkCollision[5] && !isBase && !LogScript.isGameOver)                 //problem RESIT  && checkCollision[5]
 		{
 			if (dir == 0)
 			{
@@ -354,7 +354,7 @@ public class UniArmy : MonoBehaviour
             attackSound.Play();
             //Debug.Log("Strel");
 		}
-		else if (checkCollision[4])            //problem RESIT  && checkCollision[5]
+		else if (checkCollision[4] && !LogScript.isGameOver)            //problem RESIT  && checkCollision[5]
 		{
             checkCollision[5] = true;
             animator.SetBool("ScriptFound", true);

@@ -30,7 +30,7 @@ public class EnemySpawn : MonoBehaviour
 	/*public GameObject ranger;          //co spawne
 	public GameObject tank;          //co spawne*/
 	public GameObject baseSpawner;    //kde to spawne
-	private int[] waitTime = { 7, 10, 15 , 8};					//soldier, ranger, tank, cant Build
+	private int[] waitTime = { 6, 9, 13 , 6};					//soldier, ranger, tank, cant Build
 	private int[] difficulty = { 8, 5, 4};					//obtiznost hry
 	//
 	//veci ohledne baseHP ci damage pro base
@@ -71,32 +71,21 @@ public class EnemySpawn : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+        /*if(level == 4)
+        {
+            for (int i = 0; i < waitTime.Length; i++)
+            {
+                waitTime[i] = waitTime[i] + 2;
+            }
+        }*/
         if(level != 4 && currHPBase > 0 && hpS.currHPBase > 0)
 		{
 			StartCoroutine(Evolution());
         }
-        //toto slouzi pro spawn vojaku
-        /*if (canSpawn == true && nahoda >= 1 && nahoda <= 3 && currHPBase > 0)
-		{
-			StartCoroutine(CoolDownArmySpawn());
-		}
-		else if(nahoda == 0 || nahoda >= 4)
-		{
-			nahoda = Random.Range(1, 10);
-		}*/
         if (canSpawn == true && currHPBase > 0 && hpS.currHPBase > 0)
 		{
 			StartCoroutine(CoolDownArmySpawn());
 		}
-		//damage pro base						//vse ohledne dmg je vyrazeno, protoze uz existuje lepsi zpusob
-		/*if ((Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null || Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null) && canGetdmgM == true && currHPBase > 0)  //nejaky nepritel muze ubrat zivoty zakladny
-		{
-			StartCoroutine(DmgdealcooldownMelee());
-		}
-		if (Physics2D.OverlapCircle(basePosition.transform.position, 1.4f, opponentRanger) != null && canGetdmgR == true && currHPBase > 0)
-		{
-			StartCoroutine(DmgdealcooldownRange());
-		}*/
         hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / maxHPBase[level], 3f * Time.deltaTime);       //kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
         Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / maxHPBase[level]));                                   //nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
         hpBaseBarcurr.color = healthColor;                      //zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
@@ -131,30 +120,6 @@ public class EnemySpawn : MonoBehaviour
 		nahoda = Random.Range(1, difficulty[2]);			//easy 0, normal 1, hard 2
 		canSpawn = true;
 	}
-    //base bude dostavat dmg od enemy
-    /*IEnumerator DmgdealcooldownMelee()
-	{
-		canGetdmgM = false;
-		if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentSoldier) != null)
-		{
-			currHPBase -= soldierPscript.dmg[progresS.level, 0];                                                      //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        }
-		else if (Physics2D.OverlapCircle(basePosition.transform.position, 0.7f, opponentTank) != null)
-		{
-			currHPBase -= soldierPscript.dmg[progresS.level, 2];                                                      //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        }
-		Debug.Log("Player " + currHPBase);
-		yield return new WaitForSeconds(3);
-		canGetdmgM = true;
-	}
-	IEnumerator DmgdealcooldownRange()
-	{
-		canGetdmgR = false;
-		currHPBase -= soldierPscript.dmg[progresS.level, 1];                                                          //potrebuje sledovani !!!!!!!!!!!!!!!!!!!!!!!!*******
-        Debug.Log("Player " + currHPBase);
-		yield return new WaitForSecondsRealtime(2);
-		canGetdmgR = true;
-	}*/
     void UpgradeHp()										//zachova procentuelne hp pri upgradu			//sledovat fungovani
     {
         if (level > 0)
