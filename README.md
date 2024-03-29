@@ -1,6 +1,9 @@
 # Wish of War
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 056 [26.03.2024]</h2>
+<p>+ Upravení životů s poškozením (scale)</p>
+<br>
 <h2>Update 055 [23.03.2024]</h2>
 <p>+ Upravení obtížnosti hry (dohratelné)</p>
 <p>+ Přidány životy základen (text)</p>
