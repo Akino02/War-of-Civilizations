@@ -228,28 +228,28 @@ public class ProgresScript : MonoBehaviour
 		}
 		//yield return new WaitForSeconds(0);
 	}
-	void Evolution()										//docasne dokud neni button tak se to evolvuje automaticky			//radsi sledovat !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	void Evolution()										//docasne dokud neni button tak se to evolvuje automaticky
 	{
 		if (experience >= nextlevelup && level != 4)			//pokud jeho level neni roven 4 coz je nejvysi uroven tak se muze vylepsit
 		{
 			experience -= nextlevelup;
 			level += 1;
-			for (int i = 0; i < 3; i++)                         //pise do vsech textu, ktere jsou uchovany v poli
+			for (int i = 0; i < actionButtonText.Length/2; i++)                         //pise do vsech textu, ktere jsou uchovany v poli				**mozna pak chyba bude tady
 			{
 				actionButtonText[i].text = "lvl." + (level + 1);
 				actionButtonText[i+(actionButtonText.Length)/2].text = "Cost " + moneyperunit[level, i] + " $";
 			}
-				for (int i = 0; i < 5; i++)						//zde se zmeni vzhled zakladny
+			for (int i = 0; i < baseAppearance.Length; i++)						//zde se zmeni vzhled zakladny
+			{
+				if (level == i)
 				{
-					if (level == i)
-					{
-						baseAppearance[i].SetActive(true);
-					}
-					else
-					{
-						baseAppearance[i].SetActive(false);
-					}
+					baseAppearance[i].SetActive(true);
 				}
+				else
+				{
+					baseAppearance[i].SetActive(false);
+				}
+			}
 			hpS.UpgradeHp();					//pro vylepseni zivotu s tim, ze se zachova %
 		}
 		else if(level == 4)
