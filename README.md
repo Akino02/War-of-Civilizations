@@ -1,6 +1,12 @@
 # Wish of War
 Moje ročníková práce pro školní rok 2023/2024
 
+<h2>Update 057 [29.03.2024]</h2>
+<p>+ Upravení vzhledu krajiny</p>
+<p>+ Upravení vzhledu UI menu</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/451efa17-b074-4eb1-9fad-dedd70e9ccbd" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/196ec56b-7e79-4df3-a584-26e48ae388b1" width="500" height="250"></p>
+<br>
 <h2>Update 056 [26.03.2024]</h2>
 <p>+ Upravení životů s poškozením (scale)</p>
 <br>
