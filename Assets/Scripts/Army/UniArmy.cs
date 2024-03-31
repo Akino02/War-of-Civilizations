@@ -62,8 +62,8 @@ public class UniArmy : MonoBehaviour
 
 
 	//Ohledne utoku
-	private int[,] dmgMin = { { 20, 30, 15 }, { 120, 130, 115 }, { 220, 230, 215 }, { 320, 330, 315 }, { 420, 430, 415 } };             //sila pro vojacky (soldier, ranger, tank)
-	private int[,] dmgMax = { { 40, 60, 30 }, { 140, 160, 130 }, { 240, 260, 230 }, { 340, 360, 330 }, { 340, 360, 330 } };             //sila pro vojacky (soldier, ranger, tank)
+	private int[,] dmgMin = { { 20, 30, 15 }, { 40, 60, 30 }, { 60, 90, 45 }, { 80, 120, 60 }, { 100, 150, 75 } };             //sila pro vojacky (soldier, ranger, tank)
+	private int[,] dmgMax = { { 40, 60, 30 }, { 80, 120, 60 }, { 120, 180, 90 }, { 160, 240, 120 }, { 200, 300, 150 } };             //sila pro vojacky (soldier, ranger, tank)
 	//private int[] betterDmg = { 150, 300, 120 };
 
 	public bool canGiveDmgM = false;                            //Muze bojovat melee
