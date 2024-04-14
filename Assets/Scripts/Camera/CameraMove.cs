@@ -38,7 +38,7 @@ public class CameraMove : MonoBehaviour
 	void Update()
 	{
         //Debug.Log(Input.mousePosition.x);
-        Debug.Log(Input.mousePosition.y);
+        //Debug.Log(Input.mousePosition.y);
         //Debug.Log(Screen.width);
         /*if (!LogScript.isGameOver)
         {

@@ -70,12 +70,12 @@ public class UniArmy : MonoBehaviour
 	public bool canGiveDmgR = false;                            //Muze bojovat na dalku
 
 	//Odmeny za to ze zemre
-	public int[,] moneykill = { { 30, 50, 150 }, { 60, 100, 300 }, { 120, 200, 600 }, { 240, 400, 1200 }, { 480, 800, 2400 } };             //peniza za zabiti nepritele (soldier, ranger, tank)
+	public int[,] moneykill = { { 20, 35, 135 }, { 40, 65, 265 }, { 80, 135, 535 }, { 160, 265, 1065 }, { 320, 535, 2135 } };             //peniza za zabiti nepritele (soldier, ranger, tank)
 	public int[] expperkill = { 100, 125, 300 };                //zkusenosti za zabiti nepritele (soldier, ranger, tank)
 																//
 
 	//TEST
-	public GameObject hitbox;
+	//public GameObject hitbox;
 
 	// Start is called before the first frame update
 	void Start()
@@ -192,7 +192,8 @@ public class UniArmy : MonoBehaviour
 		armyScriptP = null;
 		armyScriptE = null;
 
-		GameObject[] allEnemies = (dir == 1) ? GameObject.FindGameObjectsWithTag("Player") : GameObject.FindGameObjectsWithTag("Enemy");		//pokud true tak hleda tag s player, pokud false tak hleda tag s enemy
+        //pokud true tak hleda tag s player, pokud false tak hleda tag s enemy
+        GameObject[] allEnemies = (dir == 1) ? GameObject.FindGameObjectsWithTag("Player") : GameObject.FindGameObjectsWithTag("Enemy");
 
 		foreach (GameObject obj in allEnemies.Reverse())        //tady se otoci porazi aby bral toho prvniho enemy vzdy
 		{
@@ -424,13 +425,13 @@ public class UniArmy : MonoBehaviour
 		}
 		canGiveDmgR = true;
 	}*/
-	/*private void OnDrawGizmosSelected()     //vykreslí kruh okolo jednotky
+	private void OnDrawGizmosSelected()     //vykreslí kruh okolo jednotky
 	{
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(distanceFromAllie, 0.09f);
 		Gizmos.DrawWireSphere(transform.position, ranges[1]);
 		Gizmos.DrawWireSphere(transform.position, ranges[0]);
-	}*/
+	}
 	/*public void OnTriggerEnter2D(Collider2D hitbox)				//detekce nepritele											PROBLEM tady resit
 	{
 		if (hitbox.gameObject.CompareTag("Enemy") && dir == 0)
