@@ -3,6 +3,9 @@ Moje ročníková práce pro školní rok 2023/2024
 
 <h2>Update 060 [14.04.2024]</h2>
 <p>+ Upravení získávání peněz za zabití nepřítele</p>
+<p>+ Upravení vzhledu menu</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/3c3da5d7-db80-419f-a94d-52cf9e41bb07" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/c70229dc-30db-478a-ac0d-6e960ec621e6" width="500" height="250"></p>
 <br>
 <h2>Update 059 [07.04.2024]</h2>
 <p>+ Pohyb kamery myší</p>
