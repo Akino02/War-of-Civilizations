@@ -509,15 +509,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0.039215688}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 3687fc0a35231514789bc89539b1ac3f, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1486,7 +1486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39516672, y: 0.17300001}
   m_AnchorMax: {x: 0.6025002, y: 0.273}
-  m_AnchoredPosition: {x: 328790.72, y: 860092.25}
+  m_AnchoredPosition: {x: 329060.03, y: 860092.25}
   m_SizeDelta: {x: 377.3469, y: 98.09997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &501958361
@@ -1806,7 +1806,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.296, y: 0.7478889}
   m_AnchorMax: {x: 0.69600004, y: 0.8954075}
-  m_AnchoredPosition: {x: 328783.1, y: 860683.8}
+  m_AnchoredPosition: {x: 328783.1, y: 860683.9}
   m_SizeDelta: {x: 728.0001, y: 144.5682}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &771728293
@@ -1822,15 +1822,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 3687fc0a35231514789bc89539b1ac3f, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2027,7 +2027,7 @@ Transform:
   m_GameObject: {fileID: 1059755690}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 328916.75, y: 860362.4, z: -9796.643}
+  m_LocalPosition: {x: 329186, y: 860362.4, z: -9796.643}
   m_LocalScale: {x: 108, y: 108, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2392,8 +2392,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39516672, y: 0.17300001}
   m_AnchorMax: {x: 0.6025002, y: 0.273}
-  m_AnchoredPosition: {x: 328084.06, y: 859963.5}
-  m_SizeDelta: {x: 209.04001, y: 58.89}
+  m_AnchoredPosition: {x: 328263.44, y: 859960.1}
+  m_SizeDelta: {x: 378.34, y: 91.532}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1246589967
 MonoBehaviour:
@@ -2730,7 +2730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05118751, y: 0.4205926}
   m_AnchorMax: {x: 0.298, y: 0.77400005}
-  m_AnchoredPosition: {x: 328153, y: 860368.06}
+  m_AnchoredPosition: {x: 328333.66, y: 860368.1}
   m_SizeDelta: {x: 449.19873, y: 346.69275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1312684620
@@ -2998,9 +2998,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Author Link
-
-    YouTube'
+  m_Text: 'Author: WaterFlame'
 --- !u!222 &1340940920
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3605,7 +3603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 328083.06, y: 860057.7}
+  m_AnchoredPosition: {x: 328263.72, y: 860057.7}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1821086428
@@ -3643,9 +3641,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Used Music
 
-    Glorious Morning
-
-    Author: WaterFlame'
+    Glorious Morning'
 --- !u!222 &1821086429
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3917,7 +3913,7 @@ Transform:
   m_GameObject: {fileID: 2058342735}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 328916.75, y: 860184.1, z: -9796.643}
+  m_LocalPosition: {x: 329186, y: 860184.1, z: -9796.643}
   m_LocalScale: {x: 108, y: 108, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children:
