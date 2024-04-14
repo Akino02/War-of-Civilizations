@@ -1,7 +1,7 @@
 # Wish of War
 Moje ročníková práce pro školní rok 2023/2024
 
-<h2>Update 059 [14.04.2024]</h2>
+<h2>Update 060 [14.04.2024]</h2>
 <p>+ Upravení získávání peněz za zabití nepřítele</p>
 <br>
 <h2>Update 059 [07.04.2024]</h2>
