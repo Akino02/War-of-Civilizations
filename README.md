@@ -1,6 +1,10 @@
 # Wish of War
 Moje ročníková práce pro školní rok 2023/2024
+- Hra byla vytvořena na základě inspirace hrou [Age of War](https://aowg.fandom.com/wiki/Age_of_War_Wiki)
 
+Ke stažení [ver0.61](https://drive.google.com/file/d/1lB79GAtloPHOvmRdIU9fDPTDtZCWB_nE/view?usp=sharing)
+
+<h1>Postup</h1>
 <h2>Update 060 [14.04.2024]</h2>
 <p>+ Upravení získávání peněz za zabití nepřítele</p>
 <p>+ Upravení vzhledu menu</p>
