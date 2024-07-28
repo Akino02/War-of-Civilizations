@@ -1,8 +1,28 @@
 # Wish of War
 Moje ročníková práce pro školní rok 2023/2024
+- Hra byla vytvořena na základě inspirace hrou [Age of War](https://aowg.fandom.com/wiki/Age_of_War_Wiki)
 
+Vysvětlení hry
+- Ve hře se nacházejí dvě pevnosti jedna pevnost je ovládána hráčem, zatím což ta druhá je ovládána počítačem.
+- Úkol hráče je porazit počítač, tím že zničí základnu nepřítele s jeho jednotkami.
+- Ve hře se nacházejí tři typy jednotek: Soldier, Ranger, Tank.
+- Hráč má také speciální schopnost a tou je katastrofa, která se nachází v levé horní části obrazovky.
+- Po zničení nepřátelské jednotky hráč získá zkušenosti a peníze, kterými vytváří jednotky.
+- Zkušenosti hráč využívá automaticky na vylepšení úrovně základny, která přinese vyšší životy, ale zanechá životy se procentuelně zachovají a také přinese lepší jednotky a vzhled základny.
+
+Ovládání
+- Hra se ovládá za pomoci pohybu myši k hraně obrazovky (levá, pravá) nebo také může použít klávesnice (A - levá, D - pravá, to stejné platí pro šipky)
+- V menu se nachází nastavení ve kterém si hráč může nastavit hlasitost hry a může se podívat na autora hudby, která je použitá ve hře
+
+Hra ke stažení
+- Nejnovější verze: [ver0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
+
+# Postup
 <h2>Update 060 [14.04.2024]</h2>
 <p>+ Upravení získávání peněz za zabití nepřítele</p>
+<p>+ Upravení vzhledu menu</p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/3c3da5d7-db80-419f-a94d-52cf9e41bb07" width="500" height="250"></p>
+<p><img src="https://github.com/Akino02/Project_Unity_001/assets/115136363/c70229dc-30db-478a-ac0d-6e960ec621e6" width="500" height="250"></p>
 <br>
 <h2>Update 059 [07.04.2024]</h2>
 <p>+ Pohyb kamery myší</p>
