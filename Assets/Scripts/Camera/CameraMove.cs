@@ -44,6 +44,7 @@ public class CameraMove : MonoBehaviour
         {
             activeX = Input.GetAxis("Horizontal");                  //definice pohybu(ten pohyb je urcen pro A, D a taky pro levou sipku a pravou sipku)
         }*/
+
         if (!LogScript.isGameOver)
         {
             //pohyb pomoci myse
@@ -59,7 +60,7 @@ public class CameraMove : MonoBehaviour
             else
             {
                 //definice pohybu(ten pohyb je urcen pro A, D a taky pro levou sipku a pravou sipku)
-                activeX = Input.GetAxis("Horizontal");
+                activeX = Input.GetAxisRaw("Horizontal");
             }
         }
         rb.velocity = new Vector2((movespeed * activeX), rb.velocity.y);                                                       //pohyb kamery

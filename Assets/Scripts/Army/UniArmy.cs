@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;								//importovani random
 public class UniArmy : MonoBehaviour
 {
 	//importovane scripty
+	[Header("Importing scripts")]
 	ProgresScript progresS;                                     //importuje script zakladny v levo(hrace)
 	HpScript hpS;                                               //importuje script zakladny v levo(hrace)
 	EnemySpawn enemyS;                                          //importuje script zakladny v pravo(enemy)
@@ -27,10 +28,11 @@ public class UniArmy : MonoBehaviour
     public AudioSource attackSound;
 	public static float sfxSound = 0.35f;
 
-    //
+	//
+	[Header("Attributes")]
     public LayerMask opponent;                                  //layer nepratelskych jednotek typu soldier
 	public LayerMask opponentBase;                              //layer nepratelske zakladny
-	public float[] ranges = { 0.6f, 0.6f, 0.1f };                //velikost kde muze bojovat				//puvodne to bylo { 0.6f, 1.7f, 0.1f}
+	public float[] ranges = { 0.6f, 0.6f, 0.1f };               //velikost kde muze bojovat				//puvodne to bylo { 0.6f, 1.7f, 0.1f}
 	public LayerMask armyType;                                  //typ jednotky
 
 	//zaklad pro pohyb a gravitaci

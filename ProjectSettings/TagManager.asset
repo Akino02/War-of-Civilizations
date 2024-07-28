@@ -16,8 +16,8 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
+  - PlayerUnit
+  - EnemyUnit
   - 
   - SoldierP
   - RangerP
@@ -26,8 +26,8 @@ TagManager:
   - RangerE
   - TankE
   - CameraBorder
-  - Player
-  - Enemy
+  - PlayerBase
+  - EnemyBase
   - Ground
   - Camera
   - 

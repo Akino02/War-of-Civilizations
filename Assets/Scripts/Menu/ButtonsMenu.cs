@@ -30,10 +30,10 @@ public class ButtonsMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainMenu.SetActive(true);                       //nastaveni ze toto menu bude videt pri startu
-        settingMenu.SetActive(false);                   //toto menu bude pri startu vypnute
+        mainMenu.SetActive(true);                           //nastaveni ze toto menu bude videt pri startu
+        settingMenu.SetActive(false);                       //toto menu bude pri startu vypnute
         volumeBarSong.value = CameraFollow.songInGame;      //nastaveni zvuku do hry
-        volumeBarSFX.value = UniArmy.sfxSound;      //nastaveni zvuku do hry
+        volumeBarSFX.value = UniArmy.sfxSound;              //nastaveni zvuku do hry
         showPlayButtonTextSong.text = "Play";
         showPlayButtonTextSFX.text = "Play";
 
@@ -44,7 +44,7 @@ public class ButtonsMenu : MonoBehaviour
     void Update()
     {
         volumeSong = volumeBarSong.value;                       //ziskani hodnoty z posouvadla
-        volumeSFX = volumeBarSFX.value;                       //ziskani hodnoty z posouvadla
+        volumeSFX = volumeBarSFX.value;                         //ziskani hodnoty z posouvadla
         showVolumeValueSong.text = "Volume: " + math.round(volumeSong * 100) + "% Song";     //dosazeni textu pri meneni hodnoty zvuku
         showVolumeValueSFX.text = "Volume: " + math.round(volumeSFX * 100) + "% SFX";     //dosazeni textu pri meneni hodnoty zvuku
     }

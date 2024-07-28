@@ -12,7 +12,7 @@ public class EnemySpawn : MonoBehaviour
 	ProgresScript progresS;                                     //importuje script zakladnu hrace
 	HpScript hpS;
 
-    UniArmy army;                                               //importovani pro pracovani s vojacky
+    ArmyScript army;                                               //importovani pro pracovani s vojacky
     public GameObject objectArmyE;                              //objekt pro propojeni scriptu
 
     /*[SerializeField] GameObject soldierP;						//import objektu
@@ -65,7 +65,7 @@ public class EnemySpawn : MonoBehaviour
         /*soldierPscript = soldierP.GetComponent<SoldierP>();	//import protivnika a jeho promìnných
 		soldierEscript = soldierE.GetComponent<SoldierE>();		//import protivnika a jeho promìnných*/
 
-        army = objectArmyE.GetComponent<UniArmy>();             //propojeni scriptu UniArmy s ProgresScript
+        army = objectArmyE.GetComponent<ArmyScript>();             //propojeni scriptu UniArmy s ProgresScript
     }
 
 	// Update is called once per frame
@@ -91,25 +91,40 @@ public class EnemySpawn : MonoBehaviour
         hpBaseBarcurr.color = healthColor;                      //zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
     }
 
-	IEnumerator CoolDownArmySpawn()								//nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani
+	IEnumerator CoolDownArmySpawn()								//nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani                      //OPRAVIT OPRAVIT OPRAVIT
 	{
 		canSpawn = false;
+        /*for (int unitType = 1; unitType <= army.armyTypeLayer.Length; unitType++)
+        {
+            if(nahoda == unitType)
+            {
+                yield return new WaitForSeconds(waitTime[unitType-1]);
+                army.armyType = army.armyTypeLayer[unitType - 1];
+                Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+            }
+            else
+            {
+                yield return new WaitForSeconds(waitTime[3]);
+                Debug.Log("Cant build");
+            }
+            Debug.Log(nahoda);
+        }*/
 		if(nahoda == 1)
 		{
 			yield return new WaitForSeconds(waitTime[0]);
-            army.armyType = army.soldier;
+            army.armyType = army.armyTypeLayer[0];
             Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		else if(nahoda == 2)
 		{
 			yield return new WaitForSeconds(waitTime[1]);
-            army.armyType = army.ranger;
+            army.armyType = army.armyTypeLayer[0];
             Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		else if(nahoda == 3)
 		{
 			yield return new WaitForSeconds(waitTime[2]);
-            army.armyType = army.tank;
+            army.armyType = army.armyTypeLayer[0];
             Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
 		}
 		else

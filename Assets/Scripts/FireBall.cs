@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-    UniArmy armyScriptE;
+    ArmyScript armyScriptE;
 
-    public GameObject hitBox;
+    //private GameObject hitBox;
 
-    float dmgBall = 100;
-    bool hit = false;
+    [Header("Attributes")]
+    private float damage;
+    private bool hit = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,23 +22,29 @@ public class FireBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < -20 || hit == true)          //pokud propadne nebo se dotkne nepritele
-        {
-            Destroy(gameObject);
-        }
+        DestroyObject();     //pokud propadne nebo se dotkne nepritele
     }
     private void OnTriggerEnter2D(Collider2D hitBox)
     {
         if (hitBox.gameObject.CompareTag("Enemy"))
         {
-            var SoldierArmyScript = hitBox.GetComponent<UniArmy>();
+            var SoldierArmyScript = hitBox.GetComponent<ArmyScript>();
             armyScriptE = SoldierArmyScript;                    //dosazeni scriptu za objekt
-            dmgBall = (armyScriptE.maxhp[armyScriptE.lvl, 2] / 3) / 2;
+            damage = (armyScriptE.maxhp[armyScriptE.lvl, 2] / 3) / 2;
             if (hit == false)
             {
-                armyScriptE.currhp -= dmgBall;                      //nastaveni poskozeni fireballu podle toho kolik dana postavicka ma hp
+                armyScriptE.currhp -= damage;                      //nastaveni poskozeni fireballu podle toho kolik dana postavicka ma hp
             }
             hit = true;
+        }
+    }
+
+    private void DestroyObject()
+    {
+        if(transform.position.y < -20 || hit == true)
+        {
+            Destroy(gameObject);
+            return;
         }
     }
 }

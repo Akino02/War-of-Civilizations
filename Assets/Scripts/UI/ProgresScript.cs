@@ -8,7 +8,7 @@ public class ProgresScript : MonoBehaviour
 	ButtonScript buttonS;
 	HpScript hpS;
 
-	UniArmy army;                                               //importovani pro pracovani s vojacky
+	ArmyScript army;                                               //importovani pro pracovani s vojacky
 	public GameObject objectArmyP;								//objekt pro propojeni scriptu
 
 	//funkce zakladny ukazuje zkusenosti(%), pocet penez, co se vyrabi, co je ve fronte
@@ -58,7 +58,7 @@ public class ProgresScript : MonoBehaviour
         buttonS = GetComponent<ButtonScript>();					//propojeni zakladnich scriptu pro funkci UI
 		hpS = GetComponent<HpScript>();							//propojeni zakladnich scriptu pro funkci UI
 
-		army = objectArmyP.GetComponent<UniArmy>();				//propojeni scriptu UniArmy s ProgresScript
+		army = objectArmyP.GetComponent<ArmyScript>();				//propojeni scriptu UniArmy s ProgresScript
 																//nastaveni aktualnich penez
 		moneyText.text = money.ToString();
 		experienceText.text = experienceinprocents.ToString() + "%";
@@ -154,9 +154,18 @@ public class ProgresScript : MonoBehaviour
 				made += 1;
 				//timer = 0;
 				progBar.fillAmount = 0f;
-				if (orderv2[0] == 1)
+				for (int unitType = 1; unitType <= army.armyTypeLayer.Length; unitType++)
 				{
-					army.armyType = army.soldier;
+					if (orderv2[0] == unitType)
+					{
+                        army.armyType = army.armyTypeLayer[orderv2[0]-1];
+                        Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
+                        Debug.Log("Byl vyroben " + army.armyTypeNum);
+                    }
+				}
+				/*if (orderv2[0] == 1)
+				{
+					army.armyType = army.armyTypeLayer[orderv2[0]];
 					Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
 					Debug.Log("Byl vyroben Soldier");
 				}
@@ -169,7 +178,7 @@ public class ProgresScript : MonoBehaviour
 				{
 					army.armyType = army.tank;
 					Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
-				}
+				}*/
 				//Debug.Log("Byl vyroben " + order);
 				order -= 1;
 				if (order >= 0)
@@ -270,9 +279,11 @@ public class ProgresScript : MonoBehaviour
         int i = 0;
         while (i <= 30)
         {
-            float randomPosX = Random.Range(borderL.transform.position.x, borderR.transform.position.x);
-            Vector3 disasterZonePos = new Vector3(randomPosX, disasterZone.transform.position.y, fireBall.transform.position.z);
-            Instantiate(fireBall, disasterZonePos, disasterZone.transform.rotation);
+            float randomPosX = Random.Range(borderL.transform.position.x, borderR.transform.position.x);								//
+			float randomRotZ = Random.Range(0, 360);																					//
+            Quaternion changedRotationZ = Quaternion.Euler(disasterZone.transform.rotation.x, 0, randomRotZ);							//
+            Vector3 disasterZonePos = new Vector3(randomPosX, disasterZone.transform.position.y, fireBall.transform.position.z);		//
+            Instantiate(fireBall, disasterZonePos, changedRotationZ);
             yield return new WaitForSeconds(0.4f);
             i += 1;
         }
@@ -280,7 +291,7 @@ public class ProgresScript : MonoBehaviour
 
 	public void WaitDisaster()
 	{
-        if (waitDisasterFillBox.fillAmount > 0)					//
+        if (waitDisasterFillBox.fillAmount > 0)
 		{
             waitDisasterFill = (Time.deltaTime / waitingTimeForDisaster);				//definice rychlosti klesani (cas snimku/celkova doba cekani)
             waitDisasterFillBox.fillAmount = Mathf.Lerp(waitDisasterFillBox.fillAmount, waitDisasterFillBox.fillAmount -1f, waitDisasterFill);		//min, max, speed
