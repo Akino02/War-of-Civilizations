@@ -1,6 +1,7 @@
-# Wish of War
+# War of Civilizations
 Moje ročníková práce pro školní rok 2023/2024
 - Hra byla vytvořena na základě inspirace hrou [Age of War](https://aowg.fandom.com/wiki/Age_of_War_Wiki)
+- Ku dnešnímu dni se snažím od té inspirace odklonit
 
 Vysvětlení hry
 - Ve hře se nacházejí dvě pevnosti jedna pevnost je ovládána hráčem, zatím což ta druhá je ovládána počítačem.
