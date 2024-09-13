@@ -19,6 +19,12 @@ Hra ke stažení
 - Nejnovější verze: [ver0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
 
 # Postup
+<h2>Update 062 [13.09.2024]</h2>
+<p>+ Z ročníkové práce se stala Maturitní</p>
+<p>+ Opravení bojového systému</p>
+<br>
+
+# Postup
 <h2>Update 061 [28.07.2024]</h2>
 <p>+ Opravení bojového systému</p>
 <p>+ Plány pro vylepšení hry započaty</p>
