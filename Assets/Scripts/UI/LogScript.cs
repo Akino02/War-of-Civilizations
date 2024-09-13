@@ -39,13 +39,13 @@ public class LogScript : MonoBehaviour
     // Update is called once per frame
     void Update()                               //kontrola zda se furt hraje
     {
-        if (hpS.currHPBase <= 0 || enemyS.currHPBase <= 0)
+        if (HpScript.currHPBase <= 0 || EnemySpawn.currHPBase <= 0)
         {
             isGameOver = true;
             endGameMenu.SetActive(true);
             escapeButtonBack.SetActive(false);
             Debug.Log("Game is Over but why");
-            if(hpS.currHPBase <= 0)
+            if(HpScript.currHPBase <= 0)
             {
                 winnerText.text = "You Lost!";
             }

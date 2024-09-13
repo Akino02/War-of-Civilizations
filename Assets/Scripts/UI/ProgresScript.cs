@@ -9,7 +9,7 @@ public class ProgresScript : MonoBehaviour
 	ButtonScript buttonS;
 	HpScript hpS;
 
-	ArmyScript army;                                               //importovani pro pracovani s vojacky
+    UnitScript army;                                               //importovani pro pracovani s vojacky
 	public GameObject objectArmyP;                              //objekt pro propojeni scriptu
 
     //funkce zakladny ukazuje rychlost plneni, zkusenosti(%), pocet penez, co se vyrabi, co je ve fronte
@@ -17,7 +17,7 @@ public class ProgresScript : MonoBehaviour
     public float speedOfFill = 3f;
 	public static int experience = 0;									//zkusenosti
 	public int experienceinprocents = 0;						//zkusenosti
-	public int nextlevelup = 4000;                              //pokud dosahne tolika zkusenosti tak se evolvuje			//potrebuje i prenastavit v unity!!
+	//public int nextlevelup = 4000;                              //pokud dosahne tolika zkusenosti tak se evolvuje			//potrebuje i prenastavit v unity!!
 	public static int level = 0;                                       //toto ukazuje level evoluce v zakladu je to 0
 	public static int money = 175;                                     //penize			
 	public int order = 0;                                       //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
@@ -38,7 +38,7 @@ public class ProgresScript : MonoBehaviour
 	//vyrobnik v procentech graficky
 	[Header("Crafting")]
 	public Image progBar;
-	public int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };		//vícerozmìrné pole pro cenu jednotek	//potrebuje upravu
+	//public int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };		//vícerozmìrné pole pro cenu jednotek	//potrebuje upravu
 	private int[] waitTime = { 5, 8, 10 };                      //vyroba soldiera, rangera, tanka
 	private float speedOfBar = 0f;								//kolik bude vyplnovat v progbaru
 	//public float timer = 0;
@@ -69,7 +69,7 @@ public class ProgresScript : MonoBehaviour
         buttonS = GetComponent<ButtonScript>();					//propojeni zakladnich scriptu pro funkci UI
 		hpS = GetComponent<HpScript>();							//propojeni zakladnich scriptu pro funkci UI
 
-		army = objectArmyP.GetComponent<ArmyScript>();				//propojeni scriptu UniArmy s ProgresScript
+		army = objectArmyP.GetComponent<UnitScript>();				//propojeni scriptu UniArmy s ProgresScript
 																//nastaveni aktualnich penez
 		moneyText.text = money.ToString();
 		experienceText.text = experienceinprocents.ToString() + "%";
@@ -78,7 +78,7 @@ public class ProgresScript : MonoBehaviour
         for (int i = 0; i < 3; i++)								//na zacatku se definuje co tam bude na tom buttonu
         {
             actionButtonText[i].text = "lvl." + (level + 1);
-            actionButtonText[i + (actionButtonText.Length) / 2].text = "Cost " + moneyperunit[level, i] + " $";
+            actionButtonText[i + (actionButtonText.Length) / 2].text = "Cost " + UnityConfiguration.moneyperunit[level, i] + " $";
         }
     }
 
@@ -253,14 +253,14 @@ public class ProgresScript : MonoBehaviour
 	}
 	void Evolution()										//docasne dokud neni button tak se to evolvuje automaticky
 	{
-		if (experience >= nextlevelup && level != 4)			//pokud jeho level neni roven 4 coz je nejvysi uroven tak se muze vylepsit
+		if (experience >= UnityConfiguration.nextlevelup && level != 4)			//pokud jeho level neni roven 4 coz je nejvysi uroven tak se muze vylepsit
 		{
-			experience -= nextlevelup;
+			experience -= UnityConfiguration.nextlevelup;
 			level += 1;
 			for (int i = 0; i < actionButtonText.Length/2; i++)                         //pise do vsech textu, ktere jsou uchovany v poli				**mozna pak chyba bude tady
 			{
 				actionButtonText[i].text = "lvl." + (level + 1);
-				actionButtonText[i+(actionButtonText.Length)/2].text = "Cost " + moneyperunit[level, i] + " $";
+				actionButtonText[i+(actionButtonText.Length)/2].text = "Cost " + UnityConfiguration.moneyperunit[level, i] + " $";
 			}
 			for (int i = 0; i < baseAppearance.Length; i++)						//zde se zmeni vzhled zakladny
 			{
@@ -288,7 +288,7 @@ public class ProgresScript : MonoBehaviour
 	}
 	void ExperienceBar()
 	{
-        experienceinprocents = ((100 * experience) / nextlevelup);              //vytvori proceznta ze zkusenosti
+        experienceinprocents = ((100 * experience) / UnityConfiguration.nextlevelup);              //vytvori proceznta ze zkusenosti
 		xpBar.fillAmount = Mathf.Lerp(xpBar.fillAmount, (float)experienceinprocents/100f, speedOfFill*Time.deltaTime);
 		//Debug.Log(experience / nextlevelup);
         return;

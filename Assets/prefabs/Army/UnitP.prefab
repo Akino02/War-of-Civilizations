@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 8987014445265564340}
   - component: {fileID: 160252255419969603}
   m_Layer: 7
-  m_Name: UnitPv5
+  m_Name: UnitP
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

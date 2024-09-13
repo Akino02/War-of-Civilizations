@@ -12,7 +12,7 @@ public class EnemySpawn : MonoBehaviour
 	ProgresScript progresS;                                     //importuje script zakladnu hrace
 	HpScript hpS;
 
-    ArmyScript army;                                               //importovani pro pracovani s vojacky
+    UnitScript army;                                               //importovani pro pracovani s vojacky
     public GameObject objectArmyE;                              //objekt pro propojeni scriptu
 
     /*[SerializeField] GameObject soldierP;						//import objektu
@@ -33,8 +33,8 @@ public class EnemySpawn : MonoBehaviour
 	private int[] difficulty = { 8, 5, 4};					//obtiznost hry
 	//
 	//veci ohledne baseHP ci damage pro base
-	public float[] maxHPBase = {1000,2000,3000,4000,5000};		//zivoty zakladny
-	public float currHPBase;
+	//public float[] maxHPBase = {1000,2000,3000,4000,5000};		//zivoty zakladny
+	public static float currHPBase;
 	public float hpbaseinprocents = 1f;
 
 	public static int level = 0;
@@ -64,7 +64,9 @@ public class EnemySpawn : MonoBehaviour
         /*soldierPscript = soldierP.GetComponent<SoldierP>();	//import protivnika a jeho promìnných
 		soldierEscript = soldierE.GetComponent<SoldierE>();		//import protivnika a jeho promìnných*/
 
-        army = objectArmyE.GetComponent<ArmyScript>();             //propojeni scriptu UniArmy s ProgresScript
+        army = objectArmyE.GetComponent<UnitScript>();             //propojeni scriptu UniArmy s ProgresScript
+
+        currHPBase = UnityConfiguration.maxHPBase[level];
     }
 
 	// Update is called once per frame
@@ -77,16 +79,16 @@ public class EnemySpawn : MonoBehaviour
                 waitTime[i] = waitTime[i] + 2;
             }
         }*/
-        if(level != 4 && currHPBase > 0 && hpS.currHPBase > 0)
+        if(level != 4 && currHPBase > 0 && HpScript.currHPBase > 0)
 		{
 			StartCoroutine(Evolution());
         }
-        if (canSpawn == true && currHPBase > 0 && hpS.currHPBase > 0)
+        if (canSpawn == true && currHPBase > 0 && HpScript.currHPBase > 0)
 		{
 			StartCoroutine(CoolDownArmySpawn());
 		}
-        hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / maxHPBase[level], 3f * Time.deltaTime);       //kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
-        Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / maxHPBase[level]));                                   //nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
+        hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / UnityConfiguration.maxHPBase[level], 3f * Time.deltaTime);       //kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
+        Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / UnityConfiguration.maxHPBase[level]));                                   //nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
         hpBaseBarcurr.color = healthColor;                      //zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
     }
 
@@ -139,9 +141,9 @@ public class EnemySpawn : MonoBehaviour
         if (level > 0)
         {
             Debug.Log(currHPBase);
-            Debug.Log(maxHPBase[level - 1]);
-            hpbaseinprocents = currHPBase / maxHPBase[level - 1];						//pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
-            currHPBase = hpbaseinprocents * maxHPBase[level];						//vypocita aktualniho poctu hp v novych zivotech
+            Debug.Log(UnityConfiguration.maxHPBase[level - 1]);
+            hpbaseinprocents = currHPBase / UnityConfiguration.maxHPBase[level - 1];						//pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
+            currHPBase = hpbaseinprocents * UnityConfiguration.maxHPBase[level];						//vypocita aktualniho poctu hp v novych zivotech
         }
         //yield return currHPBase;
     }
@@ -149,7 +151,7 @@ public class EnemySpawn : MonoBehaviour
     {
         if (evolving == false && level != 4 && canSpawn == true)
         {
-			if (ProgresScript.experience >= (progresS.nextlevelup * EvolveExperiencePro) / 100 && ProgresScript.level == level)		//urcit jinak podminku
+			if (ProgresScript.experience >= (UnityConfiguration.nextlevelup * EvolveExperiencePro) / 100 && ProgresScript.level == level)		//urcit jinak podminku
 			{
                 evolving = true;
                 yield return new WaitForSeconds(lvlTypeWait);

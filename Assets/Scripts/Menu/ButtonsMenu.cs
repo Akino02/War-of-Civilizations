@@ -33,7 +33,7 @@ public class ButtonsMenu : MonoBehaviour
         mainMenu.SetActive(true);                           //nastaveni ze toto menu bude videt pri startu
         settingMenu.SetActive(false);                       //toto menu bude pri startu vypnute
         volumeBarSong.value = CameraFollow.songInGame;      //nastaveni zvuku do hry
-        volumeBarSFX.value = ArmyScript.sfxSound;              //nastaveni zvuku do hry
+        volumeBarSFX.value = UnitScript.sfxSound;              //nastaveni zvuku do hry
         showPlayButtonTextSong.text = "Play";
         showPlayButtonTextSFX.text = "Play";
 

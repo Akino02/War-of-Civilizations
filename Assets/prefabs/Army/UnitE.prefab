@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 8987014445265564340}
   - component: {fileID: 160252255419969603}
   m_Layer: 8
-  m_Name: UnitEv5
+  m_Name: UnitE
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,7 +352,7 @@ MonoBehaviour:
   hpBar: {fileID: 4047639467630880016}
   currhp: 100
   lvl: 0
-  dir: 1
+  team: 1
 --- !u!1 &4047639467630880016
 GameObject:
   m_ObjectHideFlags: 0

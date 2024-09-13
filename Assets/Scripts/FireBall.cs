@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-    ArmyScript armyScriptE;
+    UnitScript armyScriptE;
 
     //private GameObject hitBox;
 
@@ -28,9 +28,9 @@ public class FireBall : MonoBehaviour
     {
         if (hitBox.gameObject.CompareTag("Enemy"))
         {
-            var SoldierArmyScript = hitBox.GetComponent<ArmyScript>();
+            var SoldierArmyScript = hitBox.GetComponent<UnitScript>();
             armyScriptE = SoldierArmyScript;                    //dosazeni scriptu za objekt
-            damage = (armyScriptE.maxhp[armyScriptE.lvl, 2] / 3) / 2;
+            damage = (UnityConfiguration.maxhp[armyScriptE.lvl, 2] / 3) / 2;
             if (hit == false)
             {
                 armyScriptE.currhp -= damage;                      //nastaveni poskozeni fireballu podle toho kolik dana postavicka ma hp
