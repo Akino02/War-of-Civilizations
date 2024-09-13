@@ -44,6 +44,7 @@ public class LogScript : MonoBehaviour
             isGameOver = true;
             endGameMenu.SetActive(true);
             escapeButtonBack.SetActive(false);
+            Debug.Log("Game is Over but why");
             if(hpS.currHPBase <= 0)
             {
                 winnerText.text = "You Lost!";

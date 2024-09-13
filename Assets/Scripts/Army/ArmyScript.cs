@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -87,8 +88,9 @@ public class ArmyScript : MonoBehaviour
 	private int[,] moneykill = { { 20, 35, 135 }, { 40, 65, 265 }, { 80, 135, 535 }, { 160, 265, 1065 }, { 320, 535, 2135 } };             //peniza za zabiti nepritele (soldier, ranger, tank)
 	private int[] expperkill = { 100, 125, 300 };                //zkusenosti za zabiti nepritele (soldier, ranger, tank)
 																//
-	/*//TEST
-	public GameObject hitbox;*/
+	//TEST
+	private float distance;
+	private float previousdistance;
 
 	// Start is called before the first frame update
 	void Start()
@@ -107,12 +109,11 @@ public class ArmyScript : MonoBehaviour
 
 		if (dir == 0)
 		{
-			lvl = progresS.level;                               //zde se urci jaky level bude mit pro hrace
+			lvl = ProgresScript.level;                               //zde se urci jaky level bude mit pro hrace
 		}
 		else
 		{
-			lvl = enemyS.level;                                 //zde se urci jaky level bude mit pro nepritele
-			transform.Rotate(0f, 180f, 0f);
+			lvl = EnemySpawn.level;                                 //zde se urci jaky level bude mit pro nepritele
 		}
 
 		for (int layer = 0; layer < armyTypeLayer.Length; layer++)
@@ -176,7 +177,7 @@ public class ArmyScript : MonoBehaviour
 	void Update()
 	{
 		DetectEnemy();
-		CheckForEnemy();
+		CheckForCollision();
 		Move();
 		CheckDead();
 		UpdateHP();
@@ -280,11 +281,20 @@ public class ArmyScript : MonoBehaviour
 		Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(transform.position, unitRange, opponent);
 		if (detectedObjects.Length > 0)
 		{
-			for (int i = 0; i < detectedObjects.Length; i++)
+            distance = 5f;
+            for (int i = 0; i < detectedObjects.Length; i++)
 			{
-				SoldierArmyScript = detectedObjects[detectedObjects.Length - 1].GetComponent<ArmyScript>();
-				armyScriptForOpponent = SoldierArmyScript;
-			}
+                /*Debug.Log(Mathf.Abs(transform.position.x) + gameObject.name + i);
+                Debug.Log(Mathf.Abs(detectedObjects[i].transform.position.x) + gameObject.name + i);*/
+                if (Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x) < distance)
+				{
+					distance = Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x);
+                    SoldierArmyScript = detectedObjects[i].GetComponent<ArmyScript>();
+					armyScriptForOpponent = SoldierArmyScript;
+                }
+                /*SoldierArmyScript = detectedObjects[detectedObjects.Length - 1].GetComponent<ArmyScript>();
+                armyScriptForOpponent = SoldierArmyScript;*/
+            }
 
 			//Debug.Log(armyScriptForOpponent.currhp);
 			foundEnemy = true;
@@ -295,7 +305,7 @@ public class ArmyScript : MonoBehaviour
 		//animator.SetBool("ScriptFound", false);
 		return;
 	}
-	private void CheckForEnemy()                                                                                                            //ZATIM NENI OK NEVIM ZDA BUDE FUNGOVAT BEZ NOTFULLSIZE
+	private void CheckForCollision()                                                                                                            //ZATIM NENI OK NEVIM ZDA BUDE FUNGOVAT BEZ NOTFULLSIZE
 	{
 		//float notFullsize = 0.30f;                              //slouzi pro mensi odstup od objektu, aby kontroloval odstup mezi spojenci
 
@@ -369,8 +379,8 @@ public class ArmyScript : MonoBehaviour
 		//Debug.Log("can attack");
 		animator.SetBool("ScriptFound", true);
 		yield return new WaitForSeconds(attackDelay);
-		//Debug.Log("Attacking");
-		int randomDmg = Random.Range(dmgMin[lvl, armyTypeNum], dmgMax[lvl, armyTypeNum]);
+        //Debug.Log("Attacking");
+        int randomDmg = Random.Range(dmgMin[lvl, armyTypeNum], dmgMax[lvl, armyTypeNum]);
 		if (checkCollision[0] && foundEnemy == true)
 		{
 			armyScriptForOpponent.currhp -= randomDmg;
@@ -398,8 +408,8 @@ public class ArmyScript : MonoBehaviour
 
 	private void Reward()
 	{
-		progresS.money += moneykill[lvl, armyTypeNum];
-		progresS.experience += expperkill[armyTypeNum];
+		ProgresScript.money += moneykill[lvl, armyTypeNum];
+        ProgresScript.experience += expperkill[armyTypeNum];
 		//Debug.Log(moneykill[lvl, armyTypeNum - 1]);
 		//Debug.Log(expperkill[armyTypeNum - 1]);
 	}

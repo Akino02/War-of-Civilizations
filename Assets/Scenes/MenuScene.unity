@@ -516,7 +516,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3687fc0a35231514789bc89539b1ac3f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ecc0d0d0cc855814bbc7d49428c14c0d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1298,7 +1298,7 @@ GameObject:
   - component: {fileID: 465408389}
   - component: {fileID: 465408390}
   m_Layer: 5
-  m_Name: Begin
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1486,7 +1486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39516672, y: 0.17300001}
   m_AnchorMax: {x: 0.6025002, y: 0.273}
-  m_AnchoredPosition: {x: 329060.03, y: 860092.25}
+  m_AnchoredPosition: {x: 329060.06, y: 860092.25}
   m_SizeDelta: {x: 377.3469, y: 98.09997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &501958361
@@ -1806,7 +1806,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.296, y: 0.7478889}
   m_AnchorMax: {x: 0.69600004, y: 0.8954075}
-  m_AnchoredPosition: {x: 328783.1, y: 860683.9}
+  m_AnchoredPosition: {x: 328783.1, y: 860683.94}
   m_SizeDelta: {x: 728.0001, y: 144.5682}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &771728293
@@ -1829,7 +1829,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3687fc0a35231514789bc89539b1ac3f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ed5c22c9f280c9844a471915db2d8c79, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2392,7 +2392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39516672, y: 0.17300001}
   m_AnchorMax: {x: 0.6025002, y: 0.273}
-  m_AnchoredPosition: {x: 328263.44, y: 859960.1}
+  m_AnchoredPosition: {x: 328263.47, y: 859960.1}
   m_SizeDelta: {x: 378.34, y: 91.532}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1246589967
@@ -3357,7 +3357,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 110
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 110
     m_Alignment: 4
@@ -3366,7 +3366,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wish of War
+  m_Text: '  War of Civilizations  '
 --- !u!222 &1678452128
 CanvasRenderer:
   m_ObjectHideFlags: 0

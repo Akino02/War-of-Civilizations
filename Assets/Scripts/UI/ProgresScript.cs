@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,41 +10,51 @@ public class ProgresScript : MonoBehaviour
 	HpScript hpS;
 
 	ArmyScript army;                                               //importovani pro pracovani s vojacky
-	public GameObject objectArmyP;								//objekt pro propojeni scriptu
+	public GameObject objectArmyP;                              //objekt pro propojeni scriptu
 
-	//funkce zakladny ukazuje zkusenosti(%), pocet penez, co se vyrabi, co je ve fronte
-	public int experience = 0;									//zkusenosti
+    //funkce zakladny ukazuje rychlost plneni, zkusenosti(%), pocet penez, co se vyrabi, co je ve fronte
+    [Header("Base stats")]
+    public float speedOfFill = 3f;
+	public static int experience = 0;									//zkusenosti
 	public int experienceinprocents = 0;						//zkusenosti
 	public int nextlevelup = 4000;                              //pokud dosahne tolika zkusenosti tak se evolvuje			//potrebuje i prenastavit v unity!!
-	public int level = 0;                                       //toto ukazuje level evoluce v zakladu je to 0
-	public int money = 175;                                     //penize			
+	public static int level = 0;                                       //toto ukazuje level evoluce v zakladu je to 0
+	public static int money = 175;                                     //penize			
 	public int order = 0;                                       //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
 	public int made = 0;
 	public int[] orderv2 = { 0, 0, 0, 0, 0 };                   //poradi jednotek
-	public GameObject[] baseAppearance = new GameObject[4];     //vzhled budov v array ohledne nove evoluce
+    [Header("Base appearance")]
+    public GameObject[] baseAppearance = new GameObject[4];     //vzhled budov v array ohledne nove evoluce
 
-	public Text experienceText;                                 //Prehled ohledne dalsi evoluce v %
+    [Header("Text")]
+    public Text experienceText;                                 //Prehled ohledne dalsi evoluce v %
 	public Text moneyText;                                      //Prehled kolik ma hrac financi
+    public Text trainText;                                      //tento text se bude prepisovat podle toho co se vyrabi
 
-	public GameObject playerSpawner;                            //misto kde se tyto objekty spawnou
+    [Header("Spawner")]
+    public GameObject playerSpawner;                            //misto kde se tyto objekty spawnou
 
 
 	//vyrobnik v procentech graficky
+	[Header("Crafting")]
 	public Image progBar;
 	public int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };		//vícerozmìrné pole pro cenu jednotek	//potrebuje upravu
 	private int[] waitTime = { 5, 8, 10 };                      //vyroba soldiera, rangera, tanka
-	public float progbarfill = 0f;								//kolik bude vyplnovat v progbaru
+	private float speedOfBar = 0f;								//kolik bude vyplnovat v progbaru
 	//public float timer = 0;
 	public bool canProduce = true;                              //zda muze vyrabet
 	public Text[] actionButtonText = new Text[6];               //upraveni textu u buttonu soldier, ranger, tank		//pozdeji budou jeste dalsi dva na dobrovolny update evoluce a pro pohromy
 
 	public Image[] orderVizual = new Image[5];
+                                                                //
 
-	public Text trainText;                                      //tento text se bude prepisovat podle toho co se vyrabi
-																//
+    //ukazuje zkusenosti graficky
+    [Header("XP bar")]
+    public Image xpBar;
 
-	//Katastrofa
-	public GameObject fireBall;
+    //Katastrofa
+    [Header("Disaster")]
+    public GameObject fireBall;
 	public GameObject borderL;
     public GameObject borderR;
     public GameObject disasterZone;
@@ -74,8 +85,8 @@ public class ProgresScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		OrderView();											//graficke videni fronty
-		experienceinprocents = ((100 * experience) / nextlevelup);				//vytvori proceznta ze zkusenosti
+		OrderView();                                            //graficke videni fronty
+		ExperienceBar();
 		moneyText.text = money.ToString();						//opakovatelne se budou vpisovat penize do textu
 		Evolution();							//funkce pro vylepsovani urovne doby
 		if (order > 0 && !LogScript.isGameOver)					//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
@@ -87,7 +98,7 @@ public class ProgresScript : MonoBehaviour
 		{
 			WaitDisaster();
         }
-	}
+    }
 	/*IEnumerator Orderfactory()                                  //bude vyrabet jednoho 5s           //pak udelat na if (aby se menil ten vyrobni cas)              // pozdeji udelat smooth
 	{
 		if (order > 0 && progbarinprocents != 1f && canProduce == true)
@@ -142,11 +153,11 @@ public class ProgresScript : MonoBehaviour
 			canProduce = false;
 			//timer += 1;										//je to trosicku opozdene, ale nevadi
 			TrainingText();                     //zacne se psat co se vyrabi
-			progbarfill = (Time.deltaTime / waitTime[orderv2[0] - 1]);        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
+			speedOfBar = (Time.deltaTime / waitTime[orderv2[0] - 1]);        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
 			//Debug.Log(progbarfill);
 			//progBar.fillAmount = progbarinprocents;
 			//yield return new WaitForSecondsRealtime(1);
-			progBar.fillAmount = Mathf.Lerp(progBar.fillAmount, progBar.fillAmount + 1f, progbarfill);      //min, max, speed
+			progBar.fillAmount = Mathf.Lerp(progBar.fillAmount, progBar.fillAmount + 1f, speedOfBar);      //min, max, speed
 																											//yield return new WaitForSecondsRealtime(1);
             canProduce = true;
 			if (progBar.fillAmount >= 1f)
@@ -186,16 +197,17 @@ public class ProgresScript : MonoBehaviour
 					OrderSorter();
 				}
 			}
-		}
+        }
 		if (order == 0)
 		{
-			//timer = 0;
-			//progbarinprocents = ((100 * timer) / waitTime[orderv2[0]]) / 100;
-			progbarfill = 0;
-			progBar.fillAmount = progbarfill;
+            //timer = 0;
+            //progbarinprocents = ((100 * timer) / waitTime[orderv2[0]]) / 100;
+            speedOfBar = 0;
+			progBar.fillAmount = speedOfBar;
 			TrainingText();                     //zapise se viditelne ze se nic nevyrabi
 		}
-	}
+        return;
+    }
 	private void OrderView()                                    //toto zajistuje vizualni frontu vyroby jednotek
 	{
 		for (int i = 0; i < 5; i++)
@@ -209,7 +221,8 @@ public class ProgresScript : MonoBehaviour
 				orderVizual[i].fillAmount = 1;
 			}
 		}
-	}
+        return;
+    }
 	void OrderSorter()                                   //toto serazuje array podle toho co je na rade ve vyrobe
 	{
 		for (int i = 0; i < 5; i++)
@@ -223,8 +236,8 @@ public class ProgresScript : MonoBehaviour
 				orderv2[i] = 0;
 			}
 		}
-		//yield return order;
-	}
+        return;
+    }
 	void TrainingText()                                  //slouzi proto, aby clovek videl co se prave vyrabi
 	{
 		string[] trainingTextWrite = { "Nothing...", "Training Soldier...", "Training Ranger...", "Training Tank..." };
@@ -236,6 +249,7 @@ public class ProgresScript : MonoBehaviour
 			}
 		}
 		//yield return new WaitForSeconds(0);
+		return;
 	}
 	void Evolution()										//docasne dokud neni button tak se to evolvuje automaticky
 	{
@@ -270,6 +284,14 @@ public class ProgresScript : MonoBehaviour
 			experienceText.text = experienceinprocents.ToString() + "%";
 		}
 		//yield return experience;
+		return;
+	}
+	void ExperienceBar()
+	{
+        experienceinprocents = ((100 * experience) / nextlevelup);              //vytvori proceznta ze zkusenosti
+		xpBar.fillAmount = Mathf.Lerp(xpBar.fillAmount, (float)experienceinprocents/100f, speedOfFill*Time.deltaTime);
+		//Debug.Log(experience / nextlevelup);
+        return;
 	}
     public IEnumerator SpawnFireBall()
     {
@@ -287,6 +309,7 @@ public class ProgresScript : MonoBehaviour
             yield return new WaitForSeconds(0.4f);
             i += 1;
         }
+		yield return null;
     }
 
 	public void WaitDisaster()
@@ -302,5 +325,6 @@ public class ProgresScript : MonoBehaviour
 			waitDisasterFillBox.fillAmount = waitDisasterFill;
 			canDoDisaster = true;
         }
+		return;
     }
 }

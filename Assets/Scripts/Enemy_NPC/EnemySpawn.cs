@@ -29,7 +29,6 @@ public class EnemySpawn : MonoBehaviour
 	public GameObject soldier;          //co spawne
 	/*public GameObject ranger;          //co spawne
 	public GameObject tank;          //co spawne*/
-	public GameObject baseSpawner;    //kde to spawne
 	private int[] waitTime = { 6, 9, 13 , 6};					//soldier, ranger, tank, cant Build
 	private int[] difficulty = { 8, 5, 4};					//obtiznost hry
 	//
@@ -38,7 +37,7 @@ public class EnemySpawn : MonoBehaviour
 	public float currHPBase;
 	public float hpbaseinprocents = 1f;
 
-	public int level = 0;
+	public static int level = 0;
 	public int lvlTypeWait = 15;							//cas byl upraven a jeste podminka pro evoluce
 	public bool evolving = false;
 	private int EvolveExperiencePro = 90;						//procenta zkusenosti od, kterych se zacne vylepsovat enemy
@@ -113,26 +112,26 @@ public class EnemySpawn : MonoBehaviour
 		{
 			yield return new WaitForSeconds(waitTime[0]);
             army.armyType = army.armyTypeLayer[0];
-            Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+            Instantiate(soldier, transform.position, transform.rotation);
 		}
 		else if(nahoda == 2)
 		{
 			yield return new WaitForSeconds(waitTime[1]);
             army.armyType = army.armyTypeLayer[0];
-            Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+            Instantiate(soldier, transform.position, transform.rotation);
 		}
 		else if(nahoda == 3)
 		{
 			yield return new WaitForSeconds(waitTime[2]);
             army.armyType = army.armyTypeLayer[0];
-            Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+            Instantiate(soldier, transform.position, transform.rotation);
 		}
 		else
 		{
 			yield return new WaitForSeconds(waitTime[3]);
 			Debug.Log("Cant build");
 		}
-		nahoda = Random.Range(1, difficulty[2]);			//easy 0, normal 1, hard 2
+        nahoda = Random.Range(1, difficulty[2]);			//easy 0, normal 1, hard 2
 		canSpawn = true;
 	}
     void UpgradeHp()										//zachova procentuelne hp pri upgradu			//sledovat fungovani
@@ -150,7 +149,7 @@ public class EnemySpawn : MonoBehaviour
     {
         if (evolving == false && level != 4 && canSpawn == true)
         {
-			if (progresS.experience >= (progresS.nextlevelup * EvolveExperiencePro) / 100 && progresS.level == level)		//urcit jinak podminku
+			if (ProgresScript.experience >= (progresS.nextlevelup * EvolveExperiencePro) / 100 && ProgresScript.level == level)		//urcit jinak podminku
 			{
                 evolving = true;
                 yield return new WaitForSeconds(lvlTypeWait);
@@ -170,7 +169,7 @@ public class EnemySpawn : MonoBehaviour
                 }
                 UpgradeHp();
             }
-			else if(progresS.level > level)
+			else if(ProgresScript.level > level)
 			{
                 evolving = true;
                 yield return new WaitForSeconds(lvlTypeWait);
