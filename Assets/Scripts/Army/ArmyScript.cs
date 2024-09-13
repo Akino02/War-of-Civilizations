@@ -31,8 +31,7 @@ public class ArmyScript : MonoBehaviour
 	public AudioSource attackSound;
 	public static float sfxSound = 0.35f;
 
-
-
+	
 	//
 	[Header("Opponent layer")]
 	public LayerMask opponent;                                  //layer nepratelskych jednotek typu soldier
@@ -79,10 +78,10 @@ public class ArmyScript : MonoBehaviour
 	private int attackDelay = 2;
 																																	 //private int[] betterDmg = { 150, 300, 120 };
 
-	//public bool canGiveDmgM = false;                            //Muze bojovat melee
-	//public bool canGiveDmgR = false;                            //Muze bojovat na dalku
-	private bool canGiveDmg = false;                            //zda muze bojovat
-	private bool foundEnemy = false;                            //zda nasel nepritele
+	//public bool canGiveDmgM = false;								//Muze bojovat melee
+	//public bool canGiveDmgR = false;								//Muze bojovat na dalku
+	private bool canGiveDmg = false;								//zda muze bojovat
+	private bool foundEnemy = false;								//zda nasel nepritele
 
 	//Odmeny za to ze zemre
 	private int[,] moneykill = { { 20, 35, 135 }, { 40, 65, 265 }, { 80, 135, 535 }, { 160, 265, 1065 }, { 320, 535, 2135 } };             //peniza za zabiti nepritele (soldier, ranger, tank)
@@ -137,41 +136,6 @@ public class ArmyScript : MonoBehaviour
 			animator.SetInteger("Class", armyTypeNum+1);
 			animator.SetInteger("Level", lvl);
 		}
-
-		// NENI POTREBA
-		/*if (armyType == soldier)                                //nastaveni co je to za druh vojacka
-		{
-			armyTypeNum = 1;
-			//maxhp = hptypes[lvl,armyTypeNum - 1];
-			currhp = maxhp[lvl, armyTypeNum - 1];
-			canGiveDmgM = true;
-		}
-		else if (armyType == ranger)
-		{
-			armyTypeNum = 2;
-			//maxhp = hptypes[lvl,armyTypeNum - 1];
-			currhp = maxhp[lvl, armyTypeNum - 1];
-			canGiveDmgR = true;
-		}
-		else if (armyType == tank)
-		{
-			armyTypeNum = 3;
-			//maxhp = hptypes[lvl,armyTypeNum - 1];
-			currhp = maxhp[lvl, armyTypeNum - 1];
-			canGiveDmgM = true;
-		}*/
-
-
-		/*animator.SetInteger("Class", armyTypeNum);
-		animator.SetInteger("Level", lvl);*/
-		/*if (dir == 0)											//zvyseni dmg pro hrace kdyz dosahne posledni urovne
-		{
-			for (int i = 0; i < 3; i++)
-			{
-				dmgMin[4, i] = betterDmg[i];
-				dmgMax[4, i] = betterDmg[i];
-			}
-		}*/
 	}
 	// Update is called once per frame
 	void Update()
@@ -189,92 +153,7 @@ public class ArmyScript : MonoBehaviour
 		}
 
 		Animation();
-
-		/*CheckForEnemy();    //tato funkce zajistuje kontrolovani kolizi v okoli
-		hpinprocents = ((100 * currhp) / maxhp[lvl, armyTypeNum - 1]) / 100;
-		Move();      //tato funkce zajistuje pohyb
-					 //RangerRange();
-					 //DamageBase();											//ubirani zivotu primo zakladne
-		if (checkCollision[0] && canGiveDmgM == true && armyTypeNum != 2)     //je tam if, aby to poznaval hned
-		{
-			FindMyEnemy();
-			//StartCoroutine(DmgdealcooldownMelee());
-			isBase = false;
-		}
-		else if (checkCollision[1] && canGiveDmgR == true && armyTypeNum == 2)      //je tam if, aby to poznaval hned
-		{
-			FindMyEnemy();
-			//StartCoroutine(DmgdealcooldownRange());
-			isBase = false;
-		}
-		else if (checkCollision[3] && canGiveDmgM == true && armyTypeNum != 2)
-		{
-			//StartCoroutine(DmgDealCoolDownMeleeBase());
-			StartCoroutine(DmgdealcooldownMelee());
-			checkCollision[5] = true;
-			//animator.SetBool("ScriptFound", true);
-			isBase = true;
-		}
-		else if (checkCollision[4] && canGiveDmgR == true && armyTypeNum == 2)
-		{
-			//StartCoroutine(DmgDealCoolDownRangerBase());
-			StartCoroutine(DmgdealcooldownRange());
-			checkCollision[5] = true;
-			//animator.SetBool("ScriptFound", true);
-			isBase = true;
-
-		}
-		if (currhp <= 0)
-		{
-			if (dir != 0)                                       //tato podminka bude davat penize a zkusenosti pri tom kdyz zemre enemy
-			{
-				Reward();
-			}
-			Destroy(gameObject);
-		}
-		else if (transform.position.y < -20)                    //pokud tam bude hodne nepratel od nepritele ci hrace tak by mohli padat dolu a pokud ano tak zemrou
-		{
-			Destroy(gameObject);
-		}
-		hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);*/
 	}
-	/*void FindMyEnemy()                                          //tato funkce hleda nepritele a k nemu priradi script a jeste se zavola dalsi funkce na utok
-	{
-		checkCollision[5] = false;
-		//animator.SetBool("ScriptFound", false);
-		armyScriptP = null;
-		armyScriptE = null;
-
-		//pokud true tak hleda tag s player, pokud false tak hleda tag s enemy
-		GameObject[] allEnemies = (dir == 1) ? GameObject.FindGameObjectsWithTag("Player") : GameObject.FindGameObjectsWithTag("Enemy");
-
-		foreach (GameObject obj in allEnemies.Reverse())        //tady se otoci porazi aby bral toho prvniho enemy vzdy
-		{
-			SoldierArmyScript = obj.GetComponent<UniArmy>();
-			if (obj.layer == 10 && dir == 1)
-			{
-				armyScriptP = SoldierArmyScript;                //dosazeni scriptu za objekt
-																//Debug.Log("Allie attacked");
-			}
-			else if (obj.layer == 13 && dir == 0)
-			{
-				armyScriptE = SoldierArmyScript;                //dosazeni scriptu za objekt
-																//Debug.Log("Enemy attacked");
-			}
-			checkCollision[5] = true;
-			//animator.SetBool("ScriptFound", true);
-		}
-		//uderi jakmile najde nepritele
-		if (armyTypeNum == 1 || armyTypeNum == 3 && canGiveDmgM)
-		{
-			StartCoroutine(DmgdealcooldownMelee());
-		}
-		else if (armyTypeNum == 2 && canGiveDmgR)
-		{
-			StartCoroutine(DmgdealcooldownRange());
-		}
-		//Debug.Log("Can give ");
-	}*/
 	public void DetectEnemy()                                                                                                               //ZATIM OK
 	{
 		//Nalezne nepritele a dosadi script za konkretni objekt
@@ -292,8 +171,6 @@ public class ArmyScript : MonoBehaviour
                     SoldierArmyScript = detectedObjects[i].GetComponent<ArmyScript>();
 					armyScriptForOpponent = SoldierArmyScript;
                 }
-                /*SoldierArmyScript = detectedObjects[detectedObjects.Length - 1].GetComponent<ArmyScript>();
-                armyScriptForOpponent = SoldierArmyScript;*/
             }
 
 			//Debug.Log(armyScriptForOpponent.currhp);
@@ -410,8 +287,6 @@ public class ArmyScript : MonoBehaviour
 	{
 		ProgresScript.money += moneykill[lvl, armyTypeNum];
         ProgresScript.experience += expperkill[armyTypeNum];
-		//Debug.Log(moneykill[lvl, armyTypeNum - 1]);
-		//Debug.Log(expperkill[armyTypeNum - 1]);
 	}
 
 	private void Animation()
@@ -426,83 +301,6 @@ public class ArmyScript : MonoBehaviour
 	}
 
 
-	/*IEnumerator DmgdealcooldownMelee()                          //tato funkce slouzi pro utok pro soldier a tank
-	{
-		canGiveDmgM = false;
-		yield return new WaitForSecondsRealtime(2);
-		int randomDmg = Random.Range(dmgMin[lvl, armyTypeNum - 1], dmgMax[lvl, armyTypeNum - 1]);                           //nahodna hodnota pro utok na jednotky
-		if (checkCollision[0] && checkCollision[5] && !isBase && !LogScript.isGameOver)
-		{
-			if (armyTypeNum == 1 || armyTypeNum == 3)
-			{
-				if (dir == 0)
-				{
-					armyScriptE.currhp -= randomDmg;
-				}
-				else
-				{
-					armyScriptP.currhp -= randomDmg;
-				}
-				//attackSound.Play();
-			}
-		}
-		else if (checkCollision[3] && !LogScript.isGameOver)
-		{
-			if (armyTypeNum == 1 || armyTypeNum == 3)
-			{
-				if (dir == 0)
-				{
-					enemyS.currHPBase -= randomDmg;
-				}
-				else
-				{
-					hpS.currHPBase -= randomDmg;
-				}
-				//attackSound.Play();
-			}
-		}
-		checkCollision[5] = false;                              //mozna chyba*************************
-		//animator.SetBool("ScriptFound", false);
-		//Debug.Log("Bum kdyz nic");
-		canGiveDmgM = true;
-	}*/
-	/*IEnumerator DmgdealcooldownRange()                          //tato funkce slouzi pro utok pro ranger
-	{
-		canGiveDmgR = false;
-		yield return new WaitForSecondsRealtime(2);
-		int randomDmg = Random.Range(dmgMin[lvl, armyTypeNum - 1], dmgMax[lvl, armyTypeNum - 1]);                           //nahodna hodnota pro utok na jednotky
-		if (checkCollision[1] && checkCollision[5] && !isBase && !LogScript.isGameOver)                 //problem RESIT  && checkCollision[5]
-		{
-			if (dir == 0)
-			{
-				armyScriptE.currhp -= randomDmg;
-			}
-			else
-			{
-				armyScriptP.currhp -= randomDmg;
-			}
-			//attackSound.Play();
-			//Debug.Log("Strel");
-		}
-		else if (checkCollision[4] && !LogScript.isGameOver)            //problem RESIT  && checkCollision[5]
-		{
-			checkCollision[5] = true;
-			//animator.SetBool("ScriptFound", true);
-			if (dir == 0)
-			{
-				enemyS.currHPBase -= randomDmg;
-			}
-			else
-			{
-				hpS.currHPBase -= randomDmg;
-			}
-			//attackSound.Play();
-			//Debug.Log("Strel");
-		}
-		checkCollision[5] = false;                              //mozna chyba*************************
-		//animator.SetBool("ScriptFound", false);
-		canGiveDmgR = true;
-	}*/
 	private void OnDrawGizmosSelected()     //vykreslí kruh okolo jednotky
 	{
 		Gizmos.color = Color.red;
@@ -514,55 +312,4 @@ public class ArmyScript : MonoBehaviour
 	}
 	public void OnTriggerEnter2D(Collider2D hitbox)				//detekce nepritele											PROBLEM tady resit
 	{
-		/*if (hitbox.gameObject.CompareTag("Enemy") && dir == 0)
-		{
-
-			var SoldierArmyScript = hitbox.GetComponent<UniArmy>();
-			armyScriptE = SoldierArmyScript;                //dosazeni scriptu za objekt
-		}
-		else if (hitbox.gameObject.CompareTag("Player") && dir == 0)							
-		{
-			checkCollision[2] = true;
-			if (armyTypeNum == 2 && checkCollision[2] == true)
-			{
-				if (hitbox.gameObject.CompareTag("Enemy") && dir == 0)
-				{
-					checkCollision[1] = true;
-					Debug.Log("To je Enemy");
-
-					var SoldierArmyScript = hitbox.GetComponent<UniArmy>();
-					armyScriptE = SoldierArmyScript;                //dosazeni scriptu za objekt
-				}
-			}
-		}
-		else if (hitbox.gameObject.CompareTag("Player") && dir == 1)
-		{
-			//Debug.Log("To je player");
-
-			var SoldierArmyScript = hitbox.GetComponent<UniArmy>();
-			armyScriptP = SoldierArmyScript;                //dosazeni scriptu za objekt
-		}
-		else
-		{
-			checkCollision[0] = false;						//kolize nepritel s melee
-			checkCollision[1] = false;						//kolize nepritel s ranger(ranger pres spojence)
-			//checkCollision[5] = false;				
-			checkCollision[2] = false;						//kolize mezi spojenci
-		}*/
-	}
-	/*void RangerRange()											//funkce pro rangera, pokud je prednim spojenec tak se podiva dale a muze strilet pres spojence
-	{
-		if (checkCollision[2] && armyTypeNum == 2)
-		{
-			hitbox.transform.localScale = new Vector2(3f, hitbox.transform.localScale.y);
-			//hitbox.transform.position = new Vector2(1f, hitbox.transform.position.y);
-			//ranges[1] = 1.7f;
-		}
-		else if (!checkCollision[2] && armyTypeNum == 2)
-		{
-			hitbox.transform.localScale = new Vector2(0.7f, hitbox.transform.localScale.y);
-			//hitbox.transform.position = new Vector2(0.9f, hitbox.transform.position.y);
-			//ranges[1] = 1.65f;
-		}
-	}*/
 }
