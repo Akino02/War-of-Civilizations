@@ -24,8 +24,11 @@ public class ButtonsMenu : MonoBehaviour
 
     bool isPlayingSong = false;
     bool isPlayingSFX = false;
-    public Text showPlayButtonTextSong;
-    public Text showPlayButtonTextSFX;
+    /*public Text showPlayButtonTextSong;
+    public Text showPlayButtonTextSFX;*/
+
+    public float[] stopAfterTest = {0f, 0f};
+    public int testSoundLength = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +37,10 @@ public class ButtonsMenu : MonoBehaviour
         settingMenu.SetActive(false);                       //toto menu bude pri startu vypnute
         volumeBarSong.value = CameraFollow.songInGame;      //nastaveni zvuku do hry
         volumeBarSFX.value = UnitScript.sfxSound;              //nastaveni zvuku do hry
-        showPlayButtonTextSong.text = "Play";
-        showPlayButtonTextSFX.text = "Play";
+        volumeSong = volumeBarSong.value;                       //ziskani hodnoty z posouvadla
+        volumeSFX = volumeBarSFX.value;                         //ziskani hodnoty z posouvadla
+        /*showPlayButtonTextSong.text = "Play";
+        showPlayButtonTextSFX.text = "Play";*/
 
         //testSound = GetComponent<AudioSource>();
     }
@@ -43,6 +48,14 @@ public class ButtonsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //test
+        PlaySound();
+
+        if (isPlayingSong || isPlayingSFX)
+        {
+            StopTimerSound();
+        }
+
         volumeSong = volumeBarSong.value;                       //ziskani hodnoty z posouvadla
         volumeSFX = volumeBarSFX.value;                         //ziskani hodnoty z posouvadla
         showVolumeValueSong.text = "Volume: " + math.round(volumeSong * 100) + "% Song";     //dosazeni textu pri meneni hodnoty zvuku
@@ -59,12 +72,12 @@ public class ButtonsMenu : MonoBehaviour
     {
         mainMenu.SetActive(false);
         settingMenu.SetActive(true);
-
-        //nastavise hodnota textu na play a jeste bool
-        showPlayButtonTextSong.text = "Play";
-        showPlayButtonTextSFX.text = "Play";
         isPlayingSong = false;
         isPlayingSFX = false;
+
+        //nastavise hodnota textu na play a jeste bool
+        /*showPlayButtonTextSong.text = "Play";
+        showPlayButtonTextSFX.text = "Play";*/
     }
     public void QuitGame()          //Funkce pro vypnuti hry
     {
@@ -83,8 +96,61 @@ public class ButtonsMenu : MonoBehaviour
         settingMenu.SetActive(false);
         testSongSound.Stop();           //vypne se hudba, jakmile jde mimo nastaveni
         testSFXSound.Stop();
+        isPlayingSong = false;
+        isPlayingSFX = false;
     }
-    public void PlaySoundSong()                     //metoda pro button na test zvuku (Hudba)                                   !!udelat to lepsi fr
+    //test
+    private void PlaySound()
+    {
+        if (volumeSong != volumeBarSong.value)
+        {
+            if (isPlayingSong != true)
+            {
+                testSongSound.Play();
+            }
+            stopAfterTest[0] = 0f;
+            isPlayingSong = true;
+            //Debug.Log("Start timer");
+        }
+
+        if (volumeSFX != volumeBarSFX.value)
+        {
+            if (isPlayingSFX != true)
+            {
+                testSFXSound.Play();
+            }
+            stopAfterTest[1] = 0f;
+            isPlayingSFX = true;
+            //Debug.Log("Start timer");
+        }
+
+        testSongSound.volume = volumeSong;
+        testSFXSound.volume = volumeSFX;
+    }
+    private void StopTimerSound()
+    {
+        for (int i = 0; i < stopAfterTest.Length; i++)
+        {
+            stopAfterTest[i] = Mathf.Lerp(stopAfterTest[i], stopAfterTest[i] + 1f, Time.deltaTime / testSoundLength);
+            //Debug.Log("Somethingggg");
+            if (stopAfterTest[i] >= 1f)
+            {
+                if(i == 0)
+                {
+                    isPlayingSong = false;
+                    testSongSound.Stop();
+                }
+                else if(i == 1)
+                {
+                    isPlayingSFX = false;
+                    testSFXSound.Stop();
+                }
+                stopAfterTest[i] = 0f;
+                //Debug.Log("StopMusic");
+            }
+        }
+    }
+    /*public void PlaySoundSong()                     //metoda pro button na test zvuku (Hudba)                                   !!udelat to lepsi fr
     {
         if (!isPlayingSong)
         {
@@ -120,5 +186,5 @@ public class ButtonsMenu : MonoBehaviour
     {
         testSongSound.volume = volumeSong;
         testSFXSound.volume = volumeSFX;
-    }
+    }*/
 }

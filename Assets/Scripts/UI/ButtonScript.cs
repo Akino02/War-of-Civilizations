@@ -14,8 +14,6 @@ public class ButtonScript : MonoBehaviour
 																//
 	//co a kde to bude spawnovat
 	public GameObject soldierP;                                 //To je objekt soldier
-	/*public GameObject rangerP;                                //To je objekt ranger			//je to zbytecne, protoze je to univerzalni
-	public GameObject tankP;                                    //To je objekt tank*/
 
 	private int buttonN = 0;                                    //zjisteni na jaky button kliknul
 	//

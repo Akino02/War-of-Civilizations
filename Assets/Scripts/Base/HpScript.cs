@@ -8,7 +8,7 @@ public class HpScript : MonoBehaviour
 	//ProgresScript progresS;										//propojeni zakladnich scriptu pro funkci UI
 	//ButtonScript buttonS;										//propojeni zakladnich scriptu pro funkci UI
 
-	EnemySpawn enemyS;
+	//EnemySpawn enemyS;
 
 
 	//hp a ubirani base
@@ -16,13 +16,11 @@ public class HpScript : MonoBehaviour
 	public static float currHPBase;
 	public float hpbaseinprocents = 1f;
 																//
-	public Image hpBaseBarcurr;                                 //vizualni ukazatel zivotu
-	public GameObject basePosition;                             //misto kde se nachazi zakladna
+	//public GameObject basePosition;                             //misto kde se nachazi zakladna
                                                                 //
 
-    public Text hpTextShow;										//aktualni zivoty do textu viditelneho
-    public Text hpEnemyTextShow;
-
+    public Text hpTextShow;                                     //aktualni zivoty do textu viditelneho
+    public Image hpBaseBarcurr;                                 //vizualni ukazatel zivotu
 
     public bool upgradingHp = false;
 	//
@@ -34,17 +32,16 @@ public class HpScript : MonoBehaviour
 		/*soldierEscript = soldierE.GetComponent<SoldierE>();   //import protivnika a jeho promìnných*/
         currHPBase = UnityConfiguration.maxHPBase[ProgresScript.level];
 
-        //
+        /*//
         GameObject script2 = GameObject.FindWithTag("baseE");																//toto najde zakladnu nepritele pomoci tagu ktery ma
         enemyS = script2.GetComponent<EnemySpawn>();
-		//
+		//*/
     }
 
 	// Update is called once per frame
 	void Update()
 	{
 		hpTextShow.text = Mathf.Round(currHPBase).ToString();
-        hpEnemyTextShow.text = Mathf.Round(EnemySpawn.currHPBase).ToString();
 
 
 		hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / UnityConfiguration.maxHPBase[ProgresScript.level], 3f* Time.deltaTime);		//kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas

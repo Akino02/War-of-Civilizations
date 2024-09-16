@@ -45,7 +45,8 @@ public class EnemySpawn : MonoBehaviour
     public GameObject[] baseAppearance = new GameObject[5];     //vzhled budov v array ohledne nove evoluce
 
     public Image hpBaseBarcurr;
-	public GameObject basePosition;
+    public Text hpEnemyTextShow;                                     //aktualni zivoty do textu viditelneho
+    public GameObject basePosition;
 
 	/*public bool canGetdmgM = true;
 	public bool canGetdmgR = true;*/
@@ -57,9 +58,9 @@ public class EnemySpawn : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-        GameObject item = GameObject.FindWithTag("baseP");		//toto najde zakladnu hrace pomoci tagu ktery ma
+       /* GameObject item = GameObject.FindWithTag("baseP");		//toto najde zakladnu hrace pomoci tagu ktery ma
         progresS = item.GetComponent<ProgresScript>();			//zde se dosadi script za objekt
-		hpS = item.GetComponent<HpScript>();					
+		hpS = item.GetComponent<HpScript>();	*/				
 
         /*soldierPscript = soldierP.GetComponent<SoldierP>();	//import protivnika a jeho promìnných
 		soldierEscript = soldierE.GetComponent<SoldierE>();		//import protivnika a jeho promìnných*/
@@ -90,6 +91,7 @@ public class EnemySpawn : MonoBehaviour
         hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / UnityConfiguration.maxHPBase[level], 3f * Time.deltaTime);       //kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
         Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / UnityConfiguration.maxHPBase[level]));                                   //nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
         hpBaseBarcurr.color = healthColor;                      //zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
+        hpEnemyTextShow.text = Mathf.Round(currHPBase).ToString();
     }
 
 	IEnumerator CoolDownArmySpawn()								//nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani                      //OPRAVIT OPRAVIT OPRAVIT
