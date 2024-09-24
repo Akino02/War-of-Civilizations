@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HpScript : MonoBehaviour
 {
-	//ProgresScript progresS;										//propojeni zakladnich scriptu pro funkci UI
+	ProgresScript progresS;										//propojeni zakladnich scriptu pro funkci UI
 	//ButtonScript buttonS;										//propojeni zakladnich scriptu pro funkci UI
 
 	//EnemySpawn enemyS;
@@ -27,10 +27,10 @@ public class HpScript : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		//progresS = GetComponent<ProgresScript>();				//propojeni zakladnich scriptu pro funkci UI
+		progresS = GetComponent<ProgresScript>();				//propojeni zakladnich scriptu pro funkci UI
 		//buttonS = GetComponent<ButtonScript>();					//propojeni zakladnich scriptu pro funkci UI
 		/*soldierEscript = soldierE.GetComponent<SoldierE>();   //import protivnika a jeho promìnných*/
-        currHPBase = UnityConfiguration.maxHPBase[ProgresScript.level];
+        currHPBase = UnityConfiguration.maxHPBase[progresS.level];
 
         /*//
         GameObject script2 = GameObject.FindWithTag("baseE");																//toto najde zakladnu nepritele pomoci tagu ktery ma
@@ -44,18 +44,18 @@ public class HpScript : MonoBehaviour
 		hpTextShow.text = Mathf.Round(currHPBase).ToString();
 
 
-		hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / UnityConfiguration.maxHPBase[ProgresScript.level], 3f* Time.deltaTime);		//kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
-		Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / UnityConfiguration.maxHPBase[ProgresScript.level]));									//nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
+		hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / UnityConfiguration.maxHPBase[progresS.level], 3f* Time.deltaTime);		//kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
+		Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / UnityConfiguration.maxHPBase[progresS.level]));									//nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
 		hpBaseBarcurr.color = healthColor;						//zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
 	}
     public void UpgradeHp()								//zachova procentuelne hp pri upgradu
     {
-		if(ProgresScript.level > 0)
+		if(progresS.level > 0)
 		{
 			Debug.Log(currHPBase);
-			Debug.Log(UnityConfiguration.maxHPBase[ProgresScript.level - 1]);
-            hpbaseinprocents = currHPBase / UnityConfiguration.maxHPBase[ProgresScript.level - 1];			//pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
-            currHPBase = hpbaseinprocents * UnityConfiguration.maxHPBase[ProgresScript.level];				//vypocita aktualniho poctu hp v novych zivotech
+			Debug.Log(UnityConfiguration.maxHPBase[progresS.level - 1]);
+            hpbaseinprocents = currHPBase / UnityConfiguration.maxHPBase[progresS.level - 1];			//pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
+            currHPBase = hpbaseinprocents * UnityConfiguration.maxHPBase[progresS.level];				//vypocita aktualniho poctu hp v novych zivotech
         }
     }
 }

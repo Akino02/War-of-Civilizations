@@ -11,7 +11,7 @@ public class CameraMove : MonoBehaviour
 
     private int touchField = 10;                                //velikost pole pro mys, po najeti do pole se bude tam pohybovat kamera
 
-    public MoveType moveType;
+    //public MoveType moveType;
 
 	//promenne pro border kamery
     float borderLposX;
@@ -44,17 +44,18 @@ public class CameraMove : MonoBehaviour
         if (!LogScript.isGameOver)
         {
             //pohyb pomoci myse
-            if (Input.mousePosition.x < Screen.width / touchField && Input.mousePosition.y < (Screen.height * 3) / 4 && Input.mousePosition.y > Screen.height/ touchField && (moveType == MoveType.Mouse || moveType == MoveType.MouseKeyboard))                        //pokud je mys left
+            if (Input.mousePosition.x < Screen.width / touchField && Input.mousePosition.y < (Screen.height * 3) / 4 && Input.mousePosition.y > Screen.height/ touchField && (UnityConfiguration.cameraMoveType == 2 || UnityConfiguration.cameraMoveType == 0))                        //pokud je mys left
             {
                 activeX = -1;
             }
-            else if (Input.mousePosition.x > Screen.width - Screen.width / touchField && Input.mousePosition.y < (Screen.height * 3) / 4 && Input.mousePosition.y > Screen.height / touchField && (moveType == MoveType.Mouse || moveType == MoveType.MouseKeyboard))   //pokud je mys right
+            else if (Input.mousePosition.x > Screen.width - Screen.width / touchField && Input.mousePosition.y < (Screen.height * 3) / 4 && Input.mousePosition.y > Screen.height / touchField && (UnityConfiguration.cameraMoveType == 2 || UnityConfiguration.cameraMoveType == 0))   //pokud je mys right
             {
                 activeX = 1;
             }
             //
             //pohyb pomoci klavesnice (definice pohybu(ten pohyb je urcen pro A, D a taky pro levou sipku a pravou sipku))
-            else if (moveType == MoveType.Keyboard || moveType == MoveType.MouseKeyboard)
+            //bylo tam predtim enum (moveType == MoveType.Keyboard || moveType == MoveType.MouseKeyboard)
+            else if (UnityConfiguration.cameraMoveType == 1 || UnityConfiguration.cameraMoveType == 0)
             {
                 activeX = Input.GetAxisRaw("Horizontal");
             }
@@ -69,7 +70,7 @@ public class CameraMove : MonoBehaviour
     }
 }
 
-public enum MoveType
+/*public enum MoveType
 {
     MouseKeyboard, Keyboard, Mouse
-}
+}*/

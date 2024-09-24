@@ -30,7 +30,9 @@ public class SpecialAttack : MonoBehaviour
         {
             var SoldierArmyScript = hitBox.GetComponent<UnitScript>();
             armyScriptE = SoldierArmyScript;                    //dosazeni scriptu za objekt
-            damage = (UnityConfiguration.maxhp[armyScriptE.lvl, 2] / 3) / 2;
+            //damage = (UnityConfiguration.maxhp[armyScriptE.lvl, 2] / 3) / 2;
+            damage = Random.Range(UnityConfiguration.dmgMin[ButtonScript.specialAttackLevel, 0], UnityConfiguration.dmgMax[ButtonScript.specialAttackLevel, 2]);
+            Debug.Log(ButtonScript.specialAttackLevel);
             if (hit == false)
             {
                 armyScriptE.currhp -= damage;                      //nastaveni poskozeni fireballu podle toho kolik dana postavicka ma hp

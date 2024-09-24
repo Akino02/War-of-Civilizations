@@ -71,11 +71,14 @@ public class UnitScript : MonoBehaviour
 	private Vector3 distanceFromAllie;
 
 
-	private bool canGiveDmg = false;                                //zda muze bojovat
-	private bool foundEnemy = false;                                //zda nasel nepritele
+    public bool canGiveDmg = false;                                //zda muze bojovat
+    public bool foundEnemy = false;                                //zda nasel nepritele
 
 	private float distance;
 	private float previousdistance;
+
+	//test
+	public float chargeAttack = 0f;
 
 	// Start is called before the first frame update
 	void Start()
@@ -85,20 +88,20 @@ public class UnitScript : MonoBehaviour
 		sfxSound = attackSound.volume;
 
 
-		/*GameObject script1 = GameObject.FindWithTag("baseP");   //toto najde zakladnu hrace pomoci tagu ktery ma
+		GameObject script1 = GameObject.FindWithTag("baseP");   //toto najde zakladnu hrace pomoci tagu ktery ma
 		progresS = script1.GetComponent<ProgresScript>();
 		hpS = script1.GetComponent<HpScript>();
 		//
 		GameObject script2 = GameObject.FindWithTag("baseE");   //toto najde zakladnu nepritele pomoci tagu ktery ma
-		enemyS = script2.GetComponent<EnemySpawn>();*/
+		enemyS = script2.GetComponent<EnemySpawn>();
 
 		if (team == UnitTeam.Left)
 		{
-			lvl = ProgresScript.level;                               //zde se urci jaky level bude mit pro hrace
+			lvl = progresS.level;                               //zde se urci jaky level bude mit pro hrace
 		}
 		else
 		{
-			lvl = EnemySpawn.level;                                 //zde se urci jaky level bude mit pro nepritele
+			lvl = enemyS.level;                                 //zde se urci jaky level bude mit pro nepritele
 		}
 
 		for (int layer = 0; layer < armyTypeLayer.Length; layer++)
@@ -136,10 +139,20 @@ public class UnitScript : MonoBehaviour
 		UpdateHP();
 
 		//IDK PROC BY TU TO MELO BYT (canGiveDmg), ALE KDYZ TU TO NENI TAK SE STANE LOOP U ZAKLADNY
-		if (canGiveDmg && !LogScript.isGameOver)
+		/*if (canGiveDmg && !LogScript.isGameOver)
 		{
 			Attack();
-		}
+		}*/
+		if (foundEnemy || checkCollision[1])
+		{
+			ChargeAttack();
+            animator.SetBool("ScriptFound", true);
+        }
+		else
+		{
+			chargeAttack = 0f;
+            animator.SetBool("ScriptFound", false);
+        }
 
 		Animation();
 	}
@@ -152,18 +165,24 @@ public class UnitScript : MonoBehaviour
 			distance = 5f;
 			for (int i = 0; i < detectedObjects.Length; i++)
 			{
-				/*Debug.Log(Mathf.Abs(transform.position.x) + gameObject.name + i);
+                /*Debug.Log(Mathf.Abs(transform.position.x) + gameObject.name + i);
                 Debug.Log(Mathf.Abs(detectedObjects[i].transform.position.x) + gameObject.name + i);*/
-				if (Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x) < distance)
+                if (Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x) < distance)
 				{
 					distance = Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x);
 					SoldierArmyScript = detectedObjects[i].GetComponent<UnitScript>();
 					armyScriptForOpponent = SoldierArmyScript;
 				}
-			}
+                /*if (Mathf.Abs(detectedObjects[i].transform.position.x) < distance)
+                {
+                    distance = Mathf.Abs(detectedObjects[i].transform.position.x);
+                    SoldierArmyScript = detectedObjects[i].GetComponent<UnitScript>();
+                    armyScriptForOpponent = SoldierArmyScript;
+                }*/
+            }
 
-			//Debug.Log(armyScriptForOpponent.currhp);
-			foundEnemy = true;
+            //Debug.Log(armyScriptForOpponent.currhp);
+            foundEnemy = true;
 			//animator.SetBool("ScriptFound", true);
 			return;
 		}
@@ -227,7 +246,7 @@ public class UnitScript : MonoBehaviour
 		hpinprocents = ((100 * currhp) / UnityConfiguration.maxhp[lvl, armyTypeNum]) / 100;
 		hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);
 	}
-	private void Attack()                           //SPATNE FUNGUJE DMG DO ZAKLADNY (JE TO V LOOP)
+	/*private void Attack()                           //SPATNE FUNGUJE DMG DO ZAKLADNY (JE TO V LOOP)
 	{
 		if (canGiveDmg && checkCollision[0] || checkCollision[1])
 		{
@@ -266,13 +285,45 @@ public class UnitScript : MonoBehaviour
 		}
 		animator.SetBool("ScriptFound", false);
 		canGiveDmg = true;
+	}*/
+	private void ChargeAttack()
+	{
+		chargeAttack = Mathf.Lerp(chargeAttack, chargeAttack+1f, Time.deltaTime / UnityConfiguration.attackDelay);
+		if(chargeAttack >= 1)
+		{
+			chargeAttack = 0;
+            animator.SetBool("ScriptFound", true);
+            int randomDmg = Random.Range(UnityConfiguration.dmgMin[lvl, armyTypeNum], UnityConfiguration.dmgMax[lvl, armyTypeNum]);
+            if (checkCollision[0] && foundEnemy == true)
+            {
+                armyScriptForOpponent.currhp -= randomDmg;
+                attackSound.Play();
+            }
+            else if (checkCollision[1])
+            {
+                if (team == 0)
+                {
+                    Debug.Log("Hit base to E");
+                    EnemySpawn.currHPBase -= randomDmg;
+                    attackSound.Play();
+                }
+                else
+                {
+                    Debug.Log("Hit base to P");
+                    HpScript.currHPBase -= randomDmg;
+                    attackSound.Play();
+                }
+            }
+            animator.SetBool("ScriptFound", false);
+            Debug.Log("Dohrala se animece a uderil");
+		}
 	}
 
 
 	private void Reward()
 	{
-		ProgresScript.money += UnityConfiguration.moneykill[lvl, armyTypeNum];
-		ProgresScript.experience += UnityConfiguration.expperkill[armyTypeNum];
+        progresS.money += UnityConfiguration.moneykill[lvl, armyTypeNum];
+        progresS.experience += UnityConfiguration.expperkill[armyTypeNum];
 	}
 
 	private void Animation()

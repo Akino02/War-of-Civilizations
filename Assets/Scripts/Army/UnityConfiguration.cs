@@ -28,7 +28,12 @@ public static class UnityConfiguration
     public static int nextlevelup = 4000;                              //pokud dosahne tolika zkusenosti tak se evolvuje
 
 	[Header("MoneyPerUnit")]
-    public static int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };		//vícerozmìrné pole pro cenu jednotek
+    public static int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };      //vícerozmìrné pole pro cenu jednotek
+
+	//[Header("ProductionBar")]
+	[Header("CameraType")]
+    public static int cameraMoveType = 1;
+	public static string[] cameraTypeName = { "Mouse+Keyboard", "Keyboard", "Mouse" };
 
 
     /*// Start is called before the first frame update

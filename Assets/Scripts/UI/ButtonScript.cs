@@ -9,13 +9,15 @@ using UnityEngine.UIElements;
 public class ButtonScript : MonoBehaviour
 {
 	ProgresScript progresS;										//propojeni zakladnich scriptu pro funkci UI
-	HpScript hpS;												//propojeni zakladnich scriptu pro funkci UI
+	//HpScript hpS;												//propojeni zakladnich scriptu pro funkci UI
 	LogScript logS;												//propojeni zakladnich scriptu pro funkci UI
 																//
 	//co a kde to bude spawnovat
 	public GameObject soldierP;                                 //To je objekt soldier
 
 	private int buttonN = 0;                                    //zjisteni na jaky button kliknul
+    public static int specialAttackLevel = 0;
+
 	//
 
 	// Start is called before the first frame update
@@ -23,7 +25,7 @@ public class ButtonScript : MonoBehaviour
 	{
 
         progresS = GetComponent<ProgresScript>();				        //propojeni zakladnich scriptu pro funkci UI
-        hpS = GetComponent<HpScript>();							        //propojeni zakladnich scriptu pro funkci UI
+        //hpS = GetComponent<HpScript>();							        //propojeni zakladnich scriptu pro funkci UI
         logS = GetComponent<LogScript>();							    //propojeni zakladnich scriptu pro funkci UI
 	}
 
@@ -36,15 +38,15 @@ public class ButtonScript : MonoBehaviour
 	public void SoldierSpawn()									//tato funkce na kliknuti spawne jednoho vojaka				PRO SOLDIERA
 	{
 		buttonN = 1;
-		if (progresS.order < 5 && !LogScript.isGameOver && ProgresScript.money >= UnityConfiguration.moneyperunit[ProgresScript.level, 0])												//jeste tam pak doplnit ze za to bude platit
+		if (progresS.order < 5 && !LogScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[progresS.level, 0])												//jeste tam pak doplnit ze za to bude platit
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order -1] = 1;
-            ProgresScript.money -= UnityConfiguration.moneyperunit[ProgresScript.level,0];
+            progresS.money -= UnityConfiguration.moneyperunit[progresS.level,0];
 			//Debug.Log("Prirazeno do fronty " + progresS.order);
             //Debug.Log("Cena Soldier: " + progresS.moneyperunit[progresS.level, 0]);
 		}
-        else if (ProgresScript.money >= UnityConfiguration.moneyperunit[ProgresScript.level, 0] && progresS.order == 5)
+        else if (progresS.money >= UnityConfiguration.moneyperunit[progresS.level, 0] && progresS.order == 5)
         {
             Warning();
         }
@@ -56,15 +58,15 @@ public class ButtonScript : MonoBehaviour
 	public void RangerSpawn()									//tato funkce na kliknuti spawne jednoho vojaka				PRO RANGERA
 	{
         buttonN = 2;
-        if (progresS.order < 5 && !LogScript.isGameOver && ProgresScript.money >= UnityConfiguration.moneyperunit[ProgresScript.level, 1])												//jeste tam pak doplnit ze za to bude platit
+        if (progresS.order < 5 && !LogScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[progresS.level, 1])												//jeste tam pak doplnit ze za to bude platit
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order - 1] = 2;
-            ProgresScript.money -= UnityConfiguration.moneyperunit[ProgresScript.level, 1];
+            progresS.money -= UnityConfiguration.moneyperunit[progresS.level, 1];
 			//Debug.Log("Prirazeno do fronty " + progresS.order);
             //Debug.Log("Cena Ranger: " + progresS.moneyperunit[progresS.level, 1]);
         }
-        else if (ProgresScript.money >= UnityConfiguration.moneyperunit[ProgresScript.level, 1] && progresS.order == 5)
+        else if (progresS.money >= UnityConfiguration.moneyperunit[progresS.level, 1] && progresS.order == 5)
         {
             Warning();
         }
@@ -76,15 +78,15 @@ public class ButtonScript : MonoBehaviour
 	public void TankSpawn()										// tato funkce na kliknuti spawne jednoho vojaka			PRO TANK
 	{
         buttonN = 3;
-        if (progresS.order < 5 && !LogScript.isGameOver && ProgresScript.money >= UnityConfiguration.moneyperunit[ProgresScript.level, 2])												//jeste tam pak doplnit ze za to bude platit
+        if (progresS.order < 5 && !LogScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[progresS.level, 2])												//jeste tam pak doplnit ze za to bude platit
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order - 1] = 3;
-            ProgresScript.money -= UnityConfiguration.moneyperunit[ProgresScript.level, 2];
+            progresS.money -= UnityConfiguration.moneyperunit[progresS.level, 2];
             //Debug.Log("Prirazeno do fronty " + progresS.order);
             //Debug.Log("Cena Tank: " + progresS.moneyperunit[progresS.level, 2]);
         }
-        else if (ProgresScript.money >= UnityConfiguration.moneyperunit[ProgresScript.level, 2] && progresS.order == 5)
+        else if (progresS.money >= UnityConfiguration.moneyperunit[progresS.level, 2] && progresS.order == 5)
         {
             Warning();
         }
@@ -95,7 +97,7 @@ public class ButtonScript : MonoBehaviour
 	}
 	public void Warning()
 	{
-		if (ProgresScript.money < UnityConfiguration.moneyperunit[ProgresScript.level, buttonN-1] && logS.canShow && !LogScript.isGameOver)
+		if (progresS.money < UnityConfiguration.moneyperunit[progresS.level, buttonN-1] && logS.canShow && !LogScript.isGameOver)
 		{
             Debug.Log("Nemas Dostatek penez");
             logS.placeText.text = logS.possibleText[0];
@@ -140,6 +142,7 @@ public class ButtonScript : MonoBehaviour
     {
         if (progresS.canDoDisaster && !LogScript.isGameOver)
         {
+            specialAttackLevel = progresS.level;
             progresS.canDoDisaster = false;
             StartCoroutine(progresS.SpawnFireBall());
         }

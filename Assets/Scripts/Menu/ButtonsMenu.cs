@@ -19,6 +19,8 @@ public class ButtonsMenu : MonoBehaviour
     public Text showVolumeValueSong;
     public Text showVolumeValueSFX;
 
+    public Text changeCameraName;
+
     public AudioSource testSongSound;
     public AudioSource testSFXSound;
 
@@ -43,6 +45,7 @@ public class ButtonsMenu : MonoBehaviour
         showPlayButtonTextSFX.text = "Play";*/
 
         //testSound = GetComponent<AudioSource>();
+        changeCameraName.text = UnityConfiguration.cameraTypeName[UnityConfiguration.cameraMoveType];
     }
 
     // Update is called once per frame
@@ -87,6 +90,30 @@ public class ButtonsMenu : MonoBehaviour
     public void SongAuthorButtonLink()      //odkaz na autora hudby ve hre
     {
         Application.OpenURL("https://www.youtube.com/@WaterflameMusic/videos");
+    }
+    public void ChangeCameraPlus()
+    {
+        if (UnityConfiguration.cameraMoveType < 2)
+        {
+            UnityConfiguration.cameraMoveType++;
+        }
+        else
+        {
+            UnityConfiguration.cameraMoveType = 0;
+        }
+        changeCameraName.text = UnityConfiguration.cameraTypeName[UnityConfiguration.cameraMoveType];
+    }
+    public void ChangeCameraMinus()
+    {
+        if (UnityConfiguration.cameraMoveType > 0)
+        {
+            UnityConfiguration.cameraMoveType--;
+        }
+        else
+        {
+            UnityConfiguration.cameraMoveType = 2;
+        }
+        changeCameraName.text = UnityConfiguration.cameraTypeName[UnityConfiguration.cameraMoveType];
     }
 
     //SettingMenu buttons

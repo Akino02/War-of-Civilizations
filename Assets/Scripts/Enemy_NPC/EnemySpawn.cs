@@ -12,8 +12,8 @@ public class EnemySpawn : MonoBehaviour
 	ProgresScript progresS;                                     //importuje script zakladnu hrace
 	HpScript hpS;
 
-    UnitScript army;                                               //importovani pro pracovani s vojacky
-    public GameObject objectArmyE;                              //objekt pro propojeni scriptu
+    UnitScript army;                                                //importovani pro pracovani s vojacky
+    public GameObject objectArmyE;                                  //objekt pro propojeni scriptu
 
     /*[SerializeField] GameObject soldierP;						//import objektu
 	[SerializeField] GameObject soldierE;						//import objektu*/
@@ -25,19 +25,19 @@ public class EnemySpawn : MonoBehaviour
 	public LayerMask opponentTank;								//layer hracovych jednotek typu tank*/
 	//
 	//
-	//co bude spawnovat a kde
-	public GameObject soldier;          //co spawne
-	/*public GameObject ranger;          //co spawne
-	public GameObject tank;          //co spawne*/
-	private int[] waitTime = { 6, 9, 13 , 6};					//soldier, ranger, tank, cant Build
-	private int[] difficulty = { 8, 5, 4};					//obtiznost hry
+	//Factory (Unit)
+	private int[] waitTime = { 6, 9, 13};					//soldier, ranger, tank, cant Build
+	private int[] difficulty = { 8, 5, 4};					    //obtiznost hry     //to tu asi nebude vubec
+    public float timeToCreateUnit = 0f;
+    private float speedForCreatingUnit = 0;
+    public bool isCreatingUnit = false;
 	//
 	//veci ohledne baseHP ci damage pro base
 	//public float[] maxHPBase = {1000,2000,3000,4000,5000};		//zivoty zakladny
 	public static float currHPBase;
 	public float hpbaseinprocents = 1f;
 
-	public static int level = 0;
+	public int level = 0;
 	public int lvlTypeWait = 15;							//cas byl upraven a jeste podminka pro evoluce
 	public bool evolving = false;
 	private int EvolveExperiencePro = 90;						//procenta zkusenosti od, kterych se zacne vylepsovat enemy
@@ -48,19 +48,18 @@ public class EnemySpawn : MonoBehaviour
     public Text hpEnemyTextShow;                                     //aktualni zivoty do textu viditelneho
     public GameObject basePosition;
 
-	/*public bool canGetdmgM = true;
-	public bool canGetdmgR = true;*/
+
 	//
 	//spawnovani jednotek
 	public bool canSpawn = true;
-	private int nahoda = 0;
+	private int randomPickUnit = 0;
 	//
 	// Start is called before the first frame update
 	void Start()
 	{
-       /* GameObject item = GameObject.FindWithTag("baseP");		//toto najde zakladnu hrace pomoci tagu ktery ma
+        GameObject item = GameObject.FindWithTag("baseP");		//toto najde zakladnu hrace pomoci tagu ktery ma
         progresS = item.GetComponent<ProgresScript>();			//zde se dosadi script za objekt
-		hpS = item.GetComponent<HpScript>();	*/				
+		//hpS = item.GetComponent<HpScript>();				
 
         /*soldierPscript = soldierP.GetComponent<SoldierP>();	//import protivnika a jeho promìnných
 		soldierEscript = soldierE.GetComponent<SoldierE>();		//import protivnika a jeho promìnných*/
@@ -80,18 +79,56 @@ public class EnemySpawn : MonoBehaviour
                 waitTime[i] = waitTime[i] + 2;
             }
         }*/
+        CreatingUnit();
+        PickUnit();
         if(level != 4 && currHPBase > 0 && HpScript.currHPBase > 0)
 		{
 			StartCoroutine(Evolution());
         }
-        if (canSpawn == true && currHPBase > 0 && HpScript.currHPBase > 0)
+        /*if (canSpawn == true && currHPBase > 0 && HpScript.currHPBase > 0)
 		{
 			StartCoroutine(CoolDownArmySpawn());
-		}
+		}*/
         hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / UnityConfiguration.maxHPBase[level], 3f * Time.deltaTime);       //kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
         Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / UnityConfiguration.maxHPBase[level]));                                   //nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
         hpBaseBarcurr.color = healthColor;                      //zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
         hpEnemyTextShow.text = Mathf.Round(currHPBase).ToString();
+    }
+
+    private void PickUnit()
+    {
+        if (currHPBase > 0 && HpScript.currHPBase > 0 && isCreatingUnit != true)
+        {
+            //speedForCreatingUnit = 0f;
+            randomPickUnit = Random.Range(0, 2);
+            for (int i = 0; i < 2; i++)
+            {
+                if (i == randomPickUnit)
+                {
+                    //speedForCreatingUnit = Time.deltaTime / waitTime[i];
+                    isCreatingUnit = true;
+                    timeToCreateUnit = 0f;
+                    /*Debug.Log("Enemy building" + randomPickUnit);
+                    Debug.Log(waitTime[i]);*/
+                }
+            }
+        }
+    }
+    private void CreatingUnit()
+    {
+        if (isCreatingUnit)
+        {
+            speedForCreatingUnit = Time.deltaTime / waitTime[randomPickUnit];
+            timeToCreateUnit = Mathf.Lerp(timeToCreateUnit, timeToCreateUnit + 1f, speedForCreatingUnit);
+            if (timeToCreateUnit >= 1)
+            {
+                army.armyType = army.armyTypeLayer[randomPickUnit];
+                Instantiate(objectArmyE, transform.position, transform.rotation);
+                /*Debug.Log($"Enemy built {randomPickUnit}");
+                Debug.Log(randomPickUnit);*/
+                isCreatingUnit = false;
+            }
+        }
     }
 
 	IEnumerator CoolDownArmySpawn()								//nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani                      //OPRAVIT OPRAVIT OPRAVIT
@@ -112,30 +149,30 @@ public class EnemySpawn : MonoBehaviour
             }
             Debug.Log(nahoda);
         }*/
-		if(nahoda == 1)
+		if(randomPickUnit == 1)
 		{
 			yield return new WaitForSeconds(waitTime[0]);
             army.armyType = army.armyTypeLayer[0];
-            Instantiate(soldier, transform.position, transform.rotation);
+            Instantiate(objectArmyE, transform.position, transform.rotation);
 		}
-		else if(nahoda == 2)
+		else if(randomPickUnit == 2)
 		{
 			yield return new WaitForSeconds(waitTime[1]);
             army.armyType = army.armyTypeLayer[0];
-            Instantiate(soldier, transform.position, transform.rotation);
+            Instantiate(objectArmyE, transform.position, transform.rotation);
 		}
-		else if(nahoda == 3)
+		else if(randomPickUnit == 3)
 		{
 			yield return new WaitForSeconds(waitTime[2]);
             army.armyType = army.armyTypeLayer[0];
-            Instantiate(soldier, transform.position, transform.rotation);
+            Instantiate(objectArmyE, transform.position, transform.rotation);
 		}
 		else
 		{
 			yield return new WaitForSeconds(waitTime[3]);
 			Debug.Log("Cant build");
 		}
-        nahoda = Random.Range(1, difficulty[2]);			//easy 0, normal 1, hard 2
+        randomPickUnit = Random.Range(1, difficulty[2]);			//easy 0, normal 1, hard 2
 		canSpawn = true;
 	}
     void UpgradeHp()										//zachova procentuelne hp pri upgradu			//sledovat fungovani
@@ -151,9 +188,9 @@ public class EnemySpawn : MonoBehaviour
     }
     IEnumerator Evolution()                                     //toto bude primo pro enemy system pro evoluce
     {
-        if (evolving == false && level != 4 && canSpawn == true)
+        if (evolving == false && level != 4 && isCreatingUnit == false)
         {
-			if (ProgresScript.experience >= (UnityConfiguration.nextlevelup * EvolveExperiencePro) / 100 && ProgresScript.level == level)		//urcit jinak podminku
+			if (progresS.experience >= (UnityConfiguration.nextlevelup * EvolveExperiencePro) / 100 && progresS.level == level)		//urcit jinak podminku
 			{
                 evolving = true;
                 yield return new WaitForSeconds(lvlTypeWait);
@@ -173,7 +210,7 @@ public class EnemySpawn : MonoBehaviour
                 }
                 UpgradeHp();
             }
-			else if(ProgresScript.level > level)
+			else if(progresS.level > level)
 			{
                 evolving = true;
                 yield return new WaitForSeconds(lvlTypeWait);

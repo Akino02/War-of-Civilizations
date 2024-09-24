@@ -28,7 +28,7 @@ public class MiniMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        positionProcent = (cameraMove.transform.position.x / mapwidth);
+        positionProcent = (cameraMove.transform.position.x / mapwidth );
         bar.value = positionProcent;
     }
 }

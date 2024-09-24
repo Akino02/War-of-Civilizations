@@ -15,11 +15,11 @@ public class ProgresScript : MonoBehaviour
     //funkce zakladny ukazuje rychlost plneni, zkusenosti(%), pocet penez, co se vyrabi, co je ve fronte
     [Header("Base stats")]
     public float speedOfFill = 3f;
-	public static int experience = 0;									//zkusenosti
+	public int experience = 0;							//zkusenosti
 	public int experienceinprocents = 0;						//zkusenosti
-	//public int nextlevelup = 4000;                              //pokud dosahne tolika zkusenosti tak se evolvuje			//potrebuje i prenastavit v unity!!
-	public static int level = 0;                                       //toto ukazuje level evoluce v zakladu je to 0
-	public static int money = 175;                                     //penize			
+	//public int nextlevelup = 4000;                            //pokud dosahne tolika zkusenosti tak se evolvuje			//potrebuje i prenastavit v unity!!
+	public int level = 0;                                //toto ukazuje level evoluce v zakladu je to 0
+	public int money = 175;                              //penize			
 	public int order = 0;                                       //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
 	public int made = 0;
 	public int[] orderv2 = { 0, 0, 0, 0, 0 };                   //poradi jednotek
@@ -46,7 +46,8 @@ public class ProgresScript : MonoBehaviour
 	public Text[] actionButtonText = new Text[6];               //upraveni textu u buttonu soldier, ranger, tank		//pozdeji budou jeste dalsi dva na dobrovolny update evoluce a pro pohromy
 
 	public Image[] orderVizual = new Image[5];
-                                                                //
+    public Sprite[] unitProduced = new Sprite[3];				//obrazky pro vizualni order (sprites)
+    //
 
     //ukazuje zkusenosti graficky
     [Header("XP bar")]
@@ -54,7 +55,7 @@ public class ProgresScript : MonoBehaviour
 
     //Katastrofa
     [Header("Disaster")]
-    public GameObject fireBall;
+    public GameObject fireBall;									//tohle pak zmenit na array 
 	public GameObject borderL;
     public GameObject borderR;
     public GameObject disasterZone;
@@ -212,13 +213,15 @@ public class ProgresScript : MonoBehaviour
 	{
 		for (int i = 0; i < 5; i++)
 		{
-			if (orderv2[i] == 0)
-			{
-				orderVizual[i].fillAmount = 0;
-			}
-			else
+			if (orderv2[i] != 0)
 			{
 				orderVizual[i].fillAmount = 1;
+				orderVizual[i].sprite = unitProduced[orderv2[i]-1];
+				//Debug.Log(orderv2[i]);
+            }
+			else
+			{
+				orderVizual[i].fillAmount = 0;
 			}
 		}
         return;
@@ -305,7 +308,14 @@ public class ProgresScript : MonoBehaviour
 			float randomRotZ = Random.Range(0, 360);																					//
             Quaternion changedRotationZ = Quaternion.Euler(disasterZone.transform.rotation.x, 0, randomRotZ);							//
             Vector3 disasterZonePos = new Vector3(randomPosX, disasterZone.transform.position.y, fireBall.transform.position.z);		//
-            Instantiate(fireBall, disasterZonePos, changedRotationZ);
+			if (level == 0)
+			{
+                Instantiate(fireBall, disasterZonePos, changedRotationZ);
+            }
+			else
+			{
+                Instantiate(fireBall, disasterZonePos, disasterZone.transform.rotation);
+            }
             yield return new WaitForSeconds(0.4f);
             i += 1;
         }
