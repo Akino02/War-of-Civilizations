@@ -19,6 +19,13 @@ Hra ke stažení
 - Nejnovější verze: [ver0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
 
 # Postup
+<h2>Update 063 [26.09.2024]</h2>
+<p>+ Hráč si může vybrat typ kamery(pohyb)</p>
+<p>+ Opravení zvuku</p>
+<p>+ Opravení minimapky</p>
+<p><img src="https://github.com/user-attachments/assets/defb150f-d008-4a18-a042-46976caffa05" width="500" height="250"></p>
+<br>
+
 <h2>Update 062 [13.09.2024]</h2>
 <p>+ Z ročníkové práce se stala Maturitní</p>
 <p>+ Opravení bojového systému</p>
