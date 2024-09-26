@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     //public CameraMove move;
     public AudioSource song;
-    public static float songInGame = 0.15f;
+    //public static float songInGame = 0.15f;
 
     public Transform target;                                    //objekt ktery bude pronasledovan
 
@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         song.volume = ButtonsMenu.volumeSong;
-        songInGame = song.volume;
+        //songInGame = song.volume;
     }
 
     // Update is called once per frame

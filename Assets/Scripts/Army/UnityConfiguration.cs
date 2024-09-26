@@ -20,8 +20,11 @@ public static class UnityConfiguration
 	[Header("Speed")]
     public static float movespeed = 1f;//rychlost pohybu objektu
 
+	[Header("DeadZone")]
+    public static int deadZone = -10;
 
-	[Header("HP Base")]
+
+    [Header("HP Base")]
     public static float[] maxHPBase = { 1000, 2000, 3000, 4000, 5000 };
 
 	[Header("Next LevelUp")]
@@ -32,8 +35,8 @@ public static class UnityConfiguration
 
 	//[Header("ProductionBar")]
 	[Header("CameraType")]
-    public static int cameraMoveType = 1;
-	public static string[] cameraTypeName = { "Mouse+Keyboard", "Keyboard", "Mouse" };
+    public static int cameraMoveType = 0;
+	public static bool[,] cameraTypeImage = { {true, true}, {true, false}, {false, true} };		//format keyboard, mouse
 
 
     /*// Start is called before the first frame update

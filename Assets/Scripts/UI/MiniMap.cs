@@ -22,13 +22,16 @@ public class MiniMap : MonoBehaviour
     {
         bar = gameObject.GetComponent<Scrollbar>();
         cameraMove = cameraObjectMove.GetComponent<CameraMove>();
-        mapwidth = (borderL.transform.position.x + 1) + (borderR.transform.position.x - 1);                                 //vypocitani delky mapy 
+        //mapwidth = (borderL.transform.position.x + 1) - (borderR.transform.position.x - 1);                                 //vypocitani delky mapy 
     }
 
     // Update is called once per frame
     void Update()
     {
-        positionProcent = (cameraMove.transform.position.x / mapwidth );
+        actualPosition = cameraMove.transform.position.x;
+        //positionProcent = (cameraMove.transform.position.x / (borderL.transform.position.x + 1));
+        positionProcent = (actualPosition-(borderL.transform.position.x+1)) / ((borderR.transform.position.x-1) - (borderL.transform.position.x+1));
+        //positionProcent = Mathf.Abs(actualPosition) / (Mathf.Abs(borderR.transform.position.x) - 1);
         bar.value = positionProcent;
     }
 }

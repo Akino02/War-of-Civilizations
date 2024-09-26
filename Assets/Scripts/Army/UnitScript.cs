@@ -29,7 +29,7 @@ public class UnitScript : MonoBehaviour
 
 	//sound
 	public AudioSource attackSound;
-	public static float sfxSound = 0.35f;
+	//public static float sfxSound = 0.35f;
 
 
 	//
@@ -75,17 +75,18 @@ public class UnitScript : MonoBehaviour
     public bool foundEnemy = false;                                //zda nasel nepritele
 
 	private float distance;
-	private float previousdistance;
+	//private float previousdistance;
 
-	//test
 	public float chargeAttack = 0f;
+
+	//public bool isDead = false;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		//Sound                         //to na sound udìlat better
 		attackSound.volume = ButtonsMenu.volumeSFX;
-		sfxSound = attackSound.volume;
+		//sfxSound = attackSound.volume;
 
 
 		GameObject script1 = GameObject.FindWithTag("baseP");   //toto najde zakladnu hrace pomoci tagu ktery ma
@@ -187,8 +188,8 @@ public class UnitScript : MonoBehaviour
 			return;
 		}
 		foundEnemy = false;
-		//animator.SetBool("ScriptFound", false);
-		return;
+        //animator.SetBool("ScriptFound", false);
+        return;
 	}
 	private void CheckForCollision()                                                                                                            //ZATIM NENI OK NEVIM ZDA BUDE FUNGOVAT BEZ NOTFULLSIZE
 	{
@@ -206,6 +207,10 @@ public class UnitScript : MonoBehaviour
 	private void Move()                                                                                                                     //ZATIM NENI OK NEVIM ZDA BUDOU FUNGOVAT ANIMACE
 	{
 		//pokud vojacek narazi na jakoukoliv kolizi tak se zastavi (enemy, enemy base, allies)
+		/*if (isDead)
+		{
+			movespeed = 0;
+		}*/
 		if (checkCollision[0] || checkCollision[1] || checkCollision[2])
 		{
 			rb.velocity = new Vector2((movespeed * moveDir[2]), rb.velocity.y);     //nebude se hybat pokud je poblic kolize
@@ -223,28 +228,38 @@ public class UnitScript : MonoBehaviour
 	private void CheckDead()
 	{
 		//Pokud jednotka nebude mit zivoty
-		if (currhp <= 0)
+		if (currhp <= 0 || transform.position.y < UnityConfiguration.deadZone)
 		{
 			//Pokud se jedna o nepritele
-			if (team != 0)
+			if (team != 0 && transform.position.y > UnityConfiguration.deadZone)
 			{
-				Reward();
+                //isDead = true;
+                Reward();
 			}
-			Destroy(gameObject);
-			return;
+            Destroy(gameObject);
+            /*gameObject.layer = LayerMask.NameToLayer("Dead");
+            if (transform.position.y < deadZone)
+            {
+                Destroy(gameObject);
+            }*/
+            return;
 		}
 
 		//Pokud jednotka se propadne
-		if (transform.position.y < -20)
+		/*if (transform.position.y < -20)
 		{
 			Destroy(gameObject);
 			return;
-		}
+		}*/
 	}
 	private void UpdateHP()
 	{
 		hpinprocents = ((100 * currhp) / UnityConfiguration.maxhp[lvl, armyTypeNum]) / 100;
 		hpBar.transform.localScale = new Vector2(hpinprocents, hpBar.transform.localScale.y);
+		if(currhp <= 0)
+		{
+			currhp = 0;
+		}
 	}
 	/*private void Attack()                           //SPATNE FUNGUJE DMG DO ZAKLADNY (JE TO V LOOP)
 	{
@@ -289,15 +304,18 @@ public class UnitScript : MonoBehaviour
 	private void ChargeAttack()
 	{
 		chargeAttack = Mathf.Lerp(chargeAttack, chargeAttack+1f, Time.deltaTime / UnityConfiguration.attackDelay);
-		if(chargeAttack >= 1)
+		if(chargeAttack >= 1)		//pri dead animaci dat do podminky isDead
 		{
 			chargeAttack = 0;
             animator.SetBool("ScriptFound", true);
             int randomDmg = Random.Range(UnityConfiguration.dmgMin[lvl, armyTypeNum], UnityConfiguration.dmgMax[lvl, armyTypeNum]);
+			//attackSound.Stop();
+			//attackSound.Play();
+			PlaySFX();
             if (checkCollision[0] && foundEnemy == true)
             {
                 armyScriptForOpponent.currhp -= randomDmg;
-                attackSound.Play();
+                //attackSound.Play();
             }
             else if (checkCollision[1])
             {
@@ -305,22 +323,29 @@ public class UnitScript : MonoBehaviour
                 {
                     Debug.Log("Hit base to E");
                     EnemySpawn.currHPBase -= randomDmg;
-                    attackSound.Play();
+                    //attackSound.Play();
                 }
                 else
                 {
                     Debug.Log("Hit base to P");
                     HpScript.currHPBase -= randomDmg;
-                    attackSound.Play();
+                    //attackSound.Play();
                 }
             }
             animator.SetBool("ScriptFound", false);
+            //attackSound.Stop();
             Debug.Log("Dohrala se animece a uderil");
-		}
+        }
 	}
 
+	private void PlaySFX()
+	{
+        attackSound.Play();
+        AudioSource.PlayClipAtPoint(attackSound.clip, transform.position);
+    }
 
-	private void Reward()
+
+    private void Reward()
 	{
         progresS.money += UnityConfiguration.moneykill[lvl, armyTypeNum];
         progresS.experience += UnityConfiguration.expperkill[armyTypeNum];

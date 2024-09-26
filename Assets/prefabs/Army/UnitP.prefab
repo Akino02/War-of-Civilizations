@@ -337,7 +337,7 @@ MonoBehaviour:
   movespeed: 1
   armyType:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 2048
   armyTypeLayer:
   - serializedVersion: 2
     m_Bits: 1024
@@ -351,7 +351,12 @@ MonoBehaviour:
   armyTypeNum: 0
   hpBar: {fileID: 4047639467630880016}
   currhp: 100
-  dir: 0
+  lvl: 0
+  team: 0
+  canGiveDmg: 0
+  foundEnemy: 0
+  chargeAttack: 0
+  isDead: 0
 --- !u!1 &4047639467630880016
 GameObject:
   m_ObjectHideFlags: 0

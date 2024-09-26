@@ -2683,7 +2683,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8388608
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -3304,7 +3304,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectArmyP: {fileID: 2196381188073141835, guid: 7d49080397604944f908c00eccd93cad, type: 3}
   speedOfFill: 3
+  experience: 0
   experienceinprocents: 0
+  level: 0
+  money: 175
   order: 0
   made: 0
   orderv2: 0000000000000000000000000000000000000000
@@ -4142,7 +4145,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8388608
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -4674,7 +4677,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8388608
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -5514,6 +5517,7 @@ MonoBehaviour:
   timeToCreateUnit: 0
   isCreatingUnit: 0
   hpbaseinprocents: 1
+  level: 0
   lvlTypeWait: 15
   evolving: 0
   baseAppearance:
@@ -8709,7 +8713,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8388608
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

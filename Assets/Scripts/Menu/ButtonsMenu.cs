@@ -12,14 +12,15 @@ public class ButtonsMenu : MonoBehaviour
     public GameObject settingMenu;
 
 
-    public static float volumeSong;
-    public static float volumeSFX;
+    public static float volumeSong = 0.35f;
+    public static float volumeSFX = 0.35f;
     public Slider volumeBarSong;
     public Slider volumeBarSFX;
     public Text showVolumeValueSong;
     public Text showVolumeValueSFX;
 
-    public Text changeCameraName;
+    public Image changeCameraKeyboard;
+    public Image changeCameraMouse;
 
     public AudioSource testSongSound;
     public AudioSource testSFXSound;
@@ -37,15 +38,16 @@ public class ButtonsMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);                           //nastaveni ze toto menu bude videt pri startu
         settingMenu.SetActive(false);                       //toto menu bude pri startu vypnute
-        volumeBarSong.value = CameraFollow.songInGame;      //nastaveni zvuku do hry
-        volumeBarSFX.value = UnitScript.sfxSound;              //nastaveni zvuku do hry
-        volumeSong = volumeBarSong.value;                       //ziskani hodnoty z posouvadla
-        volumeSFX = volumeBarSFX.value;                         //ziskani hodnoty z posouvadla
+        volumeBarSong.value = volumeSong;      //nastaveni zvuku do hry
+        volumeBarSFX.value = volumeSFX;              //nastaveni zvuku do hry
+        /*volumeSong = volumeBarSong.value;                       //ziskani hodnoty z posouvadla
+        volumeSFX = volumeBarSFX.value;                         //ziskani hodnoty z posouvadla*/
         /*showPlayButtonTextSong.text = "Play";
         showPlayButtonTextSFX.text = "Play";*/
 
         //testSound = GetComponent<AudioSource>();
-        changeCameraName.text = UnityConfiguration.cameraTypeName[UnityConfiguration.cameraMoveType];
+        //changeCameraName.text = UnityConfiguration.cameraTypeName[UnityConfiguration.cameraMoveType];
+        ChangeCameraImage();
     }
 
     // Update is called once per frame
@@ -101,7 +103,7 @@ public class ButtonsMenu : MonoBehaviour
         {
             UnityConfiguration.cameraMoveType = 0;
         }
-        changeCameraName.text = UnityConfiguration.cameraTypeName[UnityConfiguration.cameraMoveType];
+        ChangeCameraImage();
     }
     public void ChangeCameraMinus()
     {
@@ -113,7 +115,18 @@ public class ButtonsMenu : MonoBehaviour
         {
             UnityConfiguration.cameraMoveType = 2;
         }
-        changeCameraName.text = UnityConfiguration.cameraTypeName[UnityConfiguration.cameraMoveType];
+        ChangeCameraImage();
+    }
+    private void ChangeCameraImage()
+    {
+        /*for (int i = 0; i < 2; i++)
+        {
+            changeCameraKeyboard.enabled = UnityConfiguration.cameraTypeImage[i, 0];
+            changeCameraMouse.enabled = UnityConfiguration.cameraTypeImage[i, 1];
+        }*/
+        changeCameraKeyboard.enabled = UnityConfiguration.cameraTypeImage[UnityConfiguration.cameraMoveType, 0];
+        changeCameraMouse.enabled = UnityConfiguration.cameraTypeImage[UnityConfiguration.cameraMoveType, 1];
+        return;
     }
 
     //SettingMenu buttons

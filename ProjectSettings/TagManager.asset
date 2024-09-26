@@ -8,6 +8,7 @@ TagManager:
   - baseE
   - Enemy
   - Ground
+  - Dead
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - Camera
   - 
   - FireBall
-  - 
+  - Dead
   - 
   - 
   - 
