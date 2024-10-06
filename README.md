@@ -1,5 +1,5 @@
 # War of Civilizations
-Moje ročníková práce pro školní rok 2023/2024
+Moje maturitní práce pro školní rok 2024/2025
 - Hra byla vytvořena na základě inspirace hrou [Age of War](https://aowg.fandom.com/wiki/Age_of_War_Wiki)
 - Ku dnešnímu dni se snažím od té inspirace odklonit
 
@@ -14,6 +14,7 @@ Vysvětlení hry
 Ovládání
 - Hra se ovládá za pomoci pohybu myši k hraně obrazovky (levá, pravá) nebo také může použít klávesnice (A - levá, D - pravá, to stejné platí pro šipky)
 - V menu se nachází nastavení ve kterém si hráč může nastavit hlasitost hry a může se podívat na autora hudby, která je použitá ve hře
+- Hráč si také může v nastavení vybrat jaký chce pohyb kamery (zda chce jen pohyb klávesnici nebo jen myší a nebo ještě obojí což je v základu)
 
 Hra ke stažení
 - Nejnovější verze: [ver0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
