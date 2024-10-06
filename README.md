@@ -19,6 +19,12 @@ Hra ke stažení
 - Nejnovější verze: [ver0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
 
 # Postup
+<h2>Update 064 [06.10.2024]</h2>
+<p>+ Přidání vlastní menu hudby</p>
+<p>+ Opravení animace při souboji</p>
+<p>+ Vylepšení AI logiky pro vytváření jednotek u nepřítele (Combo)</p>
+<br>
+
 <h2>Update 063 [26.09.2024]</h2>
 <p>+ Hráč si může vybrat typ kamery(pohyb)</p>
 <p>+ Opravení zvuku</p>
