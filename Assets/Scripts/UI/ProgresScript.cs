@@ -291,8 +291,15 @@ public class ProgresScript : MonoBehaviour
 	}
 	void ExperienceBar()
 	{
-        experienceinprocents = ((100 * experience) / UnityConfiguration.nextlevelup);              //vytvori proceznta ze zkusenosti
-		xpBar.fillAmount = Mathf.Lerp(xpBar.fillAmount, (float)experienceinprocents/100f, speedOfFill*Time.deltaTime);
+		if(level != 4)
+		{
+            experienceinprocents = ((100 * experience) / UnityConfiguration.nextlevelup);              //vytvori proceznta ze zkusenosti
+            xpBar.fillAmount = Mathf.Lerp(xpBar.fillAmount, (float)experienceinprocents / 100f, speedOfFill * Time.deltaTime);
+        }
+		else
+		{
+			xpBar.fillAmount = 1f;
+		}
 		//Debug.Log(experience / nextlevelup);
         return;
 	}

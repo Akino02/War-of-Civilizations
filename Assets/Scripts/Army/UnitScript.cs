@@ -147,7 +147,7 @@ public class UnitScript : MonoBehaviour
 		if (foundEnemy || checkCollision[1])
 		{
 			ChargeAttack();
-            animator.SetBool("ScriptFound", true);
+            //animator.SetBool("ScriptFound", true);
         }
 		else
 		{
@@ -168,9 +168,9 @@ public class UnitScript : MonoBehaviour
 			{
                 /*Debug.Log(Mathf.Abs(transform.position.x) + gameObject.name + i);
                 Debug.Log(Mathf.Abs(detectedObjects[i].transform.position.x) + gameObject.name + i);*/
-                if (Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x) < distance)
+                if (Mathf.Abs(Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x)) < distance)
 				{
-					distance = Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x);
+					distance = Mathf.Abs(Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x));
 					SoldierArmyScript = detectedObjects[i].GetComponent<UnitScript>();
 					armyScriptForOpponent = SoldierArmyScript;
 				}
@@ -303,7 +303,8 @@ public class UnitScript : MonoBehaviour
 	}*/
 	private void ChargeAttack()
 	{
-		chargeAttack = Mathf.Lerp(chargeAttack, chargeAttack+1f, Time.deltaTime / UnityConfiguration.attackDelay);
+        animator.SetBool("ScriptFound", true);
+        chargeAttack = Mathf.Lerp(chargeAttack, chargeAttack+1f, Time.deltaTime / UnityConfiguration.attackDelay);
 		if(chargeAttack >= 1)		//pri dead animaci dat do podminky isDead
 		{
 			chargeAttack = 0;

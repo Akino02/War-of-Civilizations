@@ -27,7 +27,6 @@ public class EnemySpawn : MonoBehaviour
 	//
 	//Factory (Unit)
 	private int[] waitTime = { 6, 9, 13};					//soldier, ranger, tank, cant Build
-	private int[] difficulty = { 8, 5, 4};					    //obtiznost hry     //to tu asi nebude vubec
     public float timeToCreateUnit = 0f;
     private float speedForCreatingUnit = 0;
     public bool isCreatingUnit = false;
@@ -53,6 +52,8 @@ public class EnemySpawn : MonoBehaviour
 	//spawnovani jednotek
 	public bool canSpawn = true;
 	private int randomPickUnit = 0;
+    private int[] countToMakeTankCombo = {0,0};
+    private int[] difficulty = { 15, 10, 5};					    //obtiznost hry (ve forme vyroby comba)
 	//
 	// Start is called before the first frame update
 	void Start()
@@ -85,6 +86,10 @@ public class EnemySpawn : MonoBehaviour
 		{
 			StartCoroutine(Evolution());
         }
+        if (currHPBase <= 0)
+        {
+            currHPBase = 0;
+        }
         /*if (canSpawn == true && currHPBase > 0 && HpScript.currHPBase > 0)
 		{
 			StartCoroutine(CoolDownArmySpawn());
@@ -106,6 +111,21 @@ public class EnemySpawn : MonoBehaviour
                 if (i == randomPickUnit)
                 {
                     //speedForCreatingUnit = Time.deltaTime / waitTime[i];
+                    //zacatek comba pro nepritele spawne nejdrive tank a potom spawne rangera a tim se ukonci combo
+                    if (countToMakeTankCombo[1] >= 1)
+                    {
+                        countToMakeTankCombo[1] = 0;
+                        randomPickUnit = 1;
+                        Debug.Log("End of Combo!!");
+                    }
+                    else if (countToMakeTankCombo[0] >= 5)
+                    {
+                        countToMakeTankCombo[0] = 0;
+                        countToMakeTankCombo[1] = 1;
+                        randomPickUnit = 2;
+                        Debug.Log("Combo started !!!!!");
+                    }
+                    //
                     isCreatingUnit = true;
                     timeToCreateUnit = 0f;
                     /*Debug.Log("Enemy building" + randomPickUnit);
@@ -120,35 +140,40 @@ public class EnemySpawn : MonoBehaviour
         {
             speedForCreatingUnit = Time.deltaTime / waitTime[randomPickUnit];
             timeToCreateUnit = Mathf.Lerp(timeToCreateUnit, timeToCreateUnit + 1f, speedForCreatingUnit);
-            if (timeToCreateUnit >= 1)
+            if (timeToCreateUnit >= 1 && !LogScript.isGameOver)
             {
                 army.armyType = army.armyTypeLayer[randomPickUnit];
                 Instantiate(objectArmyE, transform.position, transform.rotation);
                 /*Debug.Log($"Enemy built {randomPickUnit}");
                 Debug.Log(randomPickUnit);*/
+                countToMakeTankCombo[0]++;
                 isCreatingUnit = false;
             }
         }
     }
+    private void sortOrder()
+    {
 
-	IEnumerator CoolDownArmySpawn()								//nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani                      //OPRAVIT OPRAVIT OPRAVIT
+    }
+
+	/*IEnumerator CoolDownArmySpawn()								//nastaveni na prestavku at nemuze to spamovat to klikani a spawnovani                      //OPRAVIT OPRAVIT OPRAVIT
 	{
 		canSpawn = false;
-        /*for (int unitType = 1; unitType <= army.armyTypeLayer.Length; unitType++)
-        {
-            if(nahoda == unitType)
-            {
-                yield return new WaitForSeconds(waitTime[unitType-1]);
-                army.armyType = army.armyTypeLayer[unitType - 1];
-                Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
-            }
-            else
-            {
-                yield return new WaitForSeconds(waitTime[3]);
-                Debug.Log("Cant build");
-            }
-            Debug.Log(nahoda);
-        }*/
+        //for (int unitType = 1; unitType <= army.armyTypeLayer.Length; unitType++)
+        //{
+        //    if(nahoda == unitType)
+        //    {
+        //        yield return new WaitForSeconds(waitTime[unitType-1]);
+        //        army.armyType = army.armyTypeLayer[unitType - 1];
+        //        Instantiate(soldier, baseSpawner.transform.position, baseSpawner.transform.rotation);
+        //    }
+        //    else
+        //    {
+        //        yield return new WaitForSeconds(waitTime[3]);
+        //        Debug.Log("Cant build");
+        //    }
+        //    Debug.Log(nahoda);
+        //}
 		if(randomPickUnit == 1)
 		{
 			yield return new WaitForSeconds(waitTime[0]);
@@ -174,7 +199,7 @@ public class EnemySpawn : MonoBehaviour
 		}
         randomPickUnit = Random.Range(1, difficulty[2]);			//easy 0, normal 1, hard 2
 		canSpawn = true;
-	}
+	}*/
     void UpgradeHp()										//zachova procentuelne hp pri upgradu			//sledovat fungovani
     {
         if (level > 0)

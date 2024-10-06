@@ -14,7 +14,8 @@ public static class UnityConfiguration
     public static int attackDelay = 2;
 
     [Header("Rewards")]
-    public static int[,] moneykill = { { 20, 35, 135 }, { 40, 65, 265 }, { 80, 135, 535 }, { 160, 265, 1065 }, { 320, 535, 2135 } };             //peniza za zabiti nepritele (soldier, ranger, tank)
+    //public static int[,] moneykill = { { 20, 35, 135 }, { 40, 65, 265 }, { 80, 135, 535 }, { 160, 265, 1065 }, { 320, 535, 2135 } };             //peniza za zabiti nepritele (soldier, ranger, tank)
+    public static int[,] moneykill = { { 15, 25, 150 }, { 30, 50, 300 }, { 60, 100, 600 }, { 120, 200, 1200 }, { 240, 400, 2400 } };             //peniza za zabiti nepritele (soldier, ranger, tank)
     public static int[] expperkill = { 100, 125, 300 };                //zkusenosti za zabiti nepritele (soldier, ranger, tank)
 
 	[Header("Speed")]
@@ -31,7 +32,8 @@ public static class UnityConfiguration
     public static int nextlevelup = 4000;                              //pokud dosahne tolika zkusenosti tak se evolvuje
 
 	[Header("MoneyPerUnit")]
-    public static int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };      //vícerozmìrné pole pro cenu jednotek
+    //public static int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };      //vícerozmìrné pole pro cenu jednotek
+    public static int[,] moneyperunit = { { 15, 25, 150 }, { 30, 50, 300 }, { 60, 100, 600 }, { 120, 200, 1200 }, { 240, 400, 2400 } };      //vícerozmìrné pole pro cenu jednotek
 
 	//[Header("ProductionBar")]
 	[Header("CameraType")]

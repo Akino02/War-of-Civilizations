@@ -24,6 +24,7 @@ public class ButtonsMenu : MonoBehaviour
 
     public AudioSource testSongSound;
     public AudioSource testSFXSound;
+    public AudioSource menuSongSoung;
 
     bool isPlayingSong = false;
     bool isPlayingSFX = false;
@@ -40,6 +41,7 @@ public class ButtonsMenu : MonoBehaviour
         settingMenu.SetActive(false);                       //toto menu bude pri startu vypnute
         volumeBarSong.value = volumeSong;      //nastaveni zvuku do hry
         volumeBarSFX.value = volumeSFX;              //nastaveni zvuku do hry
+
         /*volumeSong = volumeBarSong.value;                       //ziskani hodnoty z posouvadla
         volumeSFX = volumeBarSFX.value;                         //ziskani hodnoty z posouvadla*/
         /*showPlayButtonTextSong.text = "Play";
@@ -65,6 +67,7 @@ public class ButtonsMenu : MonoBehaviour
         volumeSFX = volumeBarSFX.value;                         //ziskani hodnoty z posouvadla
         showVolumeValueSong.text = "Volume: " + math.round(volumeSong * 100) + "% Song";     //dosazeni textu pri meneni hodnoty zvuku
         showVolumeValueSFX.text = "Volume: " + math.round(volumeSFX * 100) + "% SFX";     //dosazeni textu pri meneni hodnoty zvuku
+        menuSongSoung.volume = volumeSong;
     }
 
     //MainMenu buttons
