@@ -22,6 +22,7 @@ Hra ke stažení
 # Postup
 <h2>Update 065 [14.10.2024]</h2>
 <p>+ Přidání pohybu minimapou</p>
+<p>+ Upravení výběru pohybu kamerou</p>
 <p>+ Opravení scriptů (Konvence)</p>
 <br>
 
