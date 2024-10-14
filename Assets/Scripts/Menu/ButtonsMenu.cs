@@ -26,6 +26,9 @@ public class ButtonsMenu : MonoBehaviour
     public AudioSource testSFXSound;
     public AudioSource menuSongSoung;
 
+    [Range(0f, 1f)]
+    public float dimPercentage = 0.35f;
+
     bool isPlayingSong = false;
     bool isPlayingSFX = false;
     /*public Text showPlayButtonTextSong;
@@ -74,7 +77,7 @@ public class ButtonsMenu : MonoBehaviour
     public void Play()          //Funkce pro vstoupeni do hry
     {
         SceneManager.LoadScene("GameScene");
-        LogScript.isGameOver = false;                           //Zajistuje ze kdyz jde do hry tak hra bude nova
+        GameScript.isGameOver = false;                           //Zajistuje ze kdyz jde do hry tak hra bude nova
     }
     public void Setting()              //Funkce pro zmenu nastaveni
     {
@@ -96,9 +99,10 @@ public class ButtonsMenu : MonoBehaviour
     {
         Application.OpenURL("https://www.youtube.com/@WaterflameMusic/videos");
     }
-    public void ChangeCameraPlus()
+    public void ToggleKeyboard()
     {
-        if (UnityConfiguration.cameraMoveType < 2)
+        //MoveType[] controllPresets = {MoveType.Keyboard, MoveType.Mouse, MoveType.Keyboard | MoveType.Mouse};
+        /*if (UnityConfiguration.cameraMoveType < )
         {
             UnityConfiguration.cameraMoveType++;
         }
@@ -106,11 +110,23 @@ public class ButtonsMenu : MonoBehaviour
         {
             UnityConfiguration.cameraMoveType = 0;
         }
+        ChangeCameraImage();*/
+        //bool isMouse = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Mouse));
+        bool isKeyboard = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Keyboard));
+        if (isKeyboard)
+        {
+            UnityConfiguration.cameraMoveType = MoveType.Mouse;
+        }
+        else
+        {
+            UnityConfiguration.cameraMoveType = UnityConfiguration.cameraMoveType | MoveType.Keyboard;
+        }
+        Debug.Log(isKeyboard + " Keyboard");
         ChangeCameraImage();
     }
-    public void ChangeCameraMinus()
+    public void ToggleMouse()
     {
-        if (UnityConfiguration.cameraMoveType > 0)
+        /*if (UnityConfiguration.cameraMoveType > 0)
         {
             UnityConfiguration.cameraMoveType--;
         }
@@ -118,18 +134,28 @@ public class ButtonsMenu : MonoBehaviour
         {
             UnityConfiguration.cameraMoveType = 2;
         }
+        ChangeCameraImage();*/
+        bool isMouse = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Mouse));
+        if (isMouse)
+        {
+            UnityConfiguration.cameraMoveType = MoveType.Keyboard;
+        }
+        else
+        {
+            UnityConfiguration.cameraMoveType = UnityConfiguration.cameraMoveType | MoveType.Mouse;
+        }
+        Debug.Log(isMouse);
         ChangeCameraImage();
     }
     private void ChangeCameraImage()
     {
-        /*for (int i = 0; i < 2; i++)
-        {
-            changeCameraKeyboard.enabled = UnityConfiguration.cameraTypeImage[i, 0];
-            changeCameraMouse.enabled = UnityConfiguration.cameraTypeImage[i, 1];
-        }*/
-        changeCameraKeyboard.enabled = UnityConfiguration.cameraTypeImage[UnityConfiguration.cameraMoveType, 0];
-        changeCameraMouse.enabled = UnityConfiguration.cameraTypeImage[UnityConfiguration.cameraMoveType, 1];
-        return;
+        //podminka ? true : false
+        Color showImage = new Color(1, 1, 1, 1);
+        Color dimImage = new Color(1, 1, 1, dimPercentage);
+        bool isKeyboard = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Keyboard));
+        bool isMouse = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Mouse));
+        changeCameraKeyboard.color = isKeyboard ? showImage : dimImage;
+        changeCameraMouse.color = isMouse ? showImage : dimImage;
     }
 
     //SettingMenu buttons

@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-	//tento script funguje na pohyblivost obrazu, takze ho vlastni kamera a taky slunce
-	public Rigidbody2D rb;                                      //funkce pro gravitaci
-	private float activeX;                                      //promenna pro ulozeni zda se hybe ci ne
-	public float movespeed = 3;                                 //rychlost pohybu objektu
+    //tento script funguje na pohyblivost obrazu, takze ho vlastni kamera a taky slunce
+    //funkce pro gravitaci
+    public Rigidbody2D rb;
 
-    private int touchField = 10;                                //velikost pole pro mys, po najeti do pole se bude tam pohybovat kamera
+    //promenna pro ulozeni zda se hybe ci ne
+    public float activeX;
+
+    //rychlost pohybu objektu
+    public float movespeed = 3;
+
+    //velikost pole pro mys, po najeti do pole se bude tam pohybovat kamera
+    private int touchField = 10;
 
     //public MoveType moveType;
 
@@ -32,6 +38,7 @@ public class CameraMove : MonoBehaviour
         borderLposX = playerBase.transform.position.x + 7;
         borderRposX = enemyBase.transform.position.x - 7;
 
+        //ziskani pozic hranicnich bodu
         borderL.transform.position = new Vector2(borderLposX, transform.position.y);
         borderR.transform.position = new Vector2(borderRposX, transform.position.y);
 	}
@@ -39,27 +46,34 @@ public class CameraMove : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-        //Debug.Log(moveType);
 
-        if (!LogScript.isGameOver)
+        if (!GameScript.isGameOver)
         {
             //pohyb pomoci myse
-            if (Input.mousePosition.x < Screen.width / touchField && Input.mousePosition.y < (Screen.height * 3) / 4 && Input.mousePosition.y > Screen.height/ touchField && (UnityConfiguration.cameraMoveType == 2 || UnityConfiguration.cameraMoveType == 0))                        //pokud je mys left
+            bool isMouse = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Mouse));
+            bool isKeyboard = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Keyboard));
+            if (
+                Input.mousePosition.x < Screen.width / touchField &&
+                Input.mousePosition.y < (Screen.height * 3) / 4 &&
+                Input.mousePosition.y > Screen.height/ touchField &&
+                isMouse)
+                //pokud je mys left
             {
                 activeX = -1;
             }
-            else if (Input.mousePosition.x > Screen.width - Screen.width / touchField && Input.mousePosition.y < (Screen.height * 3) / 4 && Input.mousePosition.y > Screen.height / touchField && (UnityConfiguration.cameraMoveType == 2 || UnityConfiguration.cameraMoveType == 0))   //pokud je mys right
+            else if (Input.mousePosition.x > Screen.width - Screen.width / touchField &&
+                Input.mousePosition.y < (Screen.height * 3) / 4 &&
+                Input.mousePosition.y > Screen.height / touchField &&
+                isMouse)
+                //pokud je mys right
             {
                 activeX = 1;
             }
-            //
-            //pohyb pomoci klavesnice (definice pohybu(ten pohyb je urcen pro A, D a taky pro levou sipku a pravou sipku))
-            //bylo tam predtim enum (moveType == MoveType.Keyboard || moveType == MoveType.MouseKeyboard)
-            else if (UnityConfiguration.cameraMoveType == 1 || UnityConfiguration.cameraMoveType == 0)
+            else if (isKeyboard)
             {
+                //pohyb pomoci klavesnice (definice pohybu(ten pohyb je urcen pro A, D a taky pro levou sipku a pravou sipku))
                 activeX = Input.GetAxisRaw("Horizontal");
             }
-            //
             else
             {
                 activeX = 0;
@@ -69,8 +83,3 @@ public class CameraMove : MonoBehaviour
         sun.transform.position = new Vector3(widthFromSun.transform.position.x + transform.position.x, sun.transform.position.y, sun.transform.position.z);     //nastaveni pozice pro slunce
     }
 }
-
-/*public enum MoveType
-{
-    MouseKeyboard, Keyboard, Mouse
-}*/

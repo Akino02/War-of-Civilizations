@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class LogScript : MonoBehaviour
+public class GameScript : MonoBehaviour
 {
-    EnemySpawn enemyS;
-    HpScript hpS;
+    HpScript hpPlayerS;
+    HpScript hpEnemyS;
 
     public GameObject warning;
-    //public GameObject reportScore;
     public Text placeText;
-    public string[] possibleText = {"You don't have enough money", "You have a full queue", "You Won", "You Lost"};
+
     public bool canShow = true;
+    public float showTextTimer = 2f;
 
     public Text winnerText;
     public GameObject endGameMenu;
@@ -25,10 +25,12 @@ public class LogScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject objectOfScript = GameObject.FindWithTag("baseE");   //toto najde zakladnu nepritele pomoci tagu ktery ma
-        enemyS = objectOfScript.GetComponent<EnemySpawn>();
+        //toto najde zakladnu nepritele pomoci tagu ktery ma
+        GameObject objectOfScript = GameObject.FindWithTag("baseE");
+        hpEnemyS = objectOfScript.GetComponent<HpScript>();
 
-        hpS = GetComponent<HpScript>();							//propojeni zakladnich scriptu pro funkci UI
+        //propojeni scriptu s zivoty hrace
+        hpPlayerS = GetComponent<HpScript>();
 
 
         warning.SetActive(false);
@@ -37,15 +39,17 @@ public class LogScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()                               //kontrola zda se furt hraje
+    void Update()
     {
-        if (HpScript.currHPBase <= 0 || EnemySpawn.currHPBase <= 0)
+        //kontrola zda se furt hraje
+        if (hpPlayerS.currHPBase <= 0 || hpEnemyS.currHPBase <= 0)
         {
             isGameOver = true;
             endGameMenu.SetActive(true);
             escapeButtonBack.SetActive(false);
-            Debug.Log("Game is Over but why");
-            if(HpScript.currHPBase <= 0)
+            //Debug.Log("Game is Over but why");
+            Debug.Log(hpPlayerS.currHPBase);
+            if(hpPlayerS.currHPBase <= 0)
             {
                 winnerText.text = "You Lost!";
             }
@@ -55,11 +59,12 @@ public class LogScript : MonoBehaviour
             }
         }
     }
-    public IEnumerator ShowText()               //Funkce ukazuje uzivateli ze nemuze neco provest
+    //Funkce ukazuje uzivateli ze nemuze neco provest
+    public IEnumerator ShowText()
     {
         canShow = false;
         warning.SetActive(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(showTextTimer);
         warning.SetActive(false);
         canShow = true;
     }

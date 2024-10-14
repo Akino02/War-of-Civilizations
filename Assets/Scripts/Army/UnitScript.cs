@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using Random = UnityEngine.Random;                              //importovani random
 
 public class UnitScript : MonoBehaviour
@@ -14,11 +15,15 @@ public class UnitScript : MonoBehaviour
 	//importovane scripty
 	[Header("Importing scripts")]
 	ProgresScript progresS;                                     //importuje script zakladny v levo(hrace)
-	HpScript hpS;                                               //importuje script zakladny v levo(hrace)
+    HpScript hpPlayerS;
+    EvolutionPlayerScript evolutionPlayerS;                                     //importuje script zakladny v levo(hrace)
+
+	//HpScript hpS;
 	EnemySpawn enemyS;                                          //importuje script zakladny v pravo(enemy)
+	HpScript hpEnemyS;
+    EvolutionEnemyScript evolutionEnemyS;
 
-
-	private UnitScript SoldierArmyScript;                          //importovani scriptu, ktery bude slouzit pro vojacka, aby si nasel nepritele
+    private UnitScript SoldierArmyScript;                          //importovani scriptu, ktery bude slouzit pro vojacka, aby si nasel nepritele
 
     UnitScript armyScriptForOpponent;                                //import scriptu protivnika
 																	 //ArmyScript armyScriptP;                                        //import scriptu spojence
@@ -79,40 +84,77 @@ public class UnitScript : MonoBehaviour
 
 	public float chargeAttack = 0f;
 
-	//public bool isDead = false;
+    //public bool isDead = false;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    private void Awake()
+    {
+        GameObject script1 = GameObject.FindWithTag("baseP");   //toto najde zakladnu hrace pomoci tagu ktery ma
+        progresS = script1.GetComponent<ProgresScript>();
+        /*enemyHpS = script1.GetComponent<HpBaseScriptE>();
+        playerHpS = script1.GetComponent<HpBaseScriptP>();*/
+        hpPlayerS = script1.GetComponent<HpScript>();
+        evolutionPlayerS = script1.GetComponent<EvolutionPlayerScript>();
+
+        //
+        GameObject script2 = GameObject.FindWithTag("baseE");   //toto najde zakladnu nepritele pomoci tagu ktery ma
+        enemyS = script2.GetComponent<EnemySpawn>();
+        hpEnemyS = script2.GetComponent<HpScript>();
+        evolutionEnemyS = script2.GetComponent<EvolutionEnemyScript>();
+        //dataForUnit = GetComponent
+    }
+    void Start()
 	{
 		//Sound                         //to na sound udìlat better
 		attackSound.volume = ButtonsMenu.volumeSFX;
 		//sfxSound = attackSound.volume;
 
 
-		GameObject script1 = GameObject.FindWithTag("baseP");   //toto najde zakladnu hrace pomoci tagu ktery ma
-		progresS = script1.GetComponent<ProgresScript>();
-		hpS = script1.GetComponent<HpScript>();
-		//
-		GameObject script2 = GameObject.FindWithTag("baseE");   //toto najde zakladnu nepritele pomoci tagu ktery ma
-		enemyS = script2.GetComponent<EnemySpawn>();
-
 		if (team == UnitTeam.Left)
 		{
-			lvl = progresS.level;                               //zde se urci jaky level bude mit pro hrace
+			lvl = evolutionPlayerS.level;                               //zde se urci jaky level bude mit pro hrace
 		}
 		else
 		{
-			lvl = enemyS.level;                                 //zde se urci jaky level bude mit pro nepritele
+			lvl = evolutionEnemyS.level;                                 //zde se urci jaky level bude mit pro nepritele
 		}
 
-		for (int layer = 0; layer < armyTypeLayer.Length; layer++)
+		int index;
+		for (index = 0; index < armyTypeLayer.Length; index++)
 		{
-			if (armyType == armyTypeLayer[layer])
+			if(armyType == armyTypeLayer[index])
+            {
+                break;
+            }
+        }
+
+        armyTypeNum = index;
+        currhp = UnityConfiguration.maxhp[lvl, index];
+        canGiveDmg = true;
+        if (index == 1)                                 //kdyz layer je rovna range
+        {
+            //canGiveDmgR = true;
+            //unitRange = ranges[1];
+            unitRange = UnityConfiguration.ranges[1];
+
+        }
+        else
+        {
+            //canGiveDmgM = true;
+            //unitRange = ranges[0];
+            unitRange = UnityConfiguration.ranges[0];
+        }
+        animator.SetInteger("Class", index + 1);
+        animator.SetInteger("Level", lvl);
+
+        /*for (int layer = 0; layer < armyTypeLayer.Length; layer++)
+		{
+			if (armyType == armyTypeLayer[layer])							//co chce jednotka byt	==	katalog layeru
 			{
 				armyTypeNum = layer;
 				currhp = UnityConfiguration.maxhp[lvl, layer];
 				canGiveDmg = true;
-				if (layer == 1)
+				if (layer == 1)									//kdyz layer je rovna range
 				{
 					//canGiveDmgR = true;
 						//unitRange = ranges[1];
@@ -128,8 +170,8 @@ public class UnitScript : MonoBehaviour
 			}
 			animator.SetInteger("Class", armyTypeNum + 1);
 			animator.SetInteger("Level", lvl);
-		}
-	}
+		}*/
+    }
 	// Update is called once per frame
 	void Update()
 	{
@@ -322,14 +364,14 @@ public class UnitScript : MonoBehaviour
             {
                 if (team == 0)
                 {
-                    Debug.Log("Hit base to E");
-                    EnemySpawn.currHPBase -= randomDmg;
+                    Debug.Log($"Hit base to E: {hpEnemyS.currHPBase}");
+                    hpEnemyS.currHPBase -= randomDmg;
                     //attackSound.Play();
                 }
                 else
                 {
-                    Debug.Log("Hit base to P");
-                    HpScript.currHPBase -= randomDmg;
+                    Debug.Log($"Hit base to P: {hpPlayerS.currHPBase}");
+                    hpPlayerS.currHPBase -= randomDmg;
                     //attackSound.Play();
                 }
             }
@@ -349,7 +391,7 @@ public class UnitScript : MonoBehaviour
     private void Reward()
 	{
         progresS.money += UnityConfiguration.moneykill[lvl, armyTypeNum];
-        progresS.experience += UnityConfiguration.expperkill[armyTypeNum];
+        evolutionPlayerS.experience += UnityConfiguration.expperkill[armyTypeNum];
 	}
 
 	private void Animation()

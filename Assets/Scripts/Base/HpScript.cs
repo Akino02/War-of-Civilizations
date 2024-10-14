@@ -3,63 +3,96 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class HpScript : MonoBehaviour
 {
-	ProgresScript progresS;										//propojeni zakladnich scriptu pro funkci UI
-	//ButtonScript buttonS;										//propojeni zakladnich scriptu pro funkci UI
+    //propojeni zakladnich scriptu pro funkci UI
+    EvolutionPlayerScript evolutionPlayerS;
+    EvolutionEnemyScript EvolutionEnemyS;
+    public float currHPBase;
+    public float hpbaseinprocents = 1f;
 
-	//EnemySpawn enemyS;
+    //ziskani levelu zakladny
+    public int currLevelBase;
 
-
-	//hp a ubirani base
-	//public float[] maxHPBase = {1000,2000,3000,4000,5000};		//potøeba zmìnit poèet životù pøi updatu !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	public static float currHPBase;
-	public float hpbaseinprocents = 1f;
-																//
-	//public GameObject basePosition;                             //misto kde se nachazi zakladna
-                                                                //
-
-    public Text hpTextShow;                                     //aktualni zivoty do textu viditelneho
-    public Image hpBaseBarcurr;                                 //vizualni ukazatel zivotu
+    //aktualni zivoty do textu viditelneho
+    public Text hpTextShow;
+    //vizualni ukazatel zivotu
+    public Image hpBaseBarcurr;
 
     public bool upgradingHp = false;
-	//
-	// Start is called before the first frame update
-	void Start()
-	{
-		progresS = GetComponent<ProgresScript>();				//propojeni zakladnich scriptu pro funkci UI
-		//buttonS = GetComponent<ButtonScript>();					//propojeni zakladnich scriptu pro funkci UI
-		/*soldierEscript = soldierE.GetComponent<SoldierE>();   //import protivnika a jeho promìnných*/
-        currHPBase = UnityConfiguration.maxHPBase[progresS.level];
 
-        /*//
-        GameObject script2 = GameObject.FindWithTag("baseE");																//toto najde zakladnu nepritele pomoci tagu ktery ma
-        enemyS = script2.GetComponent<EnemySpawn>();
-		//*/
+    public Team teamHP;
+
+    //
+    public void Awake()
+    {
+        //propojeni zakladnich scriptu pro funkci UI
+        evolutionPlayerS = GetComponent<EvolutionPlayerScript>();
+
+        //toto najde zakladnu nepritele pomoci tagu ktery ma
+        GameObject objectOfScript = GameObject.FindWithTag("baseE");
+        EvolutionEnemyS = objectOfScript.GetComponent<EvolutionEnemyScript>();
+    }
+    // Start is called before the first frame update
+    public void Start()
+    {
+        GetCurrBaseLevel();
+        currHPBase = UnityConfiguration.maxHPBase * currLevelBase;
     }
 
-	// Update is called once per frame
-	void Update()
-	{
-		hpTextShow.text = Mathf.Round(currHPBase).ToString();
-
-
-		hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / UnityConfiguration.maxHPBase[progresS.level], 3f* Time.deltaTime);		//kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
-		Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / UnityConfiguration.maxHPBase[progresS.level]));									//nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
-		hpBaseBarcurr.color = healthColor;						//zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
-		if(currHPBase <= 0)
-		{
-			currHPBase = 0;
-		}
-	}
-    public void UpgradeHp()								//zachova procentuelne hp pri upgradu
+    // Update is called once per frame
+    public void Update()
     {
-		if(progresS.level > 0)
-		{
-			Debug.Log(currHPBase);
-			Debug.Log(UnityConfiguration.maxHPBase[progresS.level - 1]);
-            hpbaseinprocents = currHPBase / UnityConfiguration.maxHPBase[progresS.level - 1];			//pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
-            currHPBase = hpbaseinprocents * UnityConfiguration.maxHPBase[progresS.level];				//vypocita aktualniho poctu hp v novych zivotech
+        hpTextShow.text = Mathf.Round(currHPBase).ToString();
+
+
+        //kolik mame aktualne, kolik budeme mit, rychlost jak se to bude posouvat nasobeno synchronizovany cas
+        hpBaseBarcurr.fillAmount = Mathf.Lerp(hpBaseBarcurr.fillAmount, currHPBase / (UnityConfiguration.maxHPBase * currLevelBase), 3f * Time.deltaTime);
+
+        //nastaveni barev pro hpBar, pokud minHP tak red a pokud maxHP tak green a je to gradian
+        Color healthColor = Color.Lerp(Color.red, Color.green, (currHPBase / (UnityConfiguration.maxHPBase * currLevelBase)));
+
+        //zde se aplikuje barva gradianu, podle toho kolik ma hpBar zivotu
+        hpBaseBarcurr.color = healthColor;
+        if (currHPBase <= 0)
+        {
+            currHPBase = 0;
         }
     }
+    public void GetCurrBaseLevel()
+    {
+        if (teamHP == Team.Player)
+        {
+            //predani hodnoty z maximalnich zivotu do aktualnich zivotu
+            currLevelBase = evolutionPlayerS.level + 1;
+        }
+        else if (teamHP == Team.Enemy)
+        {
+            currLevelBase = EvolutionEnemyS.level + 1;
+        }
+    }
+
+    //zachova procentuelne hp pri upgradu
+    public void UpgradeHp()
+    {
+        GetCurrBaseLevel();
+        if (currLevelBase > 0)
+        {
+            Debug.Log(currHPBase);
+            Debug.Log(UnityConfiguration.maxHPBase * (currLevelBase - 1));
+
+            //pomoc pri pocitani procent(zde se zjistuje rozdil aktualnich hp a maximalnich, aby se to pak podle procent upravilo v dalsi fazi)
+            hpbaseinprocents = currHPBase / (UnityConfiguration.maxHPBase * (currLevelBase - 1));
+
+            //vypocita aktualniho poctu hp v novych zivotech
+            currHPBase = hpbaseinprocents * (UnityConfiguration.maxHPBase * currLevelBase);
+        }
+    }
+}
+
+public enum Team
+{
+    Player = 1,
+    Enemy = 2
 }
