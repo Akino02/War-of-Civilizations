@@ -1,5 +1,5 @@
 # War of Civilizations
-Moje maturitní práce pro školní rok 2024/2025
+Moje maturitní práce pro školní rok 2023/2025
 - Hra byla vytvořena na základě inspirace hrou [Age of War](https://aowg.fandom.com/wiki/Age_of_War_Wiki)
 - Ku dnešnímu dni se snažím od té inspirace odklonit
 
@@ -20,6 +20,12 @@ Hra ke stažení
 - Nejnovější verze: [ver0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
 
 # Postup
+<h2>Update 066 [20.10.2024]</h2>
+<p>+ Přidání čudlíku, který evolvuje hráče</p>
+<p>+ Opravení vylepšení nepřítele</p>
+<p>+ Opravení scriptů (Konvence)</p>
+<br>
+
 <h2>Update 065 [14.10.2024]</h2>
 <p>+ Přidání pohybu minimapou</p>
 <p>+ Upravení výběru pohybu kamerou</p>
