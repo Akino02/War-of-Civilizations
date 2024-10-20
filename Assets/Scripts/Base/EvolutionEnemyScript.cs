@@ -45,10 +45,13 @@ public class EvolutionEnemyScript : MonoBehaviour
     //toto bude primo pro enemy system pro evoluce
     IEnumerator Evolution()
     {
-        if (evolving == false && level != UnityConstants.maxLevelIndex && enemyS.isCreatingUnit == false)
+        if (evolving == false && level != UnityConstants.maxLevelIndex /*&& enemyS.isCreatingUnit == false*/)
         {
-            //urcit jinak podminku
-            if (evolutionPlayerS.experience >= (UnityConfiguration.nextlevelup * EvolveExperiencePro) / UnityConstants.maxPercentage && evolutionPlayerS.level == level)
+
+            //urcit jinak podminku (pokud jsou urovne stejne tak se bude ridit procentama coz je 90% a vice; pokud ma vetsi uroven)
+            if (
+                (evolutionPlayerS.experience >= (UnityConfiguration.nextlevelup * EvolveExperiencePro) / UnityConstants.maxPercentage && evolutionPlayerS.level == level) ||
+                (evolutionPlayerS.level > level))
             {
                 evolving = true;
                 yield return new WaitForSeconds(lvlTypeWait);
@@ -68,7 +71,7 @@ public class EvolutionEnemyScript : MonoBehaviour
                 }
                 hpEnemyS.UpgradeHp();
             }
-            else if (evolutionPlayerS.level > level)
+            /*else if (evolutionPlayerS.level > level)
             {
                 evolving = true;
                 yield return new WaitForSeconds(lvlTypeWait);
@@ -87,7 +90,7 @@ public class EvolutionEnemyScript : MonoBehaviour
                     }
                 }
                 hpEnemyS.UpgradeHp();
-            }
+            }*/
         }
     }
 }

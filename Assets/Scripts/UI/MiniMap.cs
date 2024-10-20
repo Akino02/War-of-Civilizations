@@ -22,12 +22,15 @@ public class MiniMap : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public GameObject borderR;
     public float mapwidth;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         bar = gameObject.GetComponent<Scrollbar>();
         cameraMove = cameraObjectMove.GetComponent<CameraMove>();
-        //Debug.Log(UnityConfiguration.cameraMoveType);
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
     // Update is called once per frame
     void Update()

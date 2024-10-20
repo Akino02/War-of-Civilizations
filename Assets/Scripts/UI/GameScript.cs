@@ -22,8 +22,7 @@ public class GameScript : MonoBehaviour
 
     public GameObject escapeButtonBack;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         //toto najde zakladnu nepritele pomoci tagu ktery ma
         GameObject objectOfScript = GameObject.FindWithTag("baseE");
@@ -31,8 +30,10 @@ public class GameScript : MonoBehaviour
 
         //propojeni scriptu s zivoty hrace
         hpPlayerS = GetComponent<HpScript>();
-
-
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         warning.SetActive(false);
         endGameMenu.SetActive(false);
         escapeButtonBack.SetActive(true);

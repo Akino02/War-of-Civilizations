@@ -31,8 +31,6 @@ public class ButtonsMenu : MonoBehaviour
 
     bool isPlayingSong = false;
     bool isPlayingSFX = false;
-    /*public Text showPlayButtonTextSong;
-    public Text showPlayButtonTextSFX;*/
 
     public float[] stopAfterTest = {0f, 0f};
     public int testSoundLength = 2;
@@ -40,25 +38,21 @@ public class ButtonsMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainMenu.SetActive(true);                           //nastaveni ze toto menu bude videt pri startu
-        settingMenu.SetActive(false);                       //toto menu bude pri startu vypnute
-        volumeBarSong.value = volumeSong;      //nastaveni zvuku do hry
-        volumeBarSFX.value = volumeSFX;              //nastaveni zvuku do hry
+        //nastaveni ze toto menu bude videt pri startu
+        mainMenu.SetActive(true);
+        //toto menu bude pri startu vypnute
+        settingMenu.SetActive(false);
 
-        /*volumeSong = volumeBarSong.value;                       //ziskani hodnoty z posouvadla
-        volumeSFX = volumeBarSFX.value;                         //ziskani hodnoty z posouvadla*/
-        /*showPlayButtonTextSong.text = "Play";
-        showPlayButtonTextSFX.text = "Play";*/
+        //nastaveni zvuku do hry
+        volumeBarSong.value = volumeSong;
+        volumeBarSFX.value = volumeSFX;
 
-        //testSound = GetComponent<AudioSource>();
-        //changeCameraName.text = UnityConfiguration.cameraTypeName[UnityConfiguration.cameraMoveType];
         ChangeCameraImage();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //test
         PlaySound();
 
         if (isPlayingSong || isPlayingSFX)
@@ -66,52 +60,49 @@ public class ButtonsMenu : MonoBehaviour
             StopTimerSound();
         }
 
-        volumeSong = volumeBarSong.value;                       //ziskani hodnoty z posouvadla
-        volumeSFX = volumeBarSFX.value;                         //ziskani hodnoty z posouvadla
-        showVolumeValueSong.text = "Volume: " + math.round(volumeSong * 100) + "% Song";     //dosazeni textu pri meneni hodnoty zvuku
-        showVolumeValueSFX.text = "Volume: " + math.round(volumeSFX * 100) + "% SFX";     //dosazeni textu pri meneni hodnoty zvuku
+        //ziskani hodnoty z posouvadla
+        volumeSong = volumeBarSong.value;
+        volumeSFX = volumeBarSFX.value;
+
+        //dosazeni textu pri meneni hodnoty zvuku
+        showVolumeValueSong.text = "Volume: " + math.round(volumeSong * 100) + "% Song";
+        showVolumeValueSFX.text = "Volume: " + math.round(volumeSFX * 100) + "% SFX";
+
         menuSongSoung.volume = volumeSong;
     }
 
     //MainMenu buttons
-    public void Play()          //Funkce pro vstoupeni do hry
+        //Funkce pro vstoupeni do hry
+    public void Play()
     {
         SceneManager.LoadScene("GameScene");
-        GameScript.isGameOver = false;                           //Zajistuje ze kdyz jde do hry tak hra bude nova
+
+        //Zajistuje ze kdyz jde do hry tak hra bude nova
+        GameScript.isGameOver = false;
     }
-    public void Setting()              //Funkce pro zmenu nastaveni
+
+        //Funkce pro zmenu nastaveni
+    public void Setting()
     {
         mainMenu.SetActive(false);
         settingMenu.SetActive(true);
         isPlayingSong = false;
         isPlayingSFX = false;
-
-        //nastavise hodnota textu na play a jeste bool
-        /*showPlayButtonTextSong.text = "Play";
-        showPlayButtonTextSFX.text = "Play";*/
     }
-    public void QuitGame()          //Funkce pro vypnuti hry
+        //Funkce pro vypnuti hry
+    public void QuitGame()
     {
         Application.Quit();
     }
 
-    public void SongAuthorButtonLink()      //odkaz na autora hudby ve hre
+        //odkaz na autora hudby ve hre
+    public void SongAuthorButtonLink()
     {
         Application.OpenURL("https://www.youtube.com/@WaterflameMusic/videos");
     }
+
     public void ToggleKeyboard()
     {
-        //MoveType[] controllPresets = {MoveType.Keyboard, MoveType.Mouse, MoveType.Keyboard | MoveType.Mouse};
-        /*if (UnityConfiguration.cameraMoveType < )
-        {
-            UnityConfiguration.cameraMoveType++;
-        }
-        else
-        {
-            UnityConfiguration.cameraMoveType = 0;
-        }
-        ChangeCameraImage();*/
-        //bool isMouse = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Mouse));
         bool isKeyboard = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Keyboard));
         if (isKeyboard)
         {
@@ -121,20 +112,11 @@ public class ButtonsMenu : MonoBehaviour
         {
             UnityConfiguration.cameraMoveType = UnityConfiguration.cameraMoveType | MoveType.Keyboard;
         }
-        Debug.Log(isKeyboard + " Keyboard");
+        //Debug.Log(isKeyboard + " Keyboard");
         ChangeCameraImage();
     }
     public void ToggleMouse()
     {
-        /*if (UnityConfiguration.cameraMoveType > 0)
-        {
-            UnityConfiguration.cameraMoveType--;
-        }
-        else
-        {
-            UnityConfiguration.cameraMoveType = 2;
-        }
-        ChangeCameraImage();*/
         bool isMouse = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Mouse));
         if (isMouse)
         {
@@ -144,31 +126,37 @@ public class ButtonsMenu : MonoBehaviour
         {
             UnityConfiguration.cameraMoveType = UnityConfiguration.cameraMoveType | MoveType.Mouse;
         }
-        Debug.Log(isMouse);
+        //Debug.Log(isMouse);
         ChangeCameraImage();
     }
     private void ChangeCameraImage()
     {
-        //podminka ? true : false
         Color showImage = new Color(1, 1, 1, 1);
         Color dimImage = new Color(1, 1, 1, dimPercentage);
         bool isKeyboard = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Keyboard));
         bool isMouse = (UnityConfiguration.cameraMoveType.HasFlag(MoveType.Mouse));
+
+        //podminka ? true : false
+        //jedna se o ternarni operator
         changeCameraKeyboard.color = isKeyboard ? showImage : dimImage;
         changeCameraMouse.color = isMouse ? showImage : dimImage;
     }
 
     //SettingMenu buttons
-    public void Back()              //Funkce pro navrat z vedlejsiho menu do hlavniho (pokud bude vice menu tak se to da do array)
+    //Funkce pro navrat z vedlejsiho menu do hlavniho (pokud bude vice menu tak se to da do array)
+    public void Back()
     {
         mainMenu.SetActive(true);
         settingMenu.SetActive(false);
-        testSongSound.Stop();           //vypne se hudba, jakmile jde mimo nastaveni
+
+        //vypne se hudba, jakmile jde mimo nastaveni (pro jistotu aby se zabranilo lehke chybe)
+        testSongSound.Stop();
         testSFXSound.Stop();
         isPlayingSong = false;
         isPlayingSFX = false;
     }
-    //test
+
+    //prehravani hudby a nasledne i dosazeni hodnot, aby to melo odpovidajici hlasitost
     private void PlaySound()
     {
         if (volumeSong != volumeBarSong.value)
@@ -179,7 +167,6 @@ public class ButtonsMenu : MonoBehaviour
             }
             stopAfterTest[0] = 0f;
             isPlayingSong = true;
-            //Debug.Log("Start timer");
         }
 
         if (volumeSFX != volumeBarSFX.value)
@@ -190,18 +177,18 @@ public class ButtonsMenu : MonoBehaviour
             }
             stopAfterTest[1] = 0f;
             isPlayingSFX = true;
-            //Debug.Log("Start timer");
         }
 
         testSongSound.volume = volumeSong;
         testSFXSound.volume = volumeSFX;
     }
+
+    //po dosazeni casoveho limitu se vypne hudba
     private void StopTimerSound()
     {
         for (int i = 0; i < stopAfterTest.Length; i++)
         {
             stopAfterTest[i] = Mathf.Lerp(stopAfterTest[i], stopAfterTest[i] + 1f, Time.deltaTime / testSoundLength);
-            //Debug.Log("Somethingggg");
             if (stopAfterTest[i] >= 1f)
             {
                 if(i == 0)
@@ -215,45 +202,7 @@ public class ButtonsMenu : MonoBehaviour
                     testSFXSound.Stop();
                 }
                 stopAfterTest[i] = 0f;
-                //Debug.Log("StopMusic");
             }
         }
     }
-    /*public void PlaySoundSong()                     //metoda pro button na test zvuku (Hudba)                                   !!udelat to lepsi fr
-    {
-        if (!isPlayingSong)
-        {
-            testSongSound.volume = volumeSong;
-            isPlayingSong = true;
-            testSongSound.Play();
-            showPlayButtonTextSong.text = "Stop";
-        }
-        else
-        {
-            isPlayingSong = false;
-            testSongSound.Stop();
-            showPlayButtonTextSong.text = "Play";
-        }
-    }
-    public void PlaySoundSFX()                     //metoda pro button na test zvuku (Hudba)                                   !!udelat to lepsi fr
-    {
-        if (!isPlayingSFX)
-        {
-            testSFXSound.volume = volumeSFX;
-            isPlayingSFX = true;
-            testSFXSound.Play();
-            showPlayButtonTextSFX.text = "Stop";
-        }
-        else
-        {
-            isPlayingSFX = false;
-            testSFXSound.Stop();
-            showPlayButtonTextSFX.text = "Play";
-        }
-    }
-    public void OnChangeVolume()                //pri zmene se nastavi hlasitost hudby
-    {
-        testSongSound.volume = volumeSong;
-        testSFXSound.volume = volumeSFX;
-    }*/
 }

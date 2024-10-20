@@ -8,51 +8,51 @@ public class ProgresScript : MonoBehaviour
 {
 	ButtonScript buttonS;
 	EvolutionPlayerScript evolutionS;
-	//HpScript hpS;
 	HpScript hpPlayerS;
 
-    UnitScript army;                                               //importovani pro pracovani s vojacky
-	public GameObject objectArmyP;                              //objekt pro propojeni scriptu
+    //importovani pro pracovani s vojacky
+    UnitScript army;
+    //objekt pro propojeni scriptu
+    public GameObject objectArmyP;
 
     //funkce zakladny ukazuje rychlost plneni, zkusenosti(%), pocet penez, co se vyrabi, co je ve fronte
     [Header("Base stats")]
     //public float speedOfFill = 3f;
 
-	public int money = 175;                              //penize			
-	public int order = 0;                                       //kolik jich vyrabime   //udìlat poudìji jako array, protoze bude vyrabet vice jednotek
-	public int made = 0;
-	public int[] orderv2 = { 0, 0, 0, 0, 0 };                   //poradi jednotek
+    //penize
+    public int money = 175;		
+    //kolik jich vyrabime
+    public int order = 0;
+	//public int made = 0;
 
+    //poradi jednotek							//mohlo by to byt pres queue
+    public int[] orderv2 = { 0, 0, 0, 0, 0 };
 
-    /*[Header("Base appearance")]
-    public GameObject[] baseAppearance = new GameObject[UnityConstats.MaxLevel];     //vzhled budov v array ohledne nove evoluce*/
 
     [Header("Text")]
-    //public Text experienceText;                                 //Prehled ohledne dalsi evoluce v %
-	public Text moneyText;                                      //Prehled kolik ma hrac financi
-    public Text trainText;                                      //tento text se bude prepisovat podle toho co se vyrabi
+    //Prehled kolik ma hrac financi
+    public Text moneyText;
+    //tento text se bude prepisovat podle toho co se vyrabi
+    public Text trainText;
 
     [Header("Spawner")]
-    public GameObject playerSpawner;                            //misto kde se tyto objekty spawnou
-
+    //misto kde se tyto objekty spawnou
+    public GameObject playerSpawner;
 
 	//vyrobnik v procentech graficky
 	[Header("Crafting")]
 	public Image progBar;
-	//public int[,] moneyperunit = { { 15, 25, 100 }, { 30, 50, 200 }, { 60, 100, 400 }, { 120, 200, 800 }, { 240, 400, 1600 } };		//vícerozmìrné pole pro cenu jednotek	//potrebuje upravu
-	private int[] waitTime = { 5, 8, 10 };                      //vyroba soldiera, rangera, tanka
-	private float speedOfBar = 0f;								//kolik bude vyplnovat v progbaru
-	public bool canProduce = true;                              //zda muze vyrabet
 
-	//public Text[] actionButtonText = new Text[UnityConstats.NumberOfProductionButtons*2];               //upraveni textu u buttonu soldier, ranger, tank		//pozdeji budou jeste dalsi dva na dobrovolny update evoluce a pro pohromy
+    //vyroba soldiera, rangera, tanka
+    private int[] waitTime = { 5, 8, 10 };
+    //kolik bude vyplnovat v progbaru
+    private float speedOfBar = 0f;
+    //zda muze vyrabet
+    public bool canProduce = true;
 
 	public Image[] orderVizual = new Image[UnityConstants.queueSize];
-    public Sprite[] unitProduced = new Sprite[UnityConstants.numberOfProductionButtons];				//obrazky pro vizualni order (sprites)
-    //
-
-    /*//ukazuje zkusenosti graficky
-    [Header("XP bar")]
-    public Image xpBar;*/
+    //obrazky pro vizualni order (sprites)
+    public Sprite[] unitProduced = new Sprite[UnityConstants.numberOfProductionButtons];
 
     //Katastrofa
     [Header("Disaster")]
@@ -65,36 +65,38 @@ public class ProgresScript : MonoBehaviour
 	public Image waitDisasterFillBox;
     public bool canDoDisaster = true;
 
+    private void Awake()
+    {
+        //propojeni zakladnich scriptu pro funkci UI
+        buttonS = GetComponent<ButtonScript>();
+        hpPlayerS = GetComponent<HpScript>();
+        evolutionS = GetComponent<EvolutionPlayerScript>();
+
+        // propojeni scriptu UniArmy s ProgresScript
+        army = objectArmyP.GetComponent<UnitScript>();
+    }
     // Start is called before the first frame update
     void Start()
 	{
-        buttonS = GetComponent<ButtonScript>();					//propojeni zakladnich scriptu pro funkci UI
-		hpPlayerS = GetComponent<HpScript>();                          //propojeni zakladnich scriptu pro funkci UI
-        evolutionS = GetComponent<EvolutionPlayerScript>();                          //propojeni zakladnich scriptu pro funkci UI
+        //nastaveni aktualnich penez
+        moneyText.text = money.ToString();
 
-		army = objectArmyP.GetComponent<UnitScript>();				//propojeni scriptu UniArmy s ProgresScript
-																//nastaveni aktualnich penez
-		moneyText.text = money.ToString();
-		//experienceText.text = experienceinprocents.ToString() + "%";
-		TrainingText();                         //zapise se co se vyrabi
-
-        /*for (int i = 0; i < 3; i++)								//na zacatku se definuje co tam bude na tom buttonu
-        {
-            actionButtonText[i].text = "lvl." + (level + 1);
-            actionButtonText[i + (actionButtonText.Length) / 2].text = "Cost " + UnityConfiguration.moneyperunit[level, i] + " $";
-        }*/
+        //zapise se co se vyrabi
+        TrainingText();
     }
 
 	// Update is called once per frame
 	void Update()
 	{
-		OrderView();                                            //graficke videni fronty
-		//ExperienceBar();
-		moneyText.text = money.ToString();						//opakovatelne se budou vpisovat penize do textu
-		//Evolution();							//funkce pro vylepsovani urovne doby
-		if (order > 0 && !GameScript.isGameOver)					//zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
+        //graficke videni fronty
+        OrderView();
+
+        //opakovatelne se budou vpisovat penize do textu
+        moneyText.text = money.ToString();
+
+        //zacne se produkce jakmile bude neco v rade a taky se zacne hybat progbar
+        if (order > 0 && !GameScript.isGameOver)
 		{
-			//StartCoroutine(Orderfactory());
 			OrderFactory();
 		}
 		if (!canDoDisaster && !GameScript.isGameOver)
@@ -102,22 +104,23 @@ public class ProgresScript : MonoBehaviour
 			WaitDisaster();
         }
     }
-	private void OrderFactory()									//potrebuje celkove sledovani **********
+	private void OrderFactory()
 	{
 		if (order > 0 && progBar.fillAmount != 1f && canProduce == true)
 		{
 			canProduce = false;
-			TrainingText();                     //zacne se psat co se vyrabi
-			speedOfBar = (Time.deltaTime / waitTime[orderv2[0] - 1]);        //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
+            //zacne se psat co se vyrabi
+            TrainingText();
+            //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
+            speedOfBar = (Time.deltaTime / waitTime[orderv2[0] - 1]);
 			//Debug.Log(progbarfill);
 			//progBar.fillAmount = progbarinprocents;
 			//yield return new WaitForSecondsRealtime(1);
 			progBar.fillAmount = Mathf.Lerp(progBar.fillAmount, progBar.fillAmount + 1f, speedOfBar);      //min, max, speed
-																											//yield return new WaitForSecondsRealtime(1);
             canProduce = true;
 			if (progBar.fillAmount >= 1f)
 			{
-				made += 1;
+				//made += 1;
 				//timer = 0;
 				progBar.fillAmount = 0f;
 				for (int unitType = 1; unitType <= army.armyTypeLayer.Length; unitType++)
@@ -142,10 +145,12 @@ public class ProgresScript : MonoBehaviour
             //progbarinprocents = ((100 * timer) / waitTime[orderv2[0]]) / 100;
             speedOfBar = 0;
 			progBar.fillAmount = speedOfBar;
-			TrainingText();                     //zapise se viditelne ze se nic nevyrabi
+            //zapise se viditelne ze se nic nevyrabi (ve forme textu)
+            TrainingText();
 		}
     }
-	private void OrderView()                                    //toto zajistuje vizualni frontu vyroby jednotek
+    //toto zajistuje vizualni frontu vyroby jednotek
+    private void OrderView()
 	{
 		for (int i = 0; i < UnityConstants.queueSize; i++)
 		{
@@ -161,7 +166,8 @@ public class ProgresScript : MonoBehaviour
 			}
 		}
     }
-	void OrderSorter()                                   //toto serazuje array podle toho co je na rade ve vyrobe
+    //toto serazuje array podle toho co je na rade ve vyrobe		//mohlo byt nahrazeno queue
+    void OrderSorter()
 	{
 		for (int i = 0; i < UnityConstants.queueSize; i++)
 		{
@@ -175,9 +181,11 @@ public class ProgresScript : MonoBehaviour
 			}
 		}
     }
-	void TrainingText()                                  //slouzi proto, aby clovek videl co se prave vyrabi
+    //slouzi proto, aby clovek videl co se prave vyrabi
+    void TrainingText()
 	{
-        for (int i = 0; i < 4; i++)								//vepisuje se text do boxu co se prave vyrabi
+        //vepisuje se text do boxu co se prave vyrabi
+        for (int i = 0; i < 4; i++)
 		{
 			if (orderv2[0] == i)
 			{
@@ -185,53 +193,6 @@ public class ProgresScript : MonoBehaviour
 			}
 		}
 	}
-	/*void Evolution()										//docasne dokud neni button tak se to evolvuje automaticky
-	{
-		if (experience >= UnityConfiguration.nextlevelup && level != UnityConstats.MaxLevel)			//pokud jeho level neni roven 4 coz je nejvysi uroven tak se muze vylepsit
-		{
-			experience -= UnityConfiguration.nextlevelup;
-			level += 1;
-			for (int i = 0; i < actionButtonText.Length/2; i++)                         //pise do vsech textu, ktere jsou uchovany v poli				**mozna pak chyba bude tady
-			{
-				actionButtonText[i].text = "lvl." + (level + 1);
-				actionButtonText[i+(actionButtonText.Length)/2].text = "Cost " + UnityConfiguration.moneyperunit[level, i] + " $";
-			}
-			for (int i = 0; i < baseAppearance.Length; i++)						//zde se zmeni vzhled zakladny
-			{
-				if (level == i)
-				{
-					baseAppearance[i].SetActive(true);
-				}
-				else
-				{
-					baseAppearance[i].SetActive(false);
-				}
-			}
-			hpPlayerS.UpgradeHp();					//pro vylepseni zivotu s tim, ze se zachova %
-		}
-		else if(level == UnityConstats.MaxLevel)
-		{
-			experienceText.text = "Max";
-		}
-		else
-		{
-			experienceText.text = experienceinprocents.ToString() + "%";
-		}
-	}*/
-	/*void ExperienceBar()
-	{
-		if(level != UnityConstats.MaxLevel)
-		{
-            experienceinprocents = ((100 * experience) / UnityConfiguration.nextlevelup);              //vytvori proceznta ze zkusenosti
-            xpBar.fillAmount = Mathf.Lerp(xpBar.fillAmount, (float)experienceinprocents / 100f, speedOfFill * Time.deltaTime);
-        }
-		else
-		{
-			xpBar.fillAmount = 1f;
-		}
-		//Debug.Log(experience / nextlevelup);
-        return;
-	}*/
     public IEnumerator SpawnFireBall()
     {
 		waitDisasterFill = 1f;
