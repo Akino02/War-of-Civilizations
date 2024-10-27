@@ -26,6 +26,8 @@ Hra ke stažení
 <p>+ Upravení ukazatele životů u jednotky</p>
 <p>+ Přidání nového upozornění (u katastrofy, u čudlíku evoluce)</p>
 <p>+ Opravení scriptů (Konvence)</p>
+<p>+ Aktuální vzhled ve hře (GameScene)</p>
+<p><img src="https://github.com/user-attachments/assets/447bf526-75c8-432d-ab26-476e73fbd860" width="500" height="250"></p>
 <br>
 
 <h2>Update 066 [20.10.2024]</h2>
