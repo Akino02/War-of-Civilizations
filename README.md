@@ -20,6 +20,14 @@ Hra ke stažení
 - Nejnovější verze: [ver0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
 
 # Postup
+<h3>Maturitní práce</h3>
+<h2>Update 067 [27.10.2024]</h2>
+<p>+ Upravení obrázků (hodinky, penízek, evolvující čudlík)</p>
+<p>+ Upravení ukazatele životů u jednotky</p>
+<p>+ Přidání nového upozornění (u katastrofy, u čudlíku evoluce)</p>
+<p>+ Opravení scriptů (Konvence)</p>
+<br>
+
 <h2>Update 066 [20.10.2024]</h2>
 <p>+ Přidání čudlíku, který evolvuje hráče</p>
 <p>+ Opravení vylepšení nepřítele</p>
@@ -50,12 +58,12 @@ Hra ke stažení
 <p>+ Opravení bojového systému</p>
 <br>
 
-# Postup
 <h2>Update 061 [28.07.2024]</h2>
 <p>+ Opravení bojového systému</p>
 <p>+ Plány pro vylepšení hry započaty</p>
 <br>
 
+<h3>Ročníková práce</h3>
 <h2>Update 060 [14.04.2024]</h2>
 <p>+ Upravení získávání peněz za zabití nepřítele</p>
 <p>+ Upravení vzhledu menu</p>
