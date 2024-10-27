@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitStats : MonoBehaviour
+
+[CreateAssetMenu(fileName = "New Unit Type", menuName = "New Unit Type")]
+public class UnitStats : ScriptableObject
 {
-    [Range(100f, 300f)]
+    [Range(60f, 300f)]
     public float maxHp;
 
     public float currHp;
@@ -32,7 +34,7 @@ public class UnitStats : MonoBehaviour
 
     public bool isPlayer;
 
-    public WarriorClass warriorClass;
+    //public WarriorClass warriorClass;
     public LayerMask unitClass;
 
     /*//Unit HP

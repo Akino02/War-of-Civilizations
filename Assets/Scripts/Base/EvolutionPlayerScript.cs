@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class EvolutionPlayerScript : MonoBehaviour
 {
-    ProgresScript progS;
+    //ProgresScript progS;
     HpScript hpPlayerS;
+    GameScript logS;
 
     //zkusenosti
     public int experience = 0;
@@ -38,6 +39,7 @@ public class EvolutionPlayerScript : MonoBehaviour
     {
         //progS = GetComponent<ProgresScript>();
         hpPlayerS = GetComponent<HpScript>();
+        logS = GetComponent<GameScript>();
     }
     // Start is called before the first frame update
     void Start()
@@ -48,7 +50,7 @@ public class EvolutionPlayerScript : MonoBehaviour
         for (int i = 0; i < UnityConstants.numberOfProductionButtons; i++)
         {
             actionButtonText[i].text = "lvl." + (level + 1);
-            actionButtonText[i + (actionButtonText.Length) / 2].text = "Cost " + UnityConfiguration.moneyperunit[level, i] + " $";
+            actionButtonText[i + (actionButtonText.Length) / 2].text = "Cost " + (UnityConfiguration.moneyperunit[i] * (level+1)) + " $";
         }
     }
 
@@ -126,7 +128,8 @@ public class EvolutionPlayerScript : MonoBehaviour
         }
     }
 
-    public void EvolutionUpgrade()                          //funkce pro button, ktery bude evolvovat hracovy jednotky a zakladnu	(BUTTON NENI HOTOVY)
+    //funkce pro button, ktery bude evolvovat hracovy jednotky a zakladnu
+    public void EvolutionUpgrade()
     {
         if (experience >= UnityConfiguration.nextlevelup && level != UnityConstants.maxLevelIndex)
         {
@@ -137,7 +140,7 @@ public class EvolutionPlayerScript : MonoBehaviour
             for (int i = 0; i < actionButtonText.Length / UnityConstants.numberOfTextFieldsInProductionButton; i++)
             {
                 actionButtonText[i].text = "lvl." + (level + 1);
-                actionButtonText[i + (actionButtonText.Length) / UnityConstants.numberOfTextFieldsInProductionButton].text = "Cost " + UnityConfiguration.moneyperunit[level, i] + " $";
+                actionButtonText[i + (actionButtonText.Length) / UnityConstants.numberOfTextFieldsInProductionButton].text = "Cost " + (UnityConfiguration.moneyperunit[i] * (level + 1)) + " $";
             }
 
             //zde se zmeni vzhled zakladny
@@ -158,7 +161,9 @@ public class EvolutionPlayerScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("You can't evolve yet");
+            //Debug.Log("You can't evolve yet");
+            logS.placeText.text = UnityConfiguration.possibleText[4];
+            StartCoroutine(logS.ShowText());
         }
 
     }

@@ -46,15 +46,15 @@ public class ButtonScript : MonoBehaviour
     public void SoldierSpawn()
 	{
 		buttonN = 1;
-		if (progresS.order < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[currLevelBase, 0])
+		if (progresS.order < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[0] * (currLevelBase+1))
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order -1] = 1;
-            progresS.money -= UnityConfiguration.moneyperunit[currLevelBase, 0];
+            progresS.money -= UnityConfiguration.moneyperunit[0] * (currLevelBase + 1);
 			//Debug.Log("Prirazeno do fronty " + progresS.order);
             //Debug.Log("Cena Soldier: " + progresS.moneyperunit[progresS.level, 0]);
 		}
-        else if (progresS.money >= UnityConfiguration.moneyperunit[currLevelBase, 0] && progresS.order == 5)
+        else if (progresS.money >= UnityConfiguration.moneyperunit[0] * (currLevelBase+1) && progresS.order == 5)
         {
             Warning();
         }
@@ -67,15 +67,15 @@ public class ButtonScript : MonoBehaviour
     public void RangerSpawn()
 	{
         buttonN = 2;
-        if (progresS.order < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[currLevelBase, 1])
+        if (progresS.order < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[1] * (currLevelBase + 1))
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order - 1] = 2;
-            progresS.money -= UnityConfiguration.moneyperunit[currLevelBase, 1];
+            progresS.money -= UnityConfiguration.moneyperunit[1] * (currLevelBase + 1);
 			//Debug.Log("Prirazeno do fronty " + progresS.order);
             //Debug.Log("Cena Ranger: " + progresS.moneyperunit[progresS.level, 1]);
         }
-        else if (progresS.money >= UnityConfiguration.moneyperunit[currLevelBase, 1] && progresS.order == 5)
+        else if (progresS.money >= UnityConfiguration.moneyperunit[1] * (currLevelBase + 1) && progresS.order == 5)
         {
             Warning();
         }
@@ -88,15 +88,15 @@ public class ButtonScript : MonoBehaviour
     public void TankSpawn()
 	{
         buttonN = 3;
-        if (progresS.order < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[currLevelBase, 2])
+        if (progresS.order < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[2] * (currLevelBase + 1))
 		{
             progresS.order += 1;
             progresS.orderv2[progresS.order - 1] = 3;
-            progresS.money -= UnityConfiguration.moneyperunit[currLevelBase, 2];
+            progresS.money -= UnityConfiguration.moneyperunit[2] * (currLevelBase + 1);
             //Debug.Log("Prirazeno do fronty " + progresS.order);
             //Debug.Log("Cena Tank: " + progresS.moneyperunit[progresS.level, 2]);
         }
-        else if (progresS.money >= UnityConfiguration.moneyperunit[currLevelBase, 2] && progresS.order == 5)
+        else if (progresS.money >= UnityConfiguration.moneyperunit[2] * (currLevelBase + 1) && progresS.order == 5)
         {
             Warning();
         }
@@ -107,15 +107,15 @@ public class ButtonScript : MonoBehaviour
 	}
 	public void Warning()
 	{
-		if (progresS.money < UnityConfiguration.moneyperunit[currLevelBase, buttonN-1] && logS.canShow && !GameScript.isGameOver)
+		if (progresS.money < UnityConfiguration.moneyperunit[buttonN-1] * (currLevelBase + 1) && logS.canShow && !GameScript.isGameOver)
 		{
-            Debug.Log("Nemas Dostatek penez");
+            //Debug.Log("Nemas Dostatek penez");
             logS.placeText.text = UnityConfiguration.possibleText[0];
             StartCoroutine(logS.ShowText());
         }
 		if (progresS.order == 5 && logS.canShow)
 		{
-            Debug.Log("Fronta je plna " + progresS.order);
+            //Debug.Log("Fronta je plna " + progresS.order);
             logS.placeText.text = UnityConfiguration.possibleText[1];
             StartCoroutine(logS.ShowText());
         }
@@ -129,6 +129,12 @@ public class ButtonScript : MonoBehaviour
             specialAttackLevel = currLevelBase;
             progresS.canDoDisaster = false;
             StartCoroutine(progresS.SpawnFireBall());
+        }
+        else
+        {
+            //Debug.Log("You must wait until next attack");
+            logS.placeText.text = UnityConfiguration.possibleText[5];
+            StartCoroutine(logS.ShowText());
         }
     }
     public void BackToMenu()

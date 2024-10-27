@@ -33,7 +33,6 @@ public class CameraMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-
         //definice hranic pro kameru
         borderLposX = playerBase.transform.position.x + 7;
         borderRposX = enemyBase.transform.position.x - 7;
@@ -41,7 +40,7 @@ public class CameraMove : MonoBehaviour
         //ziskani pozic hranicnich bodu
         borderL.transform.position = new Vector2(borderLposX, transform.position.y);
         borderR.transform.position = new Vector2(borderRposX, transform.position.y);
-	}
+    }
 
 	// Update is called once per frame
 	void Update()

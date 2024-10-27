@@ -130,7 +130,7 @@ public class ProgresScript : MonoBehaviour
                         army.armyType = army.armyTypeLayer[orderv2[0]-1];
 						//UnitStats unitStats = new UnitStats.Factory(level, true).createSoldier();
                         Instantiate(buttonS.soldierP, playerSpawner.transform.position, playerSpawner.transform.rotation);
-                        Debug.Log("Byl vyroben " + army.armyTypeNum);
+                        //Debug.Log("Byl vyroben " + army.armyTypeNum);
                     }
 				}
 				order -= 1;

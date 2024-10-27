@@ -347,7 +347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.322, y: 4.302}
+  m_AnchoredPosition: {x: 1.343, y: 4.32}
   m_SizeDelta: {x: 22.7764, y: 22.7764}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133141280
@@ -3235,7 +3235,6 @@ MonoBehaviour:
   objectArmyP: {fileID: 2196381188073141835, guid: 7d49080397604944f908c00eccd93cad, type: 3}
   money: 175
   order: 0
-  made: 0
   orderv2: 0000000000000000000000000000000000000000
   moneyText: {fileID: 332149392}
   trainText: {fileID: 1570476159}
@@ -3490,7 +3489,7 @@ Transform:
   m_GameObject: {fileID: 775413790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.6, y: 0.11, z: -1}
+  m_LocalPosition: {x: 0.6, y: 0.1, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5798,8 +5797,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6515852, y: 0.093456835}
   m_AnchorMax: {x: 0.9855348, y: 0.8851574}
-  m_AnchoredPosition: {x: 1.581, y: 4.435}
-  m_SizeDelta: {x: 78.0358, y: 29.7678}
+  m_AnchoredPosition: {x: 1.701, y: 4.427}
+  m_SizeDelta: {x: 34.4054, y: 29.7678}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1125826617
 MonoBehaviour:
@@ -5821,7 +5820,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f0c37f2c06d9e624bbc57296f4c13500, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ba81892eb43646c45bd8f0995eb8ba29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7945,8 +7944,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 8658272a155e25e4fa4400334d1e802b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8703,7 +8702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1782054700
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8756,9 +8755,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Evolution
-
-    Working on it chiga'
+  m_Text: Level Up
 --- !u!222 &1782054702
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9943,7 +9940,7 @@ MonoBehaviour:
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 0
-  m_FillClockwise: 1
+  m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 100
