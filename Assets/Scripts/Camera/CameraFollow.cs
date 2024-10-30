@@ -9,6 +9,15 @@ public class CameraFollow : MonoBehaviour
     //objekt ktery bude pronasledovan
     public Transform target;
 
+    //importovani camery a promenne pro CameraMove
+    public Camera cam;
+    public float ortho;
+    public float pixelH;
+
+    private void Awake()
+    {
+        cam = GetComponent<Camera>();
+    }
     // Start is called before the first frame update
     void Start()
     {
