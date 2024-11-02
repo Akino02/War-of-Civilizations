@@ -21,6 +21,10 @@ Hra ke stažení
 
 # Postup
 <h3>Maturitní práce</h3>
+<h2>Update 068 [30.10.2024]</h2>
+<p>+ Responzivní kamera (správný pohled)</p>
+<br>
+
 <h2>Update 067 [27.10.2024]</h2>
 <p>+ Upravení obrázků (hodinky, penízek, evolvující čudlík)</p>
 <p>+ Upravení ukazatele životů u jednotky</p>
