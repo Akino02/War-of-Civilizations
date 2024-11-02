@@ -21,6 +21,12 @@ Hra ke stažení
 
 # Postup
 <h3>Maturitní práce</h3>
+<h2>Update 069 [02.11.2024]</h2>
+<p>+ Přidání obrázku do menu místo videa</p>
+<p>+ Přidání logiky věže</p>
+<p><img src="https://github.com/user-attachments/assets/0c2393ac-6aea-412c-baf4-fc7c70b6af69" width="500" height="250"></p>
+<br>
+
 <h2>Update 068 [30.10.2024]</h2>
 <p>+ Responzivní kamera (správný pohled)</p>
 <br>
