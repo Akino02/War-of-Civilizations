@@ -21,6 +21,13 @@ Hra ke stažení
 
 # Postup
 <h3>Maturitní práce</h3>
+
+<h2>Update 070 [21.11.2024]</h2>
+<p>+ Rozdělení UnitScriptu na více scriptů</p>
+<p>+ Hromadné upravení scriptů v celé hře</p>
+<p>+ Upravení střílení věže (střílí kuličky, které zasahují)</p>
+<br>
+
 <h2>Update 069 [02.11.2024]</h2>
 <p>+ Přidání obrázku do menu místo videa</p>
 <p>+ Přidání logiky věže</p>
