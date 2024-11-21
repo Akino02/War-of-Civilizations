@@ -15,9 +15,6 @@ public class EvolutionPlayerScript : MonoBehaviour
     //zkusenosti v procentech
     public int experienceInPercentage = 0;
 
-    //pokud dosahne tolika zkusenosti tak se evolvuje
-    //public int nextlevelup = 4000;
-
     //toto ukazuje level evoluce v zakladu je to 0
     public int level = 0;
 
@@ -37,7 +34,6 @@ public class EvolutionPlayerScript : MonoBehaviour
 
     private void Awake()
     {
-        //progS = GetComponent<ProgresScript>();
         hpPlayerS = GetComponent<HpScript>();
         logS = GetComponent<GameScript>();
     }
@@ -57,54 +53,11 @@ public class EvolutionPlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Evolution();
         ExperienceBar();
     }
 
-    //docasne dokud neni button tak se to evolvuje automaticky
-    /*void Evolution()
-    {
-        //pokud jeho level neni roven 4 coz je nejvysi uroven tak se muze vylepsit
-        if (experience >= UnityConfiguration.nextlevelup && level != UnityConstants.maxLevelIndex)
-        {
-            experience -= UnityConfiguration.nextlevelup;
-            level += 1;
-
-            //pise do vsech textu, ktere jsou uchovany v poli
-            for (int i = 0; i < actionButtonText.Length / UnityConstants.numberOfTextFieldsInProductionButton; i++)
-            {
-                actionButtonText[i].text = "lvl." + (level + 1);
-                actionButtonText[i + (actionButtonText.Length) / UnityConstants.numberOfTextFieldsInProductionButton].text = "Cost " + UnityConfiguration.moneyperunit[level, i] + " $";
-            }
-
-            //zde se zmeni vzhled zakladny
-            for (int i = 0; i < baseAppearance.Length; i++)
-            {
-                if (level == i)
-                {
-                    baseAppearance[i].SetActive(true);
-                }
-                else
-                {
-                    baseAppearance[i].SetActive(false);
-                }
-            }
-
-            //pro vylepseni zivotu s tim, ze se zachova %
-            hpPlayerS.UpgradeHp();
-        }
-        else if (level == UnityConstants.maxLevelIndex)
-        {
-            experienceText.text = "Max";
-        }
-        else
-        {
-            experienceText.text = experienceInPercentage.ToString() + "%";
-        }
-    }*/
     void ExperienceBar()
     {
-        //opravit MATHF.LERP
         if (level != UnityConstants.maxLevelIndex)
         {
             //vytvori proceznta ze zkusenosti

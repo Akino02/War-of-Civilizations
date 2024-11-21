@@ -54,17 +54,6 @@ public class ProgresScript : MonoBehaviour
     //obrazky pro vizualni order (sprites)
     public Sprite[] unitProduced = new Sprite[UnityConstants.numberOfProductionButtons];
 
-    //Katastrofa
-    [Header("Disaster")]
-    public GameObject fireBall;									//tohle pak zmenit na array 
-	public GameObject borderL;
-    public GameObject borderR;
-    public GameObject disasterZone;
-	private float waitDisasterFill = 0f;
-	private int waitingTimeForDisaster = 40;
-	public Image waitDisasterFillBox;
-    public bool canDoDisaster = true;
-
     private void Awake()
     {
         //propojeni zakladnich scriptu pro funkci UI
@@ -99,10 +88,6 @@ public class ProgresScript : MonoBehaviour
 		{
 			OrderFactory();
 		}
-		if (!canDoDisaster && !GameScript.isGameOver)
-		{
-			WaitDisaster();
-        }
     }
 	private void OrderFactory()
 	{
@@ -114,14 +99,10 @@ public class ProgresScript : MonoBehaviour
             //podle toho se urci co se bude vyrabet a jak dlouho pomoci arraye
             speedOfBar = (Time.deltaTime / waitTime[orderv2[0] - 1]);
 			//Debug.Log(progbarfill);
-			//progBar.fillAmount = progbarinprocents;
-			//yield return new WaitForSecondsRealtime(1);
 			progBar.fillAmount = Mathf.Lerp(progBar.fillAmount, progBar.fillAmount + 1f, speedOfBar);      //min, max, speed
             canProduce = true;
 			if (progBar.fillAmount >= 1f)
 			{
-				//made += 1;
-				//timer = 0;
 				progBar.fillAmount = 0f;
 				for (int unitType = 1; unitType <= army.armyTypeLayer.Length; unitType++)
 				{
@@ -142,7 +123,6 @@ public class ProgresScript : MonoBehaviour
         }
 		if (order == 0)
 		{
-            //progbarinprocents = ((100 * timer) / waitTime[orderv2[0]]) / 100;
             speedOfBar = 0;
 			progBar.fillAmount = speedOfBar;
             //zapise se viditelne ze se nic nevyrabi (ve forme textu)
@@ -193,45 +173,4 @@ public class ProgresScript : MonoBehaviour
 			}
 		}
 	}
-    public IEnumerator SpawnFireBall()
-    {
-		waitDisasterFill = 1f;
-        waitDisasterFillBox.fillAmount = waitDisasterFill;
-        WaitDisaster();
-        int i = 0;
-        while (i <= 30)
-        {
-            float randomPosX = Random.Range(borderL.transform.position.x, borderR.transform.position.x);								//
-			float randomRotZ = Random.Range(0, 360);																					//
-            Quaternion changedRotationZ = Quaternion.Euler(disasterZone.transform.rotation.x, 0, randomRotZ);							//
-            Vector3 disasterZonePos = new Vector3(randomPosX, disasterZone.transform.position.y, fireBall.transform.position.z);		//
-			if (evolutionS.level == 0)
-			{
-                Instantiate(fireBall, disasterZonePos, changedRotationZ);
-            }
-			else
-			{
-                Instantiate(fireBall, disasterZonePos, disasterZone.transform.rotation);
-            }
-            yield return new WaitForSeconds(0.4f);
-            i += 1;
-        }
-		yield return null;
-    }
-
-	public void WaitDisaster()
-	{
-        if (waitDisasterFillBox.fillAmount > 0)
-		{
-            waitDisasterFill = (Time.deltaTime / waitingTimeForDisaster);				//definice rychlosti klesani (cas snimku/celkova doba cekani)
-            waitDisasterFillBox.fillAmount = Mathf.Lerp(waitDisasterFillBox.fillAmount, waitDisasterFillBox.fillAmount -1f, waitDisasterFill);		//min, max, speed
-        }
-		else													//pokud je to rovno nule ci mensi 
-		{
-			waitDisasterFill = 0;
-			waitDisasterFillBox.fillAmount = waitDisasterFill;
-			canDoDisaster = true;
-        }
-		return;
-    }
 }

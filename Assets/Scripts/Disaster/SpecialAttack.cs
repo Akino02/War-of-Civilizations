@@ -6,8 +6,6 @@ public class SpecialAttack : MonoBehaviour
 {
     UnitScript armyScriptE;
 
-    //private GameObject hitBox;
-
     [Header("Attributes")]
     private float damage;
     private bool hit = false;
@@ -22,20 +20,21 @@ public class SpecialAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DestroyObject();     //pokud propadne nebo se dotkne nepritele
+        //pokud propadne nebo se dotkne nepritele
+        DestroyObject();
     }
     private void OnTriggerEnter2D(Collider2D hitBox)
     {
         if (hitBox.gameObject.CompareTag("Enemy"))
         {
-            var SoldierArmyScript = hitBox.GetComponent<UnitScript>();
-            armyScriptE = SoldierArmyScript;                    //dosazeni scriptu za objekt
-            //damage = (UnityConfiguration.maxhp[armyScriptE.lvl, 2] / 3) / 2;
+            armyScriptE = hitBox.GetComponent<UnitScript>();
+            //dosazeni scriptu za objekt
             damage = Random.Range(UnityConfiguration.dmgMin[0] * (ButtonScript.specialAttackLevel+1), UnityConfiguration.dmgMax[2]) * (ButtonScript.specialAttackLevel + 1);
             //Debug.Log(ButtonScript.specialAttackLevel);
             if (hit == false)
             {
-                armyScriptE.currhp -= damage;                      //nastaveni poskozeni fireballu podle toho kolik dana postavicka ma hp
+                //nastaveni poskozeni fireballu podle toho kolik dana postavicka ma hp
+                armyScriptE.currhp -= damage;
             }
             hit = true;
         }

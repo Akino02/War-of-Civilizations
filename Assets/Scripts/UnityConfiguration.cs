@@ -36,7 +36,6 @@ public static class UnityConfiguration
     public static int[] expperkill = { 100, 125, 300 };
 
     [Header("MoneyPerUnit")]
-    //public static int[] moneyperunit = { 15, 25, 100 };
     //cena jednotek
     public static int[] moneyperunit = { 15, 25, 150 };
 
@@ -49,7 +48,7 @@ public static class UnityConfiguration
     public static string[] possibleText = { "You don't have enough money", "You have a full queue", "You Won", "You Lost", "You can't evolve yet", "You must wait until next attack"};
 }
 
-[Flags]
+//[Flags]
 public enum MoveType
 {
     None = 0,
@@ -57,7 +56,7 @@ public enum MoveType
     Mouse = 2,
 }
 
-class Warrior
+/*class Warrior
 {
     public float maxHp;
     public float currHp;
@@ -107,4 +106,4 @@ public enum WarriorClass
     Soldier = 0,
     Ranger = 1,
     Tank = 2
-}
+}*/

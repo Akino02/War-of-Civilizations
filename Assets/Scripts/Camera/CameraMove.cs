@@ -21,18 +21,12 @@ public class CameraMove : MonoBehaviour
     //velikost pole pro mys, po najeti do pole se bude tam pohybovat kamera
     private int touchField = 10;
 
-    //public MoveType moveType;
-
     //Maximalni okraje hry
     public GameObject gameBorderL;
     public GameObject gameBorderR;
 
 	//promenne pro border kamery
-    //float borderLposX;
-    //public GameObject playerBase;
     public GameObject borderL;
-    //float borderRposX;
-    //public GameObject enemyBase;
     public GameObject borderR;
 
     public GameObject sun;
@@ -47,14 +41,6 @@ public class CameraMove : MonoBehaviour
     void Start()
 	{
         ResBorderSize(cameraScript.cam.orthographicSize, cameraScript.cam.pixelHeight);
-
-        //definice hranic pro kameru
-        /*borderLposX = playerBase.transform.position.x + 7;
-        borderRposX = enemyBase.transform.position.x - 7;
-
-        //ziskani pozic hranicnich bodu
-        borderL.transform.position = new Vector2(borderLposX, transform.position.y);
-        borderR.transform.position = new Vector2(borderRposX, transform.position.y);*/
     }
 
 	// Update is called once per frame
@@ -92,14 +78,15 @@ public class CameraMove : MonoBehaviour
                 activeX = 0;
             }
         }
-        rb.velocity = new Vector2((movespeed * activeX), rb.velocity.y);                                                          //pohyb kamery
-        sun.transform.position = new Vector3(widthFromSun.transform.position.x + transform.position.x, sun.transform.position.y, sun.transform.position.z);     //nastaveni pozice pro slunce
+        //pohyb kamery
+        rb.velocity = new Vector2((movespeed * activeX), rb.velocity.y);
+
+        //nastaveni pozice pro slunce
+        sun.transform.position = new Vector3(widthFromSun.transform.position.x + transform.position.x, sun.transform.position.y, sun.transform.position.z);
     }
     private void ResBorderSize(float ortho, float pixelH)
     {
         float halfUserScreen = ((Camera.main.pixelWidth / 2) * ortho * 2) / pixelH;
-        /*Debug.Log(halfUserScreen + gameBorderL.transform.position.x);
-        Debug.Log(gameBorderR.transform.position.x - halfUserScreen);*/
 
         borderL.transform.position = new Vector2(gameBorderL.transform.position.x + halfUserScreen, borderL.transform.position.y);
         borderR.transform.position = new Vector2(gameBorderR.transform.position.x - halfUserScreen, borderR.transform.position.y);

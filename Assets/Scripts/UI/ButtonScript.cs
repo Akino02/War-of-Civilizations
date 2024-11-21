@@ -10,6 +10,7 @@ public class ButtonScript : MonoBehaviour
 {
     //propojeni zakladnich scriptu pro funkci UI
     ProgresScript progresS;
+    DisasterScript DisasterS;
 	EvolutionPlayerScript evolutionPlayerS;
 	GameScript logS;
 
@@ -27,6 +28,7 @@ public class ButtonScript : MonoBehaviour
     {
         //propojeni zakladnich scriptu pro funkci UI
         progresS = GetComponent<ProgresScript>();
+        DisasterS = GetComponent<DisasterScript>();
         evolutionPlayerS = GetComponent<EvolutionPlayerScript>();
         logS = GetComponent<GameScript>();
     }
@@ -124,11 +126,11 @@ public class ButtonScript : MonoBehaviour
     //katastrofa
     public void Disaster()
     {
-        if (progresS.canDoDisaster && !GameScript.isGameOver)
+        if (DisasterS.canDoDisaster && !GameScript.isGameOver)
         {
             specialAttackLevel = currLevelBase;
-            progresS.canDoDisaster = false;
-            StartCoroutine(progresS.SpawnFireBall());
+            DisasterS.canDoDisaster = false;
+            StartCoroutine(DisasterS.SpawnFireBall());
         }
         else
         {

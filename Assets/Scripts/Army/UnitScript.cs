@@ -8,28 +8,27 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using static UnityEditor.Experimental.GraphView.GraphView;
-using Random = UnityEngine.Random;                              //importovani random
 
 public class UnitScript : MonoBehaviour
 {
     //importovane scripty (hrace)
     [Header("Importing scripts")]
-	ProgresScript progresS;
-    HpScript hpPlayerS;
+	//ProgresScript progresS;
+    //HpScript hpPlayerS;
     EvolutionPlayerScript evolutionPlayerS;
 
     //ziskani dat
     //public UnitStats unitData;
 
     //importovane scripty (nepritele)
-    EnemySpawn enemyS;
-	HpScript hpEnemyS;
+    //EnemySpawn enemyS;
+	//HpScript hpEnemyS;
     EvolutionEnemyScript evolutionEnemyS;
 
-    //importovani scriptu, ktery bude slouzit pro vojacka, aby si nasel nepritele
+    /*//importovani scriptu, ktery bude slouzit pro vojacka, aby si nasel nepritele
     private UnitScript SoldierArmyScript;
     //import scriptu protivnika
-    UnitScript armyScriptForOpponent;
+    UnitScript armyScriptForOpponent;*/
 
     //pro import animatoru
     //animace
@@ -51,9 +50,9 @@ public class UnitScript : MonoBehaviour
 
     //zaklad pro pohyb a gravitaci
     //funkce pro gravitaci
-    public Rigidbody2D rb;
+    //public Rigidbody2D rb;							//this
     //rychlost pohybu objektu
-    public float movespeed;
+    public float movespeed;							//this
 
 	//typ jednotky
 	[Header("Unit type")]
@@ -68,30 +67,32 @@ public class UnitScript : MonoBehaviour
 
 	[Header("Attributes")]
 	public float currhp;
-	private float unitRange;
+	public float unitRange;						//this
 
     //uchovani urovne vojacka
     public int lvl = 0;
 
 
-	private int[] moveDir = { 1, -1, 0 };
+	//change from private to public
+	public int[] moveDir = { 1, -1, 0 };
 	public UnitTeam team;
 	private int teamInt => (int)team;
 
     //zda vidi nepritele, zda vidi zakladnu nepritele, zda vidi spojence
-    private bool[] checkCollision = { false, false, false };
+	//change from private to public
+    public bool[] checkCollision = { false, false, false };			//this
 
 	//public bool isBase = false;
 
-	private Vector3 distanceFromAllie;
+	//change from private to public
+	public Vector3 distanceFromAllie;				//this
 
     //zda muze bojovat
     public bool canGiveDmg = false;
     //zda nasel nepritele
     public bool foundEnemy = false;
 
-	private float distance;
-	//private float previousdistance;
+	//private float distance;
 
 	public float chargeAttack = 0f;
 
@@ -102,14 +103,14 @@ public class UnitScript : MonoBehaviour
     {
         //toto najde zakladnu hrace pomoci tagu ktery ma
         GameObject script1 = GameObject.FindWithTag("baseP");
-        progresS = script1.GetComponent<ProgresScript>();
-        hpPlayerS = script1.GetComponent<HpScript>();
+        //progresS = script1.GetComponent<ProgresScript>();
+        //hpPlayerS = script1.GetComponent<HpScript>();
         evolutionPlayerS = script1.GetComponent<EvolutionPlayerScript>();
 
         //toto najde zakladnu nepritele pomoci tagu ktery ma
         GameObject script2 = GameObject.FindWithTag("baseE");
-        enemyS = script2.GetComponent<EnemySpawn>();
-        hpEnemyS = script2.GetComponent<HpScript>();
+        //enemyS = script2.GetComponent<EnemySpawn>();
+        //hpEnemyS = script2.GetComponent<HpScript>();
         evolutionEnemyS = script2.GetComponent<EvolutionEnemyScript>();
 
 
@@ -164,17 +165,17 @@ public class UnitScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		DetectEnemy();
-		CheckForCollision();
-		Move();
-		CheckDead();
+		//DetectEnemy();
+		/*CheckForCollision();
+		Move();*/
+		//CheckDead();
 
 		//IDK PROC BY TU TO MELO BYT (canGiveDmg), ALE KDYZ TU TO NENI TAK SE STANE LOOP U ZAKLADNY
 		/*if (canGiveDmg && !LogScript.isGameOver)
 		{
 			Attack();
 		}*/
-		if (foundEnemy || checkCollision[1])
+		/*if (foundEnemy || checkCollision[1])
 		{
 			ChargeAttack();
             //animator.SetBool("ScriptFound", true);
@@ -183,33 +184,25 @@ public class UnitScript : MonoBehaviour
 		{
 			chargeAttack = 0f;
             animator.SetBool("ScriptFound", false);
-        }
+        }*/
 
 		Animation();
 	}
-	public void DetectEnemy()
+	/*public void DetectEnemy()
 	{
 		//Nalezne nepritele a dosadi script za konkretni objekt
 		Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(transform.position, unitRange, opponent);
 		if (detectedObjects.Length > 0)
 		{
-			distance = 5f;
+			float distance = 5f;
 			for (int i = 0; i < detectedObjects.Length; i++)
 			{
-                /*Debug.Log(Mathf.Abs(transform.position.x) + gameObject.name + i);
-                Debug.Log(Mathf.Abs(detectedObjects[i].transform.position.x) + gameObject.name + i);*/
                 if (Mathf.Abs(Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x)) < distance)
 				{
 					distance = Mathf.Abs(Mathf.Abs(transform.position.x) - Mathf.Abs(detectedObjects[i].transform.position.x));
 					SoldierArmyScript = detectedObjects[i].GetComponent<UnitScript>();
 					armyScriptForOpponent = SoldierArmyScript;
 				}
-                /*if (Mathf.Abs(detectedObjects[i].transform.position.x) < distance)
-                {
-                    distance = Mathf.Abs(detectedObjects[i].transform.position.x);
-                    SoldierArmyScript = detectedObjects[i].GetComponent<UnitScript>();
-                    armyScriptForOpponent = SoldierArmyScript;
-                }*/
             }
 
             //Debug.Log(armyScriptForOpponent.currhp);
@@ -220,8 +213,9 @@ public class UnitScript : MonoBehaviour
 		foundEnemy = false;
         //animator.SetBool("ScriptFound", false);
         return;
-	}
-	private void CheckForCollision()
+	}*/
+
+	/*private void CheckForCollision()
 	{
 		//float notFullsize = 0.30f;                              //slouzi pro mensi odstup od objektu, aby kontroloval odstup mezi spojenci
 
@@ -233,14 +227,14 @@ public class UnitScript : MonoBehaviour
 		checkCollision[1] = Physics2D.OverlapCircle(transform.position, unitRange, opponentBase);           //zda vidi nepratelskou zakladnu
 		checkCollision[2] = Physics2D.OverlapCircle(distanceFromAllie, 0.09f, allies);           //zda vidi spojence tak se zastavi (je urceno pro vsechny)
 
-	}
-	private void Move()
+	}*/
+	/*private void Move()
 	{
 		//pokud vojacek narazi na jakoukoliv kolizi tak se zastavi (enemy, enemy base, allies)
-		/*if (isDead)
-		{
-			movespeed = 0;
-		}*/
+		//if (isDead)
+		//{
+		//	movespeed = 0;
+		//}
 		if (checkCollision[0] || checkCollision[1] || checkCollision[2])
 		{
 			rb.velocity = new Vector2((movespeed * moveDir[2]), rb.velocity.y);     //nebude se hybat pokud je poblic kolize
@@ -254,8 +248,8 @@ public class UnitScript : MonoBehaviour
 
 			animator.SetFloat("Speed", rb.velocity.x * moveDir[teamInt]);               //dosazeni za promennou speed, ktera urcuje animace
 		}
-	}
-	private void CheckDead()
+	}*/
+	/*private void CheckDead()
 	{
 		//Pokud jednotka nebude mit zivoty
 		if (currhp <= 0 || transform.position.y < UnityConfiguration.deadZone)
@@ -271,16 +265,11 @@ public class UnitScript : MonoBehaviour
 			{
                 Destroy(gameObject);
             }
-            /*gameObject.layer = LayerMask.NameToLayer("Dead");
-            if (transform.position.y < deadZone)
-            {
-                Destroy(gameObject);
-            }*/
             return;
 		}
-	}
+	}*/
 
-	private void ChargeAttack()
+	/*private void ChargeAttack()
 	{
         animator.SetBool("ScriptFound", true);
         chargeAttack = Mathf.Lerp(chargeAttack, chargeAttack+1f, Time.deltaTime / UnityConfiguration.attackDelay);
@@ -316,23 +305,23 @@ public class UnitScript : MonoBehaviour
             //attackSound.Stop();
             //Debug.Log("Dohrala se animece a uderil");
         }
-	}
+	}*/
 
-	private void PlaySFX()
+	/*public void PlaySFX()
 	{
 		if (gameObject != null || attackSound != null)
 		{
             attackSound.Play();
         }
         //AudioSource.PlayClipAtPoint(attackSound.clip, transform.position);
-    }
+    }*/
 
 
-    private void Reward()
+    /*private void Reward()
 	{
         progresS.money += UnityConfiguration.moneykill[armyTypeNum] * (lvl+1);
         evolutionPlayerS.experience += UnityConfiguration.expperkill[armyTypeNum];
-	}
+	}*/
 
 	private void Animation()
 	{
@@ -346,15 +335,15 @@ public class UnitScript : MonoBehaviour
 	}
 
 
-	private void OnDrawGizmosSelected()     //vykreslí kruh okolo jednotky
+	/*private void OnDrawGizmosSelected()     //vykreslí kruh okolo jednotky
 	{
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(distanceFromAllie, UnityConfiguration.ranges[2]);                    //odstup od spojencu
-		/*Gizmos.DrawWireSphere(transform.position, ranges[1]);                   //stop pro rangera
-		Gizmos.DrawWireSphere(transform.position, ranges[0]);                   //stop pro melee*/
+		//Gizmos.DrawWireSphere(transform.position, ranges[1]);                   //stop pro rangera
+		//Gizmos.DrawWireSphere(transform.position, ranges[0]);                   //stop pro melee
 
 		Gizmos.DrawWireSphere(transform.position, unitRange);
-	}
+	}*/
 }
 
 public enum UnitTeam { 
