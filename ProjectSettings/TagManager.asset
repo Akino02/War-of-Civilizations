@@ -9,7 +9,8 @@ TagManager:
   - Enemy
   - Ground
   - Dead
-  - Turret
+  - TurretP
+  - TurretE
   layers:
   - Default
   - TransparentFX

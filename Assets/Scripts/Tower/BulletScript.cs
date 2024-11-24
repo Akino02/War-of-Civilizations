@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    UnitScript enemyS;
-    Tower towerS;
-
-    private bool canHit;
+    UnitScript opponentS;
+    Turret towerS;
 
     Rigidbody2D rb;
 
-    //public LayerMask allieMask;
-    public LayerMask enemyMask;
+    public GameObject towerG;
 
+    public Team teamBullet;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        towerS = towerG.GetComponent<Turret>();
 
-        GameObject towerG = GameObject.FindWithTag("Turret");
-        towerS = towerG.GetComponent<Tower>();
+        teamBullet = towerS.teamTurret;
+        /*if (teamBullet == Team.Player)
+        {
+            GameObject towerG = GameObject.FindWithTag("TurretP");
+            towerS = towerG.GetComponent<Turret>();
+        }
+        else if (teamBullet == Team.Enemy)
+        {
+            GameObject towerG = GameObject.FindWithTag("TurretE");
+            towerS = towerG.GetComponent<Turret>();
+        }*/
 
         //ziskani pozine nepritele
         Vector3 directionOfEnemy = new Vector3(towerS.armyScriptForOpponent.transform.position.x, towerS.armyScriptForOpponent.transform.position.y, towerS.armyScriptForOpponent.transform.position.z);
@@ -45,20 +57,19 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitBox)
     {
-        if (!hitBox.gameObject.CompareTag("Enemy"))
+        opponentS = hitBox.GetComponent<UnitScript>();
+        if (opponentS != null)
         {
-            Destroy(gameObject);
+            if ((teamBullet == Team.Player && hitBox.tag == "Enemy") || (teamBullet == Team.Enemy && hitBox.tag == "Player"))
+            {
+                opponentS.currhp -= towerS.bulletDamage;
+                Destroy(gameObject);
+            }
         }
-        if (!canHit)
-        {
-            Destroy(gameObject);
-        }
-        enemyS = hitBox.GetComponent<UnitScript>();
-        enemyS.currhp -= towerS.bulletDamage;
-        canHit = false;
     }
     void DestroyBullet()
     {
+        //Pouziti funkce Vector3.Distance, ktera vypocita vzdalenost mezi dvema objekty
         float distanceFromTurret = Vector3.Distance(towerS.transform.position, transform.position);
         if (distanceFromTurret >= towerS.bulletDistance) Destroy(gameObject);
     }

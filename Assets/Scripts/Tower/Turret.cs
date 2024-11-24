@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class Turret : MonoBehaviour
 {
+    private EvolutionPlayerScript evolutionPlayerS;
+    private EvolutionEnemyScript evolutionEnemyS;
+
     private UnitScript SoldierArmyScript;
 
     public UnitScript armyScriptForOpponent;
+
+    public BulletScript bulletS;
+
+    public int lvl = 0;
 
     public float fireRate = 0.1f;
     public float waitingBar = 0f;
@@ -16,10 +23,10 @@ public class Tower : MonoBehaviour
     public bool canAttack = true;
     public bool isRotated = false;
 
-    public float bulletDamage;
-    public float bulletSpeed;
+    public float bulletDamage = 10f;
+    public float bulletSpeed = 2f;
     public float turretRange = 2f;
-    public float bulletDistance;
+    public float bulletDistance = 25f;
 
     public float defaultGunRotation = 0f;
     public float turretRotatingSpeed = 3f;
@@ -28,16 +35,42 @@ public class Tower : MonoBehaviour
     public Transform target;
     private Transform defaultTurretRotation;
 
+    private Sprite Body;
+    private Sprite Gun;
+    private Sprite Bullet;
+
     public LayerMask opponentLayer;
 
     public GameObject bulletPrefab;
     public GameObject bulletPoss;
 
+    public Team teamTurret;
+
+    private void Awake()
+    {
+        GameObject objectOfScriptP = GameObject.FindWithTag("baseP");
+        evolutionPlayerS = objectOfScriptP.GetComponent<EvolutionPlayerScript>();
+
+        //toto najde zakladnu nepritele pomoci tagu ktery ma
+        GameObject objectOfScriptE = GameObject.FindWithTag("baseE");
+        evolutionEnemyS = objectOfScriptE.GetComponent<EvolutionEnemyScript>();
+    }
     // Start is called before the first frame update
     void Start()
     {
         defaultTurretRotation = transform;
         target = transform;
+
+        //tohle se bude muset upravit ta towerka tam bude celou dobu jen bude hidden
+        if (teamTurret == Team.Player)
+        {
+            lvl = evolutionPlayerS.level;
+        }
+        else if (teamTurret == Team.Enemy)
+        {
+            lvl = evolutionEnemyS.level;
+        }
+        Debug.Log(gameObject.tag + " " + lvl);
     }
 
     // Update is called once per frame
@@ -46,18 +79,7 @@ public class Tower : MonoBehaviour
         DetectEnemy();
         Shoot();
         RelodingAttack();
-        RotateGun();
-        /*if (target == defaultTurretRotation)
-        {
-            DetectEnemy();
-        }
-
-        RotateGun();
-
-        if (!CheckIfTargetIsInRange())
-        {
-            target = defaultTurretRotation;
-        }*/
+        isRotated = RotateGun();
     }
     public void DetectEnemy()
     {
@@ -76,46 +98,34 @@ public class Tower : MonoBehaviour
                 }
             }
             foundEnemy = true;
-            //isRotated = false;
             return;
         }
         foundEnemy = false;
         return;
     }
-    /*private void DetectEnemy()
-    {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, turretRange, (Vector2)transform.position, 0f, opponentLayer);
-
-        if (hits.Length > 0)
-        {
-            target = hits[0].transform;
-        }
-
-    }*/
     private void Shoot()
     {
-        //maybe projectals
-        if (foundEnemy && canAttack /*&& isRotated*/)       //nefunguje podminka isRotated i kdyz je true
+        if (foundEnemy && canAttack)
         {
             Quaternion bulletRotation;
             if (isRotated)
             {
-                Debug.Log(rotatingGun.rotation.z*100);
                 bulletRotation = Quaternion.Euler(new Vector3(0f, 0f, rotatingGun.rotation.z));
-                Instantiate(bulletPrefab, bulletPoss.transform.position, bulletRotation);
+                GameObject bullet = Instantiate(bulletPrefab, bulletPoss.transform.position, bulletRotation);
+                bulletS = bullet.GetComponent<BulletScript>();
+                bulletS.towerG = gameObject;
+                /*if (teamTurret == Team.Player)
+                {
+                    bulletS.teamBullet = Team.Player;
+                }
+                else
+                {
+                    bulletS.teamBullet = Team.Enemy;
+                }*/
             }
-            //Debug.Log("Can Shooot");
             canAttack = false;
-            //Instantiate(bulletPrefab, new Vector3(1.0f, 0f, 0f), transform.rotation);
-            
-            
-            //armyScriptForOpponent.currhp -= damage;
         }
     }
-    /*private bool CheckIfTargetIsInRange()
-    {
-        return Vector2.Distance(transform.position, target.position) <= turretRange;
-    }*/
     private bool CheckIfTurretIsRotated(Quaternion targetRotation)
     {
         return (Mathf.Abs(Mathf.Abs(rotatingGun.rotation.z) - Mathf.Abs(targetRotation.z)) <= 0.01f && foundEnemy);

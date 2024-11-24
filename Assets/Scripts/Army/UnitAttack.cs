@@ -82,9 +82,9 @@ public class UnitAttack : MonoBehaviour
     private void ChargeAttack()
     {
         unitData.animator.SetBool("ScriptFound", true);
-        //unitData.chargeAttack = Mathf.Lerp(unitData.chargeAttack, unitData.chargeAttack + 1f, Time.deltaTime / UnityConfiguration.attackDelay);
         unitData.chargeAttack = unitData.chargeAttack + Time.deltaTime;
-        //Debug.Log(unitData.chargeAttack);
+
+
         if (unitData.chargeAttack >= UnityConfiguration.attackDelay)      //pri dead animaci dat do podminky isDead
         {
             unitData.chargeAttack = 0;
@@ -121,6 +121,7 @@ public class UnitAttack : MonoBehaviour
         {
             unitData.attackSound.Play();
         }
+        //pro oddeleni audia od objektu
         //AudioSource.PlayClipAtPoint(attackSound.clip, transform.position);
     }
 }

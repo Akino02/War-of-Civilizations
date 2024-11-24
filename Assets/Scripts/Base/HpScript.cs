@@ -8,7 +8,7 @@ public class HpScript : MonoBehaviour
 {
     //propojeni zakladnich scriptu pro funkci UI
     EvolutionPlayerScript evolutionPlayerS;
-    EvolutionEnemyScript EvolutionEnemyS;
+    EvolutionEnemyScript evolutionEnemyS;
     public float currHPBase;
     public float hpbaseinprocents = 1f;
 
@@ -32,7 +32,7 @@ public class HpScript : MonoBehaviour
 
         //toto najde zakladnu nepritele pomoci tagu ktery ma
         GameObject objectOfScript = GameObject.FindWithTag("baseE");
-        EvolutionEnemyS = objectOfScript.GetComponent<EvolutionEnemyScript>();
+        evolutionEnemyS = objectOfScript.GetComponent<EvolutionEnemyScript>();
     }
     // Start is called before the first frame update
     public void Start()
@@ -69,7 +69,7 @@ public class HpScript : MonoBehaviour
         }
         else if (teamHP == Team.Enemy)
         {
-            currLevelBase = EvolutionEnemyS.level + 1;
+            currLevelBase = evolutionEnemyS.level + 1;
         }
     }
 
