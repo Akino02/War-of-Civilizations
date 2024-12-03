@@ -39,13 +39,29 @@ public static class UnityConfiguration
     //cena jednotek
     public static int[] moneyperunit = { 15, 25, 150 };
 
-	[Header("CameraType")]
+    [Header("MoneyForTurret")]
+    //cena za vez
+    public static int moneyForTurret = 750;
+
+    //vlastnosti veze
+    public static float bulletDamage = 15f;
+    public static float bulletSpeed = 2f;
+    public static float turretRange = 2f;
+    public static float bulletDistance = 25f;
+
+    public static float fireRate = 2f;
+
+    [Header("CameraType")]
     public static MoveType cameraMoveType = MoveType.Keyboard | MoveType.Mouse;
 
     //udelat script konstatni na text 
     public static string[] trainingTextShow = { "You aren't crafting", "Training Soldier...", "Training Ranger...", "Training Tank..." };
 
     public static string[] possibleText = { "You don't have enough money", "You have a full queue", "You Won", "You Lost", "You can't evolve yet", "You must wait until next attack"};
+
+    public static string[] buttonLabelTurret = { "Buy turret", "Sell turret"};
+
+    public static string[] buttonLabelChangeActionBoard = { "Turret", "Units" };
 }
 
 //[Flags]

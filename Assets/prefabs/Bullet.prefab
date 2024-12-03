@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 156119756572029650}
   - component: {fileID: 6588730454837137004}
+  - component: {fileID: -4614809394791865479}
   - component: {fileID: 4264804367483006637}
   - component: {fileID: 1652169073367805822}
   - component: {fileID: 2859230582690267046}
@@ -75,18 +76,39 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0151730367c92e941901deeaab8eb295, type: 3}
+  m_SortingOrder: 3
+  m_Sprite: {fileID: -407475410, guid: 3074670406ad87547a147387e65fd509, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.25, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &-4614809394791865479
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8522775438314394503}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f42517aea9a88c14faae5aa51f0ddd08, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &4264804367483006637
 Rigidbody2D:
   serializedVersion: 4
@@ -163,3 +185,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerG: {fileID: 0}
   teamBullet: 0
+  animatorBullet: {fileID: -4614809394791865479}

@@ -16,17 +16,17 @@ public class Turret : MonoBehaviour
 
     public int lvl = 0;
 
-    public float fireRate = 0.1f;
+    //public float fireRate = 0.1f;
     public float waitingBar = 0f;
 
     public bool foundEnemy = false;
     public bool canAttack = true;
     public bool isRotated = false;
 
-    public float bulletDamage = 10f;
-    public float bulletSpeed = 2f;
-    public float turretRange = 2f;
-    public float bulletDistance = 25f;
+    public float bulletDamage;
+    public float bulletSpeed;
+    public float turretRange;
+    public float bulletDistance;
 
     public float defaultGunRotation = 0f;
     public float turretRotatingSpeed = 3f;
@@ -35,9 +35,11 @@ public class Turret : MonoBehaviour
     public Transform target;
     private Transform defaultTurretRotation;
 
-    private Sprite Body;
-    private Sprite Gun;
-    private Sprite Bullet;
+    /*public Sprite[] Body;
+    public Sprite[] Gun;
+    public Sprite[] Bullet;*/
+    public Animator animatorTurrBody;
+    public Animator animatorTurrGun;
 
     public LayerMask opponentLayer;
 
@@ -60,18 +62,15 @@ public class Turret : MonoBehaviour
     {
         defaultTurretRotation = transform;
         target = transform;
+        //nastaveni lvl podle zakladny pri startu hry
+        lvl = evolutionPlayerS.level;
 
-        //tohle se bude muset upravit ta towerka tam bude celou dobu jen bude hidden
-        if (teamTurret == Team.Player)
-        {
-            lvl = evolutionPlayerS.level;
-        }
-        else if (teamTurret == Team.Enemy)
-        {
-            lvl = evolutionEnemyS.level;
-        }
-        Debug.Log(gameObject.tag + " " + lvl);
-    }
+        //nastaveni hodnot
+        bulletDamage = UnityConfiguration.bulletDamage * (lvl+1);
+        bulletSpeed = UnityConfiguration.bulletSpeed * (lvl + 1);
+        turretRange = UnityConfiguration.turretRange;
+        bulletDistance = UnityConfiguration.bulletDistance * (lvl + 1);
+}
 
     // Update is called once per frame
     void Update()
@@ -80,7 +79,10 @@ public class Turret : MonoBehaviour
         Shoot();
         RelodingAttack();
         isRotated = RotateGun();
+
+        //isVisible();
     }
+
     public void DetectEnemy()
     {
         //Nalezne nepritele a dosadi script za konkretni objekt
@@ -114,14 +116,7 @@ public class Turret : MonoBehaviour
                 GameObject bullet = Instantiate(bulletPrefab, bulletPoss.transform.position, bulletRotation);
                 bulletS = bullet.GetComponent<BulletScript>();
                 bulletS.towerG = gameObject;
-                /*if (teamTurret == Team.Player)
-                {
-                    bulletS.teamBullet = Team.Player;
-                }
-                else
-                {
-                    bulletS.teamBullet = Team.Enemy;
-                }*/
+                bulletS.animatorBullet.SetInteger("Level", lvl);
             }
             canAttack = false;
         }
@@ -158,13 +153,19 @@ public class Turret : MonoBehaviour
     {
         if (!canAttack)
         {
-            waitingBar = Mathf.Lerp(waitingBar, waitingBar + 1f, Time.deltaTime / fireRate);
-            if (waitingBar >= 1)
+            waitingBar += Time.deltaTime;
+            //waitingBar = Mathf.Lerp(waitingBar, waitingBar + 1f, Time.deltaTime / fireRate);
+            if (waitingBar >= UnityConfiguration.fireRate)
             {
                 canAttack = true;
                 waitingBar = 0;
             }
         }
+    }
+    public void isVisible()
+    {
+        animatorTurrBody.SetInteger("Level", lvl);
+        animatorTurrGun.SetInteger("Level", lvl);
     }
     private void OnDrawGizmosSelected()     //vykreslí kruh okolo towerky
     {

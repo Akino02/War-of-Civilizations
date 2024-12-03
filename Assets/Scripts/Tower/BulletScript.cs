@@ -13,6 +13,8 @@ public class BulletScript : MonoBehaviour
 
     public Team teamBullet;
 
+    public Animator animatorBullet;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -46,7 +48,7 @@ public class BulletScript : MonoBehaviour
 
         //urceni rotace streli
         float rotationOfBullet = Mathf.Atan2(bulletSpeedDirection.y, bulletSpeedDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0,0 ,rotationOfBullet+90f);
+        transform.rotation = Quaternion.Euler(0,0 ,rotationOfBullet-90f);
     }
 
     // Update is called once per frame
@@ -62,7 +64,7 @@ public class BulletScript : MonoBehaviour
         {
             if ((teamBullet == Team.Player && hitBox.tag == "Enemy") || (teamBullet == Team.Enemy && hitBox.tag == "Player"))
             {
-                opponentS.currhp -= towerS.bulletDamage;
+                opponentS.currhp -= towerS.bulletDamage*(towerS.lvl+1);
                 Destroy(gameObject);
             }
         }
