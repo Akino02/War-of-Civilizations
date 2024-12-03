@@ -22,6 +22,12 @@ Hra ke stažení
 # Postup
 <h3>Maturitní práce</h3>
 
+<h2>Update 071 [24.11.2024]</h2>
+<p>+ Upravení scriptu věže, aby mohl být používán pro nepřítele i hráče</p>
+<p>+ Vytvoření vzhledu 1. úrovně pro věž</p>
+<p><img src="https://github.com/user-attachments/assets/91865c52-617c-448d-be02-762d1ced55cb" width="64" height="64"></p>
+<br>
+
 <h2>Update 070 [21.11.2024]</h2>
 <p>+ Rozdělení UnitScriptu na více scriptů</p>
 <p>+ Hromadné upravení scriptů v celé hře</p>
@@ -31,7 +37,6 @@ Hra ke stažení
 <h2>Update 069 [02.11.2024]</h2>
 <p>+ Přidání obrázku do menu místo videa</p>
 <p>+ Přidání logiky věže</p>
-<p><img src="https://github.com/user-attachments/assets/0c2393ac-6aea-412c-baf4-fc7c70b6af69" width="500" height="250"></p>
 <br>
 
 <h2>Update 068 [30.10.2024]</h2>
