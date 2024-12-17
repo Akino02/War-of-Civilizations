@@ -123,8 +123,9 @@ public class ButtonScript : MonoBehaviour
             Warning();
         }
 	}
-    public void CreateTurret()
+    public void ManageTurret()
     {
+        //funkce pro koupeni veze
         if (towerS.gameObject.activeSelf == false && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyForTurret * (currLevelBase+1))
         {
             progresS.money -= UnityConfiguration.moneyForTurret * (currLevelBase + 1);
@@ -134,6 +135,7 @@ public class ButtonScript : MonoBehaviour
             towerS.isVisible();
             //Debug.Log("You bought new turret");
         }
+        //funkce pro prodani veze
         else if (towerS.gameObject.activeSelf == true)
         {
             //hrac dostane zpet 0.75 procent puvodni ceny s tim ze se to jeste zaokrouhli dolu a tu hodnotu dostane

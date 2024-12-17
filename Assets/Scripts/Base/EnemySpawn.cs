@@ -59,7 +59,7 @@ public class EnemySpawn : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-        CreatingUnit();
+        if (canSpawn) CreatingUnit();
         PickUnit();
     }
 

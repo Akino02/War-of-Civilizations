@@ -56,6 +56,7 @@ public class Turret : MonoBehaviour
         //toto najde zakladnu nepritele pomoci tagu ktery ma
         GameObject objectOfScriptE = GameObject.FindWithTag("baseE");
         evolutionEnemyS = objectOfScriptE.GetComponent<EvolutionEnemyScript>();
+
     }
     // Start is called before the first frame update
     void Start()
@@ -129,6 +130,8 @@ public class Turret : MonoBehaviour
     private bool RotateGun()
     {
         Quaternion targetRotation;
+
+
         if (foundEnemy)
         {
             //urceni na kolikaty stupen se musi turreta otocit, aby videla nepritele
@@ -136,6 +139,7 @@ public class Turret : MonoBehaviour
             //float angle = Mathf.Atan2(target.transform.position.y - rotatingGun.position.y, target.transform.position.x - rotatingGun.position.x) * Mathf.Rad2Deg;
 
             targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+
             //rotatingGun.rotation = targetRotation;
         }
         else
