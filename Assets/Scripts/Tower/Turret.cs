@@ -131,20 +131,23 @@ public class Turret : MonoBehaviour
     {
         Quaternion targetRotation;
 
+        float teamRotation = Team.Player == teamTurret ? 0f : 180f;
 
         if (foundEnemy)
         {
             //urceni na kolikaty stupen se musi turreta otocit, aby videla nepritele
-            float angle = Mathf.Atan2(armyScriptForOpponent.transform.position.y - rotatingGun.position.y, armyScriptForOpponent.transform.position.x - rotatingGun.position.x) * Mathf.Rad2Deg;
+            float angle = Team.Player == teamTurret
+                ? Mathf.Atan2(armyScriptForOpponent.transform.position.y - rotatingGun.position.y, armyScriptForOpponent.transform.position.x - rotatingGun.position.x) * Mathf.Rad2Deg
+                : -Mathf.Atan2(rotatingGun.position.y - armyScriptForOpponent.transform.position.y, rotatingGun.position.x - armyScriptForOpponent.transform.position.x) * Mathf.Rad2Deg;
             //float angle = Mathf.Atan2(target.transform.position.y - rotatingGun.position.y, target.transform.position.x - rotatingGun.position.x) * Mathf.Rad2Deg;
 
-            targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+            targetRotation = Quaternion.Euler(new Vector3(0f, teamRotation, angle));
 
             //rotatingGun.rotation = targetRotation;
         }
         else
         {
-            targetRotation = Quaternion.Euler(new Vector3(0f, 0f, defaultGunRotation));
+            targetRotation = Quaternion.Euler(new Vector3(0f, teamRotation, defaultGunRotation));
         }
 
         isRotated = CheckIfTurretIsRotated(targetRotation);
