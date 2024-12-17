@@ -22,6 +22,15 @@ Hra ke stažení
 # Postup
 <h3>Maturitní práce</h3>
 
+<h2>Update 072 [03.12.2024]</h2>
+<p>+ Vytvoření dalších vzhledů věží (všech)</p>
+<p>+ Vytvoření logiky pro změnu vzhledu věže v různých úrovních</p>
+<p>+ Přidání čudlíku pro koupení a prodání věže</p>
+<p>+ Změna vzhledu HP baru</p>
+<p><img src="https://github.com/user-attachments/assets/62eef2c8-363e-4bc3-8e85-1f87ef849555" width="500" height="250"></p>
+<p><img src="https://github.com/user-attachments/assets/e26d6e4f-1be2-4842-9fc4-99305725f56e" width="500" height="250"></p>
+<br>
+
 <h2>Update 071 [24.11.2024]</h2>
 <p>+ Upravení scriptu věže, aby mohl být používán pro nepřítele i hráče</p>
 <p>+ Vytvoření vzhledu 1. úrovně pro věž</p>
