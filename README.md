@@ -22,6 +22,11 @@ Hra ke stažení
 # Postup
 <h3>Maturitní práce</h3>
 
+<h2>Update 073 [17.12.2024]</h2>
+<p>+ Vytvoření věže pro nepřítele</p>
+<p>+ Vytvoření logiky pro vytváření/vylepšování věže pro nepřítele</p>
+<br>
+
 <h2>Update 072 [03.12.2024]</h2>
 <p>+ Vytvoření dalších vzhledů věží (všech)</p>
 <p>+ Vytvoření logiky pro změnu vzhledu věže v různých úrovních</p>
