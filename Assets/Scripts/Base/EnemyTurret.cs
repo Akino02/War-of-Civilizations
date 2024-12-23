@@ -8,10 +8,12 @@ public class EnemyTurret : MonoBehaviour
     HpScript hpEnemyS;
     EvolutionEnemyScript evolutionEnemyS;
 
-    public int timeForCheck = 5;
+    public int timeToCreate;
+    private int maxTimeForCreate = 6;
     public float barForCheck = 0f;
     public float lastHPValue = 0;
     public int lastLevelValue = 0;
+    public bool gotHit = false;
 
     private void Awake()
     {
@@ -26,6 +28,8 @@ public class EnemyTurret : MonoBehaviour
     void Start()
     {
         lastHPValue = UnityConfiguration.maxHPBase;
+
+        timeToCreate = RandomizeSpawnOfTurret(maxTimeForCreate);
     }
 
     // Update is called once per frame
@@ -35,7 +39,7 @@ public class EnemyTurret : MonoBehaviour
     }
     private void CheckHPDiff()
     {
-        barForCheck += Time.deltaTime/ timeForCheck;
+        /*barForCheck += Time.deltaTime/ timeForCheck;
         if (barForCheck >= 1)
         {
             //pokud mu hrac zautoci na nepratelskou base tak nepritel si koupi vez
@@ -47,6 +51,29 @@ public class EnemyTurret : MonoBehaviour
             lastHPValue = hpEnemyS.currHPBase;
             lastLevelValue = evolutionEnemyS.level;
             barForCheck = 0;
+        }*/
+        //pokud nepratelska zakladna dostane damage a nebo uz dostala
+        if (lastHPValue != hpEnemyS.currHPBase || gotHit == true)
+        {
+            //pokud se neshoduji hp s kontrolnimi hp
+            if(lastLevelValue != evolutionEnemyS.level)
+            {
+                lastHPValue = hpEnemyS.currHPBase;
+                lastLevelValue = evolutionEnemyS.level;
+                //pokud dostal hit a ma evoluci zrovna tak se zachova vyroba/vylepseni veze
+                barForCheck = gotHit == true ? barForCheck : 0;
+                return;
+            }
+            gotHit = true;
+            barForCheck += Time.deltaTime / timeToCreate;
+            if (barForCheck >= 1)
+            {
+                SpawnTurret();
+                lastHPValue = hpEnemyS.currHPBase;
+                timeToCreate = RandomizeSpawnOfTurret(maxTimeForCreate);
+                barForCheck = 0;
+                gotHit = false;
+            }
         }
     }
     private void SpawnTurret()
@@ -61,5 +88,10 @@ public class EnemyTurret : MonoBehaviour
         Debug.Log(evolutionEnemyS.level);
         //nastavi vzhled veze podle urovne
         towerS.isVisible();
+    }
+
+    private int RandomizeSpawnOfTurret(int maxTime)
+    {
+        return Random.Range(1, maxTime);
     }
 }
