@@ -71,7 +71,7 @@ public class EvolutionPlayerScript : MonoBehaviour
 
         
         //vkladani procent do textu, ukazatel UI
-        if(experience >= UnityConfiguration.nextlevelup)
+        if(experience >= UnityConfiguration.nextlevelup || level == UnityConstants.maxLevelIndex)
         {
             experienceText.text = "100%";
         }
@@ -114,9 +114,18 @@ public class EvolutionPlayerScript : MonoBehaviour
         }
         else
         {
-            //Debug.Log("You can't evolve yet");
-            logS.placeText.text = UnityConfiguration.possibleText[4];
-            StartCoroutine(logS.ShowText());
+            if (level != UnityConstants.maxLevelIndex)
+            {
+                //Debug.Log("You can't evolve yet");
+                logS.placeText.text = UnityConfiguration.possibleText[4];
+                StartCoroutine(logS.ShowText());
+            }
+            else
+            {
+                //Debug.Log("You have reached maximum level");
+                logS.placeText.text = UnityConfiguration.possibleText[5];
+                StartCoroutine(logS.ShowText());
+            }
         }
 
     }

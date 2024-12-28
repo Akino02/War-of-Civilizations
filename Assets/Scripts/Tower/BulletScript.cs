@@ -25,16 +25,6 @@ public class BulletScript : MonoBehaviour
         towerS = towerG.GetComponent<Turret>();
 
         teamBullet = towerS.teamTurret;
-        /*if (teamBullet == Team.Player)
-        {
-            GameObject towerG = GameObject.FindWithTag("TurretP");
-            towerS = towerG.GetComponent<Turret>();
-        }
-        else if (teamBullet == Team.Enemy)
-        {
-            GameObject towerG = GameObject.FindWithTag("TurretE");
-            towerS = towerG.GetComponent<Turret>();
-        }*/
 
         //ziskani pozine nepritele
         Vector3 directionOfEnemy = new Vector3(towerS.armyScriptForOpponent.transform.position.x, towerS.armyScriptForOpponent.transform.position.y, towerS.armyScriptForOpponent.transform.position.z);

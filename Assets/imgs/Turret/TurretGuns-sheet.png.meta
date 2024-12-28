@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 106a7ffadef09d843a8e5b5090d4a1c9
-      internalID: 1370693358
+      spriteID: e265997328cbb904e9e8d46cf151b19b
+      internalID: 866690957
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49f759c28d73b914e8cb2652ca2c37b2
-      internalID: 972234518
+      spriteID: 532e5c9fbe6bd53489145f9dd4399f54
+      internalID: -41761713
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6181f61d6f2c5d24a966bd7c0c3519c3
-      internalID: -1522239510
+      spriteID: eff484316eac6c0408591e4af53d5a41
+      internalID: 1214838495
       vertices: []
       indices: 
       edges: []
@@ -187,14 +187,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3ae027c99981614f9f8a4b725558a88
-      internalID: 1174088548
+      spriteID: ef741402fe7917840adf8a70cb0428d1
+      internalID: 1218660461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: TurretGuns-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c322dd9a73dd3b4a94bcef0d1b513da
+      internalID: -1405725573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TurretGuns-sheet_5
       rect:
         serializedVersion: 2
         x: 128
@@ -208,8 +229,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e21cc526d00f2f84a870d062dda36941
-      internalID: -2111213620
+      spriteID: be6d76b5eba00d448a9b8c261a7aebaa
+      internalID: -128117232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TurretGuns-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e214960135591e40a1a61bc61743423
+      internalID: 1213628379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TurretGuns-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c309875c3e62ac47a6da5185cd8562c
+      internalID: 429652503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TurretGuns-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13bb422cff9e7694fbec36d5822048e3
+      internalID: 1744646601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TurretGuns-sheet_9
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9095aaffd581bd34b8e2338d5b0448af
+      internalID: -125252590
       vertices: []
       indices: 
       edges: []
@@ -225,11 +330,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TurretGuns-sheet_0: 1370693358
-      TurretGuns-sheet_1: 972234518
-      TurretGuns-sheet_2: -1522239510
-      TurretGuns-sheet_3: 1174088548
-      TurretGuns-sheet_4: -2111213620
+      TurretGuns-sheet_0: 866690957
+      TurretGuns-sheet_1: -41761713
+      TurretGuns-sheet_2: 1214838495
+      TurretGuns-sheet_3: 1218660461
+      TurretGuns-sheet_4: -1405725573
+      TurretGuns-sheet_5: -128117232
+      TurretGuns-sheet_6: 1213628379
+      TurretGuns-sheet_7: 429652503
+      TurretGuns-sheet_8: 1744646601
+      TurretGuns-sheet_9: -125252590
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

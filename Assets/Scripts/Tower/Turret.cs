@@ -82,6 +82,7 @@ public class Turret : MonoBehaviour
         isRotated = RotateGun();
 
         //isVisible();
+        animationGunState();
     }
 
     public void DetectEnemy()
@@ -178,5 +179,11 @@ public class Turret : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, turretRange);
+    }
+
+    private void animationGunState()
+    {
+        animatorTurrGun.SetBool("Reloaded", canAttack);
+        animatorTurrGun.SetBool("EnemyNear", foundEnemy);
     }
 }

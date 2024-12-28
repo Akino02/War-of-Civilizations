@@ -57,7 +57,7 @@ public static class UnityConfiguration
     //udelat script konstatni na text 
     public static string[] trainingTextShow = { "You aren't crafting", "Training Soldier...", "Training Ranger...", "Training Tank..." };
 
-    public static string[] possibleText = { "You don't have enough money", "You have a full queue", "You Won", "You Lost", "You can't evolve yet", "You must wait until next attack"};
+    public static string[] possibleText = { "You don't have enough money", "You have a full queue", "You Won", "You Lost", "You can't evolve yet", "You have reached maximum level", "You must wait until next attack"};
 
     public static string[] buttonLabelTurret = { "Buy turret", "Sell turret"};
 

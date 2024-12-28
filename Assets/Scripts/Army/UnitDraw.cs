@@ -22,13 +22,11 @@ public class UnitDraw : MonoBehaviour
 
     }
 
-    /*private void OnDrawGizmosSelected()     //vykreslí kruh okolo jednotky
+    private void OnDrawGizmosSelected()     //vykreslí kruh okolo jednotky
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(unitData.distanceFromAllie, UnityConfiguration.ranges[2]);                    //odstup od spojencu
-        //Gizmos.DrawWireSphere(transform.position, ranges[1]);                   //stop pro rangera
-		//Gizmos.DrawWireSphere(transform.position, ranges[0]);                   //stop pro melee
 
-        Gizmos.DrawWireSphere(unitData.transform.position, unitData.unitRange);
-    }*/
+        Gizmos.DrawWireSphere(gameObject.transform.position, unitData.unitRange);
+    }
 }

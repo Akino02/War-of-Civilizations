@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bbb70ee667e6c44c96f53920cb454af
-      internalID: -378795375
+      spriteID: 43fd0859e5d99dc41a6abfc3b93c3eed
+      internalID: -597548052
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a4525d10c61e154796956c43100b18c
-      internalID: 21204702
+      spriteID: 6880b700a5fb4e547bb616ba03bf2caf
+      internalID: 95503911
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6f7d3065f605714f87e9c4bdc87a84b
-      internalID: -888348118
+      spriteID: b36e1f70dc04e854dba146da64fbfcf2
+      internalID: 2106355085
       vertices: []
       indices: 
       edges: []
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0e45a900f85080448bc780fc74a03c3
-      internalID: 914338935
+      spriteID: 8c9a7debc0be8234a87aaa86556eaf65
+      internalID: -1326569581
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TurretBodies-sheet_0: -378795375
-      TurretBodies-sheet_1: 21204702
-      TurretBodies-sheet_2: -888348118
-      TurretBodies-sheet_3: 914338935
+      TurretBodies-sheet_0: -597548052
+      TurretBodies-sheet_1: 95503911
+      TurretBodies-sheet_2: 2106355085
+      TurretBodies-sheet_3: -1326569581
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

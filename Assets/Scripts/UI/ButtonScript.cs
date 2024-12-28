@@ -162,20 +162,6 @@ public class ButtonScript : MonoBehaviour
             changeLabelOfActionButton.text = UnityConfiguration.buttonLabelChangeActionBoard[0];
         }
     }
-    /*public void DeleteTurret()
-    {
-        if(towerS.gameObject.activeSelf == true)
-        {
-            //hrac dostane zpet 0.75 procent puvodni ceny s tim ze se to jeste zaokrouhli dolu a tu hodnotu dostane
-            progresS.money += (int)Mathf.Round((UnityConfiguration.moneyForTurret * (towerS.lvl + 1))*UnityConstants.getMoneyBackPercentage);
-            towerS.gameObject.SetActive(false);
-            //Debug.Log("You sold a turret");
-        }
-        else
-        {
-            //Debug.Log("You dont have turret so you cant sell it");
-        }
-    }*/
 
     private string DetectTurretLabel()
     {
@@ -211,7 +197,7 @@ public class ButtonScript : MonoBehaviour
         else
         {
             //Debug.Log("You must wait until next attack");
-            logS.placeText.text = UnityConfiguration.possibleText[5];
+            logS.placeText.text = UnityConfiguration.possibleText[6];
             StartCoroutine(logS.ShowText());
         }
     }

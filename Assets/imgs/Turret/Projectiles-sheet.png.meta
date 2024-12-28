@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e471bc1456f01549b00c0af12dc3edc
-      internalID: -407475410
+      spriteID: 12f1eff173d54ab4786595605e2be48e
+      internalID: -439790156
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea42cd50a00a4b344a434a2170ab31fa
-      internalID: -1554035985
+      spriteID: 6f56a7a65778f4042bbca7487af673e9
+      internalID: 1687286206
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b5c2bc7e72976643bab91bfc5f7fc13
-      internalID: 706779206
+      spriteID: d83c48323728d244a959b4e48cce897b
+      internalID: 1086579232
       vertices: []
       indices: 
       edges: []
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28bce4336e2efb241a2d0c17b4bbc1c9
-      internalID: -715737918
+      spriteID: 62b552fc3ce6aa241aef1a8ed0a7308d
+      internalID: -990884539
       vertices: []
       indices: 
       edges: []
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e184b05468c5484dae69cca2cc94fd0
-      internalID: 353950176
+      spriteID: 8c5711e2bed7d3e46ab6fc6b273f24a5
+      internalID: 1563633983
       vertices: []
       indices: 
       edges: []
@@ -229,8 +229,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cde51c760cd56f945b6ca62da2f9b902
-      internalID: 1758958879
+      spriteID: 57cf89583f3ed0f46a8f18784e5895a2
+      internalID: 595286504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectiles-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74b73973deac3304f992344829f3b6f4
+      internalID: 607782527
       vertices: []
       indices: 
       edges: []
@@ -246,12 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Projectiles-sheet_0: -407475410
-      Projectiles-sheet_1: -1554035985
-      Projectiles-sheet_2: 706779206
-      Projectiles-sheet_3: -715737918
-      Projectiles-sheet_4: 353950176
-      Projectiles-sheet_5: 1758958879
+      Projectiles-sheet_0: -439790156
+      Projectiles-sheet_1: 1687286206
+      Projectiles-sheet_2: 1086579232
+      Projectiles-sheet_3: -990884539
+      Projectiles-sheet_4: 1563633983
+      Projectiles-sheet_5: 595286504
+      Projectiles-sheet_6: 607782527
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

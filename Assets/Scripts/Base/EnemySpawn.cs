@@ -68,7 +68,7 @@ public class EnemySpawn : MonoBehaviour
         if (!GameScript.isGameOver && isCreatingUnit != true)
         {
             //speedForCreatingUnit = 0f;
-            randomPickUnit = Random.Range(0, 2);
+            randomPickUnit = Random.Range(0, UnityConstants.numberOfUnitsIndex);        //muze se tam dat +1 aby vyrabel i tanky
             if (countToMakeTankCombo[1] >= 1)
             {
                 countToMakeTankCombo[1] = 0;
