@@ -22,10 +22,19 @@ Hra ke stažení
 # Postup
 <h3>Maturitní práce</h3>
 
+<h2>Update 075 [28.12.2024]</h2>
+<p>+ Upravení vzhledu věží (2. úroveň, 5. úroveň)</p>
+<p>+ Upravení obrázku v pozadí (louka) a přidání nového stylu (smrkový les)</p>
+<p>+ Opravení procent u zkušeností v UI</p>
+<p><img src="https://github.com/user-attachments/assets/d6deac4e-e919-442f-867d-4fdcf29173cc" width="650" height="250"></p>
+<p><img src="https://github.com/user-attachments/assets/99a995b6-2773-42c4-b77a-11eac8108685" width="650" height="250"></p>
+<br>
+
 <h2>Update 074 [23.12.2024]</h2>
 <p>+ Vytvoření nového obrázku do menu, který je animovaný</p>
 <p>+ Upravení obrázku v pozadí (nebe)</p>
 <p>+ Opravení rotace nepřátelské věže</p>
+<p><img src="https://github.com/user-attachments/assets/a1b5aad7-a752-4868-93e8-b717b97f08fb" width="500" height="250"></p>
 <br>
 
 <h2>Update 073 [17.12.2024]</h2>
