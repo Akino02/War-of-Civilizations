@@ -22,6 +22,8 @@ public class GameScript : MonoBehaviour
 
     public GameObject escapeButtonBack;
 
+    public ParticleSystem fireworks;
+
     private void Awake()
     {
         //toto najde zakladnu nepritele pomoci tagu ktery ma
@@ -57,9 +59,18 @@ public class GameScript : MonoBehaviour
             else
             {
                 winnerText.text = "You Won!";
+                PlayerWon();
             }
         }
     }
+    public void PlayerWon()
+    {
+        if (!fireworks.isPlaying)
+        {
+            fireworks.Play();
+        }
+    }
+
     //Funkce ukazuje uzivateli ze nemuze neco provest
     public IEnumerator ShowText()
     {

@@ -159,7 +159,7 @@ public class Turret : MonoBehaviour
     }
     private void RelodingAttack()
     {
-        if (!canAttack)
+        if (!canAttack && !GameScript.isGameOver)
         {
             waitingBar += Time.deltaTime;
             //waitingBar = Mathf.Lerp(waitingBar, waitingBar + 1f, Time.deltaTime / fireRate);

@@ -12,4 +12,5 @@ public static partial class UnityConstants
     public const int numberOfTextFieldsInProductionButton = 2;
     public const int numberOfUnitsIndex = 2;
     public const float getMoneyBackPercentage = 0.75f;
+    public const int numberOfBackgroundImages = 2;
 }

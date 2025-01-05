@@ -78,6 +78,10 @@ public class CameraMove : MonoBehaviour
                 activeX = 0;
             }
         }
+        else
+        {
+            activeX = 0;
+        }
         //pohyb kamery
         rb.velocity = new Vector2((movespeed * activeX), rb.velocity.y);
 
