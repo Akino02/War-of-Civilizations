@@ -22,6 +22,13 @@ Hra ke stažení
 # Postup
 <h3>Maturitní práce</h3>
 
+<h2>Update 076 [05.01.2025]</h2>
+<p>+ Nová hudba do hlavní hry</p>
+<p>+ Náhodný výběr pozadí mapy (Classic, Spruce)</p>
+<p>+ Při výhře se spustí petardy na oslavu</p>
+<p>+ Opravení ubírání životů na konci hry (jednotky a věže budou pouze pozorovat)</p>
+<br>
+
 <h2>Update 075 [28.12.2024]</h2>
 <p>+ Upravení vzhledu věží (2. úroveň, 5. úroveň)</p>
 <p>+ Upravení obrázku v pozadí (louka) a přidání nového stylu (smrkový les)</p>
