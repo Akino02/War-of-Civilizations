@@ -86,7 +86,7 @@ public class CameraMove : MonoBehaviour
         rb.velocity = new Vector2((movespeed * activeX), rb.velocity.y);
 
         //nastaveni pozice pro slunce
-        sun.transform.position = new Vector3(widthFromSun.transform.position.x + transform.position.x, sun.transform.position.y, sun.transform.position.z);
+        //sun.transform.position = new Vector3(widthFromSun.transform.position.x + transform.position.x, sun.transform.position.y, sun.transform.position.z);
     }
     private void ResBorderSize(float ortho, float pixelH)
     {

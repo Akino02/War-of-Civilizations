@@ -244,6 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c952a23d31b32f74b8032cde2c2fa7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMin: 25
+  damageMax: 35
 --- !u!96 &3178190037256581489
 TrailRenderer:
   serializedVersion: 3
@@ -565,6 +567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c952a23d31b32f74b8032cde2c2fa7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMin: 25
+  damageMax: 35
 --- !u!96 &2375054816010860572
 TrailRenderer:
   serializedVersion: 3
@@ -886,6 +890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c952a23d31b32f74b8032cde2c2fa7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMin: 25
+  damageMax: 35
 --- !u!96 &2335946307822684152
 TrailRenderer:
   serializedVersion: 3
@@ -1207,6 +1213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c952a23d31b32f74b8032cde2c2fa7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMin: 25
+  damageMax: 35
 --- !u!96 &6162725022590772243
 TrailRenderer:
   serializedVersion: 3
@@ -1528,6 +1536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c952a23d31b32f74b8032cde2c2fa7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMin: 25
+  damageMax: 35
 --- !u!96 &8784509252307612060
 TrailRenderer:
   serializedVersion: 3

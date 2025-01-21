@@ -9,13 +9,15 @@ public class DisasterScript : MonoBehaviour
 
     public GameObject fireBall;                     //pozdeji array vice objektu (ball, arrow, ...)
 
+    //public GameObject[] disasterObjects;          //tam budou ulozene objekty (fireball, arrow, wall)
+
     public GameObject baseBorderL;
     public GameObject baseBorderR;
 
     public GameObject disasterZone;
 
     private float waitDisasterFill = 0f;
-    private int waitingTimeForDisaster = 40;
+    private int waitingTimeForDisaster = 60;
 
     public Image waitDisasterFillBox;
 
@@ -39,7 +41,7 @@ public class DisasterScript : MonoBehaviour
             WaitDisaster();
         }
     }
-    public IEnumerator SpawnFireBall()
+    public IEnumerator SpawnFireBall()        //GameObject objects a zmenit jmeno na SpawnObject //tam se bude dosazovat aktualni object (fireball, arrows, wall, ...)
     {
         waitDisasterFill = 1f;
         waitDisasterFillBox.fillAmount = waitDisasterFill;
@@ -65,11 +67,15 @@ public class DisasterScript : MonoBehaviour
         yield return null;
     }
 
+    /*public void SetDisasterObject()
+    {
+
+    }*/
+
     public void WaitDisaster()
     {
         if (waitDisasterFillBox.fillAmount > 0)
         {
-            //definice rychlosti klesani (cas snimku/celkova doba cekani)
             waitDisasterFill = (Time.deltaTime / waitingTimeForDisaster);
             waitDisasterFillBox.fillAmount = Mathf.Lerp(waitDisasterFillBox.fillAmount, waitDisasterFillBox.fillAmount - 1f, waitDisasterFill);		//min, max, speed
         }

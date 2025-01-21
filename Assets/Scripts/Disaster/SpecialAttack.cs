@@ -7,7 +7,8 @@ public class SpecialAttack : MonoBehaviour
     UnitScript armyScriptE;
 
     [Header("Attributes")]
-    private float damage;
+    public float damageMin = 50;
+    public float damageMax = 150;
     private bool hit = false;
 
 
@@ -25,11 +26,12 @@ public class SpecialAttack : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D hitBox)
     {
+        float damage;
         if (hitBox.gameObject.CompareTag("Enemy"))
         {
             armyScriptE = hitBox.GetComponent<UnitScript>();
             //dosazeni scriptu za objekt
-            damage = Random.Range(UnityConfiguration.dmgMin[0] * (ButtonScript.specialAttackLevel+1), UnityConfiguration.dmgMax[2]) * (ButtonScript.specialAttackLevel + 1);
+            damage = Random.Range(damageMin * (ButtonScript.specialAttackLevel+1), damageMax * (ButtonScript.specialAttackLevel + 1));
             //Debug.Log(ButtonScript.specialAttackLevel);
             if (hit == false)
             {
