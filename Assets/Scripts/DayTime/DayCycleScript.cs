@@ -15,9 +15,6 @@ public class DayCycleScript : MonoBehaviour
 
     public bool isDayTime = true;
 
-    /*public int TimeToFinish = 10;
-    public int objectSpeed = 80;*/
-
     public SpriteRenderer skyEnvironment;                   //max: 255 min: 150
     public SpriteRenderer groundEnvironment;                //max: 221 min: 130
 
@@ -32,6 +29,9 @@ public class DayCycleScript : MonoBehaviour
     public int sunRise = 14;
 
     public Animator animatorTimeObject;
+
+    //UserInput
+    private float offSetObjectPossition = 24.092716f;
 
     //from 6 to 45
 
@@ -48,6 +48,8 @@ public class DayCycleScript : MonoBehaviour
         TimeCycle();
         ChangeBrightness(isDayTime, positionOfObjectX, maxPositionX, sunSet, sunRise);
         ChangeObjectAnimator(isDayTime);
+
+        UserInput(offSetObjectPossition);
     }
 
     private void TimeCycle()
@@ -56,8 +58,6 @@ public class DayCycleScript : MonoBehaviour
         {
             positionOfObjectX = minPositionX;
             isDayTime = !isDayTime;
-            //change sprite function
-            //change brightness of environment
         }
         //slouzi to k osetreni hodnoty takze musi byt v tomto rozsahu
         positionOfObjectX = Mathf.Clamp(positionOfObjectX + Time.deltaTime/2, minPositionX, maxPositionX);        //nebo 0.008f a Time.deltaTime  
@@ -87,5 +87,21 @@ public class DayCycleScript : MonoBehaviour
 
         skyEnvironment.color = dimOfSky;
         groundEnvironment.color = dimOfGround;
+    }
+
+
+    //Function for user (interaction with time)
+    private void UserInput(float parentsPoss)
+    {
+        Vector2 mouseCursor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (IsMouseTouchingObject(objectToBeMoved, mouseCursor) && Input.GetMouseButton(2) && Input.GetMouseButton(1))
+        {
+            positionOfObjectX = mouseCursor.x - parentsPoss;
+        }
+    }
+
+    private bool IsMouseTouchingObject(GameObject objectToBeTouched, Vector2 mousePos)
+    {
+        return objectToBeTouched.GetComponent<Collider2D>().OverlapPoint(mousePos);
     }
 }
