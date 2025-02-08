@@ -23,6 +23,7 @@ public class GameScript : MonoBehaviour
     public GameObject escapeButtonBack;
 
     public ParticleSystem fireworks;
+    public Animator setEndGameImage;
 
     private void Awake()
     {
@@ -48,7 +49,6 @@ public class GameScript : MonoBehaviour
         if (hpPlayerS.currHPBase <= 0 || hpEnemyS.currHPBase <= 0)
         {
             isGameOver = true;
-            endGameMenu.SetActive(true);
             escapeButtonBack.SetActive(false);
             //Debug.Log("Game is Over but why");
             Debug.Log(hpPlayerS.currHPBase);
@@ -59,8 +59,10 @@ public class GameScript : MonoBehaviour
             else
             {
                 winnerText.text = "You Won!";
+                setEndGameImage.SetBool("PlayerWon", true);
                 PlayerWon();
             }
+            endGameMenu.SetActive(true);
         }
     }
     public void PlayerWon()

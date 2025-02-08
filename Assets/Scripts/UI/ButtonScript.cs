@@ -31,6 +31,9 @@ public class ButtonScript : MonoBehaviour
     public GameObject unitBoard;
     public GameObject turretBoard;
 
+    public GameObject turretManageZone;
+    public GameObject turretButtonForManage;
+
     public GameObject changeActiveBoard;
     public Sprite[] imageOfActiveBoard;
 
@@ -58,6 +61,9 @@ public class ButtonScript : MonoBehaviour
         currLevelBase = evolutionPlayerS.level;
         //turret
         changeLabelofTurretButton.text = DetectTurretLabel();
+
+        ChangeActionBoard();
+        GetImageForTurretButton();
     }
     //to jsou funkce pro cudliky
     //tato funkce na kliknuti spawne jednoho vojaka				PRO SOLDIERA
@@ -123,10 +129,11 @@ public class ButtonScript : MonoBehaviour
             Warning();
         }
 	}
+
     public void ManageTurret()
     {
         //funkce pro koupeni veze
-        if (towerS.gameObject.activeSelf == false && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyForTurret * (currLevelBase+1))
+        if (towerS.gameObject.activeSelf == false && progresS.money >= UnityConfiguration.moneyForTurret * (currLevelBase + 1))
         {
             progresS.money -= UnityConfiguration.moneyForTurret * (currLevelBase + 1);
             towerS.lvl = currLevelBase;
@@ -142,15 +149,25 @@ public class ButtonScript : MonoBehaviour
             progresS.money += (int)Mathf.Round((UnityConfiguration.moneyForTurret * (towerS.lvl + 1)) * UnityConstants.getMoneyBackPercentage);
             towerS.gameObject.SetActive(false);
         }
+        if (progresS.money < UnityConfiguration.moneyForTurret * (currLevelBase + 1) && !GameScript.isGameOver)
+        {
+            logS.placeText.text = UnityConfiguration.possibleText[0];
+            StartCoroutine(logS.ShowText());
+        }
         //Debug.Log("If you want to upgrade turret you must sold it and bought new one");
         //Debug.Log("You dont have turret so you cant sell it");
     }
+
     public void ChangeActionBoard()
     {
-        if (unitBoard.activeSelf == true)
+        Vector2 mouseCursor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        bool isMouseInsideTurretZone = turretManageZone.GetComponent<Collider2D>().OverlapPoint(mouseCursor);
+
+        if (isMouseInsideTurretZone && !GameScript.isGameOver)
         {
             unitBoard.SetActive(false);
             turretBoard.SetActive(true);
+            turretButtonForManage.SetActive(true);
             changeActiveBoard.GetComponent<Image>().sprite = imageOfActiveBoard[1];
             changeLabelOfActionButton.text = UnityConfiguration.buttonLabelChangeActionBoard[1];
         }
@@ -158,9 +175,15 @@ public class ButtonScript : MonoBehaviour
         {
             unitBoard.SetActive(true);
             turretBoard.SetActive(false);
+            turretButtonForManage.SetActive(towerS.gameObject.activeSelf == false);
             changeActiveBoard.GetComponent<Image>().sprite = imageOfActiveBoard[0];
             changeLabelOfActionButton.text = UnityConfiguration.buttonLabelChangeActionBoard[0];
         }
+    }
+    private void GetImageForTurretButton()
+    {
+        Animator turretButtonApper = turretButtonForManage.GetComponent<Animator>();
+        turretButtonApper.SetBool("isTurretVisible", towerS.gameObject.activeSelf);
     }
 
     private string DetectTurretLabel()

@@ -94,7 +94,7 @@ public class DayCycleScript : MonoBehaviour
     private void UserInput(float parentsPoss)
     {
         Vector2 mouseCursor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (IsMouseTouchingObject(objectToBeMoved, mouseCursor) && Input.GetMouseButton(2) && Input.GetMouseButton(1))
+        if (IsMouseTouchingObject(objectToBeMoved, mouseCursor) && Input.GetMouseButton(1))
         {
             positionOfObjectX = mouseCursor.x - parentsPoss;
         }
