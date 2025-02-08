@@ -22,6 +22,11 @@ Hra ke stažení
 # Postup
 <h3>Maturitní práce</h3>
 
+<h2>Update 078 [25.01.2025]</h2>
+<p>+ Vytvoření Easter eggu pro uživatele (tajná kombinace)</p>
+<p>+ Hráč může pohybovat s časovou osou</p>
+<br>
+
 <h2>Update 077 [21.01.2025]</h2>
 <p>+ Přidání časové cyklu (elipsa v kladné y ose)</p>
 <p>+ Změna smyslu původního sluce, které se bude střídat s měsícem</p>
