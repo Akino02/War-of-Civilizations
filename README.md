@@ -22,6 +22,13 @@ Hra ke stažení
 # Postup
 <h3>Maturitní práce</h3>
 
+<h2>Update 079 [08.02.2025]</h2>
+<p>+ Upravení kupování a prodávání věže </p>
+<p>+ Upravení tabulky při výhře/prohře na konci hry</p>
+<p><img src="https://github.com/user-attachments/assets/70324c97-8432-4454-a179-afa9e2c2beff" width="320" height="256">
+<img src="https://github.com/user-attachments/assets/73508cfa-5aef-4da4-9e99-47e50c7ccd68" width="320" height="256"></p>
+<br>
+
 <h2>Update 078 [25.01.2025]</h2>
 <p>+ Vytvoření Easter eggu pro uživatele (tajná kombinace)</p>
 <p>+ Hráč může pohybovat s časovou osou</p>
