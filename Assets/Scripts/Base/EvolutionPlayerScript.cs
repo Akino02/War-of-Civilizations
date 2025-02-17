@@ -84,47 +84,50 @@ public class EvolutionPlayerScript : MonoBehaviour
     //funkce pro button, ktery bude evolvovat hracovy jednotky a zakladnu
     public void EvolutionUpgrade()
     {
-        if (experience >= UnityConfiguration.nextlevelup && level != UnityConstants.maxLevelIndex)
+        if (!GameScript.isGameOver)
         {
-            experience -= UnityConfiguration.nextlevelup;
-            level += 1;
-
-            //pise do vsech textu, ktere jsou uchovany v poli
-            for (int i = 0; i < actionButtonText.Length / UnityConstants.numberOfTextFieldsInProductionButton; i++)
+            if (experience >= UnityConfiguration.nextlevelup && level != UnityConstants.maxLevelIndex)
             {
-                actionButtonText[i].text = "lvl." + (level + 1);
-                actionButtonText[i + (actionButtonText.Length) / UnityConstants.numberOfTextFieldsInProductionButton].text = "Cost " + (UnityConfiguration.moneyperunit[i] * (level + 1)) + " $";
-            }
+                experience -= UnityConfiguration.nextlevelup;
+                level += 1;
 
-            //zde se zmeni vzhled zakladny
-            for (int i = 0; i < baseAppearance.Length; i++)
-            {
-                if (level == i)
+                //pise do vsech textu, ktere jsou uchovany v poli
+                for (int i = 0; i < actionButtonText.Length / UnityConstants.numberOfTextFieldsInProductionButton; i++)
                 {
-                    baseAppearance[i].SetActive(true);
+                    actionButtonText[i].text = "lvl." + (level + 1);
+                    actionButtonText[i + (actionButtonText.Length) / UnityConstants.numberOfTextFieldsInProductionButton].text = "Cost " + (UnityConfiguration.moneyperunit[i] * (level + 1)) + " $";
                 }
-                else
-                {
-                    baseAppearance[i].SetActive(false);
-                }
-            }
 
-            //pro vylepseni zivotu s tim, ze se zachova %
-            hpPlayerS.UpgradeHp();
-        }
-        else
-        {
-            if (level != UnityConstants.maxLevelIndex)
-            {
-                //Debug.Log("You can't evolve yet");
-                logS.placeText.text = UnityConfiguration.possibleText[4];
-                StartCoroutine(logS.ShowText());
+                //zde se zmeni vzhled zakladny
+                for (int i = 0; i < baseAppearance.Length; i++)
+                {
+                    if (level == i)
+                    {
+                        baseAppearance[i].SetActive(true);
+                    }
+                    else
+                    {
+                        baseAppearance[i].SetActive(false);
+                    }
+                }
+
+                //pro vylepseni zivotu s tim, ze se zachova %
+                hpPlayerS.UpgradeHp();
             }
             else
             {
-                //Debug.Log("You have reached maximum level");
-                logS.placeText.text = UnityConfiguration.possibleText[5];
-                StartCoroutine(logS.ShowText());
+                if (level != UnityConstants.maxLevelIndex)
+                {
+                    //Debug.Log("You can't evolve yet");
+                    logS.placeText.text = UnityConfiguration.possibleText[4];
+                    StartCoroutine(logS.ShowText());
+                }
+                else
+                {
+                    //Debug.Log("You have reached maximum level");
+                    logS.placeText.text = UnityConfiguration.possibleText[5];
+                    StartCoroutine(logS.ShowText());
+                }
             }
         }
 

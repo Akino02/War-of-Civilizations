@@ -67,10 +67,13 @@ public class Turret : MonoBehaviour
         lvl = evolutionPlayerS.level;
 
         //nastaveni hodnot
+        //bulletDamage = UnityConfiguration.bulletDamage[lvl];
         bulletDamage = UnityConfiguration.bulletDamage * (lvl+1);
-        bulletSpeed = UnityConfiguration.bulletSpeed * (lvl + 1);
-        turretRange = UnityConfiguration.turretRange;
-        bulletDistance = UnityConfiguration.bulletDistance * (lvl + 1);
+        bulletSpeed = UnityConfiguration.bulletSpeed[lvl];
+        //bulletSpeed = UnityConfiguration.bulletSpeed * (lvl + 1);
+        turretRange = UnityConfiguration.turretRange + (lvl*0.5f);
+
+        bulletDistance = UnityConfiguration.bulletDistance;         //after this distance bullet will be destroyed :))
 }
 
     // Update is called once per frame
@@ -163,7 +166,7 @@ public class Turret : MonoBehaviour
         {
             waitingBar += Time.deltaTime;
             //waitingBar = Mathf.Lerp(waitingBar, waitingBar + 1f, Time.deltaTime / fireRate);
-            if (waitingBar >= UnityConfiguration.fireRate)
+            if (waitingBar >= UnityConfiguration.fireRate[lvl])
             {
                 canAttack = true;
                 waitingBar = 0;

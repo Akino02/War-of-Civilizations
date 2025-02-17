@@ -51,8 +51,9 @@ public class GameScript : MonoBehaviour
             isGameOver = true;
             escapeButtonBack.SetActive(false);
             //Debug.Log("Game is Over but why");
-            Debug.Log(hpPlayerS.currHPBase);
-            if(hpPlayerS.currHPBase <= 0)
+            //Debug.Log(hpPlayerS.currHPBase);
+            endGameMenu.SetActive(true);
+            if (hpPlayerS.currHPBase <= 0)
             {
                 winnerText.text = "You Lost!";
             }
@@ -62,7 +63,6 @@ public class GameScript : MonoBehaviour
                 setEndGameImage.SetBool("PlayerWon", true);
                 PlayerWon();
             }
-            endGameMenu.SetActive(true);
         }
     }
     public void PlayerWon()

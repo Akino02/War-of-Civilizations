@@ -25,7 +25,7 @@ public static class UnityConfiguration
     [Header("HP Base")]
     public static float maxHPBase = 1000;
 
-	[Header("Next LevelUp")]
+    [Header("Next LevelUp")]
     //pokud dosahne tolika zkusenosti tak se evolvuje
     public static int nextlevelup = 4000;
 
@@ -41,15 +41,15 @@ public static class UnityConfiguration
 
     [Header("MoneyForTurret")]
     //cena za vez
-    public static int moneyForTurret = 750;
+    public static int moneyForTurret = 350;
 
     //vlastnosti veze
     public static float bulletDamage = 15f;
-    public static float bulletSpeed = 2f;
-    public static float turretRange = 2f;
+    public static float[] bulletSpeed = { 7f, 5f, 3f, 4f, 10f };
+    public static float turretRange = 3f;
     public static float bulletDistance = 25f;
 
-    public static float fireRate = 2f;
+    public static float[] fireRate = {0.5f, 2f, 2.5f, 2f, 1f};
 
     [Header("CameraType")]
     public static MoveType cameraMoveType = MoveType.Keyboard | MoveType.Mouse;

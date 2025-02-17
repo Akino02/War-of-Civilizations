@@ -137,7 +137,7 @@ public class ButtonScript : MonoBehaviour
         {
             progresS.money -= UnityConfiguration.moneyForTurret * (currLevelBase + 1);
             towerS.lvl = currLevelBase;
-            Debug.Log(currLevelBase);
+            //Debug.Log(currLevelBase);
             towerS.gameObject.SetActive(true);
             towerS.isVisible();
             //Debug.Log("You bought new turret");
@@ -194,34 +194,40 @@ public class ButtonScript : MonoBehaviour
 
     public void Warning()
 	{
-		if (progresS.money < UnityConfiguration.moneyperunit[buttonN-1] * (currLevelBase + 1) && logS.canShow && !GameScript.isGameOver)
-		{
-            //Debug.Log("Nemas Dostatek penez");
-            logS.placeText.text = UnityConfiguration.possibleText[0];
-            StartCoroutine(logS.ShowText());
-        }
-		if (progresS.order == 5 && logS.canShow)
-		{
-            //Debug.Log("Fronta je plna " + progresS.order);
-            logS.placeText.text = UnityConfiguration.possibleText[1];
-            StartCoroutine(logS.ShowText());
+        if (!GameScript.isGameOver)
+        {
+            if (progresS.money < UnityConfiguration.moneyperunit[buttonN - 1] * (currLevelBase + 1) && logS.canShow)
+            {
+                //Debug.Log("Nemas Dostatek penez");
+                logS.placeText.text = UnityConfiguration.possibleText[0];
+                StartCoroutine(logS.ShowText());
+            }
+            if (progresS.order == 5 && logS.canShow)
+            {
+                //Debug.Log("Fronta je plna " + progresS.order);
+                logS.placeText.text = UnityConfiguration.possibleText[1];
+                StartCoroutine(logS.ShowText());
+            }
         }
 	}
 
     //katastrofa
     public void Disaster()
     {
-        if (DisasterS.canDoDisaster && !GameScript.isGameOver)
+        if (!GameScript.isGameOver)
         {
-            specialAttackLevel = currLevelBase;
-            DisasterS.canDoDisaster = false;
-            StartCoroutine(DisasterS.SpawnFireBall());
-        }
-        else
-        {
-            //Debug.Log("You must wait until next attack");
-            logS.placeText.text = UnityConfiguration.possibleText[6];
-            StartCoroutine(logS.ShowText());
+            if (DisasterS.canDoDisaster)
+            {
+                specialAttackLevel = currLevelBase;
+                DisasterS.canDoDisaster = false;
+                StartCoroutine(DisasterS.SpawnFireBall());
+            }
+            else
+            {
+                //Debug.Log("You must wait until next attack");
+                logS.placeText.text = UnityConfiguration.possibleText[6];
+                StartCoroutine(logS.ShowText());
+            }
         }
     }
     public void BackToMenu()

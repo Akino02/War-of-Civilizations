@@ -7904,7 +7904,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -8416,7 +8416,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -9020,7 +9020,7 @@ ParticleSystem:
     gravitySource: 1
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
-    size3D: 0
+    size3D: 1
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
@@ -13184,7 +13184,7 @@ Transform:
   m_GameObject: {fileID: 651558978}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -1}
+  m_LocalPosition: {x: 0, y: 2.3, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14881,7 +14881,7 @@ Transform:
   m_GameObject: {fileID: 882975477}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -100, y: -540, z: 0}
+  m_LocalPosition: {x: 20, y: -540, z: 0}
   m_LocalScale: {x: 108, y: 108, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16248,7 +16248,7 @@ MonoBehaviour:
   objectArmyE: {fileID: 2196381188073141835, guid: 0698543414ca79d449437781d2493fe1, type: 3}
   timeToCreateUnit: 0
   isCreatingUnit: 0
-  canSpawn: 0
+  canSpawn: 1
 --- !u!114 &1055716165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17878,8 +17878,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.4, y: 0.09354848}
   m_AnchorMax: {x: 0.5961323, y: 0.2055485}
-  m_AnchoredPosition: {x: -0.49996948, y: 0}
-  m_SizeDelta: {x: -1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1315031921
 MonoBehaviour:
@@ -27585,7 +27585,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -28353,8 +28353,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 660551595}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.37233877, y: 0.19500001}
-  m_AnchorMax: {x: 0.66756463, y: 0.39600003}
+  m_AnchorMin: {x: 0.57722586, y: 0.19500001}
+  m_AnchorMax: {x: 0.9247742, y: 0.39600003}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -29198,7 +29198,7 @@ RectTransform:
   m_Father: {fileID: 660551595}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.076112926, y: 0.19500001}
-  m_AnchorMax: {x: 0.37233877, y: 0.39600003}
+  m_AnchorMax: {x: 0.4248871, y: 0.39600003}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -29235,7 +29235,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Range: X'
+  m_Text: 'FireRate: X'
 --- !u!222 &1662228986
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29277,7 +29277,7 @@ RectTransform:
   m_Father: {fileID: 660551595}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.076112926, y: 0.5964575}
-  m_AnchorMax: {x: 0.37233877, y: 0.7984575}
+  m_AnchorMax: {x: 0.4248871, y: 0.7984575}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -30235,8 +30235,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 660551595}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.37233877, y: 0.5964575}
-  m_AnchorMax: {x: 0.66756463, y: 0.7984575}
+  m_AnchorMin: {x: 0.57722586, y: 0.5964575}
+  m_AnchorMax: {x: 0.9247742, y: 0.7984575}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -30,14 +30,15 @@ public class TowerShowStats : MonoBehaviour
     }
     private void CheckTurretStats()
     {
-        turretFireRateText.text = $"FireRate: {UnityConfiguration.fireRate}";
         if (buttonS.towerS.gameObject.activeSelf == true)
         {
             turretLvlText.text = $"Level: {buttonS.towerS.lvl + 1}";
+            turretFireRateText.text = $"FireRate: {UnityConfiguration.fireRate[buttonS.towerS.lvl]}s";
             turretDamageText.text = $"Damage: {buttonS.towerS.bulletDamage * (buttonS.towerS.lvl + 1)}";
             return;
         }
         turretLvlText.text = $"Level: {buttonS.currLevelBase+1}";
+        turretFireRateText.text = $"FireRate: {UnityConfiguration.fireRate[buttonS.currLevelBase]}s";
         turretDamageText.text = $"Damage: {UnityConfiguration.bulletDamage * (buttonS.currLevelBase + 1)}";
     }
 
