@@ -9,6 +9,11 @@ using System.Timers;
 public class ButtonsMenu : MonoBehaviour
 {
     public GameObject mainMenu;
+
+    public GameObject mainMenuButtons;
+    public GameObject playMenuButtons;
+
+
     public GameObject settingMenu;
 
 
@@ -39,9 +44,13 @@ public class ButtonsMenu : MonoBehaviour
     void Start()
     {
         //nastaveni ze toto menu bude videt pri startu
-        mainMenu.SetActive(true);
+        //Funkce back nas vrati do hlavniho menu
+        Back();
+        /*mainMenu.SetActive(true);
+        mainMenuButtons.SetActive(true);
+        playMenuButtons.SetActive(false);
         //toto menu bude pri startu vypnute
-        settingMenu.SetActive(false);
+        settingMenu.SetActive(false);*/
 
         //nastaveni zvuku do hry
         volumeBarSong.value = volumeSong;
@@ -80,6 +89,14 @@ public class ButtonsMenu : MonoBehaviour
         //Zajistuje ze kdyz jde do hry tak hra bude nova
         GameScript.isGameOver = false;
     }
+
+    public void PlayGame()
+    {
+        playMenuButtons.SetActive(true);
+        mainMenuButtons.SetActive(false);
+    }
+
+
 
         //Funkce pro zmenu nastaveni
     public void Setting()
@@ -147,6 +164,11 @@ public class ButtonsMenu : MonoBehaviour
     public void Back()
     {
         mainMenu.SetActive(true);
+
+        mainMenuButtons.SetActive(true);
+        playMenuButtons.SetActive(false);
+
+
         settingMenu.SetActive(false);
 
         //vypne se hudba, jakmile jde mimo nastaveni (pro jistotu aby se zabranilo lehke chybe)

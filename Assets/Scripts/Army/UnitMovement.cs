@@ -11,6 +11,8 @@ public class UnitMovement : MonoBehaviour
 
     private int teamInt => (int)unitData.team;
 
+    //public LayerMask GroundLayer;
+
     private void Awake()
     {
         unitData = GetComponent<UnitScript>();
@@ -43,13 +45,18 @@ public class UnitMovement : MonoBehaviour
     private void Move()
     {
         //pokud vojacek narazi na jakoukoliv kolizi tak se zastavi (enemy, enemy base, allies)
-        if (unitData.checkCollision[0] || unitData.checkCollision[1] || unitData.checkCollision[2])
+        if (unitData.checkCollision[0] || unitData.checkCollision[1] || unitData.checkCollision[2] || GameScript.isGameOver)
         {
             //nebude se hybat pokud je poblic kolize
             rb.velocity = new Vector2((unitData.movespeed * unitData.moveDir[2]), rb.velocity.y);
 
             //dosazeni za promennou speed, ktera urcuje animace
             unitData.animator.SetFloat("Speed", 0);
+
+            /*if (GameScript.isGameOver)
+            {
+                CelebrateEndOfGame();
+            }*/
         }
         //pokud nebude zadna kolize tak bude chodit
         else
@@ -60,4 +67,13 @@ public class UnitMovement : MonoBehaviour
             unitData.animator.SetFloat("Speed", rb.velocity.x * unitData.moveDir[teamInt]);
         }
     }
+
+    /*private void CelebrateEndOfGame()
+    {
+        if (Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y - 1), 1f, GroundLayer))
+        {
+            rb.AddForce(Vector2.up * 0.05f, ForceMode2D.Impulse);
+            //Debug.Log("Jump");
+        }
+    }*/
 }

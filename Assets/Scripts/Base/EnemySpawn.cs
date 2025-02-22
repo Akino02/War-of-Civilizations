@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
+using System.ComponentModel;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.UI;   //import teto funkce, abych mohl pracovat s UI vecmi v unity enginu
+using Random = UnityEngine.Random;
 
 public class EnemySpawn : MonoBehaviour
 {
@@ -29,7 +33,8 @@ public class EnemySpawn : MonoBehaviour
 	public bool canSpawn = true;
 	private int randomPickUnit = 0;
     private int[] countToMakeTankCombo = {0,0};
-    private int[] difficulty = { 15, 10, 5};					    //obtiznost hry (ve forme vyroby comba)
+
+    public static int currDifficulty;
 
     private void Awake()
     {
@@ -75,7 +80,7 @@ public class EnemySpawn : MonoBehaviour
                 randomPickUnit = 1;
                 //Debug.Log("End of Combo!!");
             }
-            else if (countToMakeTankCombo[0] >= difficulty[2])      //je tady nastavene nevyssi difficulty
+            else if (countToMakeTankCombo[0] >= currDifficulty)      //je tady nastavene nevyssi difficulty
             {
                 countToMakeTankCombo[0] = 0;
                 countToMakeTankCombo[1] = 1;
