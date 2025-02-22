@@ -22,6 +22,10 @@ Hra ke stažení
 # Postup
 <h3>Maturitní práce</h3>
 
+<h2>Update 080 [22.02.2025]</h2>
+<p>+ Hráč si může vybrat obtížnost hry</p>
+<br>
+
 <h2>Update 079 [08.02.2025]</h2>
 <p>+ Upravení kupování a prodávání věže </p>
 <p>+ Upravení tabulky při výhře/prohře na konci hry</p>
