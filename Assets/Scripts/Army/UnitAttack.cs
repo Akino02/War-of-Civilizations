@@ -44,7 +44,7 @@ public class UnitAttack : MonoBehaviour
         {
             ChargeAttack(foundEnemyUnit);
         }*/
-        if (unitData.foundEnemy || unitData.checkCollision[1] && !GameScript.isGameOver)
+        if ((unitData.foundEnemy || unitData.checkCollision[1]) && !GameScript.isGameOver)
         {
             ChargeAttack();
             //animator.SetBool("ScriptFound", true);

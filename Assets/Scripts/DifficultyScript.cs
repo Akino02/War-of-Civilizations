@@ -46,13 +46,13 @@ public class DifficultyScript : MonoBehaviour
 public enum Difficulty
 {
     [SpawnAfter(5)]
-    easy,
+    Easy,
     [SpawnAfter(7)]
-    medium,
+    Medium,
     [SpawnAfter(9)]
-    hard,
-    /*[SpawnAfter(15)]
-    impossible,*/
+    Hard,
+    /*[SpawnAfter(60)]
+    Impossible,*/
 }
 
 [AttributeUsage(AttributeTargets.All)]

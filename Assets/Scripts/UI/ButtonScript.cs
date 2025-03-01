@@ -24,6 +24,12 @@ public class ButtonScript : MonoBehaviour
 
     public int currLevelBase;
 
+    //ohledne fronty
+    public Animator manageOrderImage;
+    public GameObject completedUnitsView;
+    public Text completedUnits;
+
+
     //ohledne turret
     public Text changeLabelofTurretButton;
     public Text changeLabelOfActionButton;
@@ -62,6 +68,11 @@ public class ButtonScript : MonoBehaviour
         //turret
         changeLabelofTurretButton.text = DetectTurretLabel();
 
+        //ukazatel aktualne vyrobenych jednotek
+        completedUnits.text = progresS.completedOrders.Count.ToString();
+        //ukazatel aktualne toho zda muze vytvaret jednotky a nemusi cekat
+        manageOrderImage.SetBool("canDeploy", progresS.canDeploy);
+
         ChangeActionBoard();
         GetImageForTurretButton();
     }
@@ -70,15 +81,15 @@ public class ButtonScript : MonoBehaviour
     public void SoldierSpawn()
 	{
 		buttonN = 1;
-		if (progresS.order < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[0] * (currLevelBase+1))
+		if ((progresS.orders.Count + progresS.completedOrders.Count) < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[0] * (currLevelBase+1))
 		{
-            progresS.order += 1;
-            progresS.orderv2[progresS.order -1] = 1;
+            progresS.orders.Enqueue(1);
+
             progresS.money -= UnityConfiguration.moneyperunit[0] * (currLevelBase + 1);
 			//Debug.Log("Prirazeno do fronty " + progresS.order);
             //Debug.Log("Cena Soldier: " + progresS.moneyperunit[progresS.level, 0]);
 		}
-        else if (progresS.money >= UnityConfiguration.moneyperunit[0] * (currLevelBase+1) && progresS.order == 5)
+        else if (progresS.money >= UnityConfiguration.moneyperunit[0] * (currLevelBase+1) && (progresS.orders.Count + progresS.completedOrders.Count) == 5)
         {
             Warning();
         }
@@ -91,15 +102,15 @@ public class ButtonScript : MonoBehaviour
     public void RangerSpawn()
 	{
         buttonN = 2;
-        if (progresS.order < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[1] * (currLevelBase + 1))
+        if ((progresS.orders.Count + progresS.completedOrders.Count) < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[1] * (currLevelBase + 1))
 		{
-            progresS.order += 1;
-            progresS.orderv2[progresS.order - 1] = 2;
+            progresS.orders.Enqueue(2);
+
             progresS.money -= UnityConfiguration.moneyperunit[1] * (currLevelBase + 1);
 			//Debug.Log("Prirazeno do fronty " + progresS.order);
             //Debug.Log("Cena Ranger: " + progresS.moneyperunit[progresS.level, 1]);
         }
-        else if (progresS.money >= UnityConfiguration.moneyperunit[1] * (currLevelBase + 1) && progresS.order == 5)
+        else if (progresS.money >= UnityConfiguration.moneyperunit[1] * (currLevelBase + 1) && (progresS.orders.Count + progresS.completedOrders.Count) == 5)
         {
             Warning();
         }
@@ -112,15 +123,15 @@ public class ButtonScript : MonoBehaviour
     public void TankSpawn()
 	{
         buttonN = 3;
-        if (progresS.order < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[2] * (currLevelBase + 1))
+        if ((progresS.orders.Count + progresS.completedOrders.Count) < 5 && !GameScript.isGameOver && progresS.money >= UnityConfiguration.moneyperunit[2] * (currLevelBase + 1))
 		{
-            progresS.order += 1;
-            progresS.orderv2[progresS.order - 1] = 3;
+            progresS.orders.Enqueue(3);
+
             progresS.money -= UnityConfiguration.moneyperunit[2] * (currLevelBase + 1);
             //Debug.Log("Prirazeno do fronty " + progresS.order);
             //Debug.Log("Cena Tank: " + progresS.moneyperunit[progresS.level, 2]);
         }
-        else if (progresS.money >= UnityConfiguration.moneyperunit[2] * (currLevelBase + 1) && progresS.order == 5)
+        else if (progresS.money >= UnityConfiguration.moneyperunit[2] * (currLevelBase + 1) && (progresS.orders.Count + progresS.completedOrders.Count) == 5)
         {
             Warning();
         }
@@ -202,7 +213,7 @@ public class ButtonScript : MonoBehaviour
                 logS.placeText.text = UnityConfiguration.possibleText[0];
                 StartCoroutine(logS.ShowText());
             }
-            if (progresS.order == 5 && logS.canShow)
+            if ((progresS.orders.Count+progresS.completedOrders.Count) == 5 && logS.canShow)
             {
                 //Debug.Log("Fronta je plna " + progresS.order);
                 logS.placeText.text = UnityConfiguration.possibleText[1];
@@ -230,6 +241,14 @@ public class ButtonScript : MonoBehaviour
             }
         }
     }
+
+    public void DeployUnits()
+    {
+        progresS.canDeploy = !progresS.canDeploy;
+        completedUnitsView.SetActive(!progresS.canDeploy);
+    }
+
+
     public void BackToMenu()
     {
         SceneManager.LoadScene("MenuScene");

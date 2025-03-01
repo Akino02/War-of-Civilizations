@@ -342,7 +342,7 @@ MonoBehaviour:
   movespeed: 1
   armyType:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 1024
   armyTypeLayer:
   - serializedVersion: 2
     m_Bits: 1024
@@ -401,6 +401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab051c67359d7443957934bfbbac032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 524288
 --- !u!114 &6021009105276738080
 MonoBehaviour:
   m_ObjectHideFlags: 0

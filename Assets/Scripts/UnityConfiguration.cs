@@ -18,6 +18,9 @@ public static class UnityConfiguration
     //Speed
     public static float movespeed = 1f;
 
+    //Celebration time to jump range
+    public static float[] AfterTimeJumpRange = { 0.5f, 0.8f };
+
     [Header("DeadZone")]
     public static int deadZone = -10;
 

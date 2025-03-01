@@ -11,7 +11,11 @@ public class UnitMovement : MonoBehaviour
 
     private int teamInt => (int)unitData.team;
 
-    //public LayerMask GroundLayer;
+    private float afterTimeJump;
+    private float waitForCelebrationJumpBar = 0f;
+    public LayerMask GroundLayer;
+
+    private int forceToJump = 2;
 
     private void Awake()
     {
@@ -21,6 +25,7 @@ public class UnitMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        afterTimeJump = Random.Range(UnityConfiguration.AfterTimeJumpRange[0], UnityConfiguration.AfterTimeJumpRange[1]);
     }
 
     // Update is called once per frame
@@ -53,10 +58,11 @@ public class UnitMovement : MonoBehaviour
             //dosazeni za promennou speed, ktera urcuje animace
             unitData.animator.SetFloat("Speed", 0);
 
-            /*if (GameScript.isGameOver)
+            //na konci hry se bude oslavovat celkove konec valky
+            if (GameScript.isGameOver)
             {
                 CelebrateEndOfGame();
-            }*/
+            }
         }
         //pokud nebude zadna kolize tak bude chodit
         else
@@ -68,12 +74,14 @@ public class UnitMovement : MonoBehaviour
         }
     }
 
-    /*private void CelebrateEndOfGame()
+    private void CelebrateEndOfGame()
     {
-        if (Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y - 1), 1f, GroundLayer))
+        waitForCelebrationJumpBar += Time.deltaTime;
+        if (waitForCelebrationJumpBar >= afterTimeJump && Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y - 0.9f), 0.1f, GroundLayer))
         {
-            rb.AddForce(Vector2.up * 0.05f, ForceMode2D.Impulse);
+            waitForCelebrationJumpBar = 0f;
+            rb.AddForce(Vector2.up * forceToJump, ForceMode2D.Impulse);
             //Debug.Log("Jump");
         }
-    }*/
+    }
 }
