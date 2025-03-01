@@ -22,6 +22,12 @@ Hra ke stažení
 # Postup
 <h3>Maturitní práce</h3>
 
+<h2>Update 081 [01.03.2025]</h2>
+<p>+ Hráč může před vyrobit jednotky a potom je může vypustit najednou (před vyrobené jednotky a fronta se sčítají)</p>
+<p>+ Když hráč dohraje hru (výhra či prohra) tak to vojáčci budou oslavovat velkými výskoky</p>
+<p>+ Upravení fronty z array na queue</p>
+<br>
+
 <h2>Update 080 [22.02.2025]</h2>
 <p>+ Hráč si může vybrat obtížnost hry</p>
 <br>
