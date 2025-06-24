@@ -2,6 +2,7 @@
 Moje maturitní práce pro školní rok 2024/2025
 - Hra byla vytvořena na základě inspirace hrou [Age of War](https://aowg.fandom.com/wiki/Age_of_War_Wiki)
 - Ku dnešnímu dni se snažím od té inspirace odklonit
+- Hra bude v blízké době vydána na itch.io
 
 Vysvětlení hry
 - Ve hře se nacházejí dvě pevnosti jedna pevnost je ovládána hráčem, zatím což ta druhá je ovládána počítačem.
@@ -9,12 +10,13 @@ Vysvětlení hry
 - Ve hře se nacházejí tři typy jednotek: Soldier, Ranger, Tank.
 - Hráč má také speciální schopnost a tou je katastrofa, která se nachází v levé horní části obrazovky.
 - Po zničení nepřátelské jednotky hráč získá zkušenosti a peníze, kterými vytváří jednotky.
-- Zkušenosti hráč využívá automaticky na vylepšení úrovně základny, která přinese vyšší životy, ale zanechá životy se procentuelně zachovají a také přinese lepší jednotky a vzhled základny.
+- Zkušenosti hráč využívá automaticky na vylepšení úrovně základny, která přinese vyšší životy, ale zanechá procentuelně životy a také přinese lepší jednotky a vzhled základny.
 
 Ovládání
 - Hra se ovládá za pomoci pohybu myši k hraně obrazovky (levá, pravá) nebo také může použít klávesnice (A - levá, D - pravá, to stejné platí pro šipky)
-- V menu se nachází nastavení ve kterém si hráč může nastavit hlasitost hry a může se podívat na autora hudby, která je použitá ve hře
-- Hráč si také může v nastavení vybrat jaký chce pohyb kamery (zda chce jen pohyb klávesnici nebo jen myší a nebo ještě obojí což je v základu)
+- K pohybu může hráč využít i interaktivní mini mapky.
+- V menu se nachází nastavení ve kterém si hráč může nastavit hlasitost hry. Hudba může být také upravena v pause menu v bitvě.
+- Hráč si také může v nastavení vybrat jaký chce pohyb kamery (zda chce jen pohyb klávesnici nebo jen myší a nebo ještě obojí což je v základu nastavené)
 
 Hra ke stažení
 - Nejnovější verze: [ver0.1.8](https://drive.google.com/file/d/1eXUdZzqjLTxtMAote-ZQtIXuaGw5D0ED/view?usp=sharing)
@@ -22,6 +24,12 @@ Hra ke stažení
 - Další verze:      [ver0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
 
 # Postup
+
+<h2>Update 082 [24.06.2025]</h2>
+<p>+ Hráč může pozastavit hru pomocí ozubeného kolečka a následně si upravit zvuk. Popřípadě může odejít z aktuální bitvy</p>
+<p>+ Cursor je responzivní a reaguje na některé UI prvky, aby bylo poznat co je interaktivní (Easter eggs jsou hidden)</p>
+<br>
+
 <h3>Maturitní práce</h3>
 
 <h2>Update 081 [01.03.2025]</h2>
