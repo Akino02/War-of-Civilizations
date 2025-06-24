@@ -51,7 +51,6 @@ public static class UnityConfiguration
     public static float[] bulletSpeed = { 7f, 5f, 3f, 4f, 10f };
     public static float turretRange = 3f;
     public static float bulletDistance = 25f;
-
     public static float[] fireRate = {0.5f, 2f, 2.5f, 2f, 1f};
 
     [Header("CameraType")]

@@ -77,7 +77,7 @@ public class DisasterScript : MonoBehaviour
         if (waitDisasterFillBox.fillAmount > 0)
         {
             waitDisasterFill = (Time.deltaTime / waitingTimeForDisaster);
-            waitDisasterFillBox.fillAmount = Mathf.Lerp(waitDisasterFillBox.fillAmount, waitDisasterFillBox.fillAmount - 1f, waitDisasterFill);		//min, max, speed
+            waitDisasterFillBox.fillAmount -= Mathf.Lerp(0f, 1f, waitDisasterFill);		//min, max, speed
         }
         else//pokud je to rovno nule ci mensi 
         {

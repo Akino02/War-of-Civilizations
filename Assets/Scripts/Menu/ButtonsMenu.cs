@@ -40,6 +40,14 @@ public class ButtonsMenu : MonoBehaviour
     public float[] stopAfterTest = {0f, 0f};
     public int testSoundLength = 2;
 
+    //public CursorMode cursorMode = CursorMode.ForceSoftware;
+
+    private void Awake()
+    {
+        Time.timeScale = 1f;
+        Cursor.SetCursor(default, Vector2.zero, CursorMode.Auto);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

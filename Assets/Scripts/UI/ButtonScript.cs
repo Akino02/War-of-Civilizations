@@ -9,7 +9,7 @@ public class ButtonScript : MonoBehaviour
 {
     //propojeni zakladnich scriptu pro funkci UI
     ProgresScript progresS;
-    DisasterScript DisasterS;
+    DisasterScript disasterS;
 	EvolutionPlayerScript evolutionPlayerS;
 	GameScript logS;
     public Turret towerS;
@@ -47,7 +47,7 @@ public class ButtonScript : MonoBehaviour
     {
         //propojeni zakladnich scriptu pro funkci UI
         progresS = GetComponent<ProgresScript>();
-        DisasterS = GetComponent<DisasterScript>();
+        disasterS = GetComponent<DisasterScript>();
         evolutionPlayerS = GetComponent<EvolutionPlayerScript>();
         logS = GetComponent<GameScript>();
 
@@ -160,7 +160,7 @@ public class ButtonScript : MonoBehaviour
             progresS.money += (int)Mathf.Round((UnityConfiguration.moneyForTurret * (towerS.lvl + 1)) * UnityConstants.getMoneyBackPercentage);
             towerS.gameObject.SetActive(false);
         }
-        if (progresS.money < UnityConfiguration.moneyForTurret * (currLevelBase + 1) && !GameScript.isGameOver)
+        else if (progresS.money < UnityConfiguration.moneyForTurret * (currLevelBase + 1) && !GameScript.isGameOver)
         {
             logS.placeText.text = UnityConfiguration.possibleText[0];
             StartCoroutine(logS.ShowText());
@@ -227,11 +227,12 @@ public class ButtonScript : MonoBehaviour
     {
         if (!GameScript.isGameOver)
         {
-            if (DisasterS.canDoDisaster)
+            if (disasterS.canDoDisaster)
             {
                 specialAttackLevel = currLevelBase;
-                DisasterS.canDoDisaster = false;
-                StartCoroutine(DisasterS.SpawnFireBall());
+                disasterS.canDoDisaster = false;
+                StartCoroutine(disasterS.SpawnFireBall());
+                //disasterS.isDisasterOn = true;
             }
             else
             {

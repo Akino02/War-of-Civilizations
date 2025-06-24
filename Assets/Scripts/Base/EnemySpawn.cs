@@ -11,10 +11,10 @@ public class EnemySpawn : MonoBehaviour
 {
 	//import scriptu
         //od hrace
-	EvolutionPlayerScript evolutionPlayerS;
+	//EvolutionPlayerScript evolutionPlayerS;
         //od enemy (sebe)
 	EvolutionEnemyScript evolutionEnemyS;
-	HpScript hpEnemyS;
+	//HpScript hpEnemyS;
 
     //importovani scriptu jednotky
     UnitScript army;
@@ -29,6 +29,8 @@ public class EnemySpawn : MonoBehaviour
     private float speedForCreatingUnit = 0;
     public bool isCreatingUnit = false;
 
+    public bool scrapUnit = false;
+
 	//spawnovani jednotek
 	public bool canSpawn = true;
 	private int randomPickUnit = 0;
@@ -38,11 +40,11 @@ public class EnemySpawn : MonoBehaviour
 
     private void Awake()
     {
-        GameObject item = GameObject.FindWithTag("baseP");		//toto najde zakladnu hrace pomoci tagu ktery ma
-        evolutionPlayerS = item.GetComponent<EvolutionPlayerScript>();          //zde se dosadi script za objekt
+        //GameObject item = GameObject.FindWithTag("baseP");		//toto najde zakladnu hrace pomoci tagu ktery ma
+        //evolutionPlayerS = item.GetComponent<EvolutionPlayerScript>();          //zde se dosadi script za objekt
 
 
-        hpEnemyS = GetComponent<HpScript>();
+        //hpEnemyS = GetComponent<HpScript>();
         evolutionEnemyS = GetComponent<EvolutionEnemyScript>();
 
         army = objectArmyE.GetComponent<UnitScript>();             //propojeni scriptu UniArmy s ProgresScript
@@ -74,6 +76,11 @@ public class EnemySpawn : MonoBehaviour
         {
             //speedForCreatingUnit = 0f;
             randomPickUnit = Random.Range(0, UnityConstants.numberOfUnitsIndex);        //muze se tam dat +1 aby vyrabel i tanky
+            //give help with random scrap unity
+            if (Random.Range(0, 4)%2==0) scrapUnit = true;
+            else scrapUnit = false;
+
+            //pick combo
             if (countToMakeTankCombo[1] >= 1)
             {
                 countToMakeTankCombo[1] = 0;
@@ -101,7 +108,8 @@ public class EnemySpawn : MonoBehaviour
             if (timeToCreateUnit >= 1 && !GameScript.isGameOver)
             {
                 army.armyType = army.armyTypeLayer[randomPickUnit];
-                Instantiate(objectArmyE, transform.position, transform.rotation);
+                if (evolutionEnemyS.level < 4) Instantiate(objectArmyE, transform.position, transform.rotation);
+                else if (evolutionEnemyS.level >= 4 && scrapUnit) Debug.Log("Unit was scraped");
                 /*Debug.Log($"Enemy built {randomPickUnit}");
                 Debug.Log(randomPickUnit);*/
                 countToMakeTankCombo[0]++;

@@ -21,6 +21,7 @@ public class CameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Pro jistotu
         song.volume = ButtonsMenu.volumeSong;
     }
 
@@ -29,5 +30,11 @@ public class CameraFollow : MonoBehaviour
     {
         //bude pronasledovat dany objekt aby se hybal a jeho pozice je rovna targetu
         transform.position = new Vector3(target.position.x,target.position.y + 6, -10);
+
+        //change volume
+        if (song.volume != ButtonsMenu.volumeSong)
+        {
+            song.volume = ButtonsMenu.volumeSong;
+        }
     }
 }

@@ -1,13 +1,13 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor;
+//using JetBrains.Annotations;
+//using System;
+//using System.Collections;
+//using System.Collections.Generic;
+//using System.Linq;
+//using Unity.VisualScripting;
+//using UnityEditor;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using static UnityEditor.Experimental.GraphView.GraphView;
+//using UnityEngine.SocialPlatforms;
+//using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class UnitScript : MonoBehaviour
 {
@@ -135,7 +135,12 @@ public class UnitScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		Animation();
+        //Change SFX
+        if (attackSound.volume != ButtonsMenu.volumeSFX)
+        {
+            attackSound.volume = ButtonsMenu.volumeSFX;
+        }
+        Animation();
 	}
 	
 	private void Animation()
