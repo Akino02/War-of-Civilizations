@@ -40,6 +40,11 @@ public class PauseScript : MonoBehaviour
 
         volumeBarSong.value = ButtonsMenu.volumeSong;
         volumeBarSFX.value = ButtonsMenu.volumeSFX;
+
+        if (!isGamePause)
+        {
+            Cursor.SetCursor(default, Vector2.zero, CursorMode.Auto);
+        }
     }
 
     public void ChangeVolume()
