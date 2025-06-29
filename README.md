@@ -1,5 +1,5 @@
 # War of Civilizations
-Moje maturitní práce pro školní rok 2024/2025
+Moje dlouhodobá práce pro školní rok 2023/2025 (Dlouhodobá, maturitní)
 - Hra byla vytvořena na základě inspirace hrou [Age of War](https://aowg.fandom.com/wiki/Age_of_War_Wiki)
 - Ku dnešnímu dni se snažím od té inspirace odklonit
 - Hra bude v blízké době vydána na itch.io
@@ -24,6 +24,12 @@ Hra ke stažení
 - Další verze:      [ver0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
 
 # Postup
+
+<h2>Update 083 [29.06.2025]</h2>
+<p>+ Opravení cursoru (interakce)</p>
+<p>+ Přidání obrázku ohledně ovládání (v nastavení)</p>
+<p>+ Upravení UI vzhledu</p>
+<br>
 
 <h2>Update 082 [24.06.2025]</h2>
 <p>+ Hráč může pozastavit hru pomocí ozubeného kolečka a následně si upravit zvuk. Popřípadě může odejít z aktuální bitvy</p>
