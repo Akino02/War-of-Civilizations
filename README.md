@@ -19,9 +19,18 @@ Ovládání
 - Hráč si také může v nastavení vybrat jaký chce pohyb kamery (zda chce jen pohyb klávesnici nebo jen myší a nebo ještě obojí což je v základu nastavené)
 
 Hra ke stažení
-- Nejnovější verze: [ver0.1.8](https://drive.google.com/file/d/1eXUdZzqjLTxtMAote-ZQtIXuaGw5D0ED/view?usp=sharing)
+- Nejnovější verze: [ver_0.2.0](https://drive.google.com/file/d/15zR78KZEiz1UccdYqymwNYsif_ZXOBgn/view?usp=sharing)
 
-- Další verze:      [ver0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
+- Další verze:
+  - [ver_0.1.8](https://drive.google.com/file/d/1eXUdZzqjLTxtMAote-ZQtIXuaGw5D0ED/view?usp=sharing)
+  - [ver_0.1.6](https://drive.google.com/file/d/1hpYzftCL9eLGezDw4RPddrh8upB5qSxh/view?usp=sharing)
+
+Postup Stažení
+- Na stránce se v pravém rohu bude nacházet ikona stáhnout. Na ikonu klikneme pro stáhnutí.
+- Po stažení souboru z Google drive v místě kam jste si uložili hru, tak se bude nacházet soubor, který bude ve formě zipu. Ten extrahujete.
+- Otevřít extrahovanou složku a ještě otevřít složku "ver_X". (X značí verzi hry)
+- V té složce se bude nacházet soubor s příponou .exe to stačí otevřít a můžete začít hrát.
+- Může se stát, že vám to ukáže chybu ohledně ohrožení systému, kvůli neznámém původu. Stačí zmáčknout více informací a poté spustit přesto
 
 # Postup
 
